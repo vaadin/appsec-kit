@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bom serialNumber="urn:uuid:81768645-a763-4470-ac91-831ccf9ec2cb" version="1" xmlns="http://cyclonedx.org/schema/bom/1.4">
+  <metadata>
+    <timestamp>2023-04-19T08:52:31Z</timestamp>
+    <tools>
+      <tool>
+        <vendor>OWASP Foundation</vendor>
+        <name>CycloneDX Maven plugin</name>
+        <version>2.7.7</version>
+        <hashes>
+          <hash alg="MD5">436dfb24c63a322708e4a5143d8543af</hash>
+          <hash alg="SHA-1">3ef2e8728dc9eff2f129c34057e46e9d2b10629a</hash>
+          <hash alg="SHA-256">c185b79bf0f9264f43bc8c222c44db67bea275bb727e3327cf9aea6bf45292c9</hash>
+          <hash alg="SHA-512">41488733e31e6c5315327dcc86187c2b9a6b96cd08f7e2157ce130688afde29c313fc6a73edb8a76333a930c78874aa2eac874448920030c0f7af0ac05e65ced</hash>
+          <hash alg="SHA-384">f9462f86240fd9fc0942f34981e6d2371f252aa1a4e5e8c3c14e7f0f1a4e4de69ef972e51cf09a749afb6d97c13e67ed</hash>
+          <hash alg="SHA3-384">c755af6239348bc7dd1e1e6b5f14f7cf7e1560d689b252d9610cd865fa4b419d0b8e26260731dfc5da2176b6e706b414</hash>
+          <hash alg="SHA3-256">309aac91005470c9c834354ab918759e2ae7ec52fc1676002621a5bbdf3b7827</hash>
+          <hash alg="SHA3-512">c634570dcf8302e61005e5fa91a9a0d9b81542f731967b3c9f6d3ef89e3b945bd36d7ab69e2ebad8124b9c05da504361c8b36a8ce528d844409eeb7df4eea6ce</hash>
+        </hashes>
+      </tool>
+    </tools>
+    <component type="library" bom-ref="pkg:maven/com.vaadin/appsec-kit@1.0-SNAPSHOT?type=pom">
+      <group>com.vaadin</group>
+      <name>appsec-kit</name>
+      <version>1.0-SNAPSHOT</version>
+      <description>A parent POM for all artifacts by Vaadin Ltd.</description>
+      <licenses>
+        <license>
+          <name>Vaadin Commercial License and Service Terms</name>
+          <url>https://vaadin.com/commercial-license-and-service-terms</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin/appsec-kit@1.0-SNAPSHOT?type=pom</purl>
+      <externalReferences><reference type="website"><url>http://vaadin.com/appsec-kit</url></reference><reference type="distribution"><url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url></reference><reference type="vcs"><url>https://github.com/vaadin/maven-integration/appsec-kit</url></reference></externalReferences>
+    </component>
+    <properties>
+      <property name="maven.goal">makeAggregateBom</property>
+      <property name="maven.scopes">compile,provided,runtime,system</property>
+    </properties>
+  </metadata>
+  <components>
+    <component type="library" bom-ref="pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT?type=war">
+      <group>com.vaadin.appsec-kit</group>
+      <name>demo-vaadin-8</name>
+      <version>1.0-SNAPSHOT</version>
+      <purl>pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT?type=war</purl>
+    </component>
+    <component type="library" bom-ref="pkg:maven/javax.servlet/javax.servlet-api@3.0.1?type=jar">
+      <publisher>GlassFish Community</publisher>
+      <group>javax.servlet</group>
+      <name>javax.servlet-api</name>
+      <version>3.0.1</version>
+      <description>Java.net - The Source for Java Technology Collaboration</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">3ef236ac4c24850cd54abff60be25f35</hash>
+        <hash alg="SHA-1">6bf0ebb7efd993e222fc1112377b5e92a13b38dd</hash>
+        <hash alg="SHA-256">377d8bde87ac6bc7f83f27df8e02456d5870bb78c832dac656ceacc28b016e56</hash>
+        <hash alg="SHA-512">1e087f1e4632048f1c6ea12e3820a30c7a6e66b13277ec8e784d8c5aba99335cd90cdb08e23756e815324cc9c8dc22d0937c7ccf4b89ee00222cd5e4a1d2a0de</hash>
+        <hash alg="SHA-384">400399c84adfb450fe8f181c43ce7036d47a27c904707454abc97c8ddb89ec57033d740af53fb48e5c1a1a0da5649096</hash>
+        <hash alg="SHA3-384">a60e811e353a61f7c7c5fb4118dcdf911074502a189b3174bdea176bae663763aa111e9c2cf54fa175735fe25072bef9</hash>
+        <hash alg="SHA3-256">1b271f5b14ef4d629b0e2f044f0d49927f2bd5862c4d1bf6accf356b89c7823a</hash>
+        <hash alg="SHA3-512">3db8e064f87c1c5b8a3a152575a6651cd72361beac31000c8b9f66c919016ece425f8f541ff35ff6c999241686b32a207a5add68d459f00e3e07e83d7752aefd</hash>
+      </hashes>
+      <licenses>
+        <expression>(CDDL-1.0 OR GPL-2.0-with-classpath-exception)</expression>
+      </licenses>
+      <purl>pkg:maven/javax.servlet/javax.servlet-api@3.0.1?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://servlet-spec.java.net</url></reference><reference type="distribution"><url>https://maven.java.net/service/local/staging/deploy/maven2/</url></reference><reference type="issue-tracker"><url>http://java.net/jira/browse/SERVLET_SPEC</url></reference><reference type="mailing-list"><url>users@servlet-spec.java.net</url></reference><reference type="vcs"><url>https://svn.java.net/svn/glassfish~svn/tags/javax.servlet-api-3.0.1</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin/vaadin-server@8.20.0?type=jar">
+      <publisher>Vaadin Ltd</publisher>
+      <group>com.vaadin</group>
+      <name>vaadin-server</name>
+      <version>8.20.0</version>
+      <description>Vaadin server</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">2140d853ac0a34254ca48240bc0e51fd</hash>
+        <hash alg="SHA-1">8815bb8aad29f61db7377dc32eb9d5bb9bdd83fc</hash>
+        <hash alg="SHA-256">dbc13196d83dd67d532c2f2c8c35d7bf05fac1b15acecc9f90edb5b8442b5e98</hash>
+        <hash alg="SHA-512">2120ad56ebb51f1f7d8f0969f1d274e8004f2dd395f5e1406bcbdba53b8a1b3fcead9932dbc5cfb5cbbd0c077e4e24000a36cd180216377e431345d0e0197eda</hash>
+        <hash alg="SHA-384">ffedde4e0b508a92a1a493683f5af3033c40b270f6ee33b8e661205a2623f4f11e9a4f06b9cf687dfdbd308aec6d7aaf</hash>
+        <hash alg="SHA3-384">0a62367beef67b9010823ca50ed4746f5430135d0c9783cbf03b9f4a965b9d0471e1a482b50ac54d40346bc53ba8b6ca</hash>
+        <hash alg="SHA3-256">6d83b71b1838b64b4e172e661dc773e5ddaac408754631f1bffabfb79b449812</hash>
+        <hash alg="SHA3-512">c8be781a5a68f64770a0e9b7309a685e7ac69dea68680a991acec81dfcacd4b00a846f2ad2cc6d8b93b319e14825b538da8d3b34c813945e107128eba32f4a85</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>Vaadin Commercial License</name>
+          <url>https://vaadin.com/commercial-license-and-service-terms</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin/vaadin-server@8.20.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://vaadin.com/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/vaadin/framework/vaadin-server</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin/vaadin-sass-compiler@0.9.13?type=jar">
+      <publisher>Vaadin</publisher>
+      <group>com.vaadin</group>
+      <name>vaadin-sass-compiler</name>
+      <version>0.9.13</version>
+      <description>A pure Java implementation of the http://sass-lang.com compiler</description>
+      <hashes>
+        <hash alg="MD5">76261c154b1d70a6f4ff669def72364b</hash>
+        <hash alg="SHA-1">663088831773c35e033ea1538b96d817ce7cef52</hash>
+        <hash alg="SHA-256">8d802c5e3ff25a7aa3b4475cc356ee1daa7b586bd670b86b1c432d55b5d339df</hash>
+        <hash alg="SHA-512">5dfd39f8d2b9968c37792a156896144dcd149fe0cbe57c161f020ce8d12eef81a1fa053b0e6f27cc759be5d8690e1a8bf56cf7a5fac7eb0c16d58bc577ea98d4</hash>
+        <hash alg="SHA-384">c2133b273f5de5ed8842eaea9a499892cf8522fda327db221544f7bbebeb633e8e4100bfea4b5fe0bd36d2817101ebf0</hash>
+        <hash alg="SHA3-384">0511e413fa23273b418f020e8f2e75cae2bb63e97ef5abce433ee3d67fc9d089086a876950e5d1d2409945128b1f32b7</hash>
+        <hash alg="SHA3-256">989e1b1b6915c62ce4e780c9e85c68a0843ec8ed9102e4a43a363fec8d69b089</hash>
+        <hash alg="SHA3-512">b947c3f8d9861cb734f7b6e74771f23578893631a12e4c67f9e23744db270372dccd9f44762964049fb633173b6cd8db34fc4e200a5e30f777d72fc5b0cc46b7</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+          <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin/vaadin-sass-compiler@0.9.13?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://vaadin.com/</url></reference><reference type="distribution"><url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url></reference><reference type="vcs"><url>http://github.com/vaadin/sass-compiler</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.w3c.css/sac@1.3?type=jar">
+      <publisher>World Wide Web Consortium</publisher>
+      <group>org.w3c.css</group>
+      <name>sac</name>
+      <version>1.3</version>
+      <description>SAC is a standard interface for CSS parsers.</description>
+      <hashes>
+        <hash alg="MD5">eb04fa63fc70c722f2b8ec156166343b</hash>
+        <hash alg="SHA-1">cdb2dcb4e22b83d6b32b93095f644c3462739e82</hash>
+        <hash alg="SHA-256">003785669f921aafe4f137468dd20a01a36111e94fd7449f26c16e7924d82d23</hash>
+        <hash alg="SHA-512">2e8e54a7426fde22f27add41bbd6c002d386377008eca83659083b91070e5be7d5579105fc0113319fdb323bb70795eb6a8cf9877b6c0dcc3349661a926ff547</hash>
+        <hash alg="SHA-384">0d7f2004e17d6d6709e71e91a04069163f0bf5db5f1740e571cc9f98b19e83d479a28f6ceb3ce72e0daafe3fbcd5b684</hash>
+        <hash alg="SHA3-384">097339f35cc2f3da500a676d1d8ad6e4c6b26801d8107e928edc8ff8916db86fa64745f3e441ac0ae8a91a2273e4f934</hash>
+        <hash alg="SHA3-256">c6ed2339cb02fdf058cc660fa74c6f736c0a71e8341da443bb1e94fda671d541</hash>
+        <hash alg="SHA3-512">4f6efe3e15d0bea59bc1eaeecbbedadf10fd49e84a57a934e499c1bd0dc421d8a4a25ad99fdbe1faf2242a66e5732d9f3a97f3f534a6fd585c7d59b0db7d5208</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>W3C</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.w3c.css/sac@1.3?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://www.w3.org/Style/CSS/SAC/</url></reference><reference type="mailing-list"><url>http://lists.w3.org/Archives/Public/www-style/</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin.external.flute/flute@1.3.0.gg2?type=jar">
+      <publisher>W3C</publisher>
+      <group>com.vaadin.external.flute</group>
+      <name>flute</name>
+      <version>1.3.0.gg2</version>
+      <description>Flute implements The Simple API for CSS (SAC) using JavaCC.</description>
+      <hashes>
+        <hash alg="MD5">9b792f9bc5cd201b014602fbd9f51db5</hash>
+        <hash alg="SHA-1">048e8c3a235544a0506ca3081519ce114169242a</hash>
+        <hash alg="SHA-256">5341fe246cd6fa73e3c512217ecd0bfccf2d4ad8196b707fb88778fae2ed451d</hash>
+        <hash alg="SHA-512">6484e4ab4a7c9b2ef193f7e7f24e70864c0ca7cda34d0a94446aa1c124fed8671c8ed44d08c416937a44197cc667a8189b98a543b875ed8ccbb67e67f3ab1564</hash>
+        <hash alg="SHA-384">d2c5a5b97b967eac298b6f30ea4550bb676cbbff753889d45f77ac3840f4f3b73ef7532842705ace161afe4d73e93fd2</hash>
+        <hash alg="SHA3-384">de9d745b729786811cce4f224e2d29cfcc9336597132b0bd09320ab024d339b2c6e28bc163c292e76d6fbc1c770a3189</hash>
+        <hash alg="SHA3-256">8b8f26f4dbe679d20db5aa6968ad828d535d0c21c2310942bbb461cadfab8d10</hash>
+        <hash alg="SHA3-512">2ab37131abe66572845c71b1f2b14f68a7d7c4a5163d6be119d4af595d93f52c81ecdf060d53625d066ffa4f098efc8d3f4e70359164f7c0c2a1788fc2754c43</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>W3C Software Copyright Notice and License</name>
+          <url>http://www.w3.org/Consortium/Legal/copyright-software-19980720</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin.external.flute/flute@1.3.0.gg2?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://www.w3.org</url></reference><reference type="distribution"><url>http://oss.sonatype.org/content/repositories/vaadin-releases/</url></reference><reference type="vcs"><url>http://www.w3.org/</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin/vaadin-shared@8.20.0?type=jar">
+      <publisher>Vaadin Ltd</publisher>
+      <group>com.vaadin</group>
+      <name>vaadin-shared</name>
+      <version>8.20.0</version>
+      <description>Vaadin shared</description>
+      <hashes>
+        <hash alg="MD5">39376366da1cd86a2074dec5ed856321</hash>
+        <hash alg="SHA-1">d0fe121311dcf3ca84e4ec1c2954647ff0a053aa</hash>
+        <hash alg="SHA-256">750e5f0180834b3493087c4cccbc163e850470f207c1113015e1030fbad5d323</hash>
+        <hash alg="SHA-512">70421866878964fa3c4bc11d04994272d80af3f978aba13ee8ca86f761d2a0668ae66aec1aa44c9a6a9091a9d2533df57f34abee2ad6358caee805fd1fbd073c</hash>
+        <hash alg="SHA-384">7fd36ace5930465c2a45102a5d82091aa140e18d9ed4359f0bf4f3699b566d9163617658fa2b42c9200e2ca2e1b33d9a</hash>
+        <hash alg="SHA3-384">e0104380d56febb34ac738044412ec5664e2bcedd43c851c8077ebab69e482fced9e50a8b67dbc039903cb1307ec0938</hash>
+        <hash alg="SHA3-256">2017940f31c4eaa8060d56a1e6ead0758ad442c7db37adadd00dbe7c3a3ae3e2</hash>
+        <hash alg="SHA3-512">7c8f32be78acedafb7d57032e932981df3483b29c1dbdc91043b3d2773bf908e22bf4cde0c2057947f5df287438e36c07b6d0d87bb48174efe5b5f45df2316d5</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>Vaadin Commercial License</name>
+          <url>https://vaadin.com/commercial-license-and-service-terms</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin/vaadin-shared@8.20.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://vaadin.com/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/vaadin/framework/vaadin-shared</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar">
+      <group>com.vaadin.external.gwt</group>
+      <name>gwt-elemental</name>
+      <version>2.8.2.vaadin2</version>
+      <description>A parent POM for all artifacts by Vaadin Ltd.</description>
+      <hashes>
+        <hash alg="MD5">67327ac528eca7d4259d1160ab455448</hash>
+        <hash alg="SHA-1">abdfd4fcfbc0652298061be8c70a56a6d6e868b2</hash>
+        <hash alg="SHA-256">04f75ee196fffc2253282322e60e99fae3fb434f8d63de3c3098d89f4ed53274</hash>
+        <hash alg="SHA-512">cf2859dcb5826b21b6bb8be705608f36e270b0a95945d69ae820c98327f3354d4150b46f9b279c045cf96d998cb8ac3950ba5fa49987c13e78ea54ee93e9e941</hash>
+        <hash alg="SHA-384">97f3934ec4d6217f392bb2d3ae731e9c1e6b72f04858467ceab13216489c0f51ab18dff2d82ab61ebd873d5729a3f6fd</hash>
+        <hash alg="SHA3-384">a41a6ba12b4e8d148ca995cb1bf9e5f6ebfb0640ce92f56fa22bc450e06c6759a0d873c5101f29b3f591433614ff1d01</hash>
+        <hash alg="SHA3-256">c4104edab947ca0657291d238c556beb0af13e489806785649b5d64cc2a191c4</hash>
+        <hash alg="SHA3-512">a96ebfe8ef3ac1720c7098c4f48609a8967063f2da7562a1ee673e7a8cf2bb451a61db3439a4f05aff36cf8e7408fd7675961c72fb3786894517254bc62848cd</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://vaadin.com/gwt-elemental</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/vaadin/maven-integration/gwt-elemental</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin/license-checker@1.11.2?type=jar">
+      <group>com.vaadin</group>
+      <name>license-checker</name>
+      <version>1.11.2</version>
+      <description>A parent POM for all artifacts by Vaadin Ltd.</description>
+      <hashes>
+        <hash alg="MD5">6b2f34ed0f558f94e2e2052f39f9e62c</hash>
+        <hash alg="SHA-1">1a199808fface075f0f2292f8bdd3ea921bf8457</hash>
+        <hash alg="SHA-256">dc76e0ac18581bcc65aa46143bf30d9298e3bdffd3732f81dccd06c61b3cf5de</hash>
+        <hash alg="SHA-512">e038decb7a270241f3279c64df2e1973fe5c5c7a6691acfdfb2bbe911392afaf0e35fe332308f8bf93e43d8ccbee0f86d45d5880fc26c110cea046a0c22687a7</hash>
+        <hash alg="SHA-384">515c8d83f3684e2a632ca96f83c42ce63376d06049cd1954fcda7ba147cfdb46f2dbb309fd2ad058906c9a85607a4587</hash>
+        <hash alg="SHA3-384">4708528edbad2ea0b63e107d763829994586e83c65370262662612eff0e44538b17dd34034b836aba4362421aa4511e2</hash>
+        <hash alg="SHA3-256">225dc6080bbbf7c569adcd480b09d071a12ad4befa494841261b38463c810bf2</hash>
+        <hash alg="SHA3-512">24afd6f6e1c01f0fb18c3c9a825b784324dd0efb7739e5305b5c34c936c67f1953874f26dbddd1b56394ebdb92172585f055753d305b556614da075df0ed74dc</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin/license-checker@1.11.2?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://github.com/vaadin/license-checker-vaadin10</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/vaadin/maven-integration/license-checker-parent/license-checker</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.github.oshi/oshi-core@6.1.4?type=jar">
+      <publisher>oshi</publisher>
+      <group>com.github.oshi</group>
+      <name>oshi-core</name>
+      <version>6.1.4</version>
+      <description>A JNA-based (native) operating system information library for Java that aims to provide a
+        cross-platform implementation to retrieve system information, such as version, memory, CPU, disk, battery, etc.</description>
+      <hashes>
+        <hash alg="MD5">e981ed24cdcff7aed8f1c58cb86574a7</hash>
+        <hash alg="SHA-1">d255136f0abb2c946babc329333c9a1792ba1831</hash>
+        <hash alg="SHA-256">9b96406bbdb7707f35e9c4c2b8c3fbd74104d51203ac7c39224a2159d42d4fcb</hash>
+        <hash alg="SHA-512">b465083dfbc9308f34987bea5181db5d2dff76369cfcd5a58dd24921ee1c52a5d65776c1f036ad5bc349e56b9c0943b18c7f0162c5c879ec5912329e57b47e8a</hash>
+        <hash alg="SHA-384">d4be53fa86b929ae2a845759e56b034b7bef93417a97b65162704629f57508b7e002f51b4e22642b08f459a46658a4fa</hash>
+        <hash alg="SHA3-384">8e573c624d0e6d937e55de15a26ff2cda0e8a8acc1cb4d57cdfef356b9897baf5b7df227060f2624c6cd74304c179678</hash>
+        <hash alg="SHA3-256">081c02ca8e3feeaf90e869c45a425ef3ee9526b6e57450b57c5d4e798a55d97b</hash>
+        <hash alg="SHA3-512">5a98664b065c467eb3a618e353a15b5dd7afba106693cdea79bb04c862caa4844321f5260c1505d0da4ba2faca8b4d411e0e3335cca3961560a9930d252085e6</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>MIT</id>
+          <url>https://opensource.org/licenses/MIT</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.github.oshi/oshi-core@6.1.4?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://github.com/oshi/oshi/oshi-core</url></reference><reference type="build-system"><url>https://github.com/oshi/oshi/actions</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="issue-tracker"><url>https://github.com/oshi/oshi/issues</url></reference><reference type="vcs"><url>https://github.com/oshi/oshi.git</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar">
+      <group>net.java.dev.jna</group>
+      <name>jna</name>
+      <version>5.10.0</version>
+      <description>Java Native Access</description>
+      <hashes>
+        <hash alg="MD5">2b884b01ad2f62d4f5dd11387a8bf799</hash>
+        <hash alg="SHA-1">7cf4c87dd802db50721db66947aa237d7ad09418</hash>
+        <hash alg="SHA-256">e335c10679f743207d822c5f7948e930319835492575a9dba6b94f8a3b96fcc8</hash>
+        <hash alg="SHA-512">7daf6a8605afff8bfc564b73b1a09ec8384f3ed2a5970f5e29ac3ac52336808e3cb2a083a22e8e00a6da8913b6dfdc093b92ba18a4f6f9ffafbd70006e308fa6</hash>
+        <hash alg="SHA-384">999156f37fe9380036bc2321c60f80a1d4d61c656364c6a90f715922ba6d8888567f339da92b3dc4b7ce0bec6c5851bb</hash>
+        <hash alg="SHA3-384">17fa9e36142242164f29de325874a8e945474d0b737e867550c214263bfa3348b215d802efa4790f867cff95ac478c07</hash>
+        <hash alg="SHA3-256">9507447194b8f958d95d53d2133d00e3888609772c9cc2cb098cb8ebf999c9d5</hash>
+        <hash alg="SHA3-512">38b450d055611dfcd99360ace116640c61dcb2657b240c5da5cdd2bae0f29c349388461a73f61467d89622a93c46222179cceccc0f585fc86af55a20933dcc4c</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>LGPL-2.1-or-later</id>
+          <url>https://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html</url>
+        </license>
+        <license>
+          <id>Apache-2.0</id>
+          <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://github.com/java-native-access/jna</url></reference><reference type="vcs"><url>https://github.com/java-native-access/jna</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/net.java.dev.jna/jna-platform@5.10.0?type=jar">
+      <group>net.java.dev.jna</group>
+      <name>jna-platform</name>
+      <version>5.10.0</version>
+      <description>Java Native Access Platform</description>
+      <hashes>
+        <hash alg="MD5">c1ab841070c388ec32b77cdc05f084fb</hash>
+        <hash alg="SHA-1">fbed7d9669dba47714ad0d4f4454290a997aee69</hash>
+        <hash alg="SHA-256">1f71afd977051bf0109ef5e3767d4e2afd777be894d89788cc0f38ad68f6a16f</hash>
+        <hash alg="SHA-512">bc8bfd5a5c9a8a145ea789ac946dc3ee6e9b7f5b721733567df8a1aff0a8499d6b1434306226004bc8bc58fe41ec1fc8a99d5420301682b72f379ae526bfa4e5</hash>
+        <hash alg="SHA-384">33a6abf4c295736ddfe832bb2f5aab16fc4a705c9d8e8060fd5925ec97325d8b215fa334da52280db8996d5c7cf27440</hash>
+        <hash alg="SHA3-384">41516a4dde4ef9d6b3ec0872616d0ce21acf042b91bf5176ef9506b872da06c1cb4986f239665c307e22540dfd1379e0</hash>
+        <hash alg="SHA3-256">5a05220aad651a2a2e5e6e386ab2d394a3af647dba24ce94108177fb4e3ba9cb</hash>
+        <hash alg="SHA3-512">ba3645097d9ab0d2641d31ea29941057370e0514a19df05184380001f0c8ba32907e1bf962d491e3aa2949dde9bb7c3c4e32c756b97afb2b8b7a3ddbca5ef0e5</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>LGPL-2.1-or-later</id>
+          <url>https://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html</url>
+        </license>
+        <license>
+          <id>Apache-2.0</id>
+          <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/net.java.dev.jna/jna-platform@5.10.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://github.com/java-native-access/jna</url></reference><reference type="vcs"><url>https://github.com/java-native-access/jna</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar">
+      <publisher>QOS.ch</publisher>
+      <group>org.slf4j</group>
+      <name>slf4j-api</name>
+      <version>1.7.36</version>
+      <description>The slf4j API</description>
+      <hashes>
+        <hash alg="MD5">872da51f5de7f3923da4de871d57fd85</hash>
+        <hash alg="SHA-1">6c62681a2f655b49963a5983b8b0950a6120ae14</hash>
+        <hash alg="SHA-256">d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0</hash>
+        <hash alg="SHA-512">f9b033fc019a44f98b16048da7e2b59edd4a6a527ba60e358f65ab88e0afae03a9340f1b3e8a543d49fa542290f499c5594259affa1ff3e6e7bf3b428d4c610b</hash>
+        <hash alg="SHA-384">2b14ad035877087157e379d3277dcdcd79e58d6bdb147c47d29e377d75ce53ad42cafbf22f5fb7827c7e946ff4876b9a</hash>
+        <hash alg="SHA3-384">3bc3110dafb8d5be16a39f3b2671a466463cd99eb39610c0e4719a7bf2d928f2ea213c734887c6926a07c4cca7769e4b</hash>
+        <hash alg="SHA3-256">ba2608179fcf46e2291a90b9cbb4aa30d718e481f59c350cc21c73b88d826881</hash>
+        <hash alg="SHA3-512">14c4edcd19702ef607d78826839d8a6d3a39157df54b89a801d3d3cbbe1307131a77671b041c761122730fb1387888c5ec2e46bdd80e1cb07f8f144676441824</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>MIT</id>
+          <url>https://opensource.org/licenses/MIT</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://www.slf4j.org</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/qos-ch/slf4j/slf4j-api</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.nimbusds/nimbus-jose-jwt@9.23?type=jar">
+      <publisher>Connect2id Ltd.</publisher>
+      <group>com.nimbusds</group>
+      <name>nimbus-jose-jwt</name>
+      <version>9.23</version>
+      <description>Java library for Javascript Object Signing and Encryption (JOSE) and
+        JSON Web Tokens (JWT)</description>
+      <hashes>
+        <hash alg="MD5">7bc1585a7fc47bb9cc66e376c1406b4b</hash>
+        <hash alg="SHA-1">e2fb2b3784fffdba251db0c29c9f7cb42c670906</hash>
+        <hash alg="SHA-256">33ab8084fdae1d75be1b061b1489d4a12045bd7b50c2e24ff152911e4551ec07</hash>
+        <hash alg="SHA-512">c9f9f637319b0192688c9c3ef738704e1bbdc332a519e107babf888f989b5cef9abf544127dc49ccd0d05ef178d77f5fb0bac5d8e602663d2ea63802524bdb1f</hash>
+        <hash alg="SHA-384">c2639cbc7179ea574a35e601e49fd42e69f29b0ad9bf8b273b551972fd167ce6fb146ddf7dbb7dcd6093e2e9f5002203</hash>
+        <hash alg="SHA3-384">13fffaee4f3b0486180a7dd2fc229d0112d81234ea35ea82e0077be6b8d9ec52f2148ec281ab83aedb4d8bd05bf00311</hash>
+        <hash alg="SHA3-256">1efcf46c5de6cdefefeb6625d1fa543ba983aad596707632f0ed3393fa7003a3</hash>
+        <hash alg="SHA3-512">7dcd01a09414996cbaf798ccb3a1f80906abccb01aaf29c0914fda56e80bc0e3fe4eff40fb3821e1cb124a766e6619c04de86c8fc8e2d74caee223b801115775</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.nimbusds/nimbus-jose-jwt@9.23?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://bitbucket.org/connect2id/nimbus-jose-jwt</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://bitbucket.org/connect2id/nimbus-jose-jwt</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.lucee/jcip-annotations@1.0.0?type=jar">
+      <group>org.lucee</group>
+      <name>jcip-annotations</name>
+      <version>1.0.0</version>
+      <description>OSGi Version of jcip-annotations</description>
+      <hashes>
+        <hash alg="MD5">4524f9677bcaac7f15e2d4feec5da1b9</hash>
+        <hash alg="SHA-1">ae61631d04820071895117d5d549f4e4efd9e07f</hash>
+        <hash alg="SHA-256">408e4831d7fcfcb16d137e51443130ece5b96052ca631af9bc1b81643f3e29d9</hash>
+        <hash alg="SHA-512">0de2b5d28ed35b85c92bd1c20ff308e258e76957880c22d7eec168db615120002bc112dfff5e9eab6d0f2f77cd3b2e718a84ef8c89ff872edf067b461cbfd61e</hash>
+        <hash alg="SHA-384">e7efd1e38c9f28163b9eeb20c61bcafcb7c8ba7e2ee83adcd168c0de196c8fa2dc06a350af57832e7fe946f83b526bb2</hash>
+        <hash alg="SHA3-384">7ea935f6a85207005c39ce54bfe786adb6f4f9c6d989b7e1ed5123e795415d5c050679e4b6f3e670aa162bf756670cda</hash>
+        <hash alg="SHA3-256">180921e09ab7bae312d2519e09eb2c01fa1e099b4e846742b49ccc385b36f4de</hash>
+        <hash alg="SHA3-512">b6c992995d3c92b1fbcd1db08a69b73b19fb0d6e480123ae510e627d6fa6be933b8ed9444580b80c03291978d7d832cf8124b6c80e6f887390564dd1403b07ff</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.lucee/jcip-annotations@1.0.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://maven.lucee.org/jcip-annotations/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/lucee/osgi-bundle-jcip-annotations</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin/open@8.4.0.3?type=jar">
+      <group>com.vaadin</group>
+      <name>open</name>
+      <version>8.4.0.3</version>
+      <description>Java port of https://github.com/sindresorhus/open</description>
+      <hashes>
+        <hash alg="MD5">b6c17e059959b36093d85562fbf33598</hash>
+        <hash alg="SHA-1">c5cd0db6622e77875683b9daf3a0b9e901e1c35f</hash>
+        <hash alg="SHA-256">739c981ee25c6d82392b4e6ab40dab8ad3c3c919f5f5c0e057332a6b28ff69a7</hash>
+        <hash alg="SHA-512">80ec4021b8084f382b1407954dfea13d1aa19a4ad7bd7b8daaa44621afef1fc0954b16d8acad11a3d4dd5b5a31e574564c71e162b7c70e0903835fba39ba39c7</hash>
+        <hash alg="SHA-384">4cc019654852b3989fc6b0018fae6efa8f3ffa7f9cbe273829e865a1063aecf78517668b693779bac297a76473f6c809</hash>
+        <hash alg="SHA3-384">e60face4134cb3e39569a6a1f472e320e0cb6175f43bcc2bedecbf8f8dc910e2f5f994a89e9914a5d9635199ba5665c7</hash>
+        <hash alg="SHA3-256">121b5c0c9162b494d4a77fc24e2f93652273b516be2d5629eefef6e06bd9253e</hash>
+        <hash alg="SHA3-512">d339241f04df3c58ed4ce5bb320dff2251d874ddbee6566e6c94f4a70fa8b5392568db9964901a64a5b6d451ca96aa158a4f7656e4cb346b570441f096429470</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin/open@8.4.0.3?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://vaadin.com/open</url></reference><reference type="distribution"><url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url></reference><reference type="vcs"><url>https://github.com/vaadin/maven-integration/open</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/commons-io/commons-io@2.11.0?type=jar">
+      <publisher>The Apache Software Foundation</publisher>
+      <group>commons-io</group>
+      <name>commons-io</name>
+      <version>2.11.0</version>
+      <description>The Apache Commons IO library contains utility classes, stream implementations, file filters,
+file comparators, endian transformation classes, and much more.</description>
+      <hashes>
+        <hash alg="MD5">3b4b7ccfaeceeac240b804839ee1a1ca</hash>
+        <hash alg="SHA-1">a2503f302b11ebde7ebc3df41daebe0e4eea3689</hash>
+        <hash alg="SHA-256">961b2f6d87dbacc5d54abf45ab7a6e2495f89b75598962d8c723cea9bc210908</hash>
+        <hash alg="SHA-512">5bd78eed456ede30119319c5bed8e3e4c443b6fd7bdb3a7a5686647bd83094d0c3e2832a7575cfb60e4ef25f08106b93476939d3adcfecf5533cc030b3039e10</hash>
+        <hash alg="SHA-384">114f1e324d90ad887c177876d410f5787a8e8da6c48d4b2862d365802c0efded3a88cb24046976bf6276cadad3712f0f</hash>
+        <hash alg="SHA3-384">80288c03ad4d80d69f91d056ffc5570d49a9c76bf54ad2dff0121ecde26a560df76d05156f281f5c6db2a38ff07a873d</hash>
+        <hash alg="SHA3-256">5adfb5ccaf5f21a549422f426118a9542673926fcd18c68390cf813e791dcf6c</hash>
+        <hash alg="SHA3-512">7573f47f0babb53cefdc7c2309a0b982d800139064537b0797da442853d081010ad7c3c74a500598a0f800639a5d540eca21963ea652c68613907059bd4278c2</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/commons-io/commons-io@2.11.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://commons.apache.org/proper/commons-io/</url></reference><reference type="build-system"><url>https://builds.apache.org/</url></reference><reference type="distribution"><url>https://repository.apache.org/service/local/staging/deploy/maven2</url></reference><reference type="issue-tracker"><url>https://issues.apache.org/jira/browse/IO</url></reference><reference type="mailing-list"><url>https://mail-archives.apache.org/mod_mbox/commons-user/</url></reference><reference type="vcs"><url>https://gitbox.apache.org/repos/asf?p=commons-io.git</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.jsoup/jsoup@1.15.3?type=jar">
+      <publisher>Jonathan Hedley</publisher>
+      <group>org.jsoup</group>
+      <name>jsoup</name>
+      <version>1.15.3</version>
+      <description>jsoup is a Java library for working with real-world HTML. It provides a very convenient API for fetching URLs and extracting and manipulating data, using the best of HTML5 DOM methods and CSS selectors. jsoup implements the WHATWG HTML5 specification, and parses HTML to the same DOM as modern browsers do.</description>
+      <hashes>
+        <hash alg="MD5">4f16c3b17b8c1b0173b1ed9f99f2c27c</hash>
+        <hash alg="SHA-1">f6e1d8a8819f854b681c8eaa57fd59a42329e10c</hash>
+        <hash alg="SHA-256">e20a5e78b1372f2a4e620832db4442d5077e5cbde280b24c666a3770844999bc</hash>
+        <hash alg="SHA-512">2fd0b947ca5295ef470b6bcda9029f0b7eaf568e57f097eae631bf5b8ff56a0d42c7cec10de3e889bcc6fdee503c2f6c8bb187d878552a364d69ac68a31f919f</hash>
+        <hash alg="SHA-384">0a791f2414e017c30e48080bcf2fc9a3a733169a899010302c4ec0f1ac6a817cb691f9dade3658ed4a36e0e707d19147</hash>
+        <hash alg="SHA3-384">e97b8bc81858af6bef5aa0eff5f554507cf22569d0cd1b57be2fd8ce471ff917bac1b6a997e4b61f5d601a9387f9b070</hash>
+        <hash alg="SHA3-256">0285822976fabf0e54ceb543dbb1e305514028232c242c7b9cdef55ff07ee5f9</hash>
+        <hash alg="SHA3-512">395baa8567244ad9ad7c0aeca2f8136217ba29d647031ca0137ca4c91bce57b4fb5e5c4270aa94833bd1dd2e72982c2f91f56f876d67bda823765a84e9668ae8</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>MIT</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.jsoup/jsoup@1.15.3?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://jsoup.org/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="issue-tracker"><url>https://github.com/jhy/jsoup/issues</url></reference><reference type="vcs"><url>https://github.com/jhy/jsoup</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1?type=jar">
+      <group>com.vaadin.external</group>
+      <name>gentyref</name>
+      <version>1.2.0.vaadin1</version>
+      <description>Generic type reflection library</description>
+      <hashes>
+        <hash alg="MD5">af96718e7ca1afc81628ae799649f60e</hash>
+        <hash alg="SHA-1">c914574fdf1d7c7b85f58965d10f7a83811bb7c6</hash>
+        <hash alg="SHA-256">7fbb7aaa015944f08c0fcf394e4e4e6854ee5a4714c10835adab8d0e4c15c46a</hash>
+        <hash alg="SHA-512">71f6d99fef4d8c925349c9b499beced9f98e4ab6153d525de9beb5fcec890955b4609991c5e9addcf478a525afd4b22ed803d127b838b656780c1507b3e562ec</hash>
+        <hash alg="SHA-384">acd0e9ce0d9e1e5ab06b457baf744890b10223ca99c789f7ce8f93f7da501325f3261500f9c45ddccade755c778f007e</hash>
+        <hash alg="SHA3-384">e4f1929e4f6195a9bb68625e008f5fbfe7bc6df6f230d7c37ea5bb763d4e086e2df9a5d9204d84ab12257c4d774c0874</hash>
+        <hash alg="SHA3-256">7d6a8d15e46c367138ea2af3ca861fe260c0a5ed37d8792b8b9368d2be56a6d2</hash>
+        <hash alg="SHA3-512">55a93adad2306e9f2e3745e8e6dd20f43456a42d09fa8d77134f92f01af4f0f460dc8787277f4c05769d6f2dbd7827b4f7c316d23a051531eb8f21a54739e390</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://code.google.com/p/gentyref/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url></reference><reference type="issue-tracker"><url>http://code.google.com/p/gentyref/issues/list</url></reference><reference type="vcs"><url>https://github.com/vaadin/gentyref</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin/vaadin-push@8.20.0?type=jar">
+      <publisher>Vaadin Ltd</publisher>
+      <group>com.vaadin</group>
+      <name>vaadin-push</name>
+      <version>8.20.0</version>
+      <description>Vaadin server push support</description>
+      <scope>optional</scope>
+      <hashes>
+        <hash alg="MD5">c1c82143dc8acb3450e0d7d2ffb86702</hash>
+        <hash alg="SHA-1">25136c04123d7ad691b437110d27d739f848fab0</hash>
+        <hash alg="SHA-256">68f6dcb3ae0a1f571f04240052015f5c0b3e168085177a9ccc4f9b7cdfd7213f</hash>
+        <hash alg="SHA-512">f54068aefc9aa6ae6d8e30637e8c1d4ad4fbb4e8c251713413ae7633c3ae9c514b905ae9b7a29ca390cdee7d630a6df34fd018ba2f55881593b68b5dacc3bfd7</hash>
+        <hash alg="SHA-384">a4bb98a99da5b1833d3c11c007a1f5045c74fd3862b59043373a3d83aa78d3736744c486fe568c3fa19e5399ea1dca0c</hash>
+        <hash alg="SHA3-384">1f94ce9795f31ae7d7e6019326ebb61156401a4955f213c4c38880d59b3ce45f271cb24cfb338ad23245c5d60ddca63f</hash>
+        <hash alg="SHA3-256">dc84b16166191d87c1a99f78124eb776e1dc57fa4c52fcbdcfe5bbf997629e44</hash>
+        <hash alg="SHA3-512">99165b24122400798e8fc93a1b1815845f9febf0ffd88c6f21ad5d2e5c6691b102af4a3358f49e40643d276fd51727fc8a2cf87af0b2633659366bd7233f721d</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>Vaadin Commercial License</name>
+          <url>https://vaadin.com/commercial-license-and-service-terms</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin/vaadin-push@8.20.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://vaadin.com/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/vaadin/framework/vaadin-push</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5?type=jar">
+      <group>com.vaadin.external.atmosphere</group>
+      <name>atmosphere-runtime</name>
+      <version>2.4.30.vaadin5</version>
+      <description>Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/</description>
+      <hashes>
+        <hash alg="MD5">086159d0c3cd694032282013566c8047</hash>
+        <hash alg="SHA-1">fee5f0714f69183bcfb62a3317153c521ffcb262</hash>
+        <hash alg="SHA-256">2c9e171b08993f6ae85d383d6914700c07df4008e42cd07b3d29ba8fb47982b2</hash>
+        <hash alg="SHA-512">79b974a182f7bb170ac2e752ef7f13d182ded33c25119c1037af0949c9f0d11204d704ebbcc2172543ede162b1636deea86ced061de31e5f6d3cd87bf5359773</hash>
+        <hash alg="SHA-384">1745d7def74fb43077f1a3787ebf179d34ea1703aa98ce2b986043e4267c8265e2ac70c70d80293149ebef94d1016f64</hash>
+        <hash alg="SHA3-384">a0d652097fa28e70c746400a5b3de7a8e644b6e334d85129bedfde64d97d7f8c56f5cd5fef2b65f216cc33b26fbc84fe</hash>
+        <hash alg="SHA3-256">0660e3daa14c888d7fd2dffdb99de338f8a48bb25a66e37c29487b2080ab6418</hash>
+        <hash alg="SHA3-512">4be87a698127bf8203c4292fe32939793360ab0bdf8f2472a0b8c37856fa3f941c708302974f537787eb7c11ac89521d90ef83f7c3c6c813162f32f4d1069ed0</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>CDDL</name>
+          <url>https://glassfish.dev.java.net/public/CDDLv1.0.html</url>
+        </license>
+        <license>
+          <id>Apache-2.0</id>
+          <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://github.com/Atmosphere/atmosphere</url></reference><reference type="distribution"><url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="issue-tracker"><url>https://github.com/Atmosphere/atmosphere/issues</url></reference><reference type="mailing-list"><url>https://groups.google.com/group/atmosphere-framework</url></reference><reference type="vcs"><url>http://github.com/Atmosphere/atmosphere/atmosphere-runtime</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/commons-codec/commons-codec@1.15?type=jar">
+      <publisher>The Apache Software Foundation</publisher>
+      <group>commons-codec</group>
+      <name>commons-codec</name>
+      <version>1.15</version>
+      <description>The Apache Commons Codec package contains simple encoder and decoders for
+     various formats such as Base64 and Hexadecimal.  In addition to these
+     widely used encoders and decoders, the codec package also maintains a
+     collection of phonetic encoding utilities.</description>
+      <hashes>
+        <hash alg="MD5">303baf002ce6d382198090aedd9d79a2</hash>
+        <hash alg="SHA-1">49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d</hash>
+        <hash alg="SHA-256">b3e9f6d63a790109bf0d056611fbed1cf69055826defeb9894a71369d246ed63</hash>
+        <hash alg="SHA-512">da30a716770795fce390e4dd340a8b728f220c6572383ffef55bd5839655d5611fcc06128b2144f6cdcb36f53072a12ec80b04afee787665e7ad0b6e888a6787</hash>
+        <hash alg="SHA-384">05d0506283716472175d44c2a4766523397bf8a007c18848f9c9a61718cc8aa437f9cb4b91771037ab29a960860b62a0</hash>
+        <hash alg="SHA3-384">12fad4ef78274b06f97b1243cea6f970088abde082d2de9377d915a34b44f7d7d67807c03e59c849b69f1544e2a9a1be</hash>
+        <hash alg="SHA3-256">87be248f33f241121f54aad61a9a460a79eabefbf1b5b0dd22aeb95b581f727e</hash>
+        <hash alg="SHA3-512">8c992c9c569ebaa0bf956a4c5b34fbf5e1ed1c212c2dd896fa216183ee0bcd341e96698af4b9cec7e8880762faa081a3d3a27f51349aa457cb8e373e4f57c788</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/commons-codec/commons-codec@1.15?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://commons.apache.org/proper/commons-codec/</url></reference><reference type="build-system"><url>https://builds.apache.org/</url></reference><reference type="distribution"><url>https://repository.apache.org/service/local/staging/deploy/maven2</url></reference><reference type="issue-tracker"><url>https://issues.apache.org/jira/browse/CODEC</url></reference><reference type="mailing-list"><url>https://mail-archives.apache.org/mod_mbox/commons-user/</url></reference><reference type="vcs"><url>https://github.com/apache/commons-codec</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1?type=jar">
+      <group>com.vaadin.external.slf4j</group>
+      <name>vaadin-slf4j-jdk14</name>
+      <version>1.6.1</version>
+      <description>Slf4j API + JDK14 binding rebased to com.vaadin.external</description>
+      <hashes>
+        <hash alg="MD5">34fa1d2e66fafb0af3d5bede2b528df6</hash>
+        <hash alg="SHA-1">2268b4bb8226e01963357bc9a02a5d56c9992b8a</hash>
+        <hash alg="SHA-256">a1f953caaedf990ba23d2d9122e0349b49fef9b0e4a1474617d144f60ad1b7a8</hash>
+        <hash alg="SHA-512">d57edd230da5d6a47e3e6dd867fada6ac570a0e1f964bcda9bccd2931f99130d9603b2b93db6ef4b3306826f5322a005fc5b98457367f5f0aabf25fb598d4c2f</hash>
+        <hash alg="SHA-384">8e4a2ae6d75630a43af228e7abe475e818816e9e5a930b090d56bb7212bb9a0f0d5d81b5a151f6c9c63eceb78b06bc90</hash>
+        <hash alg="SHA3-384">07578e538f8c0ca240b7db2c07fc6964b0616e33980203f44b2d9d8b01d725a021385103bd9f6e222f6f26127bb4f830</hash>
+        <hash alg="SHA3-256">a72c44abf6a6d78b94f5cefb8130eee4c09078cab9b69399305b34433b8f57ef</hash>
+        <hash alg="SHA3-512">27ad03bb4ab919a6ae8b2164b2fb94d170748e5df96acb2cec0e468a708a5ddd9fe68f615fc37532efaa57241483df5e2f836eed300a3edad763946176eb98ac</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>MIT</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1?type=jar</purl>
+      <externalReferences><reference type="website"><url>http://www.slf4j.org</url></reference><reference type="vcs"><url>https://github.com/qos-ch/slf4j</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin/vaadin-client-compiled@8.20.0?type=jar">
+      <publisher>Vaadin Ltd</publisher>
+      <group>com.vaadin</group>
+      <name>vaadin-client-compiled</name>
+      <version>8.20.0</version>
+      <description>Vaadin client compiled</description>
+      <scope>optional</scope>
+      <hashes>
+        <hash alg="MD5">a594b62aec62cb99b9cb487f7b38135c</hash>
+        <hash alg="SHA-1">5a431db3ba712549220db337a33bde95572041a4</hash>
+        <hash alg="SHA-256">c92ace1a038f176498c49b85c01d0f1125fbb9f7571df64b3f8e2f16b952502a</hash>
+        <hash alg="SHA-512">0519c5c221314823e7646103d9f55426b16bb00ce93c8d1fe73f99c99c4166784fa54be2b493d8e1f350fdfdb8cd6c7f8723966bbe6ad84f427882c294d4fb63</hash>
+        <hash alg="SHA-384">aaa07d1bc6ab777436c70f552d3419fa6a07ec12d0d0332bac61101a6722302a15305c13ae0f1fd1b632acfc83ddff00</hash>
+        <hash alg="SHA3-384">98bdf4b52c1476959bf734125da1538e69455735e31d2b0da59740b1119bc77b6780c340f6ce127ad997885794ebe51c</hash>
+        <hash alg="SHA3-256">b39cff989371ebd2b0e446d2900b0f04ed9462dd59a57a972712bff4267b4838</hash>
+        <hash alg="SHA3-512">e1eca3ca3fbc87860e82daf904832931e152daf3cb7763ecb7e0a4a5a507548dd2dc8f3b75302c7758915a20faded4b8dc5af2ad2d43149f4688db44f5cd229c</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>Vaadin Commercial License</name>
+          <url>https://vaadin.com/commercial-license-and-service-terms</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin/vaadin-client-compiled@8.20.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://vaadin.com/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/vaadin/framework/vaadin-client-compiled</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/com.vaadin/vaadin-themes@8.20.0?type=jar">
+      <publisher>Vaadin Ltd</publisher>
+      <group>com.vaadin</group>
+      <name>vaadin-themes</name>
+      <version>8.20.0</version>
+      <description>Vaadin themes</description>
+      <scope>optional</scope>
+      <hashes>
+        <hash alg="MD5">bdd58350fa79c111197a575c84a1006c</hash>
+        <hash alg="SHA-1">abaf1f4152fd1d3df71cb4d5391de2961cb91b7c</hash>
+        <hash alg="SHA-256">d20d944877280d4c910bc4b6d00046247cebb79bd072b38a628983efad6d2891</hash>
+        <hash alg="SHA-512">66f065be6866a4c53e5b1d264ef6623474bfc937802630fc3dd1f21ec329be1517858c431e89fa3163664cc0d273c1552265bebedfa02e2ce6eb7b4ec6097127</hash>
+        <hash alg="SHA-384">31c6b9bb74c0b47f525729c992d50220b2f2dce9daa1ecfdc227aeb10810e3322d449ed7acd44cd0f44a3a303d29e5f1</hash>
+        <hash alg="SHA3-384">991607c59ef3595543e5f99f0c0ddbe12db1f86093d78886972517e88be30b89e623e6f298b912b7eab462dfa8296261</hash>
+        <hash alg="SHA3-256">7c461f42d58d9c6a4b2c46069a4956e9a0548f7a8a513e38496abbf2d757d4fc</hash>
+        <hash alg="SHA3-512">b762745b3a3e7ed86a15082108bf602620ecc500a9be9c20254c0883714ed4a31a6b6c8ed5298d67593f54b044b0451dcd4077668b1467b1cd483296fc7960e2</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>Vaadin Commercial License</name>
+          <url>https://vaadin.com/commercial-license-and-service-terms</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.vaadin/vaadin-themes@8.20.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://vaadin.com/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/vaadin/framework/vaadin-themes</url></reference></externalReferences>
+    </component>
+  </components>
+  <dependencies>
+    <dependency ref="pkg:maven/com.vaadin/appsec-kit@1.0-SNAPSHOT?type=pom">
+      <dependency ref="pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT?type=war"/>
+    </dependency>
+    <dependency ref="pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT?type=war">
+      <dependency ref="pkg:maven/javax.servlet/javax.servlet-api@3.0.1?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin/vaadin-server@8.20.0?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin/vaadin-push@8.20.0?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin/vaadin-client-compiled@8.20.0?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin/vaadin-themes@8.20.0?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/javax.servlet/javax.servlet-api@3.0.1?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin/vaadin-server@8.20.0?type=jar">
+      <dependency ref="pkg:maven/com.vaadin/vaadin-sass-compiler@0.9.13?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin/vaadin-shared@8.20.0?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin/license-checker@1.11.2?type=jar"/>
+      <dependency ref="pkg:maven/org.jsoup/jsoup@1.15.3?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/com.vaadin/vaadin-sass-compiler@0.9.13?type=jar">
+      <dependency ref="pkg:maven/org.w3c.css/sac@1.3?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin.external.flute/flute@1.3.0.gg2?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.w3c.css/sac@1.3?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin.external.flute/flute@1.3.0.gg2?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin/vaadin-shared@8.20.0?type=jar">
+      <dependency ref="pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin/license-checker@1.11.2?type=jar">
+      <dependency ref="pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar"/>
+      <dependency ref="pkg:maven/com.github.oshi/oshi-core@6.1.4?type=jar"/>
+      <dependency ref="pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar"/>
+      <dependency ref="pkg:maven/com.nimbusds/nimbus-jose-jwt@9.23?type=jar"/>
+      <dependency ref="pkg:maven/org.lucee/jcip-annotations@1.0.0?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin/open@8.4.0.3?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/com.github.oshi/oshi-core@6.1.4?type=jar">
+      <dependency ref="pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar"/>
+      <dependency ref="pkg:maven/net.java.dev.jna/jna-platform@5.10.0?type=jar"/>
+      <dependency ref="pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar"/>
+    <dependency ref="pkg:maven/net.java.dev.jna/jna-platform@5.10.0?type=jar">
+      <dependency ref="pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar"/>
+    <dependency ref="pkg:maven/com.nimbusds/nimbus-jose-jwt@9.23?type=jar"/>
+    <dependency ref="pkg:maven/org.lucee/jcip-annotations@1.0.0?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin/open@8.4.0.3?type=jar">
+      <dependency ref="pkg:maven/commons-io/commons-io@2.11.0?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/commons-io/commons-io@2.11.0?type=jar"/>
+    <dependency ref="pkg:maven/org.jsoup/jsoup@1.15.3?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin/vaadin-push@8.20.0?type=jar">
+      <dependency ref="pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5?type=jar">
+      <dependency ref="pkg:maven/commons-codec/commons-codec@1.15?type=jar"/>
+      <dependency ref="pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/commons-codec/commons-codec@1.15?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin/vaadin-client-compiled@8.20.0?type=jar"/>
+    <dependency ref="pkg:maven/com.vaadin/vaadin-themes@8.20.0?type=jar"/>
+  </dependencies>
+</bom>
