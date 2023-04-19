@@ -1,0 +1,1003 @@
+{
+	"spdxVersion": "SPDX-2.2",
+	"dataLicense": "CC0-1.0",
+	"SPDXID": "SPDXRef-DOCUMENT",
+	"name": "AppSec-Kit-1.0-SNAPSHOT",
+	"documentNamespace": "http://spdx.org/spdxpackages/AppSec-Kit-1.0-SNAPSHOT-6dcd4a07-6b51-470e-b3ad-e6424dd3f102",
+	"creationInfo": {
+		"created": "2023-04-19T14:28:04Z",
+		"creators": [
+			"Tool: spdx-sbom-generator-source-code"
+		]
+	},
+	"packages": [
+		{
+			"name": "AppSec-Kit",
+			"SPDXID": "SPDXRef-Package-AppSec-Kit",
+			"versionInfo": "1.0-SNAPSHOT",
+			"supplier": "Organization: AppSec Kit",
+			"downloadLocation": "https://mvnrepository.com/artifact/appsec-kit",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "1dd325cbf657678b39e9ad7577754b7af4e1d992"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "oshi-core",
+			"SPDXID": "SPDXRef-Package-oshi-core-6.1.4",
+			"versionInfo": "6.1.4",
+			"supplier": "Organization: oshi-core",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.github.oshi/oshi-core/6.1.4",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "092b724083a82c4b03c06bcc3801fb86185ce18c"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "nimbus-jose-jwt",
+			"SPDXID": "SPDXRef-Package-nimbus-jose-jwt-9.23",
+			"versionInfo": "9.23",
+			"supplier": "Organization: nimbus-jose-jwt",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt/9.23",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "30717614ad2bd83ec1b91671775cde63f985be55"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "atmosphere-runtime",
+			"SPDXID": "SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5",
+			"versionInfo": "2.4.30.vaadin5",
+			"supplier": "Organization: atmosphere-runtime",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin.external.atmosphere/atmosphere-runtime/2.4.30.vaadin5",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "15a1e64bd3bde63f4da3bc897eb31295d1c43460"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "flute",
+			"SPDXID": "SPDXRef-Package-flute-1.3.0.gg2",
+			"versionInfo": "1.3.0.gg2",
+			"supplier": "Organization: flute",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin.external.flute/flute/1.3.0.gg2",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "ba6665281a6143c09a4054047328169b936ecfbf"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "gwt-elemental",
+			"SPDXID": "SPDXRef-Package-gwt-elemental-2.8.2.vaadin2",
+			"versionInfo": "2.8.2.vaadin2",
+			"supplier": "Organization: gwt-elemental",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin.external.gwt/gwt-elemental/2.8.2.vaadin2",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "9049c1a935a10677a972b08f7544158998438b16"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-slf4j-jdk14",
+			"SPDXID": "SPDXRef-Package-vaadin-slf4j-jdk14-1.6.1",
+			"versionInfo": "1.6.1",
+			"supplier": "Organization: vaadin-slf4j-jdk14",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin.external.slf4j/vaadin-slf4j-jdk14/1.6.1",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "c808cea3884e13d078b36166f8c5d89f232eb69d"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "gentyref",
+			"SPDXID": "SPDXRef-Package-gentyref-1.2.0.vaadin1",
+			"versionInfo": "1.2.0.vaadin1",
+			"supplier": "Organization: gentyref",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin.external/gentyref/1.2.0.vaadin1",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "ebead363649da6b6b72136e3f717868582ca651c"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "license-checker",
+			"SPDXID": "SPDXRef-Package-license-checker-1.11.2",
+			"versionInfo": "1.11.2",
+			"supplier": "Organization: license-checker",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/license-checker/1.11.2",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "c8879f37fe62ded8719b680acaf1d19b80885d45"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "open",
+			"SPDXID": "SPDXRef-Package-open-8.4.0.3",
+			"versionInfo": "8.4.0.3",
+			"supplier": "Organization: open",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/open/8.4.0.3",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "5fc7e38bffe00ca46add89145464a2eaf759d5c2"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-client-compiled",
+			"SPDXID": "SPDXRef-Package-vaadin-client-compiled-8.20.0",
+			"versionInfo": "8.20.0",
+			"supplier": "Organization: vaadin-client-compiled",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-client-compiled/8.20.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "afc684b317c7192897bef081c6b8ab0fe69e9ac8"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-push",
+			"SPDXID": "SPDXRef-Package-vaadin-push-8.20.0",
+			"versionInfo": "8.20.0",
+			"supplier": "Organization: vaadin-push",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-push/8.20.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "d672b5c614b1539bd5785bafe7d345a8f4839789"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-sass-compiler",
+			"SPDXID": "SPDXRef-Package-vaadin-sass-compiler-0.9.13",
+			"versionInfo": "0.9.13",
+			"supplier": "Organization: vaadin-sass-compiler",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-sass-compiler/0.9.13",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "e580d4cbacfa69a020edac5395b70730a0efafb0"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-server",
+			"SPDXID": "SPDXRef-Package-vaadin-server-8.20.0",
+			"versionInfo": "8.20.0",
+			"supplier": "Organization: vaadin-server",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-server/8.20.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "122dd3466a9939dc90a252162baf6ae462fb6f87"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-shared",
+			"SPDXID": "SPDXRef-Package-vaadin-shared-8.20.0",
+			"versionInfo": "8.20.0",
+			"supplier": "Organization: vaadin-shared",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-shared/8.20.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "0fbd0aa00695186bdf823d1a479203a078590adf"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-themes",
+			"SPDXID": "SPDXRef-Package-vaadin-themes-8.20.0",
+			"versionInfo": "8.20.0",
+			"supplier": "Organization: vaadin-themes",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-themes/8.20.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "8ff8f40e2ec5233cd7fc2e7498e9183c3564688a"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "commons-codec",
+			"SPDXID": "SPDXRef-Package-commons-codec-1.15",
+			"versionInfo": "1.15",
+			"supplier": "Organization: commons-codec",
+			"downloadLocation": "https://mvnrepository.com/artifact/commons-codec/commons-codec/1.15",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "b36d54a24ab96d93326621e2967e34a2ebdb53b6"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "commons-io",
+			"SPDXID": "SPDXRef-Package-commons-io-2.11.0",
+			"versionInfo": "2.11.0",
+			"supplier": "Organization: commons-io",
+			"downloadLocation": "https://mvnrepository.com/artifact/commons-io/commons-io/2.11.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "79d4810e28d241fcfc983cb6e9b221180c05c2fe"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "javax.servlet-api",
+			"SPDXID": "SPDXRef-Package-javax.servlet-api-3.0.1",
+			"versionInfo": "3.0.1",
+			"supplier": "Organization: javax.servlet-api",
+			"downloadLocation": "https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api/3.0.1",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "84f2abd103bbb59ee48c14b4925dbafe17ff52f2"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "jna-platform",
+			"SPDXID": "SPDXRef-Package-jna-platform-5.10.0",
+			"versionInfo": "5.10.0",
+			"supplier": "Organization: jna-platform",
+			"downloadLocation": "https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform/5.10.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "0e30ee1da2635ddec50231d6f13d65d2ba326db3"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "jna",
+			"SPDXID": "SPDXRef-Package-jna-5.10.0",
+			"versionInfo": "5.10.0",
+			"supplier": "Organization: jna",
+			"downloadLocation": "https://mvnrepository.com/artifact/net.java.dev.jna/jna/5.10.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "670a2056100f5136eff47e268c92e32e229181b0"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "jsoup",
+			"SPDXID": "SPDXRef-Package-jsoup-1.15.3",
+			"versionInfo": "1.15.3",
+			"supplier": "Organization: jsoup",
+			"downloadLocation": "https://mvnrepository.com/artifact/org.jsoup/jsoup/1.15.3",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "2ad113cbf48645b729603d76b10a0f55bb2e00ce"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "jcip-annotations",
+			"SPDXID": "SPDXRef-Package-jcip-annotations-1.0.0",
+			"versionInfo": "1.0.0",
+			"supplier": "Organization: jcip-annotations",
+			"downloadLocation": "https://mvnrepository.com/artifact/org.lucee/jcip-annotations/1.0.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "ab30590295185b2941022f12c612c38be222aba7"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "slf4j-api",
+			"SPDXID": "SPDXRef-Package-slf4j-api-1.7.36",
+			"versionInfo": "1.7.36",
+			"supplier": "Organization: slf4j-api",
+			"downloadLocation": "https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.36",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "1f5d1163f93cc80861f59ac7e0ca1136f79765e8"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "sac",
+			"SPDXID": "SPDXRef-Package-sac-1.3",
+			"versionInfo": "1.3",
+			"supplier": "Organization: sac",
+			"downloadLocation": "https://mvnrepository.com/artifact/org.w3c.css/sac/1.3",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "05297834ce7ed4bad827248e6778fc9653419b39"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "2023-04-19T16",
+			"SPDXID": "SPDXRef-Package-2023-04-19T16-03+02",
+			"versionInfo": "03+02",
+			"supplier": "Organization: 2023-04-19T16",
+			"downloadLocation": "https://mvnrepository.com/artifact/Finished at/2023-04-19T16/03+02",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "621720f4b612597530441fe198b83597b9ed3d7a"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "AppSec-Kit-Demo-for-Vaadin-8",
+			"SPDXID": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"versionInfo": "1.0-SNAPSHOT",
+			"supplier": "Organization: AppSec Kit Demo for Vaadin 8",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin.appsec-kit",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "f374c7d1e9309cfd11accc59249bfa8db136ee82"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "javax.servlet-api",
+			"SPDXID": "SPDXRef-Package-javax.servlet-api-3.0.1",
+			"versionInfo": "3.0.1",
+			"supplier": "Organization: javax.servlet-api",
+			"downloadLocation": "https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api/3.0.1",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "84f2abd103bbb59ee48c14b4925dbafe17ff52f2"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-server",
+			"SPDXID": "SPDXRef-Package-vaadin-server-",
+			"supplier": "Organization: vaadin-server",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-server/",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "122dd3466a9939dc90a252162baf6ae462fb6f87"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-push",
+			"SPDXID": "SPDXRef-Package-vaadin-push-",
+			"supplier": "Organization: vaadin-push",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-push/",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "d672b5c614b1539bd5785bafe7d345a8f4839789"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-client-compiled",
+			"SPDXID": "SPDXRef-Package-vaadin-client-compiled-",
+			"supplier": "Organization: vaadin-client-compiled",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-client-compiled/",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "afc684b317c7192897bef081c6b8ab0fe69e9ac8"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-themes",
+			"SPDXID": "SPDXRef-Package-vaadin-themes-",
+			"supplier": "Organization: vaadin-themes",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-themes/",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "8ff8f40e2ec5233cd7fc2e7498e9183c3564688a"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "maven-war-plugin",
+			"SPDXID": "SPDXRef-Package-maven-war-plugin-3.2.0",
+			"versionInfo": "3.2.0",
+			"supplier": "Organization: maven-war-plugin",
+			"downloadLocation": "https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin/3.2.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "b7852e3add9f118e3d6e17b04668268a90d709cd"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "vaadin-maven-plugin",
+			"SPDXID": "SPDXRef-Package-vaadin-maven-plugin-8.20.0",
+			"versionInfo": "8.20.0",
+			"supplier": "Organization: vaadin-maven-plugin",
+			"downloadLocation": "https://mvnrepository.com/artifact/com.vaadin/vaadin-maven-plugin/8.20.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "a9f26857b0842179666e28a5975c8a85c45fe8c6"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "maven-clean-plugin",
+			"SPDXID": "SPDXRef-Package-maven-clean-plugin-3.0.0",
+			"versionInfo": "3.0.0",
+			"supplier": "Organization: maven-clean-plugin",
+			"downloadLocation": "https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin/3.0.0",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "10c987062aa8b94186a151fb61d00b58229a7a47"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		},
+		{
+			"name": "jetty-maven-plugin",
+			"SPDXID": "SPDXRef-Package-jetty-maven-plugin-9.3.9.v20160517",
+			"versionInfo": "9.3.9.v20160517",
+			"supplier": "Organization: jetty-maven-plugin",
+			"downloadLocation": "https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-maven-plugin/9.3.9.v20160517",
+			"filesAnalyzed": false,
+			"checksums": [
+				{
+					"algorithm": "SHA1",
+					"checksumValue": "46c2b62344c50cc4914016c71c4274b2e0b806df"
+				}
+			],
+			"homepage": "NOASSERTION",
+			"licenseConcluded": "NOASSERTION",
+			"licenseDeclared": "NOASSERTION",
+			"copyrightText": "NOASSERTION",
+			"licenseComments": "NOASSERTION",
+			"comment": "NOASSERTION"
+		}
+	],
+	"relationships": [
+		{
+			"spdxElementId": "SPDXRef-DOCUMENT",
+			"relatedSpdxElement": "SPDXRef-Package-AppSec-Kit",
+			"relationshipType": "DESCRIBES"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-push-8.20.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-javax.servlet-api-3.0.1",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-jna-platform-5.10.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-2023-04-19T16-03+02",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-slf4j-jdk14-1.6.1",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-flute-1.3.0.gg2",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-sass-compiler-0.9.13",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-server-8.20.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-shared-8.20.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-jsoup-1.15.3",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-jcip-annotations-1.0.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-sac-1.3",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-gwt-elemental-2.8.2.vaadin2",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-license-checker-1.11.2",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-open-8.4.0.3",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-client-compiled-8.20.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-commons-codec-1.15",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-commons-io-2.11.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-oshi-core-6.1.4",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-gentyref-1.2.0.vaadin1",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-themes-8.20.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-jna-5.10.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-slf4j-api-1.7.36",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit",
+			"relatedSpdxElement": "SPDXRef-Package-nimbus-jose-jwt-9.23",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-oshi-core-6.1.4",
+			"relatedSpdxElement": "SPDXRef-Package-jna-5.10.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-oshi-core-6.1.4",
+			"relatedSpdxElement": "SPDXRef-Package-jna-platform-5.10.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5",
+			"relatedSpdxElement": "SPDXRef-Package-commons-codec-1.15",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-slf4j-jdk14-1.6.1",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-license-checker-1.11.2",
+			"relatedSpdxElement": "SPDXRef-Package-jcip-annotations-1.0.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-license-checker-1.11.2",
+			"relatedSpdxElement": "SPDXRef-Package-open-8.4.0.3",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-license-checker-1.11.2",
+			"relatedSpdxElement": "SPDXRef-Package-oshi-core-6.1.4",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-license-checker-1.11.2",
+			"relatedSpdxElement": "SPDXRef-Package-slf4j-api-1.7.36",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-license-checker-1.11.2",
+			"relatedSpdxElement": "SPDXRef-Package-nimbus-jose-jwt-9.23",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-open-8.4.0.3",
+			"relatedSpdxElement": "SPDXRef-Package-commons-io-2.11.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-vaadin-sass-compiler-0.9.13",
+			"relatedSpdxElement": "SPDXRef-Package-sac-1.3",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-vaadin-sass-compiler-0.9.13",
+			"relatedSpdxElement": "SPDXRef-Package-flute-1.3.0.gg2",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-vaadin-shared-8.20.0",
+			"relatedSpdxElement": "SPDXRef-Package-gwt-elemental-2.8.2.vaadin2",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"relatedSpdxElement": "SPDXRef-Package-maven-clean-plugin-3.0.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"relatedSpdxElement": "SPDXRef-Package-jetty-maven-plugin-9.3.9.v20160517",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-server-",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-push-",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-client-compiled-",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-themes-",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"relatedSpdxElement": "SPDXRef-Package-maven-war-plugin-3.2.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-maven-plugin-8.20.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT",
+			"relatedSpdxElement": "SPDXRef-Package-javax.servlet-api-3.0.1",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-vaadin-server-",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-sass-compiler-0.9.13",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-vaadin-server-",
+			"relatedSpdxElement": "SPDXRef-Package-vaadin-shared-8.20.0",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-vaadin-server-",
+			"relatedSpdxElement": "SPDXRef-Package-license-checker-1.11.2",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-vaadin-server-",
+			"relatedSpdxElement": "SPDXRef-Package-jsoup-1.15.3",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-vaadin-server-",
+			"relatedSpdxElement": "SPDXRef-Package-gentyref-1.2.0.vaadin1",
+			"relationshipType": "DEPENDS_ON"
+		},
+		{
+			"spdxElementId": "SPDXRef-Package-vaadin-push-",
+			"relatedSpdxElement": "SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5",
+			"relationshipType": "DEPENDS_ON"
+		}
+	]
+}

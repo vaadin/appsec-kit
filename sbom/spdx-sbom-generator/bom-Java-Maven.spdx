@@ -1,0 +1,639 @@
+SPDXVersion: SPDX-2.2
+DataLicense: CC0-1.0
+SPDXID: SPDXRef-DOCUMENT
+DocumentName: AppSec-Kit-1.0-SNAPSHOT
+DocumentNamespace: http://spdx.org/spdxpackages/AppSec-Kit-1.0-SNAPSHOT-92f3f0c5-d252-4e65-af03-4f51f5cea1d8
+Creator: Tool: spdx-sbom-generator-source-code
+Created: 2023-04-19T14:24:32Z
+
+
+##### Package representing the AppSec-Kit
+
+PackageName: AppSec-Kit
+SPDXID: SPDXRef-Package-AppSec-Kit
+PackageVersion: 1.0-SNAPSHOT
+PackageSupplier: Organization: AppSec Kit
+PackageDownloadLocation: https://mvnrepository.com/artifact/appsec-kit
+FilesAnalyzed: false
+PackageChecksum: SHA1: 1dd325cbf657678b39e9ad7577754b7af4e1d992
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the oshi-core
+
+PackageName: oshi-core
+SPDXID: SPDXRef-Package-oshi-core-6.1.4
+PackageVersion: 6.1.4
+PackageSupplier: Organization: oshi-core
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.github.oshi/oshi-core/6.1.4
+FilesAnalyzed: false
+PackageChecksum: SHA1: 092b724083a82c4b03c06bcc3801fb86185ce18c
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the nimbus-jose-jwt
+
+PackageName: nimbus-jose-jwt
+SPDXID: SPDXRef-Package-nimbus-jose-jwt-9.23
+PackageVersion: 9.23
+PackageSupplier: Organization: nimbus-jose-jwt
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt/9.23
+FilesAnalyzed: false
+PackageChecksum: SHA1: 30717614ad2bd83ec1b91671775cde63f985be55
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the atmosphere-runtime
+
+PackageName: atmosphere-runtime
+SPDXID: SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5
+PackageVersion: 2.4.30.vaadin5
+PackageSupplier: Organization: atmosphere-runtime
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin.external.atmosphere/atmosphere-runtime/2.4.30.vaadin5
+FilesAnalyzed: false
+PackageChecksum: SHA1: 15a1e64bd3bde63f4da3bc897eb31295d1c43460
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the flute
+
+PackageName: flute
+SPDXID: SPDXRef-Package-flute-1.3.0.gg2
+PackageVersion: 1.3.0.gg2
+PackageSupplier: Organization: flute
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin.external.flute/flute/1.3.0.gg2
+FilesAnalyzed: false
+PackageChecksum: SHA1: ba6665281a6143c09a4054047328169b936ecfbf
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the gwt-elemental
+
+PackageName: gwt-elemental
+SPDXID: SPDXRef-Package-gwt-elemental-2.8.2.vaadin2
+PackageVersion: 2.8.2.vaadin2
+PackageSupplier: Organization: gwt-elemental
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin.external.gwt/gwt-elemental/2.8.2.vaadin2
+FilesAnalyzed: false
+PackageChecksum: SHA1: 9049c1a935a10677a972b08f7544158998438b16
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-slf4j-jdk14
+
+PackageName: vaadin-slf4j-jdk14
+SPDXID: SPDXRef-Package-vaadin-slf4j-jdk14-1.6.1
+PackageVersion: 1.6.1
+PackageSupplier: Organization: vaadin-slf4j-jdk14
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin.external.slf4j/vaadin-slf4j-jdk14/1.6.1
+FilesAnalyzed: false
+PackageChecksum: SHA1: c808cea3884e13d078b36166f8c5d89f232eb69d
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the gentyref
+
+PackageName: gentyref
+SPDXID: SPDXRef-Package-gentyref-1.2.0.vaadin1
+PackageVersion: 1.2.0.vaadin1
+PackageSupplier: Organization: gentyref
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin.external/gentyref/1.2.0.vaadin1
+FilesAnalyzed: false
+PackageChecksum: SHA1: ebead363649da6b6b72136e3f717868582ca651c
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the license-checker
+
+PackageName: license-checker
+SPDXID: SPDXRef-Package-license-checker-1.11.2
+PackageVersion: 1.11.2
+PackageSupplier: Organization: license-checker
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/license-checker/1.11.2
+FilesAnalyzed: false
+PackageChecksum: SHA1: c8879f37fe62ded8719b680acaf1d19b80885d45
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the open
+
+PackageName: open
+SPDXID: SPDXRef-Package-open-8.4.0.3
+PackageVersion: 8.4.0.3
+PackageSupplier: Organization: open
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/open/8.4.0.3
+FilesAnalyzed: false
+PackageChecksum: SHA1: 5fc7e38bffe00ca46add89145464a2eaf759d5c2
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-client-compiled
+
+PackageName: vaadin-client-compiled
+SPDXID: SPDXRef-Package-vaadin-client-compiled-8.20.0
+PackageVersion: 8.20.0
+PackageSupplier: Organization: vaadin-client-compiled
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-client-compiled/8.20.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: afc684b317c7192897bef081c6b8ab0fe69e9ac8
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-push
+
+PackageName: vaadin-push
+SPDXID: SPDXRef-Package-vaadin-push-8.20.0
+PackageVersion: 8.20.0
+PackageSupplier: Organization: vaadin-push
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-push/8.20.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: d672b5c614b1539bd5785bafe7d345a8f4839789
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-sass-compiler
+
+PackageName: vaadin-sass-compiler
+SPDXID: SPDXRef-Package-vaadin-sass-compiler-0.9.13
+PackageVersion: 0.9.13
+PackageSupplier: Organization: vaadin-sass-compiler
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-sass-compiler/0.9.13
+FilesAnalyzed: false
+PackageChecksum: SHA1: e580d4cbacfa69a020edac5395b70730a0efafb0
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-server
+
+PackageName: vaadin-server
+SPDXID: SPDXRef-Package-vaadin-server-8.20.0
+PackageVersion: 8.20.0
+PackageSupplier: Organization: vaadin-server
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-server/8.20.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: 122dd3466a9939dc90a252162baf6ae462fb6f87
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-shared
+
+PackageName: vaadin-shared
+SPDXID: SPDXRef-Package-vaadin-shared-8.20.0
+PackageVersion: 8.20.0
+PackageSupplier: Organization: vaadin-shared
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-shared/8.20.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: 0fbd0aa00695186bdf823d1a479203a078590adf
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-themes
+
+PackageName: vaadin-themes
+SPDXID: SPDXRef-Package-vaadin-themes-8.20.0
+PackageVersion: 8.20.0
+PackageSupplier: Organization: vaadin-themes
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-themes/8.20.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: 8ff8f40e2ec5233cd7fc2e7498e9183c3564688a
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the commons-codec
+
+PackageName: commons-codec
+SPDXID: SPDXRef-Package-commons-codec-1.15
+PackageVersion: 1.15
+PackageSupplier: Organization: commons-codec
+PackageDownloadLocation: https://mvnrepository.com/artifact/commons-codec/commons-codec/1.15
+FilesAnalyzed: false
+PackageChecksum: SHA1: b36d54a24ab96d93326621e2967e34a2ebdb53b6
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the commons-io
+
+PackageName: commons-io
+SPDXID: SPDXRef-Package-commons-io-2.11.0
+PackageVersion: 2.11.0
+PackageSupplier: Organization: commons-io
+PackageDownloadLocation: https://mvnrepository.com/artifact/commons-io/commons-io/2.11.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: 79d4810e28d241fcfc983cb6e9b221180c05c2fe
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the javax.servlet-api
+
+PackageName: javax.servlet-api
+SPDXID: SPDXRef-Package-javax.servlet-api-3.0.1
+PackageVersion: 3.0.1
+PackageSupplier: Organization: javax.servlet-api
+PackageDownloadLocation: https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api/3.0.1
+FilesAnalyzed: false
+PackageChecksum: SHA1: 84f2abd103bbb59ee48c14b4925dbafe17ff52f2
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the jna-platform
+
+PackageName: jna-platform
+SPDXID: SPDXRef-Package-jna-platform-5.10.0
+PackageVersion: 5.10.0
+PackageSupplier: Organization: jna-platform
+PackageDownloadLocation: https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform/5.10.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: 0e30ee1da2635ddec50231d6f13d65d2ba326db3
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the jna
+
+PackageName: jna
+SPDXID: SPDXRef-Package-jna-5.10.0
+PackageVersion: 5.10.0
+PackageSupplier: Organization: jna
+PackageDownloadLocation: https://mvnrepository.com/artifact/net.java.dev.jna/jna/5.10.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: 670a2056100f5136eff47e268c92e32e229181b0
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the jsoup
+
+PackageName: jsoup
+SPDXID: SPDXRef-Package-jsoup-1.15.3
+PackageVersion: 1.15.3
+PackageSupplier: Organization: jsoup
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.jsoup/jsoup/1.15.3
+FilesAnalyzed: false
+PackageChecksum: SHA1: 2ad113cbf48645b729603d76b10a0f55bb2e00ce
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the jcip-annotations
+
+PackageName: jcip-annotations
+SPDXID: SPDXRef-Package-jcip-annotations-1.0.0
+PackageVersion: 1.0.0
+PackageSupplier: Organization: jcip-annotations
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.lucee/jcip-annotations/1.0.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: ab30590295185b2941022f12c612c38be222aba7
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the slf4j-api
+
+PackageName: slf4j-api
+SPDXID: SPDXRef-Package-slf4j-api-1.7.36
+PackageVersion: 1.7.36
+PackageSupplier: Organization: slf4j-api
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.slf4j/slf4j-api/1.7.36
+FilesAnalyzed: false
+PackageChecksum: SHA1: 1f5d1163f93cc80861f59ac7e0ca1136f79765e8
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the sac
+
+PackageName: sac
+SPDXID: SPDXRef-Package-sac-1.3
+PackageVersion: 1.3
+PackageSupplier: Organization: sac
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.w3c.css/sac/1.3
+FilesAnalyzed: false
+PackageChecksum: SHA1: 05297834ce7ed4bad827248e6778fc9653419b39
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the 2023-04-19T16
+
+PackageName: 2023-04-19T16
+SPDXID: SPDXRef-Package-2023-04-19T16-31+02
+PackageVersion: 31+02
+PackageSupplier: Organization: 2023-04-19T16
+PackageDownloadLocation: https://mvnrepository.com/artifact/Finished at/2023-04-19T16/31+02
+FilesAnalyzed: false
+PackageChecksum: SHA1: 621720f4b612597530441fe198b83597b9ed3d7a
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the AppSec-Kit-Demo-for-Vaadin-8
+
+PackageName: AppSec-Kit-Demo-for-Vaadin-8
+SPDXID: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT
+PackageVersion: 1.0-SNAPSHOT
+PackageSupplier: Organization: AppSec Kit Demo for Vaadin 8
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin.appsec-kit
+FilesAnalyzed: false
+PackageChecksum: SHA1: f374c7d1e9309cfd11accc59249bfa8db136ee82
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the javax.servlet-api
+
+PackageName: javax.servlet-api
+SPDXID: SPDXRef-Package-javax.servlet-api-3.0.1
+PackageVersion: 3.0.1
+PackageSupplier: Organization: javax.servlet-api
+PackageDownloadLocation: https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api/3.0.1
+FilesAnalyzed: false
+PackageChecksum: SHA1: 84f2abd103bbb59ee48c14b4925dbafe17ff52f2
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-server
+
+PackageName: vaadin-server
+SPDXID: SPDXRef-Package-vaadin-server-
+
+PackageSupplier: Organization: vaadin-server
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-server/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 122dd3466a9939dc90a252162baf6ae462fb6f87
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-push
+
+PackageName: vaadin-push
+SPDXID: SPDXRef-Package-vaadin-push-
+
+PackageSupplier: Organization: vaadin-push
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-push/
+FilesAnalyzed: false
+PackageChecksum: SHA1: d672b5c614b1539bd5785bafe7d345a8f4839789
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-client-compiled
+
+PackageName: vaadin-client-compiled
+SPDXID: SPDXRef-Package-vaadin-client-compiled-
+
+PackageSupplier: Organization: vaadin-client-compiled
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-client-compiled/
+FilesAnalyzed: false
+PackageChecksum: SHA1: afc684b317c7192897bef081c6b8ab0fe69e9ac8
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-themes
+
+PackageName: vaadin-themes
+SPDXID: SPDXRef-Package-vaadin-themes-
+
+PackageSupplier: Organization: vaadin-themes
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-themes/
+FilesAnalyzed: false
+PackageChecksum: SHA1: 8ff8f40e2ec5233cd7fc2e7498e9183c3564688a
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-war-plugin
+
+PackageName: maven-war-plugin
+SPDXID: SPDXRef-Package-maven-war-plugin-3.2.0
+PackageVersion: 3.2.0
+PackageSupplier: Organization: maven-war-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin/3.2.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: b7852e3add9f118e3d6e17b04668268a90d709cd
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the vaadin-maven-plugin
+
+PackageName: vaadin-maven-plugin
+SPDXID: SPDXRef-Package-vaadin-maven-plugin-8.20.0
+PackageVersion: 8.20.0
+PackageSupplier: Organization: vaadin-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/com.vaadin/vaadin-maven-plugin/8.20.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: a9f26857b0842179666e28a5975c8a85c45fe8c6
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the maven-clean-plugin
+
+PackageName: maven-clean-plugin
+SPDXID: SPDXRef-Package-maven-clean-plugin-3.0.0
+PackageVersion: 3.0.0
+PackageSupplier: Organization: maven-clean-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin/3.0.0
+FilesAnalyzed: false
+PackageChecksum: SHA1: 10c987062aa8b94186a151fb61d00b58229a7a47
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+##### Package representing the jetty-maven-plugin
+
+PackageName: jetty-maven-plugin
+SPDXID: SPDXRef-Package-jetty-maven-plugin-9.3.9.v20160517
+PackageVersion: 9.3.9.v20160517
+PackageSupplier: Organization: jetty-maven-plugin
+PackageDownloadLocation: https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-maven-plugin/9.3.9.v20160517
+FilesAnalyzed: false
+PackageChecksum: SHA1: 46c2b62344c50cc4914016c71c4274b2e0b806df
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseDeclared: NOASSERTION
+PackageCopyrightText: NOASSERTION
+PackageLicenseComments: NOASSERTION
+PackageComment: NOASSERTION
+
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-Package-AppSec-Kit
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-vaadin-shared-8.20.0
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-commons-codec-1.15
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-commons-io-2.11.0
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-jna-platform-5.10.0
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-jcip-annotations-1.0.0
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-flute-1.3.0.gg2
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-vaadin-server-8.20.0
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-sac-1.3
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-vaadin-themes-8.20.0
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-jna-5.10.0
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-jsoup-1.15.3
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-slf4j-api-1.7.36
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-2023-04-19T16-31+02
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-license-checker-1.11.2
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-open-8.4.0.3
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-vaadin-client-compiled-8.20.0
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-vaadin-slf4j-jdk14-1.6.1
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-vaadin-sass-compiler-0.9.13
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-javax.servlet-api-3.0.1
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-gentyref-1.2.0.vaadin1
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-vaadin-push-8.20.0
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-oshi-core-6.1.4
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-nimbus-jose-jwt-9.23
+Relationship: SPDXRef-Package-AppSec-Kit DEPENDS_ON SPDXRef-Package-gwt-elemental-2.8.2.vaadin2
+Relationship: SPDXRef-Package-oshi-core-6.1.4 DEPENDS_ON SPDXRef-Package-jna-platform-5.10.0
+Relationship: SPDXRef-Package-oshi-core-6.1.4 DEPENDS_ON SPDXRef-Package-jna-5.10.0
+Relationship: SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5 DEPENDS_ON SPDXRef-Package-commons-codec-1.15
+Relationship: SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5 DEPENDS_ON SPDXRef-Package-vaadin-slf4j-jdk14-1.6.1
+Relationship: SPDXRef-Package-license-checker-1.11.2 DEPENDS_ON SPDXRef-Package-oshi-core-6.1.4
+Relationship: SPDXRef-Package-license-checker-1.11.2 DEPENDS_ON SPDXRef-Package-slf4j-api-1.7.36
+Relationship: SPDXRef-Package-license-checker-1.11.2 DEPENDS_ON SPDXRef-Package-nimbus-jose-jwt-9.23
+Relationship: SPDXRef-Package-license-checker-1.11.2 DEPENDS_ON SPDXRef-Package-jcip-annotations-1.0.0
+Relationship: SPDXRef-Package-license-checker-1.11.2 DEPENDS_ON SPDXRef-Package-open-8.4.0.3
+Relationship: SPDXRef-Package-open-8.4.0.3 DEPENDS_ON SPDXRef-Package-commons-io-2.11.0
+Relationship: SPDXRef-Package-vaadin-sass-compiler-0.9.13 DEPENDS_ON SPDXRef-Package-sac-1.3
+Relationship: SPDXRef-Package-vaadin-sass-compiler-0.9.13 DEPENDS_ON SPDXRef-Package-flute-1.3.0.gg2
+Relationship: SPDXRef-Package-vaadin-shared-8.20.0 DEPENDS_ON SPDXRef-Package-gwt-elemental-2.8.2.vaadin2
+Relationship: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT DEPENDS_ON SPDXRef-Package-javax.servlet-api-3.0.1
+Relationship: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT DEPENDS_ON SPDXRef-Package-vaadin-server-
+Relationship: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT DEPENDS_ON SPDXRef-Package-vaadin-client-compiled-
+Relationship: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT DEPENDS_ON SPDXRef-Package-maven-war-plugin-3.2.0
+Relationship: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT DEPENDS_ON SPDXRef-Package-jetty-maven-plugin-9.3.9.v20160517
+Relationship: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT DEPENDS_ON SPDXRef-Package-vaadin-push-
+Relationship: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT DEPENDS_ON SPDXRef-Package-vaadin-themes-
+Relationship: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT DEPENDS_ON SPDXRef-Package-vaadin-maven-plugin-8.20.0
+Relationship: SPDXRef-Package-AppSec-Kit-Demo-for-Vaadin-8-1.0-SNAPSHOT DEPENDS_ON SPDXRef-Package-maven-clean-plugin-3.0.0
+Relationship: SPDXRef-Package-vaadin-server- DEPENDS_ON SPDXRef-Package-license-checker-1.11.2
+Relationship: SPDXRef-Package-vaadin-server- DEPENDS_ON SPDXRef-Package-jsoup-1.15.3
+Relationship: SPDXRef-Package-vaadin-server- DEPENDS_ON SPDXRef-Package-gentyref-1.2.0.vaadin1
+Relationship: SPDXRef-Package-vaadin-server- DEPENDS_ON SPDXRef-Package-vaadin-sass-compiler-0.9.13
+Relationship: SPDXRef-Package-vaadin-server- DEPENDS_ON SPDXRef-Package-vaadin-shared-8.20.0
+Relationship: SPDXRef-Package-vaadin-push- DEPENDS_ON SPDXRef-Package-atmosphere-runtime-2.4.30.vaadin5
