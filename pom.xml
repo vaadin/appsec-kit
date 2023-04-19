@@ -137,6 +137,23 @@
                     <verbose>false</verbose><!-- = ${cyclonedx.verbose} -->
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.spdx</groupId>
+                <artifactId>spdx-maven-plugin</artifactId>
+                <!-- please check for updates on https://search.maven.org/search?q=a:spdx-maven-plugin -->
+                <version>0.5.4</version>
+                <executions>
+                    <execution>
+                        <id>build-spdx</id>
+                        <goals>
+                            <goal>createSPDX</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
