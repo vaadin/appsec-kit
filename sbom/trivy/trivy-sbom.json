@@ -1,0 +1,168 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:60b67111-53dd-4b4a-8c24-bbd9dd1a69a1",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2023-04-19T13:42:39+00:00",
+    "tools": [
+      {
+        "vendor": "aquasecurity",
+        "name": "trivy",
+        "version": "0.40.0"
+      }
+    ],
+    "component": {
+      "bom-ref": "8432dc1c-430f-48d1-aaa2-33b39ab97db3",
+      "type": "application",
+      "name": ".",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:SchemaVersion",
+          "value": "2"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT",
+      "type": "library",
+      "name": "com.vaadin.appsec-kit:demo-vaadin-8",
+      "version": "1.0-SNAPSHOT",
+      "purl": "pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pom"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:maven/com.vaadin/appsec-kit@1.0-SNAPSHOT",
+      "type": "library",
+      "name": "com.vaadin:appsec-kit",
+      "version": "1.0-SNAPSHOT",
+      "purl": "pkg:maven/com.vaadin/appsec-kit@1.0-SNAPSHOT",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pom"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:maven/com.vaadin/vaadin-client-compiled@1.1.0",
+      "type": "library",
+      "name": "com.vaadin:vaadin-client-compiled",
+      "version": "1.1.0",
+      "purl": "pkg:maven/com.vaadin/vaadin-client-compiled@1.1.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pom"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:maven/com.vaadin/vaadin-push@1.1.0",
+      "type": "library",
+      "name": "com.vaadin:vaadin-push",
+      "version": "1.1.0",
+      "purl": "pkg:maven/com.vaadin/vaadin-push@1.1.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pom"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:maven/com.vaadin/vaadin-server@1.1.0",
+      "type": "library",
+      "name": "com.vaadin:vaadin-server",
+      "version": "1.1.0",
+      "purl": "pkg:maven/com.vaadin/vaadin-server@1.1.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pom"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:maven/com.vaadin/vaadin-themes@1.1.0",
+      "type": "library",
+      "name": "com.vaadin:vaadin-themes",
+      "version": "1.1.0",
+      "purl": "pkg:maven/com.vaadin/vaadin-themes@1.1.0",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "pom"
+        }
+      ]
+    },
+    {
+      "bom-ref": "35a11b77-aa85-4af6-a855-0e5795970e6d",
+      "type": "application",
+      "name": "pom.xml",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:Type",
+          "value": "pom"
+        },
+        {
+          "name": "aquasecurity:trivy:Class",
+          "value": "lang-pkgs"
+        }
+      ]
+    },
+    {
+      "bom-ref": "a2612116-a466-4634-9508-94cceece4ba2",
+      "type": "application",
+      "name": "demo-vaadin-8/pom.xml",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:Type",
+          "value": "pom"
+        },
+        {
+          "name": "aquasecurity:trivy:Class",
+          "value": "lang-pkgs"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "35a11b77-aa85-4af6-a855-0e5795970e6d",
+      "dependsOn": [
+        "pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT",
+        "pkg:maven/com.vaadin/appsec-kit@1.0-SNAPSHOT",
+        "pkg:maven/com.vaadin/vaadin-client-compiled@1.1.0",
+        "pkg:maven/com.vaadin/vaadin-push@1.1.0",
+        "pkg:maven/com.vaadin/vaadin-server@1.1.0",
+        "pkg:maven/com.vaadin/vaadin-themes@1.1.0"
+      ]
+    },
+    {
+      "ref": "8432dc1c-430f-48d1-aaa2-33b39ab97db3",
+      "dependsOn": [
+        "35a11b77-aa85-4af6-a855-0e5795970e6d",
+        "a2612116-a466-4634-9508-94cceece4ba2"
+      ]
+    },
+    {
+      "ref": "a2612116-a466-4634-9508-94cceece4ba2",
+      "dependsOn": [
+        "pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT",
+        "pkg:maven/com.vaadin/vaadin-client-compiled@1.1.0",
+        "pkg:maven/com.vaadin/vaadin-push@1.1.0",
+        "pkg:maven/com.vaadin/vaadin-server@1.1.0",
+        "pkg:maven/com.vaadin/vaadin-themes@1.1.0"
+      ]
+    }
+  ],
+  "vulnerabilities": []
+}

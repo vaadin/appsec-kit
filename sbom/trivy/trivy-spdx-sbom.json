@@ -1,0 +1,210 @@
+{
+	"SPDXID": "SPDXRef-DOCUMENT",
+	"creationInfo": {
+		"created": "2023-04-19T13:44:30Z",
+		"creators": [
+			"Tool: trivy-0.40.0",
+			"Organization: aquasecurity"
+		]
+	},
+	"dataLicense": "CC0-1.0",
+	"documentDescribes": [
+		"SPDXRef-Filesystem-1465386cfbe4e9c7"
+	],
+	"documentNamespace": "http://aquasecurity.github.io/trivy/filesystem/.-139873de-8f48-44de-b808-03fa6761851a",
+	"name": ".",
+	"packages": [
+		{
+			"SPDXID": "SPDXRef-Application-8e6f52607eedd3c1",
+			"downloadLocation": "NONE",
+			"filesAnalyzed": false,
+			"name": "pom",
+			"sourceInfo": "pom.xml"
+		},
+		{
+			"SPDXID": "SPDXRef-Application-e62b408c95bd53f0",
+			"downloadLocation": "NONE",
+			"filesAnalyzed": false,
+			"name": "pom",
+			"sourceInfo": "demo-vaadin-8/pom.xml"
+		},
+		{
+			"SPDXID": "SPDXRef-Filesystem-1465386cfbe4e9c7",
+			"attributionTexts": [
+				"SchemaVersion: 2"
+			],
+			"downloadLocation": "NONE",
+			"filesAnalyzed": false,
+			"name": "."
+		},
+		{
+			"SPDXID": "SPDXRef-Package-43b015b7f0b47769",
+			"downloadLocation": "NONE",
+			"externalRefs": [
+				{
+					"referenceCategory": "PACKAGE-MANAGER",
+					"referenceLocator": "pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT",
+					"referenceType": "purl"
+				}
+			],
+			"filesAnalyzed": false,
+			"licenseConcluded": "NONE",
+			"licenseDeclared": "NONE",
+			"name": "com.vaadin.appsec-kit:demo-vaadin-8",
+			"versionInfo": "1.0-SNAPSHOT"
+		},
+		{
+			"SPDXID": "SPDXRef-Package-67935b4e920453c1",
+			"downloadLocation": "NONE",
+			"externalRefs": [
+				{
+					"referenceCategory": "PACKAGE-MANAGER",
+					"referenceLocator": "pkg:maven/com.vaadin/vaadin-push@1.1.0",
+					"referenceType": "purl"
+				}
+			],
+			"filesAnalyzed": false,
+			"licenseConcluded": "NONE",
+			"licenseDeclared": "NONE",
+			"name": "com.vaadin:vaadin-push",
+			"versionInfo": "1.1.0"
+		},
+		{
+			"SPDXID": "SPDXRef-Package-9cd17665af62efd7",
+			"downloadLocation": "NONE",
+			"externalRefs": [
+				{
+					"referenceCategory": "PACKAGE-MANAGER",
+					"referenceLocator": "pkg:maven/com.vaadin/vaadin-server@1.1.0",
+					"referenceType": "purl"
+				}
+			],
+			"filesAnalyzed": false,
+			"licenseConcluded": "NONE",
+			"licenseDeclared": "NONE",
+			"name": "com.vaadin:vaadin-server",
+			"versionInfo": "1.1.0"
+		},
+		{
+			"SPDXID": "SPDXRef-Package-b8f011874258baab",
+			"downloadLocation": "NONE",
+			"externalRefs": [
+				{
+					"referenceCategory": "PACKAGE-MANAGER",
+					"referenceLocator": "pkg:maven/com.vaadin/vaadin-client-compiled@1.1.0",
+					"referenceType": "purl"
+				}
+			],
+			"filesAnalyzed": false,
+			"licenseConcluded": "NONE",
+			"licenseDeclared": "NONE",
+			"name": "com.vaadin:vaadin-client-compiled",
+			"versionInfo": "1.1.0"
+		},
+		{
+			"SPDXID": "SPDXRef-Package-bcbc71789118b132",
+			"downloadLocation": "NONE",
+			"externalRefs": [
+				{
+					"referenceCategory": "PACKAGE-MANAGER",
+					"referenceLocator": "pkg:maven/com.vaadin/appsec-kit@1.0-SNAPSHOT",
+					"referenceType": "purl"
+				}
+			],
+			"filesAnalyzed": false,
+			"licenseConcluded": "NONE",
+			"licenseDeclared": "NONE",
+			"name": "com.vaadin:appsec-kit",
+			"versionInfo": "1.0-SNAPSHOT"
+		},
+		{
+			"SPDXID": "SPDXRef-Package-d0277233afc1bae9",
+			"downloadLocation": "NONE",
+			"externalRefs": [
+				{
+					"referenceCategory": "PACKAGE-MANAGER",
+					"referenceLocator": "pkg:maven/com.vaadin/vaadin-themes@1.1.0",
+					"referenceType": "purl"
+				}
+			],
+			"filesAnalyzed": false,
+			"licenseConcluded": "NONE",
+			"licenseDeclared": "NONE",
+			"name": "com.vaadin:vaadin-themes",
+			"versionInfo": "1.1.0"
+		}
+	],
+	"relationships": [
+		{
+			"relatedSpdxElement": "SPDXRef-Filesystem-1465386cfbe4e9c7",
+			"relationshipType": "DESCRIBES",
+			"spdxElementId": "SPDXRef-DOCUMENT"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Application-e62b408c95bd53f0",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Filesystem-1465386cfbe4e9c7"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-43b015b7f0b47769",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-e62b408c95bd53f0"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-b8f011874258baab",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-e62b408c95bd53f0"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-67935b4e920453c1",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-e62b408c95bd53f0"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-9cd17665af62efd7",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-e62b408c95bd53f0"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-d0277233afc1bae9",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-e62b408c95bd53f0"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Application-8e6f52607eedd3c1",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Filesystem-1465386cfbe4e9c7"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-43b015b7f0b47769",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-8e6f52607eedd3c1"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-bcbc71789118b132",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-8e6f52607eedd3c1"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-b8f011874258baab",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-8e6f52607eedd3c1"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-67935b4e920453c1",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-8e6f52607eedd3c1"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-9cd17665af62efd7",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-8e6f52607eedd3c1"
+		},
+		{
+			"relatedSpdxElement": "SPDXRef-Package-d0277233afc1bae9",
+			"relationshipType": "CONTAINS",
+			"spdxElementId": "SPDXRef-Application-8e6f52607eedd3c1"
+		}
+	],
+	"spdxVersion": "SPDX-2.2"
+}
