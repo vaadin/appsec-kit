@@ -1,0 +1,2718 @@
+{
+  "bomFormat" : "CycloneDX",
+  "specVersion" : "1.3",
+  "serialNumber" : "2e2a3b84-a0b0-4843-bad0-63ac75f38a72",
+  "version" : 1,
+  "metadata" : {
+    "timestamp" : "2023-04-19T13:53:53Z",
+    "tools" : [
+      {
+        "vendor" : "Contrast Security - https://contrastsecurity.com",
+        "name" : "jbom - https://github.com/Contrast-Security-OSS/jbom",
+        "version" : "1.0.0"
+      }
+    ],
+    "component" : {
+      "name" : "192.168.31.6 (tamas-mb)",
+      "description" : "Java",
+      "type" : "application"
+    },
+    "manufacture" : {
+      "name" : "Unknown"
+    }
+  },
+  "components" : [
+    {
+      "name" : "vaadin-server",
+      "version" : "server/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "8815bb8aad29f61db7377dc32eb9d5bb9bdd83fc"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "2140d853ac0a34254ca48240bc0e51fd"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin/vaadin-server"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/vaadin-server-8.20.0.jar!/META-INF/maven/com.vaadin/vaadin-server/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:vaadin-server:server/pom"
+    },
+    {
+      "group" : "com.nimbusds",
+      "name" : "Nimbus JOSE+JWT",
+      "version" : "9.23",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "7bc1585a7fc47bb9cc66e376c1406b4b"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "e2fb2b3784fffdba251db0c29c9f7cb42c670906"
+        }
+      ],
+      "purl" : "pkg:maven/com.nimbusds/Nimbus%20JOSE%2BJWT@9.23",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "nimbus-jose-jwt-9.23.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/nimbus-jose-jwt-9.23.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:e2fb2b3784fffdba251db0c29c9f7cb42c670906"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "com.sun.jna.platform",
+      "version" : "5.10.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "c1ab841070c388ec32b77cdc05f084fb"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "fbed7d9669dba47714ad0d4f4454290a997aee69"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "jna-platform-5.10.0.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/jna-platform-5.10.0.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:fbed7d9669dba47714ad0d4f4454290a997aee69"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin.external.slf4j",
+      "name" : "vaadin-slf4j-jdk14",
+      "version" : "1.6.1",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "34fa1d2e66fafb0af3d5bede2b528df6"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "2268b4bb8226e01963357bc9a02a5d56c9992b8a"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "vaadin-slf4j-jdk14-1.6.1.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/vaadin-slf4j-jdk14-1.6.1.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:2268b4bb8226e01963357bc9a02a5d56c9992b8a"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.external.slf4j:vaadin-slf4j-jdk14:1.6.1"
+    },
+    {
+      "name" : "byte-buddy-dep",
+      "version" : "dep/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/net.bytebuddy/byte-buddy-dep"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/net.bytebuddy/byte-buddy-dep/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:byte-buddy-dep:dep/pom"
+    },
+    {
+      "name" : "Apache Commons IO",
+      "version" : "2.11.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "3b4b7ccfaeceeac240b804839ee1a1ca"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "a2503f302b11ebde7ebc3df41daebe0e4eea3689"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "commons-io-2.11.0.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/commons-io-2.11.0.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:a2503f302b11ebde7ebc3df41daebe0e4eea3689"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "maven-model",
+      "version" : "model/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.apache.maven/maven-model"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/org.apache.maven/maven-model/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:maven-model:model/pom"
+    },
+    {
+      "name" : "slf4j-nop",
+      "version" : "nop/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.slf4j/slf4j-nop"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/org.slf4j/slf4j-nop/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:slf4j-nop:nop/pom"
+    },
+    {
+      "name" : "Apache Commons Codec",
+      "version" : "1.15",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "303baf002ce6d382198090aedd9d79a2"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "commons-codec-1.15.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/commons-codec-1.15.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "vaadin-shared",
+      "version" : "8.20.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "39376366da1cd86a2074dec5ed856321"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "d0fe121311dcf3ca84e4ec1c2954647ff0a053aa"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-shared@8.20.0",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "vaadin-shared-8.20.0.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/vaadin-shared-8.20.0.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:d0fe121311dcf3ca84e4ec1c2954647ff0a053aa"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:vaadin-shared:8.20.0"
+    },
+    {
+      "group" : "com.vaadin.external.atmosphere",
+      "name" : "atmosphere-runtime",
+      "version" : "2.4.30.vaadin5",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "fee5f0714f69183bcfb62a3317153c521ffcb262"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "086159d0c3cd694032282013566c8047"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin.external.atmosphere/atmosphere-runtime"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/atmosphere-runtime-2.4.30.vaadin5.jar!/META-INF/maven/com.vaadin.external.atmosphere/atmosphere-runtime/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.external.atmosphere:atmosphere-runtime:2.4.30.vaadin5"
+    },
+    {
+      "name" : "pom",
+      "version" : "jwt/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "e2fb2b3784fffdba251db0c29c9f7cb42c670906"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "7bc1585a7fc47bb9cc66e376c1406b4b"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.nimbusds/nimbus-jose-jwt"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/nimbus-jose-jwt-9.23.jar!/META-INF/maven/com.nimbusds/nimbus-jose-jwt/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin.external.gwt",
+      "name" : "gwt-elemental",
+      "version" : "2.8.2.vaadin2",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "abdfd4fcfbc0652298061be8c70a56a6d6e868b2"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "67327ac528eca7d4259d1160ab455448"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin.external.gwt/gwt-elemental"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/gwt-elemental-2.8.2.vaadin2.jar!/META-INF/maven/com.vaadin.external.gwt/gwt-elemental/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.external.gwt:gwt-elemental:2.8.2.vaadin2"
+    },
+    {
+      "group" : "com.vaadin.external.gwt",
+      "name" : "gwt-elemental",
+      "version" : "2.8.2.vaadin2",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "67327ac528eca7d4259d1160ab455448"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "abdfd4fcfbc0652298061be8c70a56a6d6e868b2"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "gwt-elemental-2.8.2.vaadin2.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/gwt-elemental-2.8.2.vaadin2.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:abdfd4fcfbc0652298061be8c70a56a6d6e868b2"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.external.gwt:gwt-elemental:2.8.2.vaadin2"
+    },
+    {
+      "name" : "byte-buddy-agent",
+      "version" : "agent/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/net.bytebuddy/byte-buddy-agent"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/net.bytebuddy/byte-buddy-agent/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:byte-buddy-agent:agent/pom"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "open",
+      "version" : "8.4.0.3",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "c5cd0db6622e77875683b9daf3a0b9e901e1c35f"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "b6c17e059959b36093d85562fbf33598"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/open@8.4.0.3",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin/open"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/open-8.4.0.3.jar!/META-INF/maven/com.vaadin/open/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:open:8.4.0.3"
+    },
+    {
+      "name" : "com.sun.jna",
+      "version" : "5.10.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "2b884b01ad2f62d4f5dd11387a8bf799"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "7cf4c87dd802db50721db66947aa237d7ad09418"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "jna-5.10.0.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/jna-5.10.0.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:7cf4c87dd802db50721db66947aa237d7ad09418"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "sac-1.3",
+      "version" : "1.3",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "eb04fa63fc70c722f2b8ec156166343b"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "cdb2dcb4e22b83d6b32b93095f644c3462739e82"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "sac-1.3.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/sac-1.3.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:cdb2dcb4e22b83d6b32b93095f644c3462739e82"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "license-checker",
+      "version" : "1.11.2",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "1a199808fface075f0f2292f8bdd3ea921bf8457"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "6b2f34ed0f558f94e2e2052f39f9e62c"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/license-checker@1.11.2",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin/license-checker"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/license-checker-1.11.2.jar!/META-INF/maven/com.vaadin/license-checker/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:license-checker:1.11.2"
+    },
+    {
+      "name" : "slf4j-api",
+      "version" : "1.7.36",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "872da51f5de7f3923da4de871d57fd85"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "6c62681a2f655b49963a5983b8b0950a6120ae14"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "slf4j-api-1.7.36.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/slf4j-api-1.7.36.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:6c62681a2f655b49963a5983b8b0950a6120ae14"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:slf4j-api:1.7.36"
+    },
+    {
+      "group" : "com.networknt",
+      "name" : "json-schema-validator",
+      "version" : "1.0.58",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "purl" : "pkg:maven/com.networknt/json-schema-validator@1.0.58",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.networknt/json-schema-validator"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/com.networknt/json-schema-validator/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.networknt:json-schema-validator:1.0.58"
+    },
+    {
+      "name" : "com.sun.jna.platform",
+      "version" : "platform",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "10d8b81ab04b75b7ccb1aa2846abde58"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "3982895a856ba88cd7acf75a1b3a11046eef419d"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "jna-platform.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/license-checker-1.11.2.jar!/META-INF/lib/jna-platform.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:3982895a856ba88cd7acf75a1b3a11046eef419d"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "oshi-core",
+      "version" : "6.1.4",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "e981ed24cdcff7aed8f1c58cb86574a7"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "d255136f0abb2c946babc329333c9a1792ba1831"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "oshi-core-6.1.4.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/oshi-core-6.1.4.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:d255136f0abb2c946babc329333c9a1792ba1831"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:oshi-core:6.1.4"
+    },
+    {
+      "group" : "com.vaadin.external.atmosphere",
+      "name" : "atmosphere-runtime",
+      "version" : "2.4.30.vaadin5",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "086159d0c3cd694032282013566c8047"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "fee5f0714f69183bcfb62a3317153c521ffcb262"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "atmosphere-runtime-2.4.30.vaadin5.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/atmosphere-runtime-2.4.30.vaadin5.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:fee5f0714f69183bcfb62a3317153c521ffcb262"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.external.atmosphere:atmosphere-runtime:2.4.30.vaadin5"
+    },
+    {
+      "group" : "com.fasterxml.jackson.core",
+      "name" : "jackson-databind",
+      "version" : "2.12.4",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.12.4",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.fasterxml.jackson.core/jackson-databind"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.fasterxml.jackson.core:jackson-databind:2.12.4"
+    },
+    {
+      "name" : "pom",
+      "version" : "compiler/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "663088831773c35e033ea1538b96d817ce7cef52"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "76261c154b1d70a6f4ff669def72364b"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin/vaadin-sass-compiler"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/vaadin-sass-compiler-0.9.13.jar!/META-INF/maven/com.vaadin/vaadin-sass-compiler/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin.appsec-kit",
+      "name" : "demo-vaadin-8",
+      "version" : "1.0-SNAPSHOT",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "24f850c4ac334ba765871ffc309d339c6a938881"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "b85244cc02733a1d00b60697a4647e6d"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin.appsec-kit/demo-vaadin-8"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/META-INF/maven/com.vaadin.appsec-kit/demo-vaadin-8/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.appsec-kit:demo-vaadin-8:1.0-SNAPSHOT"
+    },
+    {
+      "group" : "com.vaadin.appsec-kit",
+      "name" : "demo-vaadin-8",
+      "version" : "1.0-SNAPSHOT",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "ffe763570736e780f46b66293843bc70b55608d8"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "57f7d52bfa93996345e9eca6eae9fe0f"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.appsec-kit/demo-vaadin-8@1.0-SNAPSHOT",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin.appsec-kit/demo-vaadin-8"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT-sources.jar!/META-INF/maven/com.vaadin.appsec-kit/demo-vaadin-8/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.appsec-kit:demo-vaadin-8:1.0-SNAPSHOT"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "vaadin-client-compiled",
+      "version" : "8.20.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "a594b62aec62cb99b9cb487f7b38135c"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "5a431db3ba712549220db337a33bde95572041a4"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-client-compiled@8.20.0",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "vaadin-client-compiled-8.20.0.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/vaadin-client-compiled-8.20.0.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:5a431db3ba712549220db337a33bde95572041a4"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:vaadin-client-compiled:8.20.0"
+    },
+    {
+      "name" : "pom",
+      "version" : "lang3/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.apache.commons/commons-lang3"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/org.apache.commons/commons-lang3/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "jsoup Java HTML Parser",
+      "version" : "1.15.3",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "4f16c3b17b8c1b0173b1ed9f99f2c27c"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "f6e1d8a8819f854b681c8eaa57fd59a42329e10c"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "jsoup-1.15.3.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/jsoup-1.15.3.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:f6e1d8a8819f854b681c8eaa57fd59a42329e10c"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "pom",
+      "version" : "java/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.cyclonedx/cyclonedx-core-java"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/org.cyclonedx/cyclonedx-core-java/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin.external",
+      "name" : "gentyref",
+      "version" : "1.2.0.vaadin1",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "af96718e7ca1afc81628ae799649f60e"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "c914574fdf1d7c7b85f58965d10f7a83811bb7c6"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "gentyref-1.2.0.vaadin1.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/gentyref-1.2.0.vaadin1.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:c914574fdf1d7c7b85f58965d10f7a83811bb7c6"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.external:gentyref:1.2.0.vaadin1"
+    },
+    {
+      "name" : "pom",
+      "version" : "smart/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "e2fb2b3784fffdba251db0c29c9f7cb42c670906"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "7bc1585a7fc47bb9cc66e376c1406b4b"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/net.minidev/json-smart"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/nimbus-jose-jwt-9.23.jar!/META-INF/maven/net.minidev/json-smart/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "vaadin-server",
+      "version" : "8.20.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "2140d853ac0a34254ca48240bc0e51fd"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "8815bb8aad29f61db7377dc32eb9d5bb9bdd83fc"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-server@8.20.0",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "vaadin-server-8.20.0.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/vaadin-server-8.20.0.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:8815bb8aad29f61db7377dc32eb9d5bb9bdd83fc"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:vaadin-server:8.20.0"
+    },
+    {
+      "name" : "byte-buddy",
+      "version" : "buddy/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/net.bytebuddy/byte-buddy"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/net.bytebuddy/byte-buddy/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:byte-buddy:buddy/pom"
+    },
+    {
+      "name" : "com.sun.jna",
+      "version" : "INF/lib/jna",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "237d9e29373db1962be6ddecf1dfc8f3"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "27770efb6329f092f895c7329662d1aa8ee8c0ac"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "jna.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/license-checker-1.11.2.jar!/META-INF/lib/jna.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:27770efb6329f092f895c7329662d1aa8ee8c0ac"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "oshi-core",
+      "version" : "core",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "9cb2ff85cbacd9815102d1a1be9a25e9"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "98142a0f2facf9524676d15ad28f33e91de4b042"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "oshi-core.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/license-checker-1.11.2.jar!/META-INF/lib/oshi-core.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:98142a0f2facf9524676d15ad28f33e91de4b042"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:oshi-core:core"
+    },
+    {
+      "name" : "oshi-core",
+      "version" : "core/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d255136f0abb2c946babc329333c9a1792ba1831"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "e981ed24cdcff7aed8f1c58cb86574a7"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.github.oshi/oshi-core"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/oshi-core-6.1.4.jar!/META-INF/maven/com.github.oshi/oshi-core/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:oshi-core:core/pom"
+    },
+    {
+      "group" : "com.fasterxml.jackson.core",
+      "name" : "jackson-core",
+      "version" : "2.12.4",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.12.4",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.fasterxml.jackson.core/jackson-core"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.fasterxml.jackson.core:jackson-core:2.12.4"
+    },
+    {
+      "name" : "pom",
+      "version" : "core/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.fasterxml.woodstox/woodstox-core"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/com.fasterxml.woodstox/woodstox-core/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin.external",
+      "name" : "gentyref",
+      "version" : "1.2.0.vaadin1",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "c914574fdf1d7c7b85f58965d10f7a83811bb7c6"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af96718e7ca1afc81628ae799649f60e"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin.external/gentyref"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/gentyref-1.2.0.vaadin1.jar!/META-INF/maven/com.vaadin.external/gentyref/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.external:gentyref:1.2.0.vaadin1"
+    },
+    {
+      "name" : "pom",
+      "version" : "INF/maven/org.jsoup/jsoup/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "f6e1d8a8819f854b681c8eaa57fd59a42329e10c"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "4f16c3b17b8c1b0173b1ed9f99f2c27c"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.jsoup/jsoup"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/jsoup-1.15.3.jar!/META-INF/maven/org.jsoup/jsoup/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "jcip-annotations-1.0.0",
+      "version" : "1.0.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "4524f9677bcaac7f15e2d4feec5da1b9"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "ae61631d04820071895117d5d549f4e4efd9e07f"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "jcip-annotations-1.0.0.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/jcip-annotations-1.0.0.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:ae61631d04820071895117d5d549f4e4efd9e07f"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.sun.xml.bind.jaxb",
+      "name" : "isorelax",
+      "version" : "20090621",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "purl" : "pkg:maven/com.sun.xml.bind.jaxb/isorelax@20090621",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.sun.xml.bind.jaxb/isorelax"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/com.sun.xml.bind.jaxb/isorelax/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.sun.xml.bind.jaxb:isorelax:20090621"
+    },
+    {
+      "name" : "vaadin-push",
+      "version" : "push/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "25136c04123d7ad691b437110d27d739f848fab0"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "c1c82143dc8acb3450e0d7d2ffb86702"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin/vaadin-push"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/vaadin-push-8.20.0.jar!/META-INF/maven/com.vaadin/vaadin-push/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:vaadin-push:push/pom"
+    },
+    {
+      "name" : "pom",
+      "version" : "codec/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "303baf002ce6d382198090aedd9d79a2"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/commons-codec/commons-codec"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/commons-codec-1.15.jar!/META-INF/maven/commons-codec/commons-codec/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin.external.slf4j",
+      "name" : "vaadin-slf4j-jdk14",
+      "version" : "1.6.1",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "2268b4bb8226e01963357bc9a02a5d56c9992b8a"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "34fa1d2e66fafb0af3d5bede2b528df6"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin.external.org.slf4j/vaadin-slf4j-jdk14"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/vaadin-slf4j-jdk14-1.6.1.jar!/META-INF/maven/com.vaadin.external.org.slf4j/vaadin-slf4j-jdk14/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin.external.slf4j:vaadin-slf4j-jdk14:1.6.1"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "vaadin-themes",
+      "version" : "8.20.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "bdd58350fa79c111197a575c84a1006c"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "abaf1f4152fd1d3df71cb4d5391de2961cb91b7c"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-themes@8.20.0",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "vaadin-themes-8.20.0.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/vaadin-themes-8.20.0.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:abaf1f4152fd1d3df71cb4d5391de2961cb91b7c"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:vaadin-themes:8.20.0"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "vaadin-client-compiled",
+      "version" : "compiled/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "5a431db3ba712549220db337a33bde95572041a4"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "a594b62aec62cb99b9cb487f7b38135c"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-client-compiled@compiled%2Fpom",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin/vaadin-client-compiled"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/vaadin-client-compiled-8.20.0.jar!/META-INF/maven/com.vaadin/vaadin-client-compiled/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:vaadin-client-compiled:compiled/pom"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "vaadin-push",
+      "version" : "8.20.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "c1c82143dc8acb3450e0d7d2ffb86702"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "25136c04123d7ad691b437110d27d739f848fab0"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-push@8.20.0",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "vaadin-push-8.20.0.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/vaadin-push-8.20.0.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:25136c04123d7ad691b437110d27d739f848fab0"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:vaadin-push:8.20.0"
+    },
+    {
+      "group" : "com.fasterxml.jackson.dataformat",
+      "name" : "jackson-dataformat-xml",
+      "version" : "2.12.4",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-xml@2.12.4",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-xml"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/com.fasterxml.jackson.dataformat/jackson-dataformat-xml/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.4"
+    },
+    {
+      "name" : "pom",
+      "version" : "io/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "a2503f302b11ebde7ebc3df41daebe0e4eea3689"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "3b4b7ccfaeceeac240b804839ee1a1ca"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/commons-io/commons-io"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/commons-io-2.11.0.jar!/META-INF/maven/commons-io/commons-io/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "license-checker",
+      "version" : "1.11.2",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "6b2f34ed0f558f94e2e2052f39f9e62c"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "1a199808fface075f0f2292f8bdd3ea921bf8457"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/license-checker@1.11.2",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "license-checker-1.11.2.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/license-checker-1.11.2.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:1a199808fface075f0f2292f8bdd3ea921bf8457"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:license-checker:1.11.2"
+    },
+    {
+      "name" : "vaadin-themes",
+      "version" : "themes/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "abaf1f4152fd1d3df71cb4d5391de2961cb91b7c"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "bdd58350fa79c111197a575c84a1006c"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin/vaadin-themes"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/vaadin-themes-8.20.0.jar!/META-INF/maven/com.vaadin/vaadin-themes/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:vaadin-themes:themes/pom"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "Vaadin Sass Compiler",
+      "version" : "0.9.13",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "76261c154b1d70a6f4ff669def72364b"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "663088831773c35e033ea1538b96d817ce7cef52"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/Vaadin%20Sass%20Compiler@0.9.13",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "vaadin-sass-compiler-0.9.13.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/vaadin-sass-compiler-0.9.13.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:663088831773c35e033ea1538b96d817ce7cef52"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.contrastsecurity",
+      "name" : "jbom",
+      "version" : "1.2.1",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "purl" : "pkg:maven/com.contrastsecurity/jbom@1.2.1",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.contrastsecurity/jbom"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/com.contrastsecurity/jbom/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.contrastsecurity:jbom:1.2.1"
+    },
+    {
+      "name" : "plexus-utils",
+      "version" : "3.3.0",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.codehaus.plexus/plexus-utils"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/org.codehaus.plexus/plexus-utils/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:plexus-utils:3.3.0"
+    },
+    {
+      "name" : "slf4j-api",
+      "version" : "api/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "6c62681a2f655b49963a5983b8b0950a6120ae14"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "872da51f5de7f3923da4de871d57fd85"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.slf4j/slf4j-api"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/slf4j-api-1.7.36.jar!/META-INF/maven/org.slf4j/slf4j-api/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:slf4j-api:api/pom"
+    },
+    {
+      "name" : "flute-1.3.0.gg2",
+      "version" : "1.3.0.gg2",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "9b792f9bc5cd201b014602fbd9f51db5"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "048e8c3a235544a0506ca3081519ce114169242a"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "flute-1.3.0.gg2.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/flute-1.3.0.gg2.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:048e8c3a235544a0506ca3081519ce114169242a"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "jakarta.xml.bind-api",
+      "version" : "api/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/jakarta.xml.bind/jakarta.xml.bind-api"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/jakarta.xml.bind/jakarta.xml.bind-api/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:jakarta.xml.bind-api:api/pom"
+    },
+    {
+      "group" : "jakarta.activation",
+      "name" : "jakarta.activation-api",
+      "version" : "api/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "purl" : "pkg:maven/jakarta.activation/jakarta.activation-api@api%2Fpom",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/jakarta.activation/jakarta.activation-api"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/jakarta.activation/jakarta.activation-api/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "jakarta.activation:jakarta.activation-api:api/pom"
+    },
+    {
+      "name" : "pom",
+      "version" : "api/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.codehaus.woodstox/stax2-api"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/org.codehaus.woodstox/stax2-api/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "name" : "pom",
+      "version" : "annotations/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "ae61631d04820071895117d5d549f4e4efd9e07f"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "4524f9677bcaac7f15e2d4feec5da1b9"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.lucee/jcip-annotations"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/jcip-annotations-1.0.0.jar!/META-INF/maven/org.lucee/jcip-annotations/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "open",
+      "version" : "8.4.0.3",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "b6c17e059959b36093d85562fbf33598"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "c5cd0db6622e77875683b9daf3a0b9e901e1c35f"
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/open@8.4.0.3",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "WEB-INF/lib"
+        },
+        {
+          "name" : "archive",
+          "value" : "open-8.4.0.3.jar"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT.war!/WEB-INF/lib/open-8.4.0.3.jar"
+        },
+        {
+          "name" : "maven",
+          "value" : "https://search.maven.org/search?q=1:c5cd0db6622e77875683b9daf3a0b9e901e1c35f"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "com.vaadin:open:8.4.0.3"
+    },
+    {
+      "group" : "net.java.dev.msv",
+      "name" : "xsdlib",
+      "version" : "INF/maven/net.java.dev.msv/xsdlib/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "purl" : "pkg:maven/net.java.dev.msv/xsdlib@INF%2Fmaven%2Fnet.java.dev.msv%2Fxsdlib%2Fpom",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/net.java.dev.msv/xsdlib"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/net.java.dev.msv/xsdlib/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "net.java.dev.msv:xsdlib:INF/maven/net.java.dev.msv/xsdlib/pom"
+    },
+    {
+      "name" : "vaadin-shared",
+      "version" : "shared/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d0fe121311dcf3ca84e4ec1c2954647ff0a053aa"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "39376366da1cd86a2074dec5ed856321"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.vaadin/vaadin-shared"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./demo-vaadin-8/target/demo-vaadin-8-1.0-SNAPSHOT/WEB-INF/lib/vaadin-shared-8.20.0.jar!/META-INF/maven/com.vaadin/vaadin-shared/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "null:vaadin-shared:shared/pom"
+    },
+    {
+      "name" : "pom",
+      "version" : "INF/maven/com.jcraft/jsch/pom",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/com.jcraft/jsch"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/com.jcraft/jsch/pom.xml"
+        }
+      ],
+      "type" : "library"
+    },
+    {
+      "group" : "org.glassfish",
+      "name" : "javax.json",
+      "version" : "1.1.4",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "SHA-1",
+          "content" : "d5f60465ef673cf2f8f0febe8a1b03a8b7a70b03"
+        },
+        {
+          "alg" : "MD5",
+          "content" : "af9d1a18ef0cd9534c1a53f555967dae"
+        }
+      ],
+      "purl" : "pkg:maven/org.glassfish/javax.json@1.1.4",
+      "properties" : [
+        {
+          "name" : "path",
+          "value" : "META-INF/maven/org.glassfish/javax.json"
+        },
+        {
+          "name" : "archive",
+          "value" : "pom.xml"
+        },
+        {
+          "name" : "codesource",
+          "value" : "/Users/tamas/workdir/appsec-kit/./jbom-1.2.1.jar!/META-INF/maven/org.glassfish/javax.json/pom.xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "org.glassfish:javax.json:1.1.4"
+    }
+  ],
+  "dependencies" : [
+    {
+      "ref" : "com.fasterxml.jackson.core:jackson-annotations:2.12.4",
+      "dependsOn" : [
+        "junit:junit:null"
+      ]
+    },
+    {
+      "ref" : "com.sun.xml.bind.jaxb:isorelax:20090621",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "null:slf4j-api:api/pom",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "com.vaadin:license-checker:1.11.2",
+      "dependsOn" : [
+        "com.vaadin.external.gwt:gwt-elemental:2.8.2.vaadin2",
+        "com.github.oshi:oshi-core:6.1.6",
+        "org.slf4j:slf4j-api:1.7.36",
+        "com.nimbusds:nimbus-jose-jwt:9.23",
+        "org.lucee:jcip-annotations:1.0.0",
+        "com.vaadin:open:8.4.0.3"
+      ]
+    },
+    {
+      "ref" : "null:byte-buddy-agent:agent/pom",
+      "dependsOn" : [
+        "net.java.dev.jna:jna:${jna.version}",
+        "net.java.dev.jna:jna-platform:${jna.version}",
+        "junit:junit:${version.junit}",
+        "org.mockito:mockito-core:${version.mockito}",
+        "net.bytebuddy:byte-buddy:1.12.5"
+      ]
+    },
+    {
+      "ref" : "com.fasterxml.jackson.core:jackson-databind:2.12.4",
+      "dependsOn" : [
+        "com.fasterxml.jackson.core:jackson-annotations:${jackson.version.annotations}",
+        "com.fasterxml.jackson.core:jackson-core:${jackson.version.core}",
+        "org.powermock:powermock-core:${version.powermock}",
+        "org.powermock:powermock-module-junit4:${version.powermock}",
+        "org.powermock:powermock-api-mockito2:${version.powermock}",
+        "javax.measure:jsr-275:0.9.1"
+      ]
+    },
+    {
+      "ref" : "null:vaadin-themes:themes/pom",
+      "dependsOn" : [
+        "${project.groupId}:vaadin-server:${project.version}",
+        "com.vaadin:vaadin-sass-compiler:null",
+        "com.vaadin:vaadin-icons:null",
+        "com.carrotsearch:smartsprites:null",
+        "commons-io:commons-io:null",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null"
+      ]
+    },
+    {
+      "ref" : "com.vaadin.appsec-kit:demo-vaadin-8:1.0-SNAPSHOT",
+      "dependsOn" : [
+        "javax.servlet:javax.servlet-api:3.0.1",
+        "com.vaadin:vaadin-server:null",
+        "com.vaadin:vaadin-push:null",
+        "com.vaadin:vaadin-client-compiled:null",
+        "com.vaadin:vaadin-themes:null"
+      ]
+    },
+    {
+      "ref" : "com.fasterxml.jackson.core:jackson-core:2.12.4",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "com.vaadin:vaadin-client-compiled:8.20.0",
+      "dependsOn" : [
+        "${project.groupId}:vaadin-server:${project.version}",
+        "${project.groupId}:vaadin-shared:${project.version}",
+        "${project.groupId}:vaadin-client:${project.version}",
+        "${project.groupId}:vaadin-client-compiler:${project.version}",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null"
+      ]
+    },
+    {
+      "ref" : "javax.json:javax.json-api:1.1.4",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "null:maven-model:model/pom",
+      "dependsOn" : [
+        "org.codehaus.plexus:plexus-utils:null"
+      ]
+    },
+    {
+      "ref" : "com.vaadin:vaadin-themes:8.20.0",
+      "dependsOn" : [
+        "${project.groupId}:vaadin-server:${project.version}",
+        "com.vaadin:vaadin-sass-compiler:null",
+        "com.vaadin:vaadin-icons:null",
+        "com.carrotsearch:smartsprites:null",
+        "commons-io:commons-io:null",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null"
+      ]
+    },
+    {
+      "ref" : "null:byte-buddy-dep:dep/pom",
+      "dependsOn" : [
+        "org.ow2.asm:asm:${version.asm}",
+        "org.ow2.asm:asm-commons:${version.asm}",
+        "net.java.dev.jna:jna:${jna.version}",
+        "net.java.dev.jna:jna-platform:${jna.version}",
+        "junit:junit:${version.junit}",
+        "org.mockito:mockito-core:${version.mockito}",
+        "org.ow2.asm:asm-util:${version.asm}",
+        "org.ow2.asm:asm-analysis:${version.asm}",
+        "${project.groupId}:byte-buddy-agent:${project.version}"
+      ]
+    },
+    {
+      "ref" : "com.vaadin.external:gentyref:1.2.0.vaadin1",
+      "dependsOn" : [
+        "junit:junit:4.11"
+      ]
+    },
+    {
+      "ref" : "null:oshi-core:6.1.4",
+      "dependsOn" : [
+        "net.java.dev.jna:jna:null",
+        "net.java.dev.jna:jna-platform:null",
+        "org.slf4j:slf4j-api:${slf4j.version}",
+        "org.slf4j:slf4j-simple:${slf4j.version}",
+        "org.junit.jupiter:junit-jupiter-api:${junit.version}",
+        "org.hamcrest:hamcrest:${hamcrest.version}"
+      ]
+    },
+    {
+      "ref" : "net.java.dev.msv:xsdlib:INF/maven/net.java.dev.msv/xsdlib/pom",
+      "dependsOn" : [
+        "relaxngDatatype:relaxngDatatype:null",
+        "junit:junit:null",
+        "jdom:jdom:null"
+      ]
+    },
+    {
+      "ref" : "null:oshi-core:core/pom",
+      "dependsOn" : [
+        "net.java.dev.jna:jna:null",
+        "net.java.dev.jna:jna-platform:null",
+        "org.slf4j:slf4j-api:${slf4j.version}",
+        "org.slf4j:slf4j-simple:${slf4j.version}",
+        "org.junit.jupiter:junit-jupiter-api:${junit.version}",
+        "org.hamcrest:hamcrest:${hamcrest.version}"
+      ]
+    },
+    {
+      "ref" : "com.vaadin.external.atmosphere:atmosphere-runtime:2.4.30.vaadin5",
+      "dependsOn" : [
+        "org.apache.geronimo.specs:geronimo-servlet_3.0_spec:1.0",
+        "org.eclipse.jetty.websocket:websocket-server:${jetty9_3-version}",
+        "org.eclipse.jetty:jetty-io:${jetty9-version}",
+        "org.eclipse.jetty:jetty-util:${jetty9-version}",
+        "org.eclipse.jetty:jetty-continuation:${jetty7-version}",
+        "org.eclipse.jetty.websocket:websocket-jetty-server:${jetty10-version}",
+        "org.glassfish.grizzly:grizzly-comet:${grizzly2-version}",
+        "org.glassfish.grizzly:grizzly-websockets:${grizzly2-version}",
+        "org.glassfish.grizzly:grizzly-http-servlet:${grizzly2-version}",
+        "com.sun.grizzly:grizzly-websockets:${grizzly-version}",
+        "com.sun.grizzly:grizzly-framework-http:${grizzly10-version}",
+        "com.sun.grizzly:grizzly-comet:${grizzly-version}",
+        "com.sun.grizzly:grizzly-compat:${grizzly-version}",
+        "org.atmosphere.jboss.as:jboss-as-websockets:${jbossaswebsockets-version}",
+        "org.jboss:jboss-vfs:3.1.0.Final",
+        "com.vaadin.external.atmosphere:atmosphere-compat-jbossweb:${compat-version}",
+        "com.vaadin.external.atmosphere:atmosphere-compat-tomcat:${compat-version}",
+        "com.vaadin.external.atmosphere:atmosphere-compat-tomcat7:${compat-version}",
+        "org.apache.tomcat:tomcat-catalina:${tomcat7-version}",
+        "org.apache.tomcat:tomcat-coyote:${tomcat7-version}",
+        "javax.websocket:javax.websocket-api:1.0",
+        "org.mockito:mockito-core:4.1.0",
+        "org.apache.shiro:shiro-core:${shiro-version}",
+        "org.atmosphere:atmosphere-stubs:1.0.0",
+        "javax:javaee-api:6.0",
+        "org.apache.shiro:shiro-web:${shiro-version}",
+        "org.apache.commons:commons-pool2:${commons-pool2}",
+        "org.json:json:20180130",
+        "org.eclipse.jetty:jetty-websocket:7.6.10.v20130312",
+        "commons-codec:commons-codec:1.15"
+      ]
+    },
+    {
+      "ref" : "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.4",
+      "dependsOn" : [
+        "com.fasterxml.jackson.core:jackson-core:null",
+        "com.fasterxml.jackson.core:jackson-annotations:null",
+        "com.fasterxml.jackson.core:jackson-databind:null",
+        "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:null",
+        "org.codehaus.woodstox:stax2-api:4.2.1",
+        "com.fasterxml.woodstox:woodstox-core:6.2.4",
+        "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2",
+        "com.sun.xml.stream:sjsxp:1.0.2",
+        "junit:junit:null"
+      ]
+    },
+    {
+      "ref" : "com.contrastsecurity:jbom:1.2.1",
+      "dependsOn" : [
+        "net.bytebuddy:byte-buddy:1.12.6",
+        "net.bytebuddy:byte-buddy-agent:1.12.6",
+        "org.apache.maven:maven-model:3.8.4",
+        "org.cyclonedx:cyclonedx-core-java:5.0.4",
+        "org.zeroturnaround:zt-exec:1.12",
+        "org.slf4j:slf4j-nop:1.7.33",
+        "com.jcraft:jsch:0.1.55",
+        "com.sun:tools:any",
+        "info.picocli:picocli:4.6.2",
+        "commons-codec:commons-codec:1.15",
+        "junit:junit:4.13.2"
+      ]
+    },
+    {
+      "ref" : "com.vaadin:vaadin-server:8.20.0",
+      "dependsOn" : [
+        "javax.servlet:javax.servlet-api:null",
+        "javax.validation:validation-api:null",
+        "${project.groupId}:vaadin-sass-compiler:null",
+        "${project.groupId}:vaadin-shared:${project.version}",
+        "${project.groupId}:vaadin-push:${project.version}",
+        "com.vaadin:vaadin-icons:null",
+        "com.vaadin:license-checker:null",
+        "org.jsoup:jsoup:null",
+        "com.vaadin.external:gentyref:1.2.0.vaadin1",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null",
+        "commons-io:commons-io:null",
+        "commons-lang:commons-lang:null",
+        "org.hsqldb:hsqldb:null",
+        "org.slf4j:slf4j-log4j12:null",
+        "org.reflections:reflections:0.9.11"
+      ]
+    },
+    {
+      "ref" : "com.networknt:json-schema-validator:1.0.58",
+      "dependsOn" : [
+        "com.fasterxml.jackson.core:jackson-databind:${version.jackson}",
+        "org.slf4j:slf4j-api:${version.slf4j}",
+        "org.apache.commons:commons-lang3:${version.common-lang3}",
+        "org.jruby.joni:joni:${version.joni}",
+        "ch.qos.logback:logback-classic:${version.logback}",
+        "junit:junit:${version.junit}",
+        "org.mockito:mockito-core:${version.mockito}",
+        "org.hamcrest:hamcrest-all:${version.hamcrest}",
+        "io.undertow:undertow-core:${version.undertow}"
+      ]
+    },
+    {
+      "ref" : "com.vaadin:open:8.4.0.3",
+      "dependsOn" : [
+        "commons-io:commons-io:2.11.0"
+      ]
+    },
+    {
+      "ref" : "null:slf4j-api:1.7.36",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "null:oshi-core:core",
+      "dependsOn" : [
+        "net.java.dev.jna:jna:null",
+        "net.java.dev.jna:jna-platform:null",
+        "org.slf4j:slf4j-api:${slf4j.version}",
+        "org.slf4j:slf4j-simple:${slf4j.version}",
+        "org.junit.jupiter:junit-jupiter-api:${junit.version}",
+        "org.hamcrest:hamcrest:${hamcrest.version}"
+      ]
+    },
+    {
+      "ref" : "null:vaadin-push:push/pom",
+      "dependsOn" : [
+        "com.vaadin.external.atmosphere:atmosphere-runtime:null",
+        "com.vaadin.external.atmosphere.client:javascript:null",
+        "${project.groupId}:vaadin-shared:${project.version}",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null"
+      ]
+    },
+    {
+      "ref" : "com.vaadin.external.slf4j:vaadin-slf4j-jdk14:1.6.1",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "null:jackson-module-jaxb-annotations:annotations/pom",
+      "dependsOn" : [
+        "com.fasterxml.jackson.core:jackson-annotations:null",
+        "com.fasterxml.jackson.core:jackson-core:null",
+        "com.fasterxml.jackson.core:jackson-databind:null",
+        "jakarta.xml.bind:jakarta.xml.bind-api:${version.jaxb.impl}",
+        "jakarta.activation:jakarta.activation-api:1.2.1",
+        "org.glassfish.jaxb:jaxb-runtime:${version.jaxb.impl}"
+      ]
+    },
+    {
+      "ref" : "org.slf4j:slf4j-api:api/pom",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "null:vaadin-server:server/pom",
+      "dependsOn" : [
+        "javax.servlet:javax.servlet-api:null",
+        "javax.validation:validation-api:null",
+        "${project.groupId}:vaadin-sass-compiler:null",
+        "${project.groupId}:vaadin-shared:${project.version}",
+        "${project.groupId}:vaadin-push:${project.version}",
+        "com.vaadin:vaadin-icons:null",
+        "com.vaadin:license-checker:null",
+        "org.jsoup:jsoup:null",
+        "com.vaadin.external:gentyref:1.2.0.vaadin1",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null",
+        "commons-io:commons-io:null",
+        "commons-lang:commons-lang:null",
+        "org.hsqldb:hsqldb:null",
+        "org.slf4j:slf4j-log4j12:null",
+        "org.reflections:reflections:0.9.11"
+      ]
+    },
+    {
+      "ref" : "null:byte-buddy:buddy/pom",
+      "dependsOn" : [
+        "${project.groupId}:byte-buddy-dep:${project.version}",
+        "net.java.dev.jna:jna:${jna.version}",
+        "net.java.dev.jna:jna-platform:${jna.version}"
+      ]
+    },
+    {
+      "ref" : "null:slf4j-nop:nop/pom",
+      "dependsOn" : [
+        "org.slf4j:slf4j-api:null"
+      ]
+    },
+    {
+      "ref" : "null:plexus-utils:3.3.0",
+      "dependsOn" : [
+        "org.apache.maven.shared:maven-plugin-testing-harness:1.1",
+        "org.openjdk.jmh:jmh-core:1.21",
+        "org.openjdk.jmh:jmh-generator-annprocess:1.21"
+      ]
+    },
+    {
+      "ref" : "com.vaadin:vaadin-client-compiled:compiled/pom",
+      "dependsOn" : [
+        "${project.groupId}:vaadin-server:${project.version}",
+        "${project.groupId}:vaadin-shared:${project.version}",
+        "${project.groupId}:vaadin-client:${project.version}",
+        "${project.groupId}:vaadin-client-compiler:${project.version}",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null"
+      ]
+    },
+    {
+      "ref" : "null:jakarta.xml.bind-api:api/pom",
+      "dependsOn" : [
+        "jakarta.activation:jakarta.activation-api:null"
+      ]
+    },
+    {
+      "ref" : "com.vaadin:vaadin-shared:8.20.0",
+      "dependsOn" : [
+        "com.google.gwt:gwt-elemental:null",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null",
+        "com.vaadin.external.gwt:gwt-elemental:2.8.2.vaadin2"
+      ]
+    },
+    {
+      "ref" : "org.glassfish:javax.json:1.1.4",
+      "dependsOn" : [
+        "javax.json:javax.json-api:null"
+      ]
+    },
+    {
+      "ref" : "com.vaadin:vaadin-push:8.20.0",
+      "dependsOn" : [
+        "com.vaadin.external.atmosphere:atmosphere-runtime:null",
+        "com.vaadin.external.atmosphere.client:javascript:null",
+        "${project.groupId}:vaadin-shared:${project.version}",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null"
+      ]
+    },
+    {
+      "ref" : "jakarta.activation:jakarta.activation-api:api/pom",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "null:vaadin-shared:shared/pom",
+      "dependsOn" : [
+        "com.google.gwt:gwt-elemental:null",
+        "org.osgi:osgi.core:null",
+        "org.osgi:osgi.cmpn:null",
+        "com.vaadin.external.gwt:gwt-elemental:2.8.2.vaadin2"
+      ]
+    },
+    {
+      "ref" : "com.vaadin.external.gwt:gwt-elemental:2.8.2.vaadin2",
+      "dependsOn" : [
+        "com.google.gwt:gwt-elemental:2.8.2"
+      ]
+    }
+  ]
+}
