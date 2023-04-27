@@ -7,7 +7,7 @@
   - CycloneDX (JSON / XML)
 - Includes transitive dependencies
 
-### CycloneDX CycloneDX Core (Java) module:
+### CycloneDX Core (Java) module:
 
 The CycloneDX core module provides a model representation of the SBOM along with utilities to assist in creating, validating, and parsing SBOMs. CycloneDX is a lightweight software bill of materials (SBOM) specification designed for use in application security contexts and supply chain component analysis.
 

@@ -20,5 +20,3 @@ spdx-sbom-generator -o /out/diretory/ -f json
 ### Links
 - Documentation:
 https://github.com/opensbom-generator/spdx-sbom-generator
-
-
