@@ -20,7 +20,7 @@
 	<properties>
 		<vaadin.version>8.20.0</vaadin.version>
 		<vaadin.plugin.version>8.20.0</vaadin.plugin.version>
-		<jetty.plugin.version>9.4.9.v20180320</jetty.plugin.version>
+		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -68,11 +68,6 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.cyclonedx</groupId>
-			<artifactId>cyclonedx-core-java</artifactId>
-			<version>7.3.2</version>
 		</dependency>
 	</dependencies>
 
@@ -157,8 +152,8 @@
 					<includeLicenseText>false</includeLicenseText>
 					<outputReactorProjects>true</outputReactorProjects>
 					<outputFormat>json</outputFormat>
-					<outputName>bom</outputName>
-					<outputDirectory>${project.build.directory}/generated-resources/bom</outputDirectory>
+					<outputName>sbom</outputName>
+					<outputDirectory>${project.build.directory}/generated-resources/sbom</outputDirectory>
 					<verbose>false</verbose>
 				</configuration>
 			</plugin>
@@ -168,7 +163,7 @@
 				<version>3.2.0</version>
 				<executions>
 					<execution>
-						<id>copy-bom</id>
+						<id>copy-sbom</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>copy-resources</goal>
@@ -177,7 +172,7 @@
 							<outputDirectory>${project.build.outputDirectory}/resources</outputDirectory>
 							<resources>
 								<resource>
-									<directory>${project.build.directory}/generated-resources/bom</directory>
+									<directory>${project.build.directory}/generated-resources/sbom</directory>
 									<filtering>false</filtering>
 								</resource>
 							</resources>
