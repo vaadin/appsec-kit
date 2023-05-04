@@ -22,7 +22,7 @@
     </licenses>
 
     <modules>
-        <module>demo-vaadin-8</module>
+        <module>appsec-kit-demo-v8</module>
     </modules>
 
     <properties>

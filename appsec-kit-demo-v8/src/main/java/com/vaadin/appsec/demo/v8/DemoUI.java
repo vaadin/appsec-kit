@@ -1,4 +1,4 @@
-package com.vaadin.appseckit;
+package com.vaadin.appsec.demo.v8;
 
 import javax.servlet.annotation.WebServlet;
 

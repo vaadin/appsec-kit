@@ -7,8 +7,8 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-	<groupId>com.vaadin.appsec-kit</groupId>
-	<artifactId>demo-vaadin-8</artifactId>
+	<groupId>com.vaadin</groupId>
+	<artifactId>appsec-kit-demo-v8</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>AppSec Kit Demo for Vaadin 8</name>
