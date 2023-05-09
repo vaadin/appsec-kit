@@ -1,4 +1,4 @@
-package com.vaadin.appseckit.service;
+package com.vaadin.appsec.service;
 
 import org.cyclonedx.model.Bom;
 
