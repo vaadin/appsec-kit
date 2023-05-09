@@ -6,7 +6,9 @@ import org.cyclonedx.model.Component;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.appsec.service.BillOfMaterialsService;
+import com.vaadin.appsec.model.osv.Vulnerability;
+import com.vaadin.appsec.service.BillOfMaterialsStore;
+import com.vaadin.appsec.service.VulnerabilityStore;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Grid;
@@ -20,19 +22,27 @@ public class DemoUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
-        
+
         layout.addComponent(new Label("AppSec Kit Vaadin 8 Demo Application"));
 
         layout.addComponent(new Label("SBOM components:"));
 
-        Grid<Component> grid = new Grid<>();
-        grid.setItems(BillOfMaterialsService.getInstance().getBom().getComponents());
-        grid.addColumn(Component::getGroup).setCaption("Group");
-        grid.addColumn(Component::getName).setCaption("Name");
-        grid.addColumn(Component::getVersion).setCaption("Version");
-        grid.setSizeFull();
-        layout.addComponent(grid);
-        
+        Grid<Component> sbomGrid = new Grid<>();
+        sbomGrid.setItems(BillOfMaterialsStore.getInstance().getBom().getComponents());
+        sbomGrid.addColumn(Component::getGroup).setCaption("Group");
+        sbomGrid.addColumn(Component::getName).setCaption("Name");
+        sbomGrid.addColumn(Component::getVersion).setCaption("Version");
+        sbomGrid.setSizeFull();
+        layout.addComponent(sbomGrid);
+
+        Grid<Vulnerability> vulnGrid = new Grid<>();
+        vulnGrid.setItems(VulnerabilityStore.getInstance().getVulnerabilities());
+        vulnGrid.addColumn(Vulnerability::getId).setCaption("Id");
+        vulnGrid.addColumn(Vulnerability::getSummary).setCaption("Summary");
+        vulnGrid.addColumn(Vulnerability::getAliases).setCaption("Aliases");
+        vulnGrid.setSizeFull();
+        layout.addComponent(vulnGrid);
+
         setContent(layout);
     }
 

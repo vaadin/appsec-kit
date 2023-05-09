@@ -1,1 +1,2 @@
-com.vaadin.appsec.service.BillOfMaterialsServiceInitListener
+com.vaadin.appsec.service.BillOfMaterialsStoreInitListener
+com.vaadin.appsec.service.OpenSourceVulnerabilityServiceInitListener
