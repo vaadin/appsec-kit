@@ -6,7 +6,7 @@ import org.cyclonedx.model.Component;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.appseckit.service.BOMService;
+import com.vaadin.appsec.service.BillOfMaterialsService;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Grid;
@@ -26,7 +26,7 @@ public class DemoUI extends UI {
         layout.addComponent(new Label("SBOM components:"));
 
         Grid<Component> grid = new Grid<>();
-        grid.setItems(BOMService.getInstance().getBom().getComponents());
+        grid.setItems(BillOfMaterialsService.getInstance().getBom().getComponents());
         grid.addColumn(Component::getGroup).setCaption("Group");
         grid.addColumn(Component::getName).setCaption("Name");
         grid.addColumn(Component::getVersion).setCaption("Version");
