@@ -1,5 +1,6 @@
 package com.vaadin.appsec.model.osv;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -11,16 +12,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Event {
 
     @JsonIgnore
-    private Map<String, Object> additionalProperties;
+    private final Map<String, Object> additionalProperties = new LinkedHashMap<>();
 
     /**
      * No args constructor for use in serialization.
      */
     public Event() {
-    }
-
-    public Event(Map<String, Object> additionalProperties) {
-        this.additionalProperties = additionalProperties;
     }
 
     @JsonAnyGetter
@@ -29,7 +26,7 @@ public class Event {
     }
 
     @JsonAnySetter
-    public void setAdditionalProperties(Map<String, Object> additionalProperties) {
-        this.additionalProperties = additionalProperties;
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 }
