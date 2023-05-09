@@ -35,6 +35,8 @@ public class DemoUI extends UI {
         sbomGrid.setSizeFull();
         layout.addComponent(sbomGrid);
 
+        layout.addComponent(new Label("Vulnerabilities:"));
+
         Grid<Vulnerability> vulnGrid = new Grid<>();
         vulnGrid.setItems(VulnerabilityStore.getInstance().getVulnerabilities());
         vulnGrid.addColumn(Vulnerability::getId).setCaption("Id");
