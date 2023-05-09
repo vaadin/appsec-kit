@@ -1,4 +1,4 @@
-package com.vaadin.appseckit.model.osv;
+package com.vaadin.appsec.model.osv;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EcosystemSpecific {
+public class DatabaseSpecific {
 
     @JsonIgnore
     private Map<String, Object> additionalProperties;
@@ -16,10 +16,10 @@ public class EcosystemSpecific {
     /**
      * No args constructor for use in serialization.
      */
-    public EcosystemSpecific() {
+    public DatabaseSpecific() {
     }
 
-    public EcosystemSpecific(Map<String, Object> additionalProperties) {
+    public DatabaseSpecific(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
     }
 

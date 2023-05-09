@@ -1,6 +1,6 @@
-package com.vaadin.appseckit.model.osv;
+package com.vaadin.appsec.model.osv;
 
-import java.util.List;
+import java.net.URI;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,33 +9,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "type",
-        "repo",
-        "events",
-        "database_specific"
+        "url"
 })
-public class Range {
+public class Reference {
 
     @JsonProperty("type")
     private Type type;
-    @JsonProperty("repo")
-    private String repo;
-    @JsonProperty("events")
-    private List<Event> events;
-    @JsonProperty("database_specific")
-    private DatabaseSpecific databaseSpecific;
+    @JsonProperty("url")
+    private URI url;
 
     /**
      * No args constructor for use in serialization.
      */
-    public Range() {
+    public Reference() {
     }
 
-    public Range(Type type, String repo, List<Event> events,
-                 DatabaseSpecific databaseSpecific) {
+    public Reference(Type type, URI url) {
         this.type = type;
-        this.repo = repo;
-        this.events = events;
-        this.databaseSpecific = databaseSpecific;
+        this.url = url;
     }
 
     public Type getType() {
@@ -46,34 +37,26 @@ public class Range {
         this.type = type;
     }
 
-    public String getRepo() {
-        return repo;
+    public URI getUrl() {
+        return url;
     }
 
-    public void setRepo(String repo) {
-        this.repo = repo;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
-    public DatabaseSpecific getDatabaseSpecific() {
-        return databaseSpecific;
-    }
-
-    public void setDatabaseSpecific(DatabaseSpecific databaseSpecific) {
-        this.databaseSpecific = databaseSpecific;
+    public void setUrl(URI url) {
+        this.url = url;
     }
 
     public enum Type {
+        ADVISORY("ADVISORY"),
+        ARTICLE("ARTICLE"),
+        DETECTION("DETECTION"),
+        DISCUSSION("DISCUSSION"),
+        REPORT("REPORT"),
+        FIX("FIX"),
+        INTRODUCED("INTRODUCED"),
         GIT("GIT"),
-        SEMVER("SEMVER"),
-        ECOSYSTEM("ECOSYSTEM");
+        PACKAGE("PACKAGE"),
+        EVIDENCE("EVIDENCE"),
+        WEB("WEB");
 
         private final String value;
 

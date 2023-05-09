@@ -1,4 +1,4 @@
-package com.vaadin.appseckit.model.osv;
+package com.vaadin.appsec.model.osv;
 
 import java.util.Map;
 

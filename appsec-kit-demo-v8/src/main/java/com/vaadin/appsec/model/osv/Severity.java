@@ -1,6 +1,4 @@
-package com.vaadin.appseckit.model.osv;
-
-import java.net.URI;
+package com.vaadin.appsec.model.osv;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,24 +7,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "type",
-        "url"
+        "score"
 })
-public class Reference {
+public class Severity {
 
     @JsonProperty("type")
     private Type type;
-    @JsonProperty("url")
-    private URI url;
+    @JsonProperty("score")
+    private String score;
 
     /**
      * No args constructor for use in serialization.
      */
-    public Reference() {
+    public Severity() {
     }
 
-    public Reference(Type type, URI url) {
+    public Severity(Type type, String score) {
         this.type = type;
-        this.url = url;
+        this.score = score;
     }
 
     public Type getType() {
@@ -37,26 +35,17 @@ public class Reference {
         this.type = type;
     }
 
-    public URI getUrl() {
-        return url;
+    public String getScore() {
+        return score;
     }
 
-    public void setUrl(URI url) {
-        this.url = url;
+    public void setScore(String score) {
+        this.score = score;
     }
 
     public enum Type {
-        ADVISORY("ADVISORY"),
-        ARTICLE("ARTICLE"),
-        DETECTION("DETECTION"),
-        DISCUSSION("DISCUSSION"),
-        REPORT("REPORT"),
-        FIX("FIX"),
-        INTRODUCED("INTRODUCED"),
-        GIT("GIT"),
-        PACKAGE("PACKAGE"),
-        EVIDENCE("EVIDENCE"),
-        WEB("WEB");
+        CVSS_V2("CVSS_V2"),
+        CVSS_V3("CVSS_V3");
 
         private final String value;
 
