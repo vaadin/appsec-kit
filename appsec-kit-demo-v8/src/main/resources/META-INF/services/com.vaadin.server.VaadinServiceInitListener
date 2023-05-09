@@ -1,1 +1,1 @@
-com.vaadin.appseckit.service.BOMServiceInitListener
+com.vaadin.appsec.service.BillOfMaterialsServiceInitListener

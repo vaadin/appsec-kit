@@ -13,19 +13,19 @@ import org.slf4j.LoggerFactory;
 import com.vaadin.server.ServiceInitEvent;
 import com.vaadin.server.VaadinServiceInitListener;
 
-public class BOMServiceInitListener implements VaadinServiceInitListener {
+public class BillOfMaterialsServiceInitListener implements VaadinServiceInitListener {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BOMServiceInitListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BillOfMaterialsServiceInitListener.class);
     private static final String BOM_PATH = "/resources/bom.json";
 
     @Override
     public void serviceInit(ServiceInitEvent event) {
-        URL resource = BOMServiceInitListener.class.getResource(BOM_PATH);
+        URL resource = BillOfMaterialsServiceInitListener.class.getResource(BOM_PATH);
         if (resource != null) {
             JsonParser parser = new JsonParser();
             try {
                 Bom bom = parser.parse(Paths.get(resource.toURI()).toFile());
-                BOMService.getInstance().init(bom);
+                BillOfMaterialsService.getInstance().init(bom);
             } catch (URISyntaxException e) {
                 LOGGER.error("Syntax error in BOM resource path: " + BOM_PATH, e);
             } catch (ParseException e) {
