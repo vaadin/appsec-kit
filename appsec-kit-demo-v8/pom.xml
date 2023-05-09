@@ -84,6 +84,18 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.15.0</version>
 		</dependency>
+		<!-- Added these two dependencies to get vulnerabilities returned -->
+		<dependency>
+			<groupId>net.minidev</groupId>
+			<artifactId>json-smart</artifactId>
+			<version>2.4.8</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mikesamuel</groupId>
+			<artifactId>json-sanitizer</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<!-- -->
 	</dependencies>
 
 	<build>

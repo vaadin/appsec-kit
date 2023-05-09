@@ -1,4 +1,4 @@
-package com.vaadin.appsec.model.osv;
+package com.vaadin.appsec.model.osv.response;
 
 import java.util.List;
 

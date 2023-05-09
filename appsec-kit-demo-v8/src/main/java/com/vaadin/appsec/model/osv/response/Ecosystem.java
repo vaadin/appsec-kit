@@ -1,4 +1,4 @@
-package com.vaadin.appsec.model.osv;
+package com.vaadin.appsec.model.osv.response;
 
 public enum Ecosystem {
     MAVEN("Maven"),

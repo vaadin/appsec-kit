@@ -6,7 +6,7 @@ import org.cyclonedx.model.Component;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.appsec.model.osv.Vulnerability;
+import com.vaadin.appsec.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.service.BillOfMaterialsStore;
 import com.vaadin.appsec.service.VulnerabilityStore;
 import com.vaadin.server.VaadinRequest;
@@ -37,11 +37,11 @@ public class DemoUI extends UI {
 
         layout.addComponent(new Label("Vulnerabilities:"));
 
-        Grid<Vulnerability> vulnGrid = new Grid<>();
+        Grid<OpenSourceVulnerability> vulnGrid = new Grid<>();
         vulnGrid.setItems(VulnerabilityStore.getInstance().getVulnerabilities());
-        vulnGrid.addColumn(Vulnerability::getId).setCaption("Id");
-        vulnGrid.addColumn(Vulnerability::getSummary).setCaption("Summary");
-        vulnGrid.addColumn(Vulnerability::getAliases).setCaption("Aliases");
+        vulnGrid.addColumn(OpenSourceVulnerability::getId).setCaption("Id");
+        vulnGrid.addColumn(OpenSourceVulnerability::getSummary).setCaption("Summary");
+        vulnGrid.addColumn(OpenSourceVulnerability::getAliases).setCaption("Aliases");
         vulnGrid.setSizeFull();
         layout.addComponent(vulnGrid);
 

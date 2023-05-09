@@ -1,4 +1,6 @@
-package com.vaadin.appsec.model.osv;
+package com.vaadin.appsec.model.osv.response;
+
+import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "name",
         "purl"
 })
-public class Package {
+public class Package implements Serializable {
 
     @JsonProperty("ecosystem")
     private String ecosystem;
