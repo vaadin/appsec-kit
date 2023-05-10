@@ -4,14 +4,10 @@ import java.util.stream.Collectors;
 
 import com.vaadin.appsec.data.DependencyDTO;
 import com.vaadin.appsec.data.SeverityLevel;
-import com.vaadin.appsec.ui.AppSecDataProvider;
+import com.vaadin.appsec.service.AppSecDataProvider;
 import com.vaadin.data.provider.ListDataProvider;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.themes.ValoTheme;
 
 public class DependenciesTab extends AbstractAppSecContent {
     private Grid<DependencyDTO> grid;
