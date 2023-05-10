@@ -11,6 +11,7 @@ import com.vaadin.appsec.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.service.BillOfMaterialsStore;
 import com.vaadin.appsec.service.VulnerabilityStore;
 import com.vaadin.appsec.ui.AppSecButton;
+import com.vaadin.appsec.util.OpenSourceVulnerabilityUtil;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Grid;
@@ -43,7 +44,9 @@ public class DemoUI extends UI {
         vulnGrid.setItems(VulnerabilityStore.getInstance().getVulnerabilities());
         vulnGrid.addColumn(OpenSourceVulnerability::getId).setCaption("Id");
         vulnGrid.addColumn(OpenSourceVulnerability::getSummary).setCaption("Summary");
-        vulnGrid.addColumn(OpenSourceVulnerability::getAliases).setCaption("Aliases");
+        vulnGrid.addColumn(OpenSourceVulnerability::getAliases, OpenSourceVulnerabilityUtil::getAliasesStr).setCaption("Aliases");
+        vulnGrid.addColumn(OpenSourceVulnerability::getSeverity, OpenSourceVulnerabilityUtil::getCvssVectorsStr).setCaption("CVSS vectors");
+        vulnGrid.addColumn(OpenSourceVulnerability::getSeverity, OpenSourceVulnerabilityUtil::getScoresStr).setCaption("Scores");
         vulnGrid.setSizeFull();
         layout.addComponent(vulnGrid);
 
