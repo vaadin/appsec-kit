@@ -1,4 +1,4 @@
-package com.vaadin.appsec.model.osv;
+package com.vaadin.appsec.model.osv.response;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EcosystemSpecific {
+public class Event {
 
     @JsonIgnore
     private final Map<String, Object> additionalProperties = new LinkedHashMap<>();
@@ -17,7 +17,7 @@ public class EcosystemSpecific {
     /**
      * No args constructor for use in serialization.
      */
-    public EcosystemSpecific() {
+    public Event() {
     }
 
     @JsonAnyGetter
