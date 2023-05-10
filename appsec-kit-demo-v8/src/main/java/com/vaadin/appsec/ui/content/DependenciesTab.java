@@ -29,7 +29,7 @@ public class DependenciesTab extends AbstractAppSecContent {
         riskScore = new ComboBox<>("Risk score");
         riskScore.setItems(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-        buildFilterBar(group, severity,riskScore);
+        buildFilterBar(group, severity/*,riskScore*/);
     }
 
     protected void clearFilters() {

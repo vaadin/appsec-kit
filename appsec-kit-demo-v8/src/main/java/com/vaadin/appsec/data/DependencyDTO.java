@@ -12,7 +12,7 @@ public class DependencyDTO {
     private Integer numOfVulnerabilities;
 
     private SeverityLevel severityLevel;
-    private Integer riskScore;
+    private Double riskScore;
 
     public DependencyDTO(@NotNull String group, @NotNull String name, @NotNull String version) {
         this.group = group;
@@ -73,16 +73,16 @@ public class DependencyDTO {
         this.severityLevel = severityLevel;
     }
 
-    public Integer getRiskScore() {
+    public Double getRiskScore() {
         return riskScore;
     }
 
-    public void setRiskScore(Integer riskScore) {
+    public void setRiskScore(Double riskScore) {
         this.riskScore = riskScore;
     }
 
     @Override
     public String toString() {
-        return group + "." + name;
+        return group + ":" + name;
     }
 }

@@ -1,11 +1,11 @@
 package com.vaadin.appsec.ui.content;
 
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import com.vaadin.appsec.data.DependencyDTO;
 import com.vaadin.appsec.data.SeverityLevel;
 import com.vaadin.appsec.data.VulnerabilityDTO;
+import com.vaadin.appsec.service.AppSecDataProvider;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
@@ -90,8 +90,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     }
 
     public void refresh() {
-        // TODO set items to grid
-        grid.setItems(new ArrayList<>());
+        grid.setItems(AppSecDataProvider.getVulnerabilities());
         dependency.setItems(getListDataProvider().getItems().stream().map(VulnerabilityDTO::getDependency).collect(Collectors.toSet()));
         // TODO Update vaadin analysis options
         // TODO Update dev analysis options
