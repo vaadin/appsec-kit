@@ -78,6 +78,16 @@
 			<artifactId>cyclonedx-core-java</artifactId>
 			<version>7.3.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.15.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -143,7 +153,8 @@
 				<version>2.7.7</version>
 				<executions>
 					<execution>
-						<phase>prepare-package</phase>
+						<!--<phase>prepare-package</phase>-->
+						<phase>compile</phase>
 						<goals>
 							<goal>makeAggregateBom</goal>
 						</goals>
@@ -168,12 +179,14 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>copy-bom</id>
-						<phase>prepare-package</phase>
+						<!--<phase>prepare-package</phase>-->
+						<phase>compile</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>

@@ -2,15 +2,15 @@ package com.vaadin.appsec.service;
 
 import org.cyclonedx.model.Bom;
 
-public class BOMService {
+public class BillOfMaterialsStore {
 
     private Bom bom;
 
     private static final class InstanceHolder {
-        static final BOMService instance = new BOMService();
+        static final BillOfMaterialsStore instance = new BillOfMaterialsStore();
     }
 
-    public static BOMService getInstance() {
+    public static BillOfMaterialsStore getInstance() {
         return InstanceHolder.instance;
     }
 
