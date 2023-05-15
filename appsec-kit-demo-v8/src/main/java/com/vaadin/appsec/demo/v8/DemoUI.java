@@ -6,7 +6,6 @@ import org.cyclonedx.model.Component;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.appsec.extension.AppSecUIExtension;
 import com.vaadin.appsec.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.service.BillOfMaterialsStore;
 import com.vaadin.appsec.service.VulnerabilityStore;
@@ -52,14 +51,11 @@ public class DemoUI extends UI {
 
         setContent(layout);
 
-        AppSecUIExtension appSecUIExtension = new AppSecUIExtension();
-        appSecUIExtension.extend(this);
-
         layout.addComponent(new AppSecButton());
     }
 
     @WebServlet(urlPatterns = "/*", name = "DemoUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = DemoUI.class, productionMode = false, widgetset = "com.vaadin.appsec.WidgetSet")
+    @VaadinServletConfiguration(ui = DemoUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 }
