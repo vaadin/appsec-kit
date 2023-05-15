@@ -27,7 +27,7 @@ public abstract class AbstractAppSecContent extends VerticalLayout {
     protected void buildFilterBar(Component... filters) {
         HorizontalLayout filterBar = new HorizontalLayout();
         filterBar.setDefaultComponentAlignment(Alignment.BOTTOM_LEFT);
-        filterBar.setWidthFull();
+        filterBar.setWidth("100%");
 
         filterBar.addComponents(filters);
         filterBar.setExpandRatio(filterBar.getComponent(filters.length - 1), 1);

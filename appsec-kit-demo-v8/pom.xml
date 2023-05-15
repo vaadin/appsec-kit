@@ -48,6 +48,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>appsec-kit-v8</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
@@ -73,7 +78,7 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client</artifactId>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.cyclonedx</groupId>
 			<artifactId>cyclonedx-core-java</artifactId>
 			<version>7.3.2</version>
@@ -92,7 +97,7 @@
 			<groupId>us.springett</groupId>
 			<artifactId>cvss-calculator</artifactId>
 			<version>1.4.1</version>
-		</dependency>
+		</dependency>-->
 		<!-- Added these two dependencies to get vulnerabilities returned -->
 		<dependency>
 			<groupId>net.minidev</groupId>

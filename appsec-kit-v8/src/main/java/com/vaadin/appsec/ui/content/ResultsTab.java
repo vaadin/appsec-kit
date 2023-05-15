@@ -1,10 +1,8 @@
 package com.vaadin.appsec.ui.content;
 
-import com.vaadin.appsec.ui.AppSecDialog;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
-import com.vaadin.ui.VerticalLayout;
 
 public class ResultsTab extends AbstractAppSecContent {
     private VulnerabilitiesTab vulnerabilitiesTab;

@@ -23,6 +23,8 @@
 
     <modules>
         <module>appsec-kit-demo-v8</module>
+        <module>appsec-kit-backend</module>
+        <module>appsec-kit-v8</module>
     </modules>
 
     <properties>
