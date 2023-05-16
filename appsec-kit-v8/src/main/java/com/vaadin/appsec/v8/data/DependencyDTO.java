@@ -14,7 +14,8 @@ public class DependencyDTO {
     private SeverityLevel severityLevel;
     private Double riskScore;
 
-    public DependencyDTO(@NotNull String group, @NotNull String name, @NotNull String version) {
+    public DependencyDTO(@NotNull String group, @NotNull String name,
+            @NotNull String version) {
         this.group = group;
         this.name = name;
         this.version = version;
@@ -46,10 +47,14 @@ public class DependencyDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         DependencyDTO that = (DependencyDTO) o;
-        return Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(version, that.version);
+        return Objects.equals(group, that.group)
+                && Objects.equals(name, that.name)
+                && Objects.equals(version, that.version);
     }
 
     @Override

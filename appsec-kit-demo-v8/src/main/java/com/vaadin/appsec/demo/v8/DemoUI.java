@@ -30,7 +30,8 @@ public class DemoUI extends UI {
         layout.addComponent(new Label("SBOM components:"));
 
         Grid<Component> sbomGrid = new Grid<>();
-        sbomGrid.setItems(BillOfMaterialsStore.getInstance().getBom().getComponents());
+        sbomGrid.setItems(
+                BillOfMaterialsStore.getInstance().getBom().getComponents());
         sbomGrid.addColumn(Component::getGroup).setCaption("Group");
         sbomGrid.addColumn(Component::getName).setCaption("Name");
         sbomGrid.addColumn(Component::getVersion).setCaption("Version");
@@ -40,12 +41,19 @@ public class DemoUI extends UI {
         layout.addComponent(new Label("Vulnerabilities:"));
 
         Grid<OpenSourceVulnerability> vulnGrid = new Grid<>();
-        vulnGrid.setItems(VulnerabilityStore.getInstance().getVulnerabilities());
+        vulnGrid.setItems(
+                VulnerabilityStore.getInstance().getVulnerabilities());
         vulnGrid.addColumn(OpenSourceVulnerability::getId).setCaption("Id");
-        vulnGrid.addColumn(OpenSourceVulnerability::getSummary).setCaption("Summary");
-        vulnGrid.addColumn(OpenSourceVulnerability::getAliases, OpenSourceVulnerabilityUtil::getAliasesStr).setCaption("Aliases");
-        vulnGrid.addColumn(OpenSourceVulnerability::getSeverity, OpenSourceVulnerabilityUtil::getCvssVectorsStr).setCaption("CVSS vectors");
-        vulnGrid.addColumn(OpenSourceVulnerability::getSeverity, OpenSourceVulnerabilityUtil::getScoresStr).setCaption("Scores");
+        vulnGrid.addColumn(OpenSourceVulnerability::getSummary)
+                .setCaption("Summary");
+        vulnGrid.addColumn(OpenSourceVulnerability::getAliases,
+                OpenSourceVulnerabilityUtil::getAliasesStr)
+                .setCaption("Aliases");
+        vulnGrid.addColumn(OpenSourceVulnerability::getSeverity,
+                OpenSourceVulnerabilityUtil::getCvssVectorsStr)
+                .setCaption("CVSS vectors");
+        vulnGrid.addColumn(OpenSourceVulnerability::getSeverity,
+                OpenSourceVulnerabilityUtil::getScoresStr).setCaption("Scores");
         vulnGrid.setSizeFull();
         layout.addComponent(vulnGrid);
 

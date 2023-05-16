@@ -7,14 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "package",
-        "severity",
-        "ranges",
-        "versions",
-        "ecosystem_specific",
-        "database_specific"
-})
+@JsonPropertyOrder({ "package", "severity", "ranges", "versions",
+        "ecosystem_specific", "database_specific" })
 public class Affected {
 
     @JsonProperty("package")
@@ -36,12 +30,10 @@ public class Affected {
     public Affected() {
     }
 
-    public Affected(Package aPackage,
-                    List<Severity> severity,
-                    List<Range> ranges,
-                    List<String> versions,
-                    EcosystemSpecific ecosystemSpecific,
-                    DatabaseSpecific databaseSpecific) {
+    public Affected(Package aPackage, List<Severity> severity,
+            List<Range> ranges, List<String> versions,
+            EcosystemSpecific ecosystemSpecific,
+            DatabaseSpecific databaseSpecific) {
         this.aPackage = aPackage;
         this.severity = severity;
         this.ranges = ranges;

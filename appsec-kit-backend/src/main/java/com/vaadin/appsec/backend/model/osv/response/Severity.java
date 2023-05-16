@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "type",
-        "score"
-})
+@JsonPropertyOrder({ "type", "score" })
 public class Severity {
 
     @JsonProperty("type")
@@ -44,8 +41,7 @@ public class Severity {
     }
 
     public enum Type {
-        CVSS_V2("CVSS_V2"),
-        CVSS_V3("CVSS_V3");
+        CVSS_V2("CVSS_V2"), CVSS_V3("CVSS_V3");
 
         private final String value;
 

@@ -24,12 +24,13 @@ public class DependenciesTab extends AbstractAppSecContent {
         group = new ComboBox<>("Dependency group");
 
         severity = new ComboBox<>("Severity level");
-        severity.setItems(SeverityLevel.NA, SeverityLevel.LOW, SeverityLevel.MEDIUM, SeverityLevel.HIGH);
+        severity.setItems(SeverityLevel.NA, SeverityLevel.LOW,
+                SeverityLevel.MEDIUM, SeverityLevel.HIGH);
 
         riskScore = new ComboBox<>("Risk score");
         riskScore.setItems(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-        buildFilterBar(group, severity/*,riskScore*/);
+        buildFilterBar(group, severity/* ,riskScore */);
     }
 
     protected void clearFilters() {
@@ -45,13 +46,16 @@ public class DependenciesTab extends AbstractAppSecContent {
         Integer riskScoreFilter = riskScore.getValue();
 
         getListDataProvider().setFilter(dependencyDTO -> {
-            if (groupFilter != null && !groupFilter.equals(dependencyDTO.getGroup())) {
+            if (groupFilter != null
+                    && !groupFilter.equals(dependencyDTO.getGroup())) {
                 return false;
             }
-            if (severityFilter != null && !severityFilter.equals(dependencyDTO.getSeverityLevel())) {
+            if (severityFilter != null && !severityFilter
+                    .equals(dependencyDTO.getSeverityLevel())) {
                 return false;
             }
-            if (riskScoreFilter != null && !riskScoreFilter.equals(dependencyDTO.getRiskScore())) {
+            if (riskScoreFilter != null
+                    && !riskScoreFilter.equals(dependencyDTO.getRiskScore())) {
                 return false;
             }
             return true;
@@ -62,7 +66,8 @@ public class DependenciesTab extends AbstractAppSecContent {
         grid = new Grid<>();
         grid.setSizeFull();
         grid.addColumn(DependencyDTO::getName).setCaption("Dependency");
-        grid.addColumn(DependencyDTO::getNumOfVulnerabilities).setCaption("# of vulnerabilities");
+        grid.addColumn(DependencyDTO::getNumOfVulnerabilities)
+                .setCaption("# of vulnerabilities");
         grid.addColumn(DependencyDTO::getGroup).setCaption("Dependency group");
         grid.addColumn(DependencyDTO::getVersion).setCaption("Version");
         grid.addColumn(DependencyDTO::getSeverityLevel).setCaption("Severity");
@@ -71,7 +76,7 @@ public class DependenciesTab extends AbstractAppSecContent {
         addComponentsAndExpand(grid);
 
         grid.addItemClickListener(item -> {
-            // TODO Open details  view for clicked dependency
+            // TODO Open details view for clicked dependency
         });
     }
 
@@ -82,6 +87,7 @@ public class DependenciesTab extends AbstractAppSecContent {
 
     public void refresh() {
         grid.setItems(AppSecDataProvider.getDependencies());
-        group.setItems(getListDataProvider().getItems().stream().map(DependencyDTO::getGroup).collect(Collectors.toSet()));
+        group.setItems(getListDataProvider().getItems().stream()
+                .map(DependencyDTO::getGroup).collect(Collectors.toSet()));
     }
 }

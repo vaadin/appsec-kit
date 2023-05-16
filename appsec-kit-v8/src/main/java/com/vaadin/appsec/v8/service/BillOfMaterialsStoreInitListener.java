@@ -14,21 +14,25 @@ import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 import com.vaadin.server.ServiceInitEvent;
 import com.vaadin.server.VaadinServiceInitListener;
 
-public class BillOfMaterialsStoreInitListener implements VaadinServiceInitListener {
+public class BillOfMaterialsStoreInitListener
+        implements VaadinServiceInitListener {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BillOfMaterialsStoreInitListener.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(BillOfMaterialsStoreInitListener.class);
     private static final String BOM_PATH = "/resources/bom.json";
 
     @Override
     public void serviceInit(ServiceInitEvent event) {
-        URL resource = BillOfMaterialsStoreInitListener.class.getResource(BOM_PATH);
+        URL resource = BillOfMaterialsStoreInitListener.class
+                .getResource(BOM_PATH);
         if (resource != null) {
             JsonParser parser = new JsonParser();
             try {
                 Bom bom = parser.parse(Paths.get(resource.toURI()).toFile());
                 BillOfMaterialsStore.getInstance().init(bom);
             } catch (URISyntaxException e) {
-                LOGGER.error("Syntax error in BOM resource path: " + BOM_PATH, e);
+                LOGGER.error("Syntax error in BOM resource path: " + BOM_PATH,
+                        e);
             } catch (ParseException e) {
                 LOGGER.error("Can't parse the BOM resource.", e);
             }

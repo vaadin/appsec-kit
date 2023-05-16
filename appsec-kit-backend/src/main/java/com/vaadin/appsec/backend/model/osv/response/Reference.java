@@ -7,10 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "type",
-        "url"
-})
+@JsonPropertyOrder({ "type", "url" })
 public class Reference {
 
     @JsonProperty("type")
@@ -46,17 +43,10 @@ public class Reference {
     }
 
     public enum Type {
-        ADVISORY("ADVISORY"),
-        ARTICLE("ARTICLE"),
-        DETECTION("DETECTION"),
-        DISCUSSION("DISCUSSION"),
-        REPORT("REPORT"),
-        FIX("FIX"),
-        INTRODUCED("INTRODUCED"),
-        GIT("GIT"),
-        PACKAGE("PACKAGE"),
-        EVIDENCE("EVIDENCE"),
-        WEB("WEB");
+        ADVISORY("ADVISORY"), ARTICLE("ARTICLE"), DETECTION(
+                "DETECTION"), DISCUSSION("DISCUSSION"), REPORT("REPORT"), FIX(
+                        "FIX"), INTRODUCED("INTRODUCED"), GIT("GIT"), PACKAGE(
+                                "PACKAGE"), EVIDENCE("EVIDENCE"), WEB("WEB");
 
         private final String value;
 

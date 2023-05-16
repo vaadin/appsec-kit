@@ -1,8 +1,7 @@
 package com.vaadin.appsec.backend.model.osv.response;
 
 public enum Ecosystem {
-    MAVEN("Maven"),
-    NPM("npm");
+    MAVEN("Maven"), NPM("npm");
 
     private final String value;
 

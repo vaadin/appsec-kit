@@ -6,12 +6,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.vaadin.appsec.backend.model.osv.response.Package;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "commit",
-        "version",
-        "package"
-})
+@JsonPropertyOrder({ "commit", "version", "package" })
 public class QueryRequestPayload implements Serializable {
 
     @JsonProperty("commit")
@@ -35,7 +32,8 @@ public class QueryRequestPayload implements Serializable {
         this(null, version, aPackage);
     }
 
-    private QueryRequestPayload(String commit, String version, Package aPackage) {
+    private QueryRequestPayload(String commit, String version,
+            Package aPackage) {
         this.commit = commit;
         this.version = version;
         this.aPackage = aPackage;

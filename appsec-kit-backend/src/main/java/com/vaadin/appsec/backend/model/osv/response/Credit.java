@@ -7,11 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "name",
-        "contact",
-        "type"
-})
+@JsonPropertyOrder({ "name", "contact", "type" })
 public class Credit {
 
     @JsonProperty("name")
@@ -58,16 +54,14 @@ public class Credit {
     }
 
     public enum Type {
-        FINDER("FINDER"),
-        REPORTER("REPORTER"),
-        ANALYST("ANALYST"),
-        COORDINATOR("COORDINATOR"),
-        REMEDIATION_DEVELOPER("REMEDIATION_DEVELOPER"),
-        REMEDIATION_REVIEWER("REMEDIATION_REVIEWER"),
-        REMEDIATION_VERIFIER("REMEDIATION_VERIFIER"),
-        TOOL("TOOL"),
-        SPONSOR("SPONSOR"),
-        OTHER("OTHER");
+        FINDER("FINDER"), REPORTER("REPORTER"), ANALYST("ANALYST"), COORDINATOR(
+                "COORDINATOR"), REMEDIATION_DEVELOPER(
+                        "REMEDIATION_DEVELOPER"), REMEDIATION_REVIEWER(
+                                "REMEDIATION_REVIEWER"), REMEDIATION_VERIFIER(
+                                        "REMEDIATION_VERIFIER"), TOOL(
+                                                "TOOL"), SPONSOR(
+                                                        "SPONSOR"), OTHER(
+                                                                "OTHER");
 
         private final String value;
 

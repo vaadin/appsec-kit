@@ -7,12 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "type",
-        "repo",
-        "events",
-        "database_specific"
-})
+@JsonPropertyOrder({ "type", "repo", "events", "database_specific" })
 public class Range {
 
     @JsonProperty("type")
@@ -31,7 +26,7 @@ public class Range {
     }
 
     public Range(Type type, String repo, List<Event> events,
-                 DatabaseSpecific databaseSpecific) {
+            DatabaseSpecific databaseSpecific) {
         this.type = type;
         this.repo = repo;
         this.events = events;
@@ -71,9 +66,7 @@ public class Range {
     }
 
     public enum Type {
-        GIT("GIT"),
-        SEMVER("SEMVER"),
-        ECOSYSTEM("ECOSYSTEM");
+        GIT("GIT"), SEMVER("SEMVER"), ECOSYSTEM("ECOSYSTEM");
 
         private final String value;
 

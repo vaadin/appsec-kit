@@ -7,11 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "ecosystem",
-        "name",
-        "purl"
-})
+@JsonPropertyOrder({ "ecosystem", "name", "purl" })
 public class Package implements Serializable {
 
     @JsonProperty("ecosystem")
@@ -30,9 +26,13 @@ public class Package implements Serializable {
     /**
      * Constructs {@link Package} with ecosystem and name.
      *
-     * @param ecosystem The ecosystem for this package. For the complete list of valid ecosystem names,
-     *                  see <a href="https://ossf.github.io/osv-schema/#affectedpackage-field">ecosystems list</a>
-     * @param name      Name of the package
+     * @param ecosystem
+     *            The ecosystem for this package. For the complete list of valid
+     *            ecosystem names, see <a href=
+     *            "https://ossf.github.io/osv-schema/#affectedpackage-field">ecosystems
+     *            list</a>
+     * @param name
+     *            Name of the package
      */
     public Package(String ecosystem, String name) {
         this(ecosystem, name, null);
@@ -41,8 +41,12 @@ public class Package implements Serializable {
     /**
      * Constructs {@link Package} with package URL.
      *
-     * @param purl Package URL. Format <b>scheme:type/namespace/name@version?qualifiers#subpath<b/>,
-     *             see <a href="https://github.com/package-url/purl-spec#purl">Package URL specification</a>
+     * @param purl
+     *            Package URL. Format
+     *            <b>scheme:type/namespace/name@version?qualifiers#subpath<b/>,
+     *            see <a href=
+     *            "https://github.com/package-url/purl-spec#purl">Package URL
+     *            specification</a>
      */
     public Package(String purl) {
         this(null, null, purl);

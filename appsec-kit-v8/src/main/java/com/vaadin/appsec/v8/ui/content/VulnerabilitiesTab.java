@@ -30,7 +30,8 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         devAnalysis = new ComboBox<>("Developer analysis");
 
         severity = new ComboBox<>("Severity level");
-        severity.setItems(SeverityLevel.NA, SeverityLevel.LOW, SeverityLevel.MEDIUM, SeverityLevel.HIGH);
+        severity.setItems(SeverityLevel.NA, SeverityLevel.LOW,
+                SeverityLevel.MEDIUM, SeverityLevel.HIGH);
 
         buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
     }
@@ -50,16 +51,20 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         SeverityLevel severityFilter = severity.getValue();
 
         getListDataProvider().setFilter(vulnerabilityDTO -> {
-            if (dependencyFilter != null && !dependencyFilter.equals(vulnerabilityDTO.getDependency())) {
+            if (dependencyFilter != null && !dependencyFilter
+                    .equals(vulnerabilityDTO.getDependency())) {
                 return false;
             }
-            if (vaadinAnalysisFilter != null && !vaadinAnalysisFilter.equals(vulnerabilityDTO.getVaadinAnalysis())) {
+            if (vaadinAnalysisFilter != null && !vaadinAnalysisFilter
+                    .equals(vulnerabilityDTO.getVaadinAnalysis())) {
                 return false;
             }
-            if (devAnalysisFilter != null && !devAnalysisFilter.equals(vulnerabilityDTO.getDeveloperAnalysis())) {
+            if (devAnalysisFilter != null && !devAnalysisFilter
+                    .equals(vulnerabilityDTO.getDeveloperAnalysis())) {
                 return false;
             }
-            if (severityFilter != null && !severityFilter.equals(vulnerabilityDTO.getSeverityLevel())) {
+            if (severityFilter != null && !severityFilter
+                    .equals(vulnerabilityDTO.getSeverityLevel())) {
                 return false;
             }
             return true;
@@ -70,12 +75,17 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         grid = new Grid<>();
         grid.setSizeFull();
 
-        grid.addColumn(VulnerabilityDTO::getIdentifier).setCaption("Vulnerability name or identifier");
-        grid.addColumn(VulnerabilityDTO::getDependency).setCaption("Dependency");
-        grid.addColumn(VulnerabilityDTO::getSeverityLevel).setCaption("Severity");
+        grid.addColumn(VulnerabilityDTO::getIdentifier)
+                .setCaption("Vulnerability name or identifier");
+        grid.addColumn(VulnerabilityDTO::getDependency)
+                .setCaption("Dependency");
+        grid.addColumn(VulnerabilityDTO::getSeverityLevel)
+                .setCaption("Severity");
         grid.addColumn(VulnerabilityDTO::getRiskScore).setCaption("Risk score");
-        grid.addColumn(VulnerabilityDTO::getVaadinAnalysis).setCaption("Vaadin analysis");
-        grid.addColumn(VulnerabilityDTO::getDeveloperAnalysis).setCaption("Developer analysis");
+        grid.addColumn(VulnerabilityDTO::getVaadinAnalysis)
+                .setCaption("Vaadin analysis");
+        grid.addColumn(VulnerabilityDTO::getDeveloperAnalysis)
+                .setCaption("Developer analysis");
 
         addComponentsAndExpand(grid);
 
@@ -91,7 +101,9 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
     public void refresh() {
         grid.setItems(AppSecDataProvider.getVulnerabilities());
-        dependency.setItems(getListDataProvider().getItems().stream().map(VulnerabilityDTO::getDependency).collect(Collectors.toSet()));
+        dependency.setItems(getListDataProvider().getItems().stream()
+                .map(VulnerabilityDTO::getDependency)
+                .collect(Collectors.toSet()));
         // TODO Update vaadin analysis options
         // TODO Update dev analysis options
     }
