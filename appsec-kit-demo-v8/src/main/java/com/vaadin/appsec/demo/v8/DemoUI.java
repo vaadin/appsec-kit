@@ -6,11 +6,11 @@ import org.cyclonedx.model.Component;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.appsec.model.osv.response.OpenSourceVulnerability;
-import com.vaadin.appsec.service.BillOfMaterialsStore;
-import com.vaadin.appsec.service.VulnerabilityStore;
-import com.vaadin.appsec.ui.AppSecButton;
-import com.vaadin.appsec.util.OpenSourceVulnerabilityUtil;
+import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
+import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
+import com.vaadin.appsec.backend.service.VulnerabilityStore;
+import com.vaadin.appsec.v8.ui.AppSecButton;
+import com.vaadin.appsec.backend.util.OpenSourceVulnerabilityUtil;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Grid;
