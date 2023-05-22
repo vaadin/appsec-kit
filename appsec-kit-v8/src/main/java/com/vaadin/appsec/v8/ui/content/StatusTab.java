@@ -1,5 +1,4 @@
-/*
- * -
+/*-
  * Copyright (C) 2023 Vaadin Ltd
  *
  * This program is available under Vaadin Commercial License and Service Terms.
