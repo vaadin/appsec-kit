@@ -20,6 +20,15 @@ public class SeverityLevelComparator implements Comparator<SeverityLevel> {
         return compareStatic(o1, o2);
     }
 
+    /**
+     * Compare static int.
+     *
+     * @param o1
+     *            the o 1
+     * @param o2
+     *            the o 2
+     * @return the int
+     */
     public static int compareStatic(SeverityLevel o1, SeverityLevel o2) {
         if (o1 == null && o2 == null) {
             return 0;

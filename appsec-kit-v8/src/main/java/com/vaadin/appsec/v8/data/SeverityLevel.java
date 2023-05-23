@@ -13,7 +13,22 @@ package com.vaadin.appsec.v8.data;
  * Severity level for a vulnerability
  */
 public enum SeverityLevel {
-    HIGH("High"), MEDIUM("Medium"), LOW("Low"), NA("---");
+    /**
+     * High severity level.
+     */
+    HIGH("High"),
+    /**
+     * Medium severity level.
+     */
+    MEDIUM("Medium"),
+    /**
+     * Low severity level.
+     */
+    LOW("Low"),
+    /**
+     * Na severity level.
+     */
+    NA("---");
 
     private String caption;
 

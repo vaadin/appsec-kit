@@ -16,11 +16,17 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.Window;
 
+/**
+ * Main dialog window.
+ */
 public class AppSecDialog extends Window {
 
     private StatusTab statusTab;
     private ResultsTab resultsTab;
 
+    /**
+     * Instantiates a new App sec dialog.
+     */
     public AppSecDialog() {
         setup();
         buildLayout();

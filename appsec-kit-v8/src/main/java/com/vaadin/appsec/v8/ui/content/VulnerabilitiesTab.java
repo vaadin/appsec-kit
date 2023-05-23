@@ -19,6 +19,9 @@ import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 
+/**
+ * Vulnerabilities tab content
+ */
 public class VulnerabilitiesTab extends AbstractAppSecContent {
     private Grid<VulnerabilityDTO> grid;
     private ComboBox<DependencyDTO> dependency;
@@ -26,6 +29,9 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     private ComboBox<String> vaadinAnalysis;
     private ComboBox<String> devAnalysis;
 
+    /**
+     * Instantiates a new Vulnerabilities tab.
+     */
     public VulnerabilitiesTab() {
         buildFilters();
         buildGrid();

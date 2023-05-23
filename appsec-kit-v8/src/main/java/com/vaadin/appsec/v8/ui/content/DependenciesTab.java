@@ -18,12 +18,18 @@ import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 
+/**
+ * Dependencies tab content
+ */
 public class DependenciesTab extends AbstractAppSecContent {
     private Grid<DependencyDTO> grid;
     private ComboBox<String> group;
     private ComboBox<SeverityLevel> severity;
     private ComboBox<Integer> riskScore;
 
+    /**
+     * Instantiates a new Dependencies tab.
+     */
     public DependenciesTab() {
         buildFilters();
         buildGrid();

@@ -26,6 +26,16 @@ public class DependencyDTO {
     private SeverityLevel severityLevel;
     private Double riskScore;
 
+    /**
+     * Instantiates a new Dependency dto.
+     *
+     * @param group
+     *            the group
+     * @param name
+     *            the name
+     * @param version
+     *            the version
+     */
     public DependencyDTO(@NotNull String group, @NotNull String name,
             @NotNull String version) {
         this.group = group;
@@ -33,26 +43,59 @@ public class DependencyDTO {
         this.version = version;
     }
 
+    /**
+     * Gets group.
+     *
+     * @return the group
+     */
     public String getGroup() {
         return group;
     }
 
+    /**
+     * Sets group.
+     *
+     * @param group
+     *            the group
+     */
     public void setGroup(String group) {
         this.group = group;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name
+     *            the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets version.
+     *
+     * @return the version
+     */
     public String getVersion() {
         return version;
     }
 
+    /**
+     * Sets version.
+     *
+     * @param version
+     *            the version
+     */
     public void setVersion(String version) {
         this.version = version;
     }
@@ -74,26 +117,59 @@ public class DependencyDTO {
         return Objects.hash(group, name, version);
     }
 
+    /**
+     * Gets num of vulnerabilities.
+     *
+     * @return the num of vulnerabilities
+     */
     public Integer getNumOfVulnerabilities() {
         return numOfVulnerabilities;
     }
 
+    /**
+     * Sets num of vulnerabilities.
+     *
+     * @param numOfVulnerabilities
+     *            the num of vulnerabilities
+     */
     public void setNumOfVulnerabilities(Integer numOfVulnerabilities) {
         this.numOfVulnerabilities = numOfVulnerabilities;
     }
 
+    /**
+     * Gets severity level.
+     *
+     * @return the severity level
+     */
     public SeverityLevel getSeverityLevel() {
         return severityLevel;
     }
 
+    /**
+     * Sets severity level.
+     *
+     * @param severityLevel
+     *            the severity level
+     */
     public void setSeverityLevel(SeverityLevel severityLevel) {
         this.severityLevel = severityLevel;
     }
 
+    /**
+     * Gets risk score.
+     *
+     * @return the risk score
+     */
     public Double getRiskScore() {
         return riskScore;
     }
 
+    /**
+     * Sets risk score.
+     *
+     * @param riskScore
+     *            the risk score
+     */
     public void setRiskScore(Double riskScore) {
         this.riskScore = riskScore;
     }

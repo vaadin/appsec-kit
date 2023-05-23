@@ -13,10 +13,16 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
 
+/**
+ * Results tab content
+ */
 public class ResultsTab extends AbstractAppSecContent {
     private VulnerabilitiesTab vulnerabilitiesTab;
     private DependenciesTab dependenciesTab;
 
+    /**
+     * Instantiates a new Results tab.
+     */
     public ResultsTab() {
         buildLayout();
     }

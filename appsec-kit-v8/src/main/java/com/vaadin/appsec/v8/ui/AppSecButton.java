@@ -12,8 +12,14 @@ package com.vaadin.appsec.v8.ui;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.UI;
 
+/**
+ * A button that instantiates and opens the app sec dialog.
+ */
 public class AppSecButton extends Button {
 
+    /**
+     * Instantiates a new App sec button.
+     */
     public AppSecButton() {
         setCaption("Open");
         addClickListener(e -> {

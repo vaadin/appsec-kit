@@ -16,16 +16,32 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+/**
+ * Abstract app sec content is a base class for view parts.
+ */
 public abstract class AbstractAppSecContent extends VerticalLayout {
 
+    /**
+     * Refresh.
+     */
     public abstract void refresh();
 
+    /**
+     * Build clear button.
+     *
+     * @return the button
+     */
     protected Button buildClearButton() {
         Button clear = new Button("Clear");
         clear.addClickListener(e -> clearFilters());
         return clear;
     }
 
+    /**
+     * Build filter button.
+     *
+     * @return the button
+     */
     protected Button buildFilterButton() {
         Button filter = new Button("Filter");
         filter.addClickListener(e -> applyFilters());
@@ -33,6 +49,12 @@ public abstract class AbstractAppSecContent extends VerticalLayout {
         return filter;
     }
 
+    /**
+     * Build filter bar.
+     *
+     * @param filters
+     *            the filters
+     */
     protected void buildFilterBar(Component... filters) {
         HorizontalLayout filterBar = new HorizontalLayout();
         filterBar.setDefaultComponentAlignment(Alignment.BOTTOM_LEFT);
@@ -46,9 +68,15 @@ public abstract class AbstractAppSecContent extends VerticalLayout {
         addComponent(filterBar);
     }
 
+    /**
+     * Apply filters.
+     */
     protected void applyFilters() {
     }
 
+    /**
+     * Clear filters.
+     */
     protected void clearFilters() {
     }
 }

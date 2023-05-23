@@ -34,6 +34,7 @@ import com.vaadin.appsec.v8.data.VulnerabilityDTO;
 public class AppSecDataProvider {
 
     /**
+     * Gets dependencies.
      *
      * @return all dependencies
      */
@@ -52,6 +53,7 @@ public class AppSecDataProvider {
     }
 
     /**
+     * Gets vulnerabilities.
      *
      * @return all vulnerabilities
      */

@@ -9,7 +9,13 @@
 
 package com.vaadin.appsec.v8.ui.content;
 
+/**
+ * Status tab content
+ */
 public class StatusTab extends AbstractAppSecContent {
+    /**
+     * Instantiates a new Status tab.
+     */
     public StatusTab() {
     }
 
