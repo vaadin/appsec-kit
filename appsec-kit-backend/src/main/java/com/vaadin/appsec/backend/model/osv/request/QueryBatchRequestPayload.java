@@ -14,6 +14,9 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The container for the payload of a batch query to the OSV API.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class QueryBatchRequestPayload implements Serializable {
 
@@ -26,14 +29,31 @@ public class QueryBatchRequestPayload implements Serializable {
     public QueryBatchRequestPayload() {
     }
 
+    /**
+     * Instantiates a new query batch request payload.
+     *
+     * @param queries
+     *            the queries
+     */
     public QueryBatchRequestPayload(QueryRequestPayload[] queries) {
         this.queries = queries;
     }
 
+    /**
+     * Gets the queries.
+     *
+     * @return the queries
+     */
     public QueryRequestPayload[] getQueries() {
         return queries;
     }
 
+    /**
+     * Sets the queries.
+     *
+     * @param queries
+     *            the new queries
+     */
     public void setQueries(QueryRequestPayload[] queries) {
         this.queries = queries;
     }

@@ -15,6 +15,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+/**
+ * DTO for the OSV API range property.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "type", "repo", "events", "database_specific" })
 public class Range {
@@ -34,6 +37,18 @@ public class Range {
     public Range() {
     }
 
+    /**
+     * Instantiates a new range.
+     *
+     * @param type
+     *            the type
+     * @param repo
+     *            the repo
+     * @param events
+     *            the events
+     * @param databaseSpecific
+     *            the database specific
+     */
     public Range(Type type, String repo, List<Event> events,
             DatabaseSpecific databaseSpecific) {
         this.type = type;
@@ -42,38 +57,85 @@ public class Range {
         this.databaseSpecific = databaseSpecific;
     }
 
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
     public Type getType() {
         return type;
     }
 
+    /**
+     * Sets the type.
+     *
+     * @param type
+     *            the new type
+     */
     public void setType(Type type) {
         this.type = type;
     }
 
+    /**
+     * Gets the repo.
+     *
+     * @return the repo
+     */
     public String getRepo() {
         return repo;
     }
 
+    /**
+     * Sets the repo.
+     *
+     * @param repo
+     *            the new repo
+     */
     public void setRepo(String repo) {
         this.repo = repo;
     }
 
+    /**
+     * Gets the events.
+     *
+     * @return the events
+     */
     public List<Event> getEvents() {
         return events;
     }
 
+    /**
+     * Sets the events.
+     *
+     * @param events
+     *            the new events
+     */
     public void setEvents(List<Event> events) {
         this.events = events;
     }
 
+    /**
+     * Gets the database specific.
+     *
+     * @return the database specific
+     */
     public DatabaseSpecific getDatabaseSpecific() {
         return databaseSpecific;
     }
 
+    /**
+     * Sets the database specific.
+     *
+     * @param databaseSpecific
+     *            the new database specific
+     */
     public void setDatabaseSpecific(DatabaseSpecific databaseSpecific) {
         this.databaseSpecific = databaseSpecific;
     }
 
+    /**
+     * The range type.
+     */
     public enum Type {
         GIT("GIT"), SEMVER("SEMVER"), ECOSYSTEM("ECOSYSTEM");
 
@@ -83,10 +145,22 @@ public class Range {
             this.value = value;
         }
 
+        /**
+         * The value as string.
+         *
+         * @return the value as string
+         */
         public String value() {
             return this.value;
         }
 
+        /**
+         * Returns the type instance from the string value.
+         *
+         * @param value
+         *            the string value
+         * @return the type
+         */
         public static Type fromValue(String value) {
             for (Type type : values()) {
                 if (type.value().equals(value)) {

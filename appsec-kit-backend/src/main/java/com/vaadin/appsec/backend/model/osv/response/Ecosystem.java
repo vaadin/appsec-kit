@@ -9,6 +9,9 @@
 
 package com.vaadin.appsec.backend.model.osv.response;
 
+/**
+ * The OSV API Ecosystem values.
+ */
 public enum Ecosystem {
     MAVEN("Maven"), NPM("npm");
 
@@ -18,10 +21,22 @@ public enum Ecosystem {
         this.value = value;
     }
 
+    /**
+     * The value as string.
+     *
+     * @return the value as string
+     */
     public String value() {
         return value;
     }
 
+    /**
+     * Returns the instance from the string value.
+     *
+     * @param value
+     *            the value as string
+     * @return the ecosystem
+     */
     public static Ecosystem fromValue(String value) {
         for (Ecosystem ecosystem : values()) {
             if (ecosystem.value().equals(value)) {

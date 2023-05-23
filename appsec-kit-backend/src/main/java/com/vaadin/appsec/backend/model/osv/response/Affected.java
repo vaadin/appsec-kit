@@ -15,6 +15,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+/**
+ * DTO for information on dependencies affected by vulnerabilities.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "package", "severity", "ranges", "versions",
         "ecosystem_specific", "database_specific" })
@@ -39,6 +42,22 @@ public class Affected {
     public Affected() {
     }
 
+    /**
+     * Creates a new instance.
+     *
+     * @param aPackage
+     *            the a package
+     * @param severity
+     *            the severity
+     * @param ranges
+     *            the ranges
+     * @param versions
+     *            the versions
+     * @param ecosystemSpecific
+     *            the ecosystem specific
+     * @param databaseSpecific
+     *            the database specific
+     */
     public Affected(Package aPackage, List<Severity> severity,
             List<Range> ranges, List<String> versions,
             EcosystemSpecific ecosystemSpecific,
@@ -51,50 +70,116 @@ public class Affected {
         this.databaseSpecific = databaseSpecific;
     }
 
+    /**
+     * Gets the package.
+     *
+     * @return the package
+     */
     public Package getPackage() {
         return aPackage;
     }
 
+    /**
+     * Sets the package.
+     *
+     * @param aPackage
+     *            the new package
+     */
     public void setPackage(Package aPackage) {
         this.aPackage = aPackage;
     }
 
+    /**
+     * Gets the severity.
+     *
+     * @return the severity
+     */
     public List<Severity> getSeverity() {
         return severity;
     }
 
+    /**
+     * Sets the severity.
+     *
+     * @param severity
+     *            the new severity
+     */
     public void setSeverity(List<Severity> severity) {
         this.severity = severity;
     }
 
+    /**
+     * Gets the ranges.
+     *
+     * @return the ranges
+     */
     public List<Range> getRanges() {
         return ranges;
     }
 
+    /**
+     * Sets the ranges.
+     *
+     * @param ranges
+     *            the new ranges
+     */
     public void setRanges(List<Range> ranges) {
         this.ranges = ranges;
     }
 
+    /**
+     * Gets the versions.
+     *
+     * @return the versions
+     */
     public List<String> getVersions() {
         return versions;
     }
 
+    /**
+     * Sets the versions.
+     *
+     * @param versions
+     *            the new versions
+     */
     public void setVersions(List<String> versions) {
         this.versions = versions;
     }
 
+    /**
+     * Gets the ecosystem specific.
+     *
+     * @return the ecosystem specific
+     */
     public EcosystemSpecific getEcosystemSpecific() {
         return ecosystemSpecific;
     }
 
+    /**
+     * Sets the ecosystem specific.
+     *
+     * @param ecosystemSpecific
+     *            the new ecosystem specific
+     */
     public void setEcosystemSpecific(EcosystemSpecific ecosystemSpecific) {
         this.ecosystemSpecific = ecosystemSpecific;
     }
 
+    /**
+     * Gets the database specific.
+     *
+     * @return the database specific
+     */
     public DatabaseSpecific getDatabaseSpecific() {
         return databaseSpecific;
     }
 
+    /**
+     * Sets the database specific.
+     *
+     * @param databaseSpecific
+     *            the new database specific
+     */
     public void setDatabaseSpecific(DatabaseSpecific databaseSpecific) {
         this.databaseSpecific = databaseSpecific;
     }

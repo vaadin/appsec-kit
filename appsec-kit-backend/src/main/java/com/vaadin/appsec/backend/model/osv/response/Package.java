@@ -15,6 +15,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+/**
+ * DTO for the OSV API package property.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "ecosystem", "name", "purl" })
 public class Package implements Serializable {
@@ -67,26 +70,59 @@ public class Package implements Serializable {
         this.purl = purl;
     }
 
+    /**
+     * Gets the ecosystem.
+     *
+     * @return the ecosystem
+     */
     public String getEcosystem() {
         return ecosystem;
     }
 
+    /**
+     * Sets the ecosystem.
+     *
+     * @param ecosystem
+     *            the new ecosystem
+     */
     public void setEcosystem(String ecosystem) {
         this.ecosystem = ecosystem;
     }
 
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name.
+     *
+     * @param name
+     *            the new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the purl.
+     *
+     * @return the purl
+     */
     public String getPurl() {
         return purl;
     }
 
+    /**
+     * Sets the purl.
+     *
+     * @param purl
+     *            the new purl
+     */
     public void setPurl(String purl) {
         this.purl = purl;
     }

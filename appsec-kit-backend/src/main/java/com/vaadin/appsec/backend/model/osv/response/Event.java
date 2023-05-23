@@ -17,6 +17,9 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * DTO for the OSV API event property.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Event {
 
@@ -29,11 +32,24 @@ public class Event {
     public Event() {
     }
 
+    /**
+     * Gets the additional properties.
+     *
+     * @return the additional properties
+     */
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
+    /**
+     * Sets the additional property.
+     *
+     * @param name
+     *            the name
+     * @param value
+     *            the value
+     */
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);

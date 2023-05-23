@@ -12,6 +12,9 @@ package com.vaadin.appsec.backend.model.osv.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * DTO for the OSV API query response.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class QueryResponse {
 
@@ -24,14 +27,31 @@ public class QueryResponse {
     public QueryResponse() {
     }
 
+    /**
+     * Instantiates a new query response.
+     *
+     * @param vulnerabilities
+     *            the vulnerabilities
+     */
     public QueryResponse(OpenSourceVulnerability[] vulnerabilities) {
         this.vulnerabilities = vulnerabilities;
     }
 
+    /**
+     * Gets the vulnerabilities.
+     *
+     * @return the vulnerabilities
+     */
     public OpenSourceVulnerability[] getVulnerabilities() {
         return vulnerabilities;
     }
 
+    /**
+     * Sets the vulnerabilities.
+     *
+     * @param vulnerabilities
+     *            the new vulnerabilities
+     */
     public void setVulnerabilities(OpenSourceVulnerability[] vulnerabilities) {
         this.vulnerabilities = vulnerabilities;
     }

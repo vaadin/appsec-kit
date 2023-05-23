@@ -14,8 +14,12 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import com.vaadin.appsec.backend.model.osv.response.Package;
 
+/**
+ * The container for the payload of a query to the OSV API.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "commit", "version", "package" })
 public class QueryRequestPayload implements Serializable {
@@ -33,10 +37,24 @@ public class QueryRequestPayload implements Serializable {
     public QueryRequestPayload() {
     }
 
+    /**
+     * Instantiates a new query request payload.
+     *
+     * @param commit
+     *            the commit
+     */
     public QueryRequestPayload(String commit) {
         this(commit, null, null);
     }
 
+    /**
+     * Instantiates a new query request payload.
+     *
+     * @param version
+     *            the version
+     * @param aPackage
+     *            the a package
+     */
     public QueryRequestPayload(String version, Package aPackage) {
         this(null, version, aPackage);
     }
@@ -48,26 +66,59 @@ public class QueryRequestPayload implements Serializable {
         this.aPackage = aPackage;
     }
 
+    /**
+     * Gets the commit.
+     *
+     * @return the commit
+     */
     public String getCommit() {
         return commit;
     }
 
+    /**
+     * Sets the commit.
+     *
+     * @param commit
+     *            the new commit
+     */
     public void setCommit(String commit) {
         this.commit = commit;
     }
 
+    /**
+     * Gets the version.
+     *
+     * @return the version
+     */
     public String getVersion() {
         return version;
     }
 
+    /**
+     * Sets the version.
+     *
+     * @param version
+     *            the new version
+     */
     public void setVersion(String version) {
         this.version = version;
     }
 
+    /**
+     * Gets the package.
+     *
+     * @return the package
+     */
     public Package getPackage() {
         return aPackage;
     }
 
+    /**
+     * Sets the package.
+     *
+     * @param aPackage
+     *            the new package
+     */
     public void setPackage(Package aPackage) {
         this.aPackage = aPackage;
     }
