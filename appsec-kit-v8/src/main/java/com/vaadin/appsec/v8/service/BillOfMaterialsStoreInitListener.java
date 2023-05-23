@@ -36,21 +36,25 @@ public class BillOfMaterialsStoreInitListener
 
     @Override
     public void serviceInit(ServiceInitEvent event) {
-        URL resource = BillOfMaterialsStoreInitListener.class
-                .getResource(BOM_PATH);
-        if (resource != null) {
-            JsonParser parser = new JsonParser();
-            try {
-                Bom bom = parser.parse(Paths.get(resource.toURI()).toFile());
-                BillOfMaterialsStore.getInstance().init(bom);
-            } catch (URISyntaxException e) {
-                LOGGER.error("Syntax error in BOM resource path: " + BOM_PATH,
-                        e);
-            } catch (ParseException e) {
-                LOGGER.error("Can't parse the BOM resource.", e);
+        if (AppSecUtil.isDebugMode(event.getSource())) {
+            URL resource = BillOfMaterialsStoreInitListener.class
+                    .getResource(BOM_PATH);
+            if (resource != null) {
+                JsonParser parser = new JsonParser();
+                try {
+                    Bom bom = parser
+                            .parse(Paths.get(resource.toURI()).toFile());
+                    BillOfMaterialsStore.getInstance().init(bom);
+                } catch (URISyntaxException e) {
+                    LOGGER.error(
+                            "Syntax error in BOM resource path: " + BOM_PATH,
+                            e);
+                } catch (ParseException e) {
+                    LOGGER.error("Can't parse the BOM resource.", e);
+                }
+            } else {
+                LOGGER.error("Can't get BOM resource on path: " + BOM_PATH);
             }
-        } else {
-            LOGGER.error("Can't get BOM resource on path: " + BOM_PATH);
         }
     }
 }
