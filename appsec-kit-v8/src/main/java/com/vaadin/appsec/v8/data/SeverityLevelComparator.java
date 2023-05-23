@@ -11,6 +11,9 @@ package com.vaadin.appsec.v8.data;
 
 import java.util.Comparator;
 
+/**
+ * Comparator for SeverityLevel objects; for sorting in a grid
+ */
 public class SeverityLevelComparator implements Comparator<SeverityLevel> {
     @Override
     public int compare(SeverityLevel o1, SeverityLevel o2) {

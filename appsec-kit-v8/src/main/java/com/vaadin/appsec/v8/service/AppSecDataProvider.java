@@ -18,17 +18,25 @@ import java.util.stream.Collectors;
 import org.cyclonedx.model.Component;
 import us.springett.cvss.Cvss;
 
-import com.vaadin.appsec.v8.data.DependencyDTO;
-import com.vaadin.appsec.v8.data.SeverityLevel;
-import com.vaadin.appsec.v8.data.SeverityLevelComparator;
-import com.vaadin.appsec.v8.data.VulnerabilityDTO;
 import com.vaadin.appsec.backend.model.osv.response.Affected;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 import com.vaadin.appsec.backend.service.VulnerabilityStore;
+import com.vaadin.appsec.v8.data.DependencyDTO;
+import com.vaadin.appsec.v8.data.SeverityLevel;
+import com.vaadin.appsec.v8.data.SeverityLevelComparator;
+import com.vaadin.appsec.v8.data.VulnerabilityDTO;
 
+/**
+ * Helper class to provide bill of materials and vulnerabilities as DTOs for use
+ * in the UI.
+ */
 public class AppSecDataProvider {
 
+    /**
+     *
+     * @return all dependencies
+     */
     public static List<DependencyDTO> getDependencies() {
         final List<OpenSourceVulnerability> vulnerabilities = VulnerabilityStore
                 .getInstance().getVulnerabilities();
@@ -43,6 +51,10 @@ public class AppSecDataProvider {
                 }).collect(Collectors.toList());
     }
 
+    /**
+     *
+     * @return all vulnerabilities
+     */
     public static List<VulnerabilityDTO> getVulnerabilities() {
         final List<DependencyDTO> dependencies = getDependencies();
         final List<OpenSourceVulnerability> vulnerabilities = VulnerabilityStore

@@ -23,6 +23,10 @@ import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 import com.vaadin.server.ServiceInitEvent;
 import com.vaadin.server.VaadinServiceInitListener;
 
+/**
+ * A Vaadin service init listener for initializing the bill of materials store.
+ * Will be initialized automatically by Vaadin.
+ */
 public class BillOfMaterialsStoreInitListener
         implements VaadinServiceInitListener {
 

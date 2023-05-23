@@ -12,6 +12,9 @@ package com.vaadin.appsec.v8.data;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+/**
+ * DTO for a dependency instance, used in the UI.
+ */
 public class DependencyDTO {
 
     private String group;
