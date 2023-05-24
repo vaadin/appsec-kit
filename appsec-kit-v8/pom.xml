@@ -29,13 +29,14 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>appsec-kit-backend</artifactId>
-            <version>${project.version}</version>
+            <artifactId>vaadin-server</artifactId>
+            <version>${vaadin.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-server</artifactId>
-            <version>${vaadin.version}</version>
+            <artifactId>appsec-kit-backend</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
