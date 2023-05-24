@@ -1,5 +1,4 @@
-/*
- * -
+/*-
  * Copyright (C) 2023 Vaadin Ltd
  *
  * This program is available under Vaadin Commercial License and Service Terms.
@@ -16,6 +15,10 @@ import com.vaadin.server.UIClassSelectionEvent;
 import com.vaadin.server.UIProvider;
 import com.vaadin.ui.UI;
 
+/**
+ * UI provider for providing the AppSecUI class for UI instantiation when the
+ * request contains 'vaadin-appsec-kit' parameter.
+ */
 public class AppSecUIProvider extends UIProvider {
 
     public static final String VAADIN_APPSEC_KIT_URL_PARAM = "vaadin-appsec-kit";

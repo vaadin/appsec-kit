@@ -19,7 +19,6 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 import com.vaadin.appsec.backend.service.VulnerabilityStore;
-import com.vaadin.appsec.v8.ui.AppSecButton;
 import com.vaadin.appsec.demo.util.OpenSourceVulnerabilityUtils;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -70,8 +69,6 @@ public class DemoUI extends UI {
         layout.addComponent(vulnGrid);
 
         setContent(layout);
-
-        layout.addComponent(new AppSecButton());
     }
 
     @WebServlet(urlPatterns = "/*", name = "DemoUIServlet", asyncSupported = true)

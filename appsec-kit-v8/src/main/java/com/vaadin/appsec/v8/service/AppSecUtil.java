@@ -13,6 +13,13 @@ import com.vaadin.server.VaadinService;
 
 public class AppSecUtil {
 
+    /**
+     * Checks if the application is deployed in debug mode.
+     *
+     * @param vaadinService
+     *            service instance to check
+     * @return true if application is in debug mode
+     */
     public static boolean isDebugMode(VaadinService vaadinService) {
         return !vaadinService.getDeploymentConfiguration().isProductionMode();
     }

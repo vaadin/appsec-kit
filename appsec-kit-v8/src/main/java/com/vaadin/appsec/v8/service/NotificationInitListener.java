@@ -1,3 +1,12 @@
+/*-
+ * Copyright (C) 2023 Vaadin Ltd
+ *
+ * This program is available under Vaadin Commercial License and Service Terms.
+ *
+ *
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
+ */
+
 package com.vaadin.appsec.v8.service;
 
 import java.util.ArrayList;
@@ -19,11 +28,19 @@ import com.vaadin.ui.UI;
  */
 public class NotificationInitListener implements VaadinServiceInitListener {
 
-    private static final int NOTIFICATION_CHECK_INTERVAL = 5000; // ms
-
     private static final String NOTIFIED_UIS_SESSION_PARAM = "vaadin-appsec-kit-notified-uis";
+    /**
+     * New UI instance check interval (in ms). Determines how often the session
+     * is checked for new UI instances which might need a notification shown.
+     */
+    private static final int NOTIFICATION_CHECK_INTERVAL = 5000;
 
-    private static final int DELAY = 30 * 60 * 1000; // 30 mins
+    /**
+     * Notification timeout (in ms). Set to 24 hours to essentially make it
+     * persistent until either the appsec link is clicked or the notification is
+     * dismissed.
+     */
+    private static final int NOTIFICATION_DELAY = 24 * 60 * 60 * 1000;
 
     @Override
     public void serviceInit(ServiceInitEvent event) {
@@ -90,7 +107,7 @@ public class NotificationInitListener implements VaadinServiceInitListener {
         Notification n = new Notification("Vaadin AppSec Kit", msg,
                 Notification.Type.TRAY_NOTIFICATION);
         n.setPosition(Position.TOP_RIGHT);
-        n.setDelayMsec(DELAY);
+        n.setDelayMsec(NOTIFICATION_DELAY);
         n.setHtmlContentAllowed(true);
         n.show(ui.getPage());
     }

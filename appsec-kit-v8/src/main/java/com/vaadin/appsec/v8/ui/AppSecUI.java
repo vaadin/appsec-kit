@@ -1,5 +1,4 @@
-/*
- * -
+/*-
  * Copyright (C) 2023 Vaadin Ltd
  *
  * This program is available under Vaadin Commercial License and Service Terms.
@@ -19,6 +18,9 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * UI class for displaying main content of AppSec Kit.
+ */
 public class AppSecUI extends UI {
 
     private StatusTab statusTab;
