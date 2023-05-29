@@ -1,4 +1,4 @@
-/*-
+/*/*-
  * Copyright (C) 2023 Vaadin Ltd
  *
  * This program is available under Vaadin Commercial License and Service Terms.
@@ -32,7 +32,7 @@ public class BillOfMaterialsStoreInitListener
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(BillOfMaterialsStoreInitListener.class);
-    private static final String BOM_PATH = "/resources/bom.json";
+    private static String BOM_PATH = "/resources/bom.json";
 
     @Override
     public void serviceInit(ServiceInitEvent event) {
@@ -45,6 +45,8 @@ public class BillOfMaterialsStoreInitListener
                     Bom bom = parser
                             .parse(Paths.get(resource.toURI()).toFile());
                     BillOfMaterialsStore.getInstance().init(bom);
+                    LOGGER.debug(
+                            "BillOfMaterialsStoreInitListener initialized.");
                 } catch (URISyntaxException e) {
                     LOGGER.error(
                             "Syntax error in BOM resource path: " + BOM_PATH,
@@ -56,5 +58,9 @@ public class BillOfMaterialsStoreInitListener
                 LOGGER.error("Can't get BOM resource on path: " + BOM_PATH);
             }
         }
+    }
+
+    private void setBomPath(String bomPath) {
+        BOM_PATH = bomPath;
     }
 }

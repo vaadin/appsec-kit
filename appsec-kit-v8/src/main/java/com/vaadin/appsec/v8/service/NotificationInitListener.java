@@ -12,6 +12,9 @@ package com.vaadin.appsec.v8.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vaadin.appsec.v8.ui.AppSecUI;
 import com.vaadin.appsec.v8.ui.AppSecUIProvider;
 import com.vaadin.server.ServiceInitEvent;
@@ -27,6 +30,9 @@ import com.vaadin.ui.UI;
  * Will be initialized automatically by Vaadin.
  */
 public class NotificationInitListener implements VaadinServiceInitListener {
+
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(NotificationInitListener.class);
 
     private static final String NOTIFIED_UIS_SESSION_PARAM = "vaadin-appsec-kit-notified-uis";
     /**
@@ -50,12 +56,16 @@ public class NotificationInitListener implements VaadinServiceInitListener {
                 e.getSession().addUIProvider(new AppSecUIProvider());
                 createNotificationThread(e.getSession()).start();
             });
+            LOGGER.debug("NotificationInitListener initialized.");
         }
     }
 
     private Thread createNotificationThread(final VaadinSession session) {
         return new Thread(() -> {
             try {
+                LOGGER.debug(
+                        "NotificationInitListener notification thread initialized.");
+
                 Thread.sleep(NOTIFICATION_CHECK_INTERVAL);
 
                 while (isSessionOpen(session)) {
