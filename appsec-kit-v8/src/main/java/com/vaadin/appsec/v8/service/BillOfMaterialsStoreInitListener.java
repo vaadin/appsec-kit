@@ -1,4 +1,4 @@
-/*/*-
+/*-
  * Copyright (C) 2023 Vaadin Ltd
  *
  * This program is available under Vaadin Commercial License and Service Terms.
@@ -21,14 +21,12 @@ import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 import com.vaadin.server.ServiceInitEvent;
-import com.vaadin.server.VaadinServiceInitListener;
 
 /**
  * A Vaadin service init listener for initializing the bill of materials store.
  * Will be initialized automatically by Vaadin.
  */
-public class BillOfMaterialsStoreInitListener
-        implements VaadinServiceInitListener {
+public class BillOfMaterialsStoreInitListener extends AbstractInitListener {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(BillOfMaterialsStoreInitListener.class);
@@ -36,7 +34,7 @@ public class BillOfMaterialsStoreInitListener
 
     @Override
     public void serviceInit(ServiceInitEvent event) {
-        if (AppSecUtil.isDebugMode(event.getSource())) {
+        if (isDebugMode(event.getSource())) {
             URL resource = BillOfMaterialsStoreInitListener.class
                     .getResource(BOM_PATH);
             if (resource != null) {
@@ -60,6 +58,7 @@ public class BillOfMaterialsStoreInitListener
         }
     }
 
+    /* Added for testing purposes */
     private void setBomPath(String bomPath) {
         BOM_PATH = bomPath;
     }

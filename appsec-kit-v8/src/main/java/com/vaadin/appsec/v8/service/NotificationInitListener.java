@@ -19,7 +19,6 @@ import com.vaadin.appsec.v8.ui.AppSecUI;
 import com.vaadin.appsec.v8.ui.AppSecUIProvider;
 import com.vaadin.server.ServiceInitEvent;
 import com.vaadin.server.VaadinService;
-import com.vaadin.server.VaadinServiceInitListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.Notification;
@@ -29,7 +28,7 @@ import com.vaadin.ui.UI;
  * A Vaadin service init listener for initializing the notification mechanism.
  * Will be initialized automatically by Vaadin.
  */
-public class NotificationInitListener implements VaadinServiceInitListener {
+public class NotificationInitListener extends AbstractInitListener {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(NotificationInitListener.class);
@@ -51,7 +50,7 @@ public class NotificationInitListener implements VaadinServiceInitListener {
     @Override
     public void serviceInit(ServiceInitEvent event) {
         VaadinService vaadinService = event.getSource();
-        if (AppSecUtil.isDebugMode(vaadinService)) {
+        if (isDebugMode(vaadinService)) {
             vaadinService.addSessionInitListener(e -> {
                 e.getSession().addUIProvider(new AppSecUIProvider());
                 createNotificationThread(e.getSession()).start();

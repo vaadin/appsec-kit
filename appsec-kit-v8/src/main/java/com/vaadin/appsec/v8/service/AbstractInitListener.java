@@ -1,4 +1,5 @@
-/*-
+/*
+ * -
  * Copyright (C) 2023 Vaadin Ltd
  *
  * This program is available under Vaadin Commercial License and Service Terms.
@@ -10,9 +11,14 @@
 package com.vaadin.appsec.v8.service;
 
 import com.vaadin.server.VaadinService;
+import com.vaadin.server.VaadinServiceInitListener;
 
-public class AppSecUtil {
-
+/**
+ * Base class for all classes implementing {@link VaadinServiceInitListener} in
+ * the AppSec Kit.
+ */
+public abstract class AbstractInitListener
+        implements VaadinServiceInitListener {
     /**
      * Checks if the application is deployed in debug mode.
      *
