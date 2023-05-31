@@ -23,6 +23,7 @@ import com.vaadin.ui.Grid;
  * Vulnerabilities tab content
  */
 public class VulnerabilitiesTab extends AbstractAppSecContent {
+    private AbstractAppSecContent parent;
     private Grid<VulnerabilityDTO> grid;
     private ComboBox<DependencyDTO> dependency;
     private ComboBox<SeverityLevel> severity;
@@ -32,7 +33,8 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     /**
      * Instantiates a new Vulnerabilities tab.
      */
-    public VulnerabilitiesTab() {
+    public VulnerabilitiesTab(AbstractAppSecContent parent) {
+        this.parent = parent;
         buildFilters();
         buildGrid();
     }
@@ -88,6 +90,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
     private void buildGrid() {
         grid = new Grid<>();
+        grid.setSelectionMode(Grid.SelectionMode.NONE);
         grid.setSizeFull();
 
         grid.addColumn(VulnerabilityDTO::getIdentifier)
@@ -102,10 +105,16 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         grid.addColumn(VulnerabilityDTO::getDeveloperAnalysis)
                 .setCaption("Developer analysis");
 
-        addComponentsAndExpand(grid);
+        getMainContent().addComponentsAndExpand(grid);
 
-        grid.addItemClickListener(item -> {
-            // TODO Open details view for clicked vulnerability
+        grid.addItemClickListener(e -> {
+            if (e.getMouseEventDetails().isDoubleClick()) {
+                parent.showDetails(
+                        new VulnerabilityDetailsView(e.getItem(), () -> {
+                            parent.showMainContent();
+                            refresh();
+                        }));
+            }
         });
     }
 
@@ -114,12 +123,20 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         return (ListDataProvider<VulnerabilityDTO>) grid.getDataProvider();
     }
 
+    @Override
     public void refresh() {
         grid.setItems(AppSecDataProvider.getVulnerabilities());
         dependency.setItems(getListDataProvider().getItems().stream()
                 .map(VulnerabilityDTO::getDependency)
                 .collect(Collectors.toSet()));
+        applyFilters();
         // TODO Update vaadin analysis options
         // TODO Update dev analysis options
+    }
+
+    void filterOn(DependencyDTO item) {
+        clearFilters();
+        dependency.setValue(item);
+        applyFilters();
     }
 }

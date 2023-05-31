@@ -34,6 +34,7 @@ public class DemoUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
+        layout.setSizeFull();
 
         layout.addComponent(new Label("AppSec Kit Vaadin 8 Demo Application"));
 
@@ -46,7 +47,7 @@ public class DemoUI extends UI {
         sbomGrid.addColumn(Component::getName).setCaption("Name");
         sbomGrid.addColumn(Component::getVersion).setCaption("Version");
         sbomGrid.setSizeFull();
-        layout.addComponent(sbomGrid);
+        layout.addComponentsAndExpand(sbomGrid);
 
         layout.addComponent(new Label("Vulnerabilities:"));
 
@@ -66,7 +67,7 @@ public class DemoUI extends UI {
                 OpenSourceVulnerabilityUtils::getScoresStr)
                 .setCaption("Scores");
         vulnGrid.setSizeFull();
-        layout.addComponent(vulnGrid);
+        layout.addComponentsAndExpand(vulnGrid);
 
         setContent(layout);
     }
