@@ -21,36 +21,45 @@ import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 import com.vaadin.server.ServiceInitEvent;
-import com.vaadin.server.VaadinServiceInitListener;
 
 /**
  * A Vaadin service init listener for initializing the bill of materials store.
  * Will be initialized automatically by Vaadin.
  */
-public class BillOfMaterialsStoreInitListener
-        implements VaadinServiceInitListener {
+public class BillOfMaterialsStoreInitListener extends AbstractInitListener {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(BillOfMaterialsStoreInitListener.class);
-    private static final String BOM_PATH = "/resources/bom.json";
+    private static String BOM_PATH = "/resources/bom.json";
 
     @Override
     public void serviceInit(ServiceInitEvent event) {
-        URL resource = BillOfMaterialsStoreInitListener.class
-                .getResource(BOM_PATH);
-        if (resource != null) {
-            JsonParser parser = new JsonParser();
-            try {
-                Bom bom = parser.parse(Paths.get(resource.toURI()).toFile());
-                BillOfMaterialsStore.getInstance().init(bom);
-            } catch (URISyntaxException e) {
-                LOGGER.error("Syntax error in BOM resource path: " + BOM_PATH,
-                        e);
-            } catch (ParseException e) {
-                LOGGER.error("Can't parse the BOM resource.", e);
+        if (isDebugMode(event.getSource())) {
+            URL resource = BillOfMaterialsStoreInitListener.class
+                    .getResource(BOM_PATH);
+            if (resource != null) {
+                JsonParser parser = new JsonParser();
+                try {
+                    Bom bom = parser
+                            .parse(Paths.get(resource.toURI()).toFile());
+                    BillOfMaterialsStore.getInstance().init(bom);
+                    LOGGER.debug(
+                            "BillOfMaterialsStoreInitListener initialized.");
+                } catch (URISyntaxException e) {
+                    LOGGER.error(
+                            "Syntax error in BOM resource path: " + BOM_PATH,
+                            e);
+                } catch (ParseException e) {
+                    LOGGER.error("Can't parse the BOM resource.", e);
+                }
+            } else {
+                LOGGER.error("Can't get BOM resource on path: " + BOM_PATH);
             }
-        } else {
-            LOGGER.error("Can't get BOM resource on path: " + BOM_PATH);
         }
+    }
+
+    /* Added for testing purposes */
+    private void setBomPath(String bomPath) {
+        BOM_PATH = bomPath;
     }
 }

@@ -12,34 +12,23 @@ package com.vaadin.appsec.v8.ui;
 import com.vaadin.appsec.v8.ui.content.AbstractAppSecContent;
 import com.vaadin.appsec.v8.ui.content.ResultsTab;
 import com.vaadin.appsec.v8.ui.content.StatusTab;
+import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.TabSheet;
-import com.vaadin.ui.Window;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 
 /**
- * Main dialog window.
+ * UI class for displaying main content of AppSec Kit.
  */
-public class AppSecDialog extends Window {
+public class AppSecUI extends UI {
 
     private StatusTab statusTab;
     private ResultsTab resultsTab;
 
-    /**
-     * Instantiates a new App sec dialog.
-     */
-    public AppSecDialog() {
-        setup();
-        buildLayout();
-    }
-
     private void setup() {
-        setModal(true);
-        setClosable(true);
-        setResizable(true);
-        setWidth(85, Unit.PERCENTAGE);
-        setHeight(85, Unit.PERCENTAGE);
-        center();
-        setCaption("Vaadin AppSec Kit");
+        setSizeFull();
+        getPage().setTitle("Vaadin AppSec Kit");
     }
 
     private void buildLayout() {
@@ -61,6 +50,14 @@ public class AppSecDialog extends Window {
 
         addStyleName("appsec-kit-dialog");
 
-        setContent(tabSheet);
+        VerticalLayout wrapper = new VerticalLayout(tabSheet);
+        wrapper.setSizeFull();
+        setContent(wrapper);
+    }
+
+    @Override
+    protected void init(VaadinRequest vaadinRequest) {
+        setup();
+        buildLayout();
     }
 }

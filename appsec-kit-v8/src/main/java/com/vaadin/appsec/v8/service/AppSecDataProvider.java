@@ -12,7 +12,9 @@ package com.vaadin.appsec.v8.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.cyclonedx.model.Component;
@@ -76,6 +78,14 @@ public class AppSecDataProvider {
                             v.getId());
                     vulnerabilityDTO.setDependency(dependencyDTO);
                     vulnerabilityDTOS.add(vulnerabilityDTO);
+                    vulnerabilityDTO.setDatePublished(v.getPublished());
+                    vulnerabilityDTO.setDetails(v.getDetails());
+
+                    Set<String> urls = new HashSet<>();
+                    v.getReferences().forEach(ref -> {
+                        urls.add(ref.getUrl().toString());
+                    });
+                    vulnerabilityDTO.setReferenceUrls(urls);
                 }
             }
         }
