@@ -1,0 +1,67 @@
+.appsec-kit-main {
+    min-width: 800px;
+    min-height: 500px;
+}
+
+.vulnerability-details-view .vulnerability-header {
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.vulnerability-details-view .vulnerability-details-content-right {
+    background-color: #ddd;
+}
+
+.vulnerability-details-view .vulnerability-details-prop-holder {
+    padding-right: 30px;
+    padding-top: 10px;
+}
+
+.small-margin.v-margin-left {
+    padding-left: 15px !important;
+}
+.small-margin.v-margin-bottom {
+    padding-bottom: 15px !important;
+}
+.small-margin.v-margin-right {
+    padding-right: 15px !important;
+}
+.small-margin.v-margin-top {
+    padding-top: 15px !important;
+}
+
+.vulnerability-details-view .developer-analysis-title {
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #666   ;
+    padding-bottom: 10px;
+}
+
+.vulnerability-details-view .vulnerability-title,
+.vulnerability-details-view .scan-results {
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+
+.vulnerability-details-view .vaadin-analysis-title,
+.vulnerability-details-view .vulnerability-desc-title,
+.vulnerability-details-view .references-title {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.vulnerability-details-view .vulnerability-desc-title,
+.vulnerability-details-view .references-title {
+    margin-top: 20px;
+}
+
+.vulnerability-details-view .vaadin-analysis-panel {
+    border: 1px solid #666;
+    margin-top: 20px;
+}
+
+.vulnerability-details-view .va-false-positive {
+    background: lightblue;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
