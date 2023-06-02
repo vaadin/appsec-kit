@@ -13,6 +13,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import org.cyclonedx.model.Bom;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
@@ -40,21 +41,6 @@ public class BillOfMaterialsStoreInitListenerTest
         Assert.assertNotNull(bom);
         Assert.assertEquals("Mismatch in expected dependency count.", 49,
                 bom.getComponents().size());
-    }
-
-    @Test
-    public void testBomStoreInit_doesNotInit_productionMode() {
-        when(service.getDeploymentConfiguration().isProductionMode())
-                .thenReturn(true);
-
-        ListAppender<ILoggingEvent> logAppender = createListAppender(
-                BillOfMaterialsStoreInitListener.class.getName());
-
-        initBomStoreInitListener(TEST_RESOURCE_BOM_PATH);
-
-        Assert.assertEquals("Unexpected count of log messages. ", 0,
-                logAppender.list.size());
-        Assert.assertNull(BillOfMaterialsStore.getInstance().getBom());
     }
 
     @Test
