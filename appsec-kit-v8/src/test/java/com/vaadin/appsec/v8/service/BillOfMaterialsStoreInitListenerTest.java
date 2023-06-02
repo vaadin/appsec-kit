@@ -13,12 +13,15 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import org.cyclonedx.model.Bom;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 
 import static org.mockito.Mockito.when;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BillOfMaterialsStoreInitListenerTest
         extends AbstractAppSecKitTest {
 
@@ -43,7 +46,7 @@ public class BillOfMaterialsStoreInitListenerTest
     }
 
     @Test
-    public void testBomStoreInit_doesNotInit_productionMode() {
+    public void a_testBomStoreInit_doesNotInit_productionMode() {
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(true);
 
