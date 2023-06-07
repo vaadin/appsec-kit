@@ -60,9 +60,14 @@ public abstract class AbstractAppSecKitTest {
 =======
 
         // Clear data from singletons before each test
+<<<<<<< HEAD
         BillOfMaterialsStore.getInstance().init(null);
         VulnerabilityStore.getInstance().init(null);
 >>>>>>> fd7081c (Clear data from singletons before each test)
+=======
+         BillOfMaterialsStoreInitializer.reset();
+        VulnerabilityStoreInitializer.reset();
+>>>>>>> d7ab08a (Fix v7 tests)
     }
 
     @After

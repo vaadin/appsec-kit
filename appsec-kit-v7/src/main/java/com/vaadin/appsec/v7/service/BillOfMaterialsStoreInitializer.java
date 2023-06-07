@@ -71,12 +71,18 @@ public class BillOfMaterialsStoreInitializer extends AbstractInitializer {
         BOM_PATH = bomPath;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d7ab08a (Fix v7 tests)
 
     /* Added for testing purposes */
     static void reset() {
         initialized = false;
         BillOfMaterialsStore.getInstance().init(null);
     }
+<<<<<<< HEAD
 =======
 >>>>>>> dd08b2b (Add Vaadin 7 version)
+=======
+>>>>>>> d7ab08a (Fix v7 tests)
 }
