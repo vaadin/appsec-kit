@@ -70,4 +70,10 @@ public class BillOfMaterialsStoreInitializer extends AbstractInitializer {
     private static void setBomPath(String bomPath) {
         BOM_PATH = bomPath;
     }
+
+    /* Added for testing purposes */
+    static void reset() {
+        initialized = false;
+        BillOfMaterialsStore.getInstance().init(null);
+    }
 }

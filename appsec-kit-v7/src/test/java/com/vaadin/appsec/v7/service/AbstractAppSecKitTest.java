@@ -43,8 +43,8 @@ public abstract class AbstractAppSecKitTest {
                 .thenReturn(false);
 
         // Clear data from singletons before each test
-        BillOfMaterialsStore.getInstance().init(null);
-        VulnerabilityStore.getInstance().init(null);
+         BillOfMaterialsStoreInitializer.reset();
+        VulnerabilityStoreInitializer.reset();
     }
 
     @After
