@@ -24,10 +24,15 @@ import org.mockito.MockitoAnnotations;
 import org.slf4j.LoggerFactory;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 import com.vaadin.appsec.backend.service.VulnerabilityStore;
 =======
 >>>>>>> dd08b2b (Add Vaadin 7 version)
+=======
+import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
+import com.vaadin.appsec.backend.service.VulnerabilityStore;
+>>>>>>> fd7081c (Clear data from singletons before each test)
 import com.vaadin.server.VaadinService;
 
 import static org.mockito.Mockito.when;
@@ -45,12 +50,19 @@ public abstract class AbstractAppSecKitTest {
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         // Clear data from singletons before each test
         BillOfMaterialsStoreInitializer.reset();
         VulnerabilityStoreInitializer.reset();
 =======
 >>>>>>> dd08b2b (Add Vaadin 7 version)
+=======
+
+        // Clear data from singletons before each test
+        BillOfMaterialsStore.getInstance().init(null);
+        VulnerabilityStore.getInstance().init(null);
+>>>>>>> fd7081c (Clear data from singletons before each test)
     }
 
     @After
