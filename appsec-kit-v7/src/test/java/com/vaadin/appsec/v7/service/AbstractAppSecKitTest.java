@@ -23,6 +23,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.LoggerFactory;
 
+import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
+import com.vaadin.appsec.backend.service.VulnerabilityStore;
 import com.vaadin.server.VaadinService;
 
 import static org.mockito.Mockito.when;
@@ -39,6 +41,10 @@ public abstract class AbstractAppSecKitTest {
         toClose = MockitoAnnotations.openMocks(this);
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(false);
+
+        // Clear data from singletons before each test
+        BillOfMaterialsStore.getInstance().init(null);
+        VulnerabilityStore.getInstance().init(null);
     }
 
     @After
