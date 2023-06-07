@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 import org.cyclonedx.model.Component;
 import us.springett.cvss.Cvss;
 
@@ -64,6 +67,9 @@ public class AppSecDataProvider {
         final List<OpenSourceVulnerability> vulnerabilities = VulnerabilityStore
                 .getInstance().getVulnerabilities();
 
+        Parser parser = Parser.builder().build();
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+
         List<VulnerabilityDTO> vulnerabilityDTOS = new ArrayList<>();
         for (OpenSourceVulnerability v : vulnerabilities) {
             for (Affected affected : v.getAffected()) {
@@ -79,7 +85,11 @@ public class AppSecDataProvider {
                     vulnerabilityDTO.setDependency(dependencyDTO);
                     vulnerabilityDTOS.add(vulnerabilityDTO);
                     vulnerabilityDTO.setDatePublished(v.getPublished());
-                    vulnerabilityDTO.setDetails(v.getDetails());
+
+                    if (v.getDetails() != null) {
+                        Node document = parser.parse(v.getDetails());
+                        vulnerabilityDTO.setDetails(renderer.render(document));
+                    }
 
                     Set<String> urls = new HashSet<>();
                     v.getReferences().forEach(ref -> {
