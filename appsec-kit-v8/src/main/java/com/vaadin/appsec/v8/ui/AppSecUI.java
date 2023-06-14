@@ -9,6 +9,7 @@
 
 package com.vaadin.appsec.v8.ui;
 
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.appsec.v8.ui.content.AbstractAppSecContent;
 import com.vaadin.appsec.v8.ui.content.ResultsTab;
 import com.vaadin.appsec.v8.ui.content.StatusTab;
@@ -21,6 +22,7 @@ import com.vaadin.ui.VerticalLayout;
 /**
  * UI class for displaying main content of AppSec Kit.
  */
+@StyleSheet("appsec-v8.css")
 public class AppSecUI extends UI {
 
     private StatusTab statusTab;
@@ -52,6 +54,8 @@ public class AppSecUI extends UI {
 
         VerticalLayout wrapper = new VerticalLayout(tabSheet);
         wrapper.setSizeFull();
+        wrapper.addStyleName("small-margin");
+        wrapper.addStyleName("appsec-kit-main");
         setContent(wrapper);
     }
 

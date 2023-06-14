@@ -9,6 +9,7 @@
 
 package com.vaadin.appsec.v8.ui.content;
 
+import com.vaadin.appsec.v8.data.DependencyDTO;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
@@ -19,6 +20,7 @@ import com.vaadin.ui.TabSheet;
 public class ResultsTab extends AbstractAppSecContent {
     private VulnerabilitiesTab vulnerabilitiesTab;
     private DependenciesTab dependenciesTab;
+    private TabSheet tabSheet;
 
     /**
      * Instantiates a new Results tab.
@@ -28,12 +30,10 @@ public class ResultsTab extends AbstractAppSecContent {
     }
 
     private void buildLayout() {
-        setSizeFull();
-
         Label scanResultsTitle = new Label("Scan results");
         scanResultsTitle.addStyleName("scan-results");
 
-        TabSheet tabSheet = new TabSheet();
+        tabSheet = new TabSheet();
         tabSheet.setSizeFull();
 
         tabSheet.addSelectedTabChangeListener(e -> {
@@ -43,18 +43,26 @@ public class ResultsTab extends AbstractAppSecContent {
             }
         });
 
-        vulnerabilitiesTab = new VulnerabilitiesTab();
-        dependenciesTab = new DependenciesTab();
+        vulnerabilitiesTab = new VulnerabilitiesTab(this);
+        dependenciesTab = new DependenciesTab(this);
 
         tabSheet.addTab(vulnerabilitiesTab, "Vulnerabilities");
         tabSheet.addTab(dependenciesTab, "Dependencies");
 
-        addComponents(scanResultsTitle, tabSheet);
-        setExpandRatio(tabSheet, 1);
+        getMainContent().addComponents(scanResultsTitle, tabSheet);
+        getMainContent().setExpandRatio(tabSheet, 1);
     }
 
     @Override
     public void refresh() {
-        // TODO
+        Component selectedTab = tabSheet.getSelectedTab();
+        if (selectedTab instanceof AbstractAppSecContent) {
+            ((AbstractAppSecContent) selectedTab).refresh();
+        }
+    }
+
+    void showVulnerabilitiesTabFor(DependencyDTO item) {
+        tabSheet.setSelectedTab(vulnerabilitiesTab);
+        vulnerabilitiesTab.filterOn(item);
     }
 }

@@ -9,6 +9,7 @@
 
 package com.vaadin.appsec.v8.ui.content;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.vaadin.appsec.v8.data.DependencyDTO;
@@ -16,6 +17,8 @@ import com.vaadin.appsec.v8.data.SeverityLevel;
 import com.vaadin.appsec.v8.data.VulnerabilityDTO;
 import com.vaadin.appsec.v8.service.AppSecDataProvider;
 import com.vaadin.data.provider.ListDataProvider;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 
@@ -23,6 +26,7 @@ import com.vaadin.ui.Grid;
  * Vulnerabilities tab content
  */
 public class VulnerabilitiesTab extends AbstractAppSecContent {
+    private AbstractAppSecContent parent;
     private Grid<VulnerabilityDTO> grid;
     private ComboBox<DependencyDTO> dependency;
     private ComboBox<SeverityLevel> severity;
@@ -32,7 +36,8 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     /**
      * Instantiates a new Vulnerabilities tab.
      */
-    public VulnerabilitiesTab() {
+    public VulnerabilitiesTab(AbstractAppSecContent parent) {
+        this.parent = parent;
         buildFilters();
         buildGrid();
     }
@@ -88,6 +93,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
     private void buildGrid() {
         grid = new Grid<>();
+        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         grid.setSizeFull();
 
         grid.addColumn(VulnerabilityDTO::getIdentifier)
@@ -102,11 +108,29 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         grid.addColumn(VulnerabilityDTO::getDeveloperAnalysis)
                 .setCaption("Developer analysis");
 
-        addComponentsAndExpand(grid);
+        getMainContent().addComponentsAndExpand(grid);
 
-        grid.addItemClickListener(item -> {
-            // TODO Open details view for clicked vulnerability
+        grid.addItemClickListener(e -> {
+            if (e.getMouseEventDetails().isDoubleClick()) {
+                showDetails(e.getItem());
+            }
         });
+
+        Button showDetails = new Button("Show details");
+        showDetails.setEnabled(false);
+        addComponent(showDetails);
+        setComponentAlignment(showDetails, Alignment.BOTTOM_RIGHT);
+        showDetails.addClickListener(
+                e -> showDetails(grid.getSelectedItems().iterator().next()));
+        grid.addSelectionListener(e -> showDetails
+                .setEnabled(e.getFirstSelectedItem().isPresent()));
+    }
+
+    private void showDetails(VulnerabilityDTO item) {
+        parent.showDetails(new VulnerabilityDetailsView(item, () -> {
+            parent.showMainContent();
+            refresh();
+        }));
     }
 
     @SuppressWarnings("unchecked")
@@ -114,12 +138,24 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         return (ListDataProvider<VulnerabilityDTO>) grid.getDataProvider();
     }
 
+    @Override
     public void refresh() {
+        Set<VulnerabilityDTO> selectedItems = grid.getSelectedItems();
+        grid.deselectAll();
         grid.setItems(AppSecDataProvider.getVulnerabilities());
         dependency.setItems(getListDataProvider().getItems().stream()
                 .map(VulnerabilityDTO::getDependency)
                 .collect(Collectors.toSet()));
+        applyFilters();
+        selectedItems.forEach(grid::select);
+
         // TODO Update vaadin analysis options
         // TODO Update dev analysis options
+    }
+
+    void filterOn(DependencyDTO item) {
+        clearFilters();
+        dependency.setValue(item);
+        applyFilters();
     }
 }

@@ -21,6 +21,17 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 public abstract class AbstractAppSecContent extends VerticalLayout {
 
+    private final VerticalLayout mainContent;
+
+    public AbstractAppSecContent() {
+        super();
+        setSizeFull();
+        mainContent = new VerticalLayout();
+        mainContent.setSizeFull();
+        mainContent.setMargin(false);
+        showMainContent();
+    }
+
     /**
      * Refresh.
      */
@@ -58,14 +69,18 @@ public abstract class AbstractAppSecContent extends VerticalLayout {
     protected void buildFilterBar(Component... filters) {
         HorizontalLayout filterBar = new HorizontalLayout();
         filterBar.setDefaultComponentAlignment(Alignment.BOTTOM_LEFT);
-        filterBar.setWidth("100%");
+        filterBar.setWidth(100, Unit.PERCENTAGE);
 
         filterBar.addComponents(filters);
         filterBar.setExpandRatio(filterBar.getComponent(filters.length - 1), 1);
 
         filterBar.addComponents(buildClearButton(), buildFilterButton());
 
-        addComponent(filterBar);
+        mainContent.addComponent(filterBar);
+    }
+
+    VerticalLayout getMainContent() {
+        return mainContent;
     }
 
     /**
@@ -78,5 +93,15 @@ public abstract class AbstractAppSecContent extends VerticalLayout {
      * Clear filters.
      */
     protected void clearFilters() {
+    }
+
+    protected void showDetails(Component detailsContent) {
+        removeAllComponents();
+        addComponentsAndExpand(detailsContent);
+    }
+
+    protected void showMainContent() {
+        removeAllComponents();
+        addComponentsAndExpand(mainContent);
     }
 }

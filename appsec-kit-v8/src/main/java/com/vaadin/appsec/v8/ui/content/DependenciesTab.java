@@ -26,11 +26,13 @@ public class DependenciesTab extends AbstractAppSecContent {
     private ComboBox<String> group;
     private ComboBox<SeverityLevel> severity;
     private ComboBox<Integer> riskScore;
+    private ResultsTab parent;
 
     /**
      * Instantiates a new Dependencies tab.
      */
-    public DependenciesTab() {
+    public DependenciesTab(ResultsTab parent) {
+        this.parent = parent;
         buildFilters();
         buildGrid();
     }
@@ -79,6 +81,7 @@ public class DependenciesTab extends AbstractAppSecContent {
 
     private void buildGrid() {
         grid = new Grid<>();
+        grid.setSelectionMode(Grid.SelectionMode.NONE);
         grid.setSizeFull();
         grid.addColumn(DependencyDTO::getName).setCaption("Dependency");
         grid.addColumn(DependencyDTO::getNumOfVulnerabilities)
@@ -88,10 +91,12 @@ public class DependenciesTab extends AbstractAppSecContent {
         grid.addColumn(DependencyDTO::getSeverityLevel).setCaption("Severity");
         grid.addColumn(DependencyDTO::getRiskScore).setCaption("Risk score");
 
-        addComponentsAndExpand(grid);
+        getMainContent().addComponentsAndExpand(grid);
 
-        grid.addItemClickListener(item -> {
-            // TODO Open details view for clicked dependency
+        grid.addItemClickListener(e -> {
+            if (e.getMouseEventDetails().isDoubleClick()) {
+                parent.showVulnerabilitiesTabFor(e.getItem());
+            }
         });
     }
 
@@ -100,9 +105,11 @@ public class DependenciesTab extends AbstractAppSecContent {
         return (ListDataProvider<DependencyDTO>) grid.getDataProvider();
     }
 
+    @Override
     public void refresh() {
         grid.setItems(AppSecDataProvider.getDependencies());
         group.setItems(getListDataProvider().getItems().stream()
                 .map(DependencyDTO::getGroup).collect(Collectors.toSet()));
+        applyFilters();
     }
 }
