@@ -9,6 +9,7 @@
 
 package com.vaadin.appsec.v8.ui.content;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.vaadin.appsec.v8.data.DependencyDTO;
@@ -16,6 +17,8 @@ import com.vaadin.appsec.v8.data.SeverityLevel;
 import com.vaadin.appsec.v8.data.VulnerabilityDTO;
 import com.vaadin.appsec.v8.service.AppSecDataProvider;
 import com.vaadin.data.provider.ListDataProvider;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
 
@@ -90,7 +93,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
     private void buildGrid() {
         grid = new Grid<>();
-        grid.setSelectionMode(Grid.SelectionMode.NONE);
+        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         grid.setSizeFull();
 
         grid.addColumn(VulnerabilityDTO::getIdentifier)
@@ -109,13 +112,25 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
         grid.addItemClickListener(e -> {
             if (e.getMouseEventDetails().isDoubleClick()) {
-                parent.showDetails(
-                        new VulnerabilityDetailsView(e.getItem(), () -> {
-                            parent.showMainContent();
-                            refresh();
-                        }));
+                showDetails(e.getItem());
             }
         });
+
+        Button showDetails = new Button("Show details");
+        showDetails.setEnabled(false);
+        addComponent(showDetails);
+        setComponentAlignment(showDetails, Alignment.BOTTOM_RIGHT);
+        showDetails.addClickListener(
+                e -> showDetails(grid.getSelectedItems().iterator().next()));
+        grid.addSelectionListener(e -> showDetails
+                .setEnabled(e.getFirstSelectedItem().isPresent()));
+    }
+
+    private void showDetails(VulnerabilityDTO item) {
+        parent.showDetails(new VulnerabilityDetailsView(item, () -> {
+            parent.showMainContent();
+            refresh();
+        }));
     }
 
     @SuppressWarnings("unchecked")
@@ -125,11 +140,15 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
     @Override
     public void refresh() {
+        Set<VulnerabilityDTO> selectedItems = grid.getSelectedItems();
+        grid.deselectAll();
         grid.setItems(AppSecDataProvider.getVulnerabilities());
         dependency.setItems(getListDataProvider().getItems().stream()
                 .map(VulnerabilityDTO::getDependency)
                 .collect(Collectors.toSet()));
         applyFilters();
+        selectedItems.forEach(grid::select);
+
         // TODO Update vaadin analysis options
         // TODO Update dev analysis options
     }

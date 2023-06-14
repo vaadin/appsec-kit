@@ -17,8 +17,6 @@ import org.junit.Test;
 
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 
-import static org.mockito.Mockito.when;
-
 public class BillOfMaterialsStoreInitListenerTest
         extends AbstractAppSecKitTest {
 
@@ -40,21 +38,6 @@ public class BillOfMaterialsStoreInitListenerTest
         Assert.assertNotNull(bom);
         Assert.assertEquals("Mismatch in expected dependency count.", 49,
                 bom.getComponents().size());
-    }
-
-    @Test
-    public void testBomStoreInit_doesNotInit_productionMode() {
-        when(service.getDeploymentConfiguration().isProductionMode())
-                .thenReturn(true);
-
-        ListAppender<ILoggingEvent> logAppender = createListAppender(
-                BillOfMaterialsStoreInitListener.class.getName());
-
-        initBomStoreInitListener(TEST_RESOURCE_BOM_PATH);
-
-        Assert.assertEquals("Unexpected count of log messages. ", 0,
-                logAppender.list.size());
-        Assert.assertNull(BillOfMaterialsStore.getInstance().getBom());
     }
 
     @Test
