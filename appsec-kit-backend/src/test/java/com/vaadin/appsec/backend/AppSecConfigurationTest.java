@@ -9,6 +9,7 @@
 package com.vaadin.appsec.backend;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.After;
 import org.junit.Test;
@@ -27,24 +28,25 @@ public class AppSecConfigurationTest {
         AppSecConfiguration conf = new AppSecConfiguration();
         Path dataFilePath = conf.getDataFilePath();
 
-        assertEquals(AppSecConfiguration.DEFAULT_DATA_PATH,
-                dataFilePath.toString());
+        assertEquals(Paths.get(AppSecConfiguration.DEFAULT_DATA_PATH,
+                AppSecConfiguration.FILE_NAME), dataFilePath);
     }
 
     @Test
     public void dataPathNotSet_systemPropertySet_systemPropertyIsUsed() {
         System.setProperty(AppSecConfiguration.DATA_PATH_PROPERTY,
-                "custom-path.json");
+                "custom-path");
 
         AppSecConfiguration conf = new AppSecConfiguration();
         Path dataFilePath = conf.getDataFilePath();
 
-        assertEquals("custom-path.json", dataFilePath.toString());
+        assertEquals(Paths.get("custom-path", AppSecConfiguration.FILE_NAME),
+                dataFilePath);
     }
 
     @Test
     public void dataPathSet_isUsed() {
-        Path customPath = Path.of("custom-path.json");
+        Path customPath = Path.of("custom-file.json");
 
         AppSecConfiguration conf = new AppSecConfiguration();
         conf.setDataFilePath(customPath);
