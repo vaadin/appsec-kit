@@ -46,7 +46,7 @@ public class AppSecConfigurationTest {
 
     @Test
     public void dataPathSet_isUsed() {
-        Path customPath = Path.of("custom-file.json");
+        Path customPath = Paths.get("custom-file.json");
 
         AppSecConfiguration conf = new AppSecConfiguration();
         conf.setDataFilePath(customPath);
