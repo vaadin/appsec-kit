@@ -12,6 +12,7 @@ package com.vaadin.appsec.v8.ui.content;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.vaadin.appsec.backend.model.AppSecData;
 import com.vaadin.appsec.v8.data.DependencyDTO;
 import com.vaadin.appsec.v8.data.SeverityLevel;
 import com.vaadin.appsec.v8.data.VulnerabilityDTO;
@@ -31,7 +32,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     private ComboBox<DependencyDTO> dependency;
     private ComboBox<SeverityLevel> severity;
     private ComboBox<String> vaadinAnalysis;
-    private ComboBox<String> devAnalysis;
+    private ComboBox<AppSecData.VulnerabilityStatus> devAnalysis;
 
     /**
      * Instantiates a new Vulnerabilities tab.
@@ -48,6 +49,11 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         vaadinAnalysis = new ComboBox<>("Vaadin analysis");
 
         devAnalysis = new ComboBox<>("Developer analysis");
+        devAnalysis.setItems(AppSecData.VulnerabilityStatus.NOT_SET,
+                AppSecData.VulnerabilityStatus.NOT_AFFECTED,
+                AppSecData.VulnerabilityStatus.FALSE_POSITIVE,
+                AppSecData.VulnerabilityStatus.IN_TRIAGE,
+                AppSecData.VulnerabilityStatus.EXPLOITABLE);
 
         severity = new ComboBox<>("Severity level");
         severity.setItems(SeverityLevel.NA, SeverityLevel.LOW,
@@ -67,7 +73,8 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     protected void applyFilters() {
         DependencyDTO dependencyFilter = dependency.getValue();
         String vaadinAnalysisFilter = vaadinAnalysis.getValue();
-        String devAnalysisFilter = devAnalysis.getValue();
+        AppSecData.VulnerabilityStatus devAnalysisFilter = devAnalysis
+                .getValue();
         SeverityLevel severityFilter = severity.getValue();
 
         getListDataProvider().setFilter(vulnerabilityDTO -> {
@@ -80,7 +87,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                 return false;
             }
             if (devAnalysisFilter != null && !devAnalysisFilter
-                    .equals(vulnerabilityDTO.getDeveloperAnalysis())) {
+                    .equals(vulnerabilityDTO.getDeveloperStatus())) {
                 return false;
             }
             if (severityFilter != null && !severityFilter
@@ -105,7 +112,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         grid.addColumn(VulnerabilityDTO::getRiskScore).setCaption("Risk score");
         grid.addColumn(VulnerabilityDTO::getVaadinAnalysis)
                 .setCaption("Vaadin analysis");
-        grid.addColumn(VulnerabilityDTO::getDeveloperAnalysis)
+        grid.addColumn(VulnerabilityDTO::getDeveloperStatus)
                 .setCaption("Developer analysis");
 
         getMainContent().addComponentsAndExpand(grid);
@@ -153,7 +160,13 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         // TODO Update dev analysis options
     }
 
-    void filterOn(DependencyDTO item) {
+    /**
+     * Filters the Vulnerability list using the given item.
+     *
+     * @param item
+     *            filter
+     */
+    public void filterOn(DependencyDTO item) {
         clearFilters();
         dependency.setValue(item);
         applyFilters();

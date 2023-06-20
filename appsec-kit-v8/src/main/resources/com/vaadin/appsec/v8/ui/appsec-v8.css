@@ -1,6 +1,10 @@
-.appsec-kit-main {
-    min-width: 800px;
+.appsec-kit-root-layout {
+    min-width: 1000px;
     min-height: 500px;
+}
+
+.appseckit-title {
+    font-size: 20px;
 }
 
 .vulnerability-details-view .vulnerability-header {

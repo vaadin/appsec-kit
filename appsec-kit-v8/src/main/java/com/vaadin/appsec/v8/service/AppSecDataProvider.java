@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,8 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.cyclonedx.model.Component;
 import us.springett.cvss.Cvss;
 
+import com.vaadin.appsec.backend.AppSecService;
+import com.vaadin.appsec.backend.model.AppSecData;
 import com.vaadin.appsec.backend.model.osv.response.Affected;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
@@ -66,6 +69,8 @@ public class AppSecDataProvider {
         final List<DependencyDTO> dependencies = getDependencies();
         final List<OpenSourceVulnerability> vulnerabilities = VulnerabilityStore
                 .getInstance().getVulnerabilities();
+        final Map<String, AppSecData.Vulnerability> devAnalysis = AppSecService
+                .getInstance().getData().getVulnerabilities();
 
         Parser parser = Parser.builder().build();
         HtmlRenderer renderer = HtmlRenderer.builder().build();
@@ -89,6 +94,17 @@ public class AppSecDataProvider {
                     if (v.getDetails() != null) {
                         Node document = parser.parse(v.getDetails());
                         vulnerabilityDTO.setDetails(renderer.render(document));
+                    }
+
+                    AppSecData.Vulnerability vulnDevAnalysis = devAnalysis
+                            .get(v.getId());
+                    if (vulnDevAnalysis != null) {
+                        vulnerabilityDTO.setDeveloperStatus(
+                                vulnDevAnalysis.getStatus());
+                        vulnerabilityDTO.setDeveloperAnalysis(
+                                vulnDevAnalysis.getDeveloperAnalysis());
+                        vulnerabilityDTO.setDeveloperUpdated(
+                                vulnDevAnalysis.getUpdated());
                     }
 
                     Set<String> urls = new HashSet<>();

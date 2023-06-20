@@ -9,13 +9,10 @@
 
 package com.vaadin.appsec.v8.ui;
 
+import com.vaadin.annotations.Push;
 import com.vaadin.annotations.StyleSheet;
-import com.vaadin.appsec.v8.ui.content.AbstractAppSecContent;
-import com.vaadin.appsec.v8.ui.content.ResultsTab;
-import com.vaadin.appsec.v8.ui.content.StatusTab;
+import com.vaadin.appsec.v8.ui.content.MainView;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -23,10 +20,10 @@ import com.vaadin.ui.VerticalLayout;
  * UI class for displaying main content of AppSec Kit.
  */
 @StyleSheet("appsec-v8.css")
+@Push
 public class AppSecUI extends UI {
 
-    private StatusTab statusTab;
-    private ResultsTab resultsTab;
+    private MainView mainView;
 
     private void setup() {
         setSizeFull();
@@ -34,34 +31,16 @@ public class AppSecUI extends UI {
     }
 
     private void buildLayout() {
-        TabSheet tabSheet = new TabSheet();
-        tabSheet.setSizeFull();
-
-        tabSheet.addSelectedTabChangeListener(e -> {
-            Component tab = tabSheet.getSelectedTab();
-            if (tab instanceof AbstractAppSecContent) {
-                ((AbstractAppSecContent) tab).refresh();
-            }
-        });
-
-        statusTab = new StatusTab();
-        resultsTab = new ResultsTab();
-
-        tabSheet.addTab(statusTab, "Status");
-        tabSheet.addTab(resultsTab, "Results");
-
-        addStyleName("appsec-kit-dialog");
-
-        VerticalLayout wrapper = new VerticalLayout(tabSheet);
-        wrapper.setSizeFull();
-        wrapper.addStyleName("small-margin");
-        wrapper.addStyleName("appsec-kit-main");
-        setContent(wrapper);
+        mainView = new MainView();
+        mainView.addStyleName("appsec-kit-root-layout");
+        mainView.addStyleName("small-margin");
+        setContent(mainView);
     }
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         setup();
         buildLayout();
+        mainView.refresh();
     }
 }
