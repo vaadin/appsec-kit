@@ -57,15 +57,13 @@ public class DemoUI extends UI {
         vulnGrid.addColumn(OpenSourceVulnerability::getId).setCaption("Id");
         vulnGrid.addColumn(OpenSourceVulnerability::getSummary)
                 .setCaption("Summary");
-        vulnGrid.addColumn(OpenSourceVulnerability::getAliases,
-                OpenSourceVulnerabilityUtils::getAliasesStr)
-                .setCaption("Aliases");
-        vulnGrid.addColumn(OpenSourceVulnerability::getSeverity,
-                OpenSourceVulnerabilityUtils::getCvssVectorsStr)
+        vulnGrid.addColumn(osv -> OpenSourceVulnerabilityUtils
+                .getAliasesStr(osv.getAliases())).setCaption("Aliases");
+        vulnGrid.addColumn(osv -> OpenSourceVulnerabilityUtils
+                .getCvssVectorsStr(osv.getSeverity()))
                 .setCaption("CVSS vectors");
-        vulnGrid.addColumn(OpenSourceVulnerability::getSeverity,
-                OpenSourceVulnerabilityUtils::getScoresStr)
-                .setCaption("Scores");
+        vulnGrid.addColumn(osv -> OpenSourceVulnerabilityUtils
+                .getScoresStr(osv.getSeverity())).setCaption("Scores");
         vulnGrid.setSizeFull();
         layout.addComponentsAndExpand(vulnGrid);
 
