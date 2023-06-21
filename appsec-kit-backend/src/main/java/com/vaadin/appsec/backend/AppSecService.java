@@ -35,7 +35,9 @@ public class AppSecService {
     }
 
     /**
-     * @return singleton AppSecService instance
+     * Get the AppSecService singleton instance.
+     *
+     * @return singleton the singleton instance
      */
     public static AppSecService getInstance() {
         return AppSecService.InstanceHolder.instance;
