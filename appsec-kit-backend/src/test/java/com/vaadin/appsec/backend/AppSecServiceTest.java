@@ -40,7 +40,8 @@ public class AppSecServiceTest {
 
     @Test
     public void newDataFile_emptyData() {
-        AppSecService service = new AppSecService(configuration);
+        AppSecService service = AppSecService.getInstance();
+        service.setConfiguration(configuration);
         AppSecData data = service.getData();
 
         assertNull(data.getLastScan());
@@ -51,7 +52,8 @@ public class AppSecServiceTest {
         AppSecData existingData = createData();
         writeToFile(configuration.getDataFilePath(), existingData);
 
-        AppSecService service = new AppSecService(configuration);
+        AppSecService service = AppSecService.getInstance();
+        service.setConfiguration(configuration);
         AppSecData data = service.getData();
 
         assertEquals(existingData.getLastScan(), data.getLastScan());

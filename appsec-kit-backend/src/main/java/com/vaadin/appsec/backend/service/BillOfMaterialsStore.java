@@ -29,6 +29,9 @@ public class BillOfMaterialsStore {
         return InstanceHolder.instance;
     }
 
+    private BillOfMaterialsStore() {
+    }
+
     /**
      * Sets the given Bom to the static store.
      *

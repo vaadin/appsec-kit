@@ -10,6 +10,7 @@ package com.vaadin.appsec.backend;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -28,7 +29,21 @@ public class AppSecService {
         MAPPER.registerModule(new JavaTimeModule());
     }
 
-    private final AppSecConfiguration configuration;
+    private static final class InstanceHolder {
+        static final AppSecService instance = new AppSecService(
+                new AppSecConfiguration());
+    }
+
+    /**
+     * Get the AppSecService singleton instance.
+     *
+     * @return singleton the singleton instance
+     */
+    public static AppSecService getInstance() {
+        return AppSecService.InstanceHolder.instance;
+    }
+
+    private AppSecConfiguration configuration;
 
     private AppSecData data;
 
@@ -38,7 +53,7 @@ public class AppSecService {
      * @param configuration
      *            the configuration bean
      */
-    public AppSecService(AppSecConfiguration configuration) {
+    private AppSecService(AppSecConfiguration configuration) {
         this.configuration = configuration;
     }
 
@@ -47,7 +62,7 @@ public class AppSecService {
      *
      * @return the data object, not {@code null}
      */
-    public AppSecData getData() {
+    public synchronized AppSecData getData() {
         if (data == null) {
             data = readOrCreateDataFile();
         }
@@ -60,13 +75,45 @@ public class AppSecService {
      * @param data
      *            the data object, not {@code null}
      */
-    public void setData(AppSecData data) {
+    public synchronized void setData(AppSecData data) {
         if (data == null) {
             throw new IllegalArgumentException(
                     "The data object cannot be null");
         }
         this.data = data;
         writeDataFile();
+    }
+
+    /**
+     * Re-reads data from disk.
+     *
+     * @return the data object, not {@code null}
+     */
+    public synchronized AppSecData refresh() {
+        data = null;
+        return getData();
+    }
+
+    /**
+     * Updates the last scanned timestamp to current time and writes the data to
+     * disk.
+     */
+    public synchronized void updateLastScanTime() {
+        AppSecData tempData = getData();
+        tempData.setLastScan(Instant.now());
+        setData(tempData);
+    }
+
+    /**
+     * Allows to set the configuration for this singleton instance.
+     *
+     * @param configuration
+     *            configuration to set
+     */
+    public synchronized void setConfiguration(
+            AppSecConfiguration configuration) {
+        this.configuration = configuration;
+        this.data = null;
     }
 
     private AppSecData readOrCreateDataFile() {
