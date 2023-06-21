@@ -80,13 +80,17 @@ public class AppSecDataProvider {
             for (Affected affected : v.getAffected()) {
                 String depGroup = getDepGroup(affected);
                 String depName = getDepName(affected);
+
                 DependencyDTO dependencyDTO = dependencies.stream()
                         .filter(d -> d.getGroup().equals(depGroup)
-                                && d.getName().equals(depName))
+                                && d.getName().equals(depName)
+                                && affected.getVersions()
+                                        .contains(d.getVersion()))
                         .findFirst().orElse(null);
                 if (dependencyDTO != null) {
+                    String id = getVulnerabilityId(v);
                     VulnerabilityDTO vulnerabilityDTO = new VulnerabilityDTO(
-                            v.getId());
+                            id);
                     vulnerabilityDTO.setDependency(dependencyDTO);
                     vulnerabilityDTOS.add(vulnerabilityDTO);
                     vulnerabilityDTO.setDatePublished(v.getPublished());
@@ -97,7 +101,7 @@ public class AppSecDataProvider {
                     }
 
                     AppSecData.Vulnerability vulnDevAnalysis = devAnalysis
-                            .get(v.getId());
+                            .get(id);
                     if (vulnDevAnalysis != null) {
                         vulnerabilityDTO.setDeveloperStatus(
                                 vulnDevAnalysis.getStatus());
@@ -174,5 +178,18 @@ public class AppSecDataProvider {
 
     private static String getDepName(Affected affected) {
         return affected.getPackage().getName().split(":")[1];
+    }
+
+    private static String getVulnerabilityId(
+            OpenSourceVulnerability vulnerability) {
+        String identifier = vulnerability.getId();
+        List<String> aliases = vulnerability.getAliases();
+        if (aliases == null || identifier.startsWith("CVE")) {
+            return identifier;
+        } else {
+            return vulnerability.getAliases().stream()
+                    .filter(alias -> alias.startsWith("CVE")).findFirst()
+                    .orElse(vulnerability.getId());
+        }
     }
 }
