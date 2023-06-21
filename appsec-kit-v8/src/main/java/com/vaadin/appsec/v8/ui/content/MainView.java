@@ -14,8 +14,8 @@ import java.time.Instant;
 import java.util.Date;
 
 import com.vaadin.appsec.backend.AppSecService;
+import com.vaadin.appsec.backend.model.dto.DependencyDTO;
 import com.vaadin.appsec.backend.service.VulnerabilityStore;
-import com.vaadin.appsec.v8.data.DependencyDTO;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;

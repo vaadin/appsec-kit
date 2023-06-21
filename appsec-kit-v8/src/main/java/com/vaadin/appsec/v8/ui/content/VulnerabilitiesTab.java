@@ -12,11 +12,11 @@ package com.vaadin.appsec.v8.ui.content;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.vaadin.appsec.backend.AppSecDTOProvider;
 import com.vaadin.appsec.backend.model.AppSecData;
-import com.vaadin.appsec.v8.data.DependencyDTO;
-import com.vaadin.appsec.v8.data.SeverityLevel;
-import com.vaadin.appsec.v8.data.VulnerabilityDTO;
-import com.vaadin.appsec.v8.service.AppSecDataProvider;
+import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.SeverityLevel;
+import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -149,7 +149,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     public void refresh() {
         Set<VulnerabilityDTO> selectedItems = grid.getSelectedItems();
         grid.deselectAll();
-        grid.setItems(AppSecDataProvider.getVulnerabilities());
+        grid.setItems(AppSecDTOProvider.getVulnerabilities());
         dependency.setItems(getListDataProvider().getItems().stream()
                 .map(VulnerabilityDTO::getDependency)
                 .collect(Collectors.toSet()));

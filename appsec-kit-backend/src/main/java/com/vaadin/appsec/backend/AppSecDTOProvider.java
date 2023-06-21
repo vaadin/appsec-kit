@@ -7,7 +7,7 @@
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
 
-package com.vaadin.appsec.v8.service;
+package com.vaadin.appsec.backend;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,22 +24,21 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.cyclonedx.model.Component;
 import us.springett.cvss.Cvss;
 
-import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.SeverityLevel;
+import com.vaadin.appsec.backend.model.dto.SeverityLevelComparator;
+import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
 import com.vaadin.appsec.backend.model.osv.response.Affected;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
 import com.vaadin.appsec.backend.service.VulnerabilityStore;
-import com.vaadin.appsec.v8.data.DependencyDTO;
-import com.vaadin.appsec.v8.data.SeverityLevel;
-import com.vaadin.appsec.v8.data.SeverityLevelComparator;
-import com.vaadin.appsec.v8.data.VulnerabilityDTO;
 
 /**
  * Helper class to provide bill of materials and vulnerabilities as DTOs for use
  * in the UI.
  */
-public class AppSecDataProvider {
+public class AppSecDTOProvider {
 
     /**
      * Gets dependencies.
