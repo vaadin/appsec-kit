@@ -16,6 +16,9 @@ import java.util.concurrent.Executors;
 
 /**
  * Configuration settings for AppSec Kit.
+ * <p>
+ * An instance of this class can be set to configure {@link AppSecService} with
+ * {@link AppSecService#setConfiguration(AppSecConfiguration).
  */
 public class AppSecConfiguration implements Serializable {
 
@@ -64,6 +67,11 @@ public class AppSecConfiguration implements Serializable {
         this.dataFilePath = dataFilePath;
     }
 
+    /**
+     * Gets the BOM-file path.
+     *
+     * @return the BOM-file path, not {@code null}
+     */
     public Path getBomFilePath() {
         if (bomFilePath == null) {
             bomFilePath = Paths.get(DEFAULT_BOM_FILE_PATH);
@@ -71,19 +79,39 @@ public class AppSecConfiguration implements Serializable {
         return bomFilePath;
     }
 
+    /**
+     * Sets the BOM-file path.
+     *
+     * @param bomFilePath
+     *            the BOM-file path, not {@code null}
+     */
     public void setBomFilePath(Path bomFilePath) {
         if (bomFilePath == null) {
             throw new IllegalArgumentException(
-                    "The bom-file path cannot be null");
+                    "The BOM-file path cannot be null");
         }
         this.bomFilePath = bomFilePath;
     }
 
+    /**
+     * Gets the executor used to run asynchronous tasks.
+     *
+     * @return the task executor
+     */
     public Executor getTaskExecutor() {
         return taskExecutor;
     }
 
+    /**
+     * Sets the executor used to run asynchronous tasks.
+     *
+     * @param taskExecutor
+     *            the task executor
+     */
     public void setTaskExecutor(Executor taskExecutor) {
+        if (taskExecutor == null) {
+            throw new IllegalArgumentException("The executor cannot be null");
+        }
         this.taskExecutor = taskExecutor;
     }
 }

@@ -10,9 +10,12 @@ package com.vaadin.appsec.backend;
 
 import java.util.EventObject;
 
+/**
+ * Event fired when a scan for vulnerabilities has been completed.
+ */
 public class AppSecScanEvent extends EventObject {
 
-    public AppSecScanEvent(AppSecService source) {
+    AppSecScanEvent(AppSecService source) {
         super(source);
     }
 

@@ -11,8 +11,19 @@ package com.vaadin.appsec.backend;
 import java.io.Serializable;
 import java.util.EventListener;
 
+/**
+ * A listener of {@link AppSecScanEvent} that can be added to
+ * {@link AppSecService} with
+ * {@link AppSecService#addScanEventListener(AppSecScanEventListener)}.
+ */
 @FunctionalInterface
 public interface AppSecScanEventListener extends EventListener, Serializable {
 
+    /**
+     * Operation performed when a new scan event has completed.
+     *
+     * @param event
+     *            the scan event
+     */
     public void scanCompleted(AppSecScanEvent event);
 }

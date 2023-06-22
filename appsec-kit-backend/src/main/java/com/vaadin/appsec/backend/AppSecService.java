@@ -15,6 +15,7 @@ import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -84,6 +85,9 @@ public class AppSecService {
         this.configuration = configuration;
     }
 
+    /**
+     * Initializes the service reading the SBOM file.
+     */
     public void init() {
         Path bomFilePath = configuration.getBomFilePath();
         try {
@@ -95,15 +99,34 @@ public class AppSecService {
         readOrCreateDataFile();
     }
 
+    /**
+     * Adds a listener for scan events.
+     * <p>
+     * All listeners will be invoked once a scan has been performed
+     * successfully.
+     *
+     * @param listener
+     *            the listener
+     * @return a registration object that can be used to remove the listener
+     */
     public Registration addScanEventListener(AppSecScanEventListener listener) {
         scanEventListeners.add(listener);
         return () -> scanEventListeners.remove(listener);
     }
 
-    void invokeEventListeners(AppSecScanEvent event) {
-        scanEventListeners.forEach(listener -> listener.scanCompleted(event));
-    }
-
+    /**
+     * Scans the application dependencies for vulnerabilities. The scan is
+     * performed against the OSV database (see {@link https://osv.dev/}).
+     * <p>
+     * The scan is performed asynchronously on a thread created by the
+     * {@link Executor} set in the service configuration (the default is a
+     * single-thread executor). A custom executor can be set with
+     * {@link AppSecConfiguration#setTaskExecutor(Executor)}.
+     *
+     * @param scanCompleteCallback
+     *            a callback to run when the scan has completed
+     * @return a future completed when the scan has ended
+     */
     public CompletableFuture<Void> scanForVulnerabilities(
             Runnable scanCompleteCallback) {
         checkForInitialization();
@@ -116,10 +139,26 @@ public class AppSecService {
                 .thenRun(scanCompleteCallback);
     }
 
+    private void invokeEventListeners(AppSecScanEvent event) {
+        scanEventListeners.forEach(listener -> listener.scanCompleted(event));
+    }
+
+    /**
+     * Gets the list of application dependencies (including transitive).
+     *
+     * @return the list of dependencies
+     */
     public List<DependencyDTO> getDependencies() {
         return dtoProvider.getDependencies();
     }
 
+    /**
+     * Gets the list of vulnerabilities found in application dependencies. The
+     * list is always empty before the first scan. To scan dependencies for
+     * vulnerabilities see {@link #scanForVulnerabilities(Runnable)}.
+     *
+     * @return the list of vulnerabilities
+     */
     public List<VulnerabilityDTO> getVulnerabilities() {
         return dtoProvider.getVulnerabilities();
     }
@@ -165,14 +204,16 @@ public class AppSecService {
      * Updates the last scanned timestamp to current time and writes the data to
      * disk.
      */
-    public synchronized void updateLastScanTime() {
+    private synchronized void updateLastScanTime() {
         AppSecData tempData = getData();
         tempData.setLastScan(clock.instant());
         setData(tempData);
     }
 
     /**
-     * Allows to set the configuration for this singleton instance.
+     * Allows to set the configuration for this singleton instance. When a new
+     * configuration is set, the service need to be initialized again with
+     * {@link #init()}.
      *
      * @param configuration
      *            configuration to set
