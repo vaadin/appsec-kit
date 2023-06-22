@@ -115,7 +115,7 @@ public class AppSecService {
      */
     public void scheduleAutomaticScan() {
         long initialDelay = 0;
-        long autoScanPeriod = configuration.getAutoScanInterval().toSeconds();
+        long autoScanPeriod = configuration.getAutoScanInterval().getSeconds();
         Instant lastScan = data.getLastScan();
         if (lastScan != null) {
             long secondsUntilNextScan = autoScanPeriod
