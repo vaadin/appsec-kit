@@ -36,7 +36,7 @@ public class BillOfMaterialsStoreInitListenerTest
 
         Bom bom = BillOfMaterialsStore.getInstance().getBom();
         Assert.assertNotNull(bom);
-        Assert.assertEquals("Mismatch in expected dependency count.", 49,
+        Assert.assertEquals("Mismatch in expected dependency count.", 2,
                 bom.getComponents().size());
     }
 

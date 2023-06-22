@@ -7,7 +7,7 @@
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
 
-package com.vaadin.appsec.v8.data;
+package com.vaadin.appsec.backend.model.dto;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;

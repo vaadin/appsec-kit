@@ -11,9 +11,9 @@ package com.vaadin.appsec.v8.ui.content;
 
 import java.util.stream.Collectors;
 
-import com.vaadin.appsec.v8.data.DependencyDTO;
-import com.vaadin.appsec.v8.data.SeverityLevel;
-import com.vaadin.appsec.v8.service.AppSecDataProvider;
+import com.vaadin.appsec.backend.AppSecDTOProvider;
+import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Grid;
@@ -107,7 +107,7 @@ public class DependenciesTab extends AbstractAppSecContent {
 
     @Override
     public void refresh() {
-        grid.setItems(AppSecDataProvider.getDependencies());
+        grid.setItems(AppSecDTOProvider.getDependencies());
         group.setItems(getListDataProvider().getItems().stream()
                 .map(DependencyDTO::getGroup).collect(Collectors.toSet()));
         applyFilters();
