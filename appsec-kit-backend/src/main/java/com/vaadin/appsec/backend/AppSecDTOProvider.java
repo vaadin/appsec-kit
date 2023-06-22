@@ -31,43 +31,40 @@ import com.vaadin.appsec.backend.model.dto.SeverityLevelComparator;
 import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
 import com.vaadin.appsec.backend.model.osv.response.Affected;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
-import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
-import com.vaadin.appsec.backend.service.VulnerabilityStore;
 
 /**
  * Helper class to provide bill of materials and vulnerabilities as DTOs for use
  * in the UI.
  */
-public class AppSecDTOProvider {
+class AppSecDTOProvider {
 
-    /**
-     * Gets dependencies.
-     *
-     * @return all dependencies
-     */
-    public static List<DependencyDTO> getDependencies() {
-        final List<OpenSourceVulnerability> vulnerabilities = VulnerabilityStore
-                .getInstance().getVulnerabilities();
+    private final VulnerabilityStore vulnerabilityStore;
 
-        return BillOfMaterialsStore.getInstance().getBom().getComponents()
-                .stream().map(c -> {
-                    DependencyDTO dep = new DependencyDTO(c.getGroup(),
-                            c.getName(), c.getVersion());
-                    updateVulnerabilityStatistics(dep, vulnerabilities,
-                            getConcatDepName(c));
-                    return dep;
-                }).collect(Collectors.toList());
+    private final BillOfMaterialsStore bomStore;
+
+    AppSecDTOProvider(VulnerabilityStore vulnerabilityStore,
+            BillOfMaterialsStore bomStore) {
+        this.vulnerabilityStore = vulnerabilityStore;
+        this.bomStore = bomStore;
     }
 
-    /**
-     * Gets vulnerabilities.
-     *
-     * @return all vulnerabilities
-     */
-    public static List<VulnerabilityDTO> getVulnerabilities() {
+    List<DependencyDTO> getDependencies() {
+        final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
+                .getVulnerabilities();
+
+        return bomStore.getBom().getComponents().stream().map(c -> {
+            DependencyDTO dep = new DependencyDTO(c.getGroup(), c.getName(),
+                    c.getVersion());
+            updateVulnerabilityStatistics(dep, vulnerabilities,
+                    getConcatDepName(c));
+            return dep;
+        }).collect(Collectors.toList());
+    }
+
+    List<VulnerabilityDTO> getVulnerabilities() {
         final List<DependencyDTO> dependencies = getDependencies();
-        final List<OpenSourceVulnerability> vulnerabilities = VulnerabilityStore
-                .getInstance().getVulnerabilities();
+        final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
+                .getVulnerabilities();
         final Map<String, AppSecData.Vulnerability> devAnalysis = AppSecService
                 .getInstance().getData().getVulnerabilities();
 
@@ -151,8 +148,8 @@ public class AppSecDTOProvider {
         String severity = String.valueOf(vulnerability.databaseSpecific()
                 .getAdditionalProperties().get("severity"));
         SeverityLevel severityLevel = Arrays.stream(SeverityLevel.values())
-                .filter(sl -> sl.name().equalsIgnoreCase((String) severity))
-                .findAny().orElse(SeverityLevel.NA);
+                .filter(sl -> sl.name().equalsIgnoreCase(severity)).findAny()
+                .orElse(SeverityLevel.NA);
         return SeverityLevelComparator.compareStatic(severityLevel,
                 highestSeverityLevel) > 0 ? severityLevel
                         : highestSeverityLevel;

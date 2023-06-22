@@ -18,6 +18,7 @@ import com.vaadin.server.VaadinServiceInitListener;
  */
 public abstract class AbstractInitListener
         implements VaadinServiceInitListener {
+
     /**
      * Checks if the application is deployed in debug mode.
      *

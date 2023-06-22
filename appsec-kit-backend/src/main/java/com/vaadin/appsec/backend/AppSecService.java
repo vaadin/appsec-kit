@@ -10,18 +10,29 @@ package com.vaadin.appsec.backend;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Instant;
+import java.nio.file.Path;
+import java.time.Clock;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.cyclonedx.exception.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
 
 /**
  * Service that provides access to all AppSec Kit features, such as
  * vulnerability scanning and analysis storage.
  */
 public class AppSecService {
+
+    static final Logger LOGGER = LoggerFactory.getLogger(AppSecService.class);
 
     static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -43,9 +54,21 @@ public class AppSecService {
         return AppSecService.InstanceHolder.instance;
     }
 
+    private final List<AppSecScanEventListener> scanEventListeners = new ArrayList<>();
+
+    private final OpenSourceVulnerabilityService osvService;
+
+    private final VulnerabilityStore vulnerabilityStore;
+
+    private final BillOfMaterialsStore bomStore;
+
+    private final AppSecDTOProvider dtoProvider;
+
     private AppSecConfiguration configuration;
 
     private AppSecData data;
+
+    private Clock clock = Clock.systemUTC();
 
     /**
      * Creates a new instance of the service.
@@ -54,7 +77,51 @@ public class AppSecService {
      *            the configuration bean
      */
     private AppSecService(AppSecConfiguration configuration) {
+        bomStore = new BillOfMaterialsStore();
+        osvService = new OpenSourceVulnerabilityService();
+        vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
+        dtoProvider = new AppSecDTOProvider(vulnerabilityStore, bomStore);
         this.configuration = configuration;
+    }
+
+    public void init() {
+        Path bomFilePath = configuration.getBomFilePath();
+        try {
+            bomStore.readBomFile(bomFilePath);
+        } catch (ParseException e) {
+            throw new AppSecException(
+                    "Cannot parse the SBOM file: " + bomFilePath.toString(), e);
+        }
+        readOrCreateDataFile();
+    }
+
+    public Registration addScanEventListener(AppSecScanEventListener listener) {
+        scanEventListeners.add(listener);
+        return () -> scanEventListeners.remove(listener);
+    }
+
+    void invokeEventListeners(AppSecScanEvent event) {
+        scanEventListeners.forEach(listener -> listener.scanCompleted(event));
+    }
+
+    public CompletableFuture<Void> scanForVulnerabilities(
+            Runnable scanCompleteCallback) {
+        checkForInitialization();
+        return CompletableFuture
+                .supplyAsync(vulnerabilityStore::refresh,
+                        configuration.getTaskExecutor())
+                .thenRun(this::updateLastScanTime)
+                .thenApply(vulnerabilities -> new AppSecScanEvent(this))
+                .thenAccept(this::invokeEventListeners)
+                .thenRun(scanCompleteCallback);
+    }
+
+    public List<DependencyDTO> getDependencies() {
+        return dtoProvider.getDependencies();
+    }
+
+    public List<VulnerabilityDTO> getVulnerabilities() {
+        return dtoProvider.getVulnerabilities();
     }
 
     /**
@@ -64,7 +131,7 @@ public class AppSecService {
      */
     public synchronized AppSecData getData() {
         if (data == null) {
-            data = readOrCreateDataFile();
+            readOrCreateDataFile();
         }
         return data;
     }
@@ -100,7 +167,7 @@ public class AppSecService {
      */
     public synchronized void updateLastScanTime() {
         AppSecData tempData = getData();
-        tempData.setLastScan(Instant.now());
+        tempData.setLastScan(clock.instant());
         setData(tempData);
     }
 
@@ -116,11 +183,19 @@ public class AppSecService {
         this.data = null;
     }
 
-    private AppSecData readOrCreateDataFile() {
+    private void checkForInitialization() {
+        if (data == null) {
+            throw new AppSecException(
+                    "The service has not been initialized. You should run the "
+                            + "init() method after setting a new configuration");
+        }
+    }
+
+    private void readOrCreateDataFile() {
         File dataFile = configuration.getDataFilePath().toFile();
         if (dataFile.exists()) {
             try {
-                return MAPPER.readValue(dataFile, AppSecData.class);
+                data = MAPPER.readValue(dataFile, AppSecData.class);
             } catch (IOException e) {
                 throw new AppSecException(
                         "Cannot read the AppSec Kit data file: "
@@ -128,7 +203,7 @@ public class AppSecService {
                         e);
             }
         } else {
-            return new AppSecData();
+            data = new AppSecData();
         }
     }
 
@@ -144,5 +219,10 @@ public class AppSecService {
                         e);
             }
         }
+    }
+
+    /* for testing purposes */
+    void setClock(Clock clock) {
+        this.clock = clock;
     }
 }

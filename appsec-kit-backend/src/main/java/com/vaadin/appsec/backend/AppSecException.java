@@ -13,6 +13,10 @@ package com.vaadin.appsec.backend;
  */
 public class AppSecException extends RuntimeException {
 
+    AppSecException(String message) {
+        super(message);
+    }
+
     AppSecException(String message, Throwable cause) {
         super(message, cause);
     }

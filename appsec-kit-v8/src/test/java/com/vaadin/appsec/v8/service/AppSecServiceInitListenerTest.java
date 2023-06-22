@@ -18,38 +18,42 @@ import com.vaadin.server.ServiceInitEvent;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class NoticationInitListenerTest extends AbstractAppSecKitTest {
+public class AppSecServiceInitListenerTest extends AbstractAppSecKitTest {
 
     @Test
-    public void testVulnStoreInit_initsProperly_debugMode() {
+    public void debugMode_kitInitialized() {
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(false);
 
         ListAppender<ILoggingEvent> logAppender = createListAppender(
-                NotificationInitListener.class.getName());
+                AppSecServiceInitListener.class.getName());
 
-        NotificationInitListener notificationInitListener = new NotificationInitListener();
-        notificationInitListener.serviceInit(new ServiceInitEvent(service));
+        AppSecServiceInitListener listener = new AppSecServiceInitListener();
+        listener.serviceInit(new ServiceInitEvent(service));
 
         assertEquals("Unexpected count of log messages. ", 1,
                 logAppender.list.size());
-        assertEquals("NotificationInitListener initialization failed.",
-                "NotificationInitListener initialized.",
+        assertEquals("AppSecService initialization failed.",
+                "AppSecService initialized.",
                 logAppender.list.get(0).getMessage());
     }
 
     @Test
-    public void testVulnStoreInit_doesNotInit_productionMode() {
+    public void productionMode_kitNotInitialized() {
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(true);
 
         ListAppender<ILoggingEvent> logAppender = createListAppender(
-                NotificationInitListener.class.getName());
+                AppSecServiceInitListener.class.getName());
 
-        NotificationInitListener notificationInitListener = new NotificationInitListener();
-        notificationInitListener.serviceInit(new ServiceInitEvent(service));
+        AppSecServiceInitListener listener = new AppSecServiceInitListener();
+        listener.serviceInit(new ServiceInitEvent(service));
 
-        assertEquals("Unexpected count of log messages. ", 0,
+        assertEquals("Unexpected count of log messages. ", 1,
                 logAppender.list.size());
+        assertEquals("AppSecService shouldn't initialize in production mode.",
+                "AppSec Kit not enabled in production mode. Run the "
+                        + "application in debug mode to initialize AppSec Kit",
+                logAppender.list.get(0).getMessage());
     }
 }
