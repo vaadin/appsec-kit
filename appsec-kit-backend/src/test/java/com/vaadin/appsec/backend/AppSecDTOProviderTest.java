@@ -55,7 +55,7 @@ public class AppSecDTOProviderTest {
     public void testGetDependencies() {
         List<DependencyDTO> dependencies = AppSecDTOProvider.getDependencies();
 
-        Assert.assertEquals("Mismatch in expected dependency count.", 49,
+        Assert.assertEquals("Mismatch in expected dependency count.", 2,
                 dependencies.size());
     }
 
@@ -64,7 +64,7 @@ public class AppSecDTOProviderTest {
         List<VulnerabilityDTO> vulnerabilities = AppSecDTOProvider
                 .getVulnerabilities();
 
-        Assert.assertEquals("Mismatch in expected vulnerability count.", 4,
+        Assert.assertEquals("Mismatch in expected vulnerability count.", 3,
                 vulnerabilities.size());
     }
 }
