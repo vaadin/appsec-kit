@@ -9,10 +9,12 @@
 package com.vaadin.appsec.backend;
 
 import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.Executor;
+import java.time.Duration;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * Configuration settings for AppSec Kit.
@@ -37,7 +39,10 @@ public class AppSecConfiguration implements Serializable {
 
     private Path bomFilePath;
 
-    private Executor taskExecutor = Executors.newSingleThreadExecutor();
+    private ScheduledExecutorService taskExecutor = Executors
+            .newSingleThreadScheduledExecutor();
+
+    private Duration autoScanInterval = Duration.ofDays(1);
 
     /**
      * Gets the data-file path.
@@ -74,7 +79,13 @@ public class AppSecConfiguration implements Serializable {
      */
     public Path getBomFilePath() {
         if (bomFilePath == null) {
-            bomFilePath = Paths.get(DEFAULT_BOM_FILE_PATH);
+            try {
+                bomFilePath = Paths.get(AppSecConfiguration.class
+                        .getResource(DEFAULT_BOM_FILE_PATH).toURI());
+            } catch (URISyntaxException e) {
+                throw new AppSecException(
+                        "Invalid SBOM file path: " + DEFAULT_BOM_FILE_PATH, e);
+            }
         }
         return bomFilePath;
     }
@@ -98,7 +109,7 @@ public class AppSecConfiguration implements Serializable {
      *
      * @return the task executor
      */
-    public Executor getTaskExecutor() {
+    public ScheduledExecutorService getTaskExecutor() {
         return taskExecutor;
     }
 
@@ -108,10 +119,38 @@ public class AppSecConfiguration implements Serializable {
      * @param taskExecutor
      *            the task executor
      */
-    public void setTaskExecutor(Executor taskExecutor) {
+    public void setTaskExecutor(ScheduledExecutorService taskExecutor) {
         if (taskExecutor == null) {
             throw new IllegalArgumentException("The executor cannot be null");
         }
         this.taskExecutor = taskExecutor;
+    }
+
+    /**
+     * Gets the duration of the interval between automatic scanning for
+     * vulnerabilities.
+     *
+     * @return the duration of the interval between automatic scanning
+     */
+    public Duration getAutoScanInterval() {
+        return autoScanInterval;
+    }
+
+    /**
+     * Sets the duration of the interval between automatic scanning for
+     * vulnerabilities. The default interval is 1 day.
+     * <p>
+     * A custom interval can be created using
+     * {@link Duration#of(long, java.time.temporal.TemporalUnit)}.
+     *
+     * @param autoScanInterval
+     *            the duration of the interval between automatic scanning
+     */
+    public void setAutoScanInterval(Duration autoScanInterval) {
+        if (autoScanInterval == null) {
+            throw new IllegalArgumentException(
+                    "The auto-scan period cannot be null");
+        }
+        this.autoScanInterval = autoScanInterval;
     }
 }

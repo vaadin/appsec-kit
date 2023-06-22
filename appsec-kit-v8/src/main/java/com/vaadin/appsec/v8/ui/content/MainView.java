@@ -63,15 +63,16 @@ public class MainView extends AbstractAppSecContent {
         UI ui = UI.getCurrent();
         Button scanNow = new Button("Scan now");
         scanNow.setDisableOnClick(true);
+        AppSecService.getInstance().addScanEventListener(event -> {
+            ui.access(() -> {
+                scanNow.setEnabled(true);
+                refresh();
+                ui.push();
+            });
+        });
         scanNow.addClickListener(e -> {
             lastScannedLabel.setValue("Scanning...");
-            AppSecService.getInstance().scanForVulnerabilities(() -> {
-                ui.access(() -> {
-                    scanNow.setEnabled(true);
-                    refresh();
-                    ui.push();
-                });
-            });
+            AppSecService.getInstance().scanForVulnerabilities();
         });
         headerBar.addComponent(scanNow);
 

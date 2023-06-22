@@ -12,12 +12,17 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Clock;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.cyclonedx.exception.ParseException;
 import org.slf4j.Logger;
@@ -39,6 +44,7 @@ public class AppSecService {
 
     static {
         MAPPER.registerModule(new JavaTimeModule());
+        MAPPER.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
     private static final class InstanceHolder {
@@ -71,6 +77,8 @@ public class AppSecService {
 
     private Clock clock = Clock.systemUTC();
 
+    private ScheduledFuture<?> scheduledScan;
+
     /**
      * Creates a new instance of the service.
      *
@@ -89,6 +97,7 @@ public class AppSecService {
      * Initializes the service reading the SBOM file.
      */
     public void init() {
+        cancelScheduledScan();
         Path bomFilePath = configuration.getBomFilePath();
         try {
             bomStore.readBomFile(bomFilePath);
@@ -97,6 +106,36 @@ public class AppSecService {
                     "Cannot parse the SBOM file: " + bomFilePath.toString(), e);
         }
         readOrCreateDataFile();
+    }
+
+    /**
+     * Schedules automatic scan for vulnerabilities at a fixed rate set to the
+     * value configured with
+     * {@link AppSecConfiguration#setAutoScanInterval(java.time.Duration)}.
+     */
+    public void scheduleAutomaticScan() {
+        long initialDelay = 0;
+        long autoScanPeriod = configuration.getAutoScanInterval().toSeconds();
+        Instant lastScan = data.getLastScan();
+        if (lastScan != null) {
+            long secondsUntilNextScan = autoScanPeriod
+                    - lastScan.until(clock.instant(), ChronoUnit.SECONDS);
+            if (secondsUntilNextScan > 0) {
+                initialDelay = secondsUntilNextScan;
+            }
+        }
+        scheduledScan = configuration.getTaskExecutor()
+                .scheduleAtFixedRate(() -> {
+                    vulnerabilityStore.refresh();
+                    updateLastScanTime();
+                    invokeEventListeners(new AppSecScanEvent(this));
+                }, initialDelay, autoScanPeriod, TimeUnit.SECONDS);
+    }
+
+    private void cancelScheduledScan() {
+        if (scheduledScan != null) {
+            scheduledScan.cancel(false);
+        }
     }
 
     /**
@@ -123,20 +162,16 @@ public class AppSecService {
      * single-thread executor). A custom executor can be set with
      * {@link AppSecConfiguration#setTaskExecutor(Executor)}.
      *
-     * @param scanCompleteCallback
-     *            a callback to run when the scan has completed
      * @return a future completed when the scan has ended
      */
-    public CompletableFuture<Void> scanForVulnerabilities(
-            Runnable scanCompleteCallback) {
+    public CompletableFuture<Void> scanForVulnerabilities() {
         checkForInitialization();
+        Executor executor = configuration.getTaskExecutor();
         return CompletableFuture
-                .supplyAsync(vulnerabilityStore::refresh,
-                        configuration.getTaskExecutor())
+                .supplyAsync(vulnerabilityStore::refresh, executor)
                 .thenRun(this::updateLastScanTime)
                 .thenApply(vulnerabilities -> new AppSecScanEvent(this))
-                .thenAccept(this::invokeEventListeners)
-                .thenRun(scanCompleteCallback);
+                .thenAccept(this::invokeEventListeners);
     }
 
     private void invokeEventListeners(AppSecScanEvent event) {
@@ -222,6 +257,7 @@ public class AppSecService {
             AppSecConfiguration configuration) {
         this.configuration = configuration;
         this.data = null;
+        cancelScheduledScan();
     }
 
     private void checkForInitialization() {

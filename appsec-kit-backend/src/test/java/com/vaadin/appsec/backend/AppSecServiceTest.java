@@ -60,9 +60,7 @@ public class AppSecServiceTest {
     public void scanForVulnerabilities_lastScanUpdated() throws Exception {
         service.init();
 
-        service.scanForVulnerabilities(() -> {
-            // do nothing
-        }).get();
+        service.scanForVulnerabilities().get();
 
         assertEquals(fixedClock.instant(), service.getData().getLastScan());
     }
@@ -74,21 +72,7 @@ public class AppSecServiceTest {
 
         AtomicBoolean callbackExecuted = new AtomicBoolean(false);
         service.addScanEventListener(event -> callbackExecuted.set(true));
-        service.scanForVulnerabilities(() -> {
-            // do nothing
-        }).get();
-
-        assertTrue(callbackExecuted.get());
-    }
-
-    @Test
-    public void scanForVulnerabilities_callbackExecuted() throws Exception {
-        service.init();
-
-        AtomicBoolean callbackExecuted = new AtomicBoolean(false);
-        service.scanForVulnerabilities(() -> {
-            callbackExecuted.set(true);
-        }).get();
+        service.scanForVulnerabilities().get();
 
         assertTrue(callbackExecuted.get());
     }
