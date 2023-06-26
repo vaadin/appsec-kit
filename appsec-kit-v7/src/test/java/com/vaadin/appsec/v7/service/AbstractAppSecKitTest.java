@@ -1,5 +1,4 @@
-/*
- * -
+/*-
  * Copyright (C) 2023 Vaadin Ltd
  *
  * This program is available under Vaadin Commercial License and Service Terms.
@@ -10,7 +9,7 @@
 
 package com.vaadin.appsec.v7.service;
 
-import java.lang.reflect.Method;
+import java.nio.file.Paths;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -23,77 +22,36 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.LoggerFactory;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
-import com.vaadin.appsec.backend.service.VulnerabilityStore;
-=======
->>>>>>> dd08b2b (Add Vaadin 7 version)
-=======
-import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
-import com.vaadin.appsec.backend.service.VulnerabilityStore;
->>>>>>> fd7081c (Clear data from singletons before each test)
+import com.vaadin.appsec.backend.AppSecConfiguration;
+import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.server.VaadinService;
 
-import static org.mockito.Mockito.when;
-
 public abstract class AbstractAppSecKitTest {
-    public static final String TEST_RESOURCE_BOM_PATH = "../../../../../bom.json";
+
+    static final String TEST_RESOURCE_BOM_PATH = "/bom.json";
+
+    protected AppSecConfiguration configuration;
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected VaadinService service;
 
     private AutoCloseable toClose;
 
     @Before
-    public void abstractAppSecKitTestSetup() {
+    public void abstractAppSecKitTestSetup() throws Exception {
         toClose = MockitoAnnotations.openMocks(this);
-        when(service.getDeploymentConfiguration().isProductionMode())
-                .thenReturn(false);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-        // Clear data from singletons before each test
-        BillOfMaterialsStoreInitializer.reset();
-        VulnerabilityStoreInitializer.reset();
-=======
->>>>>>> dd08b2b (Add Vaadin 7 version)
-=======
+        configuration = new AppSecConfiguration();
+        configuration.setBomFilePath(Paths.get(AbstractAppSecKitTest.class
+                .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
+        AppSecService.getInstance().setConfiguration(configuration);
 
-        // Clear data from singletons before each test
-<<<<<<< HEAD
-<<<<<<< HEAD
-        BillOfMaterialsStore.getInstance().init(null);
-        VulnerabilityStore.getInstance().init(null);
->>>>>>> fd7081c (Clear data from singletons before each test)
-=======
-         BillOfMaterialsStoreInitializer.reset();
-=======
-        BillOfMaterialsStoreInitializer.reset();
->>>>>>> 8e19db1 (Formatting)
-        VulnerabilityStoreInitializer.reset();
->>>>>>> d7ab08a (Fix v7 tests)
+        VaadinService.setCurrent(service);
     }
 
     @After
     public void tearDown() throws Exception {
         toClose.close();
-    }
-
-    protected void initBomStoreInitListener(String pathToBom) {
-        try {
-            Method setBomPath = BillOfMaterialsStoreInitializer.class
-                    .getDeclaredMethod("setBomPath", String.class);
-            setBomPath.setAccessible(true);
-            setBomPath.invoke(null, pathToBom);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        BillOfMaterialsStoreInitializer.serviceInit(service);
-    }
-
-    protected void initVulnStoreInitListener() {
-        new VulnerabilityStoreInitializer().serviceInit(service);
     }
 
     protected ListAppender<ILoggingEvent> createListAppender(

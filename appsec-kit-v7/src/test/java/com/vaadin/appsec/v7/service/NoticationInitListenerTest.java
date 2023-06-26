@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class NoticationInitListenerTest extends AbstractAppSecKitTest {
 
     @Test
-    public void testVulnStoreInit_initsProperly_debugMode() {
+    public void testNotificationInitializer_initsProperly_debugMode() {
         ListAppender<ILoggingEvent> logAppender = createListAppender(
                 NotificationInitializer.class.getName());
 
@@ -34,7 +34,7 @@ public class NoticationInitListenerTest extends AbstractAppSecKitTest {
     }
 
     @Test
-    public void testVulnStoreInit_doesNotInit_productionMode() {
+    public void testNotificationInitializer_doesNotInit_productionMode() {
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(true);
 

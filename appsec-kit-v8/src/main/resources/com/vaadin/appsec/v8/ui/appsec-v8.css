@@ -64,8 +64,35 @@
     margin-top: 20px;
 }
 
+.vulnerability-details-view .va-true-positive {
+    background: pink;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
 .vulnerability-details-view .va-false-positive {
     background: lightblue;
     padding: 3px 10px;
     border-radius: 20px;
+}
+
+.vulnerability-details-view .va-under-review {
+    background: lightgray;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.severity-HIGH .vulnerability-property {
+    color: red;
+    font-weight: bold;
+}
+
+.severity-MEDIUM .vulnerability-property {
+    color: orangered;
+    font-weight: bold;
+}
+
+.severity-LOW .vulnerability-property {
+    color: orange;
+    font-weight: bold;
 }

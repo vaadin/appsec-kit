@@ -13,30 +13,47 @@ package com.vaadin.appsec.v7.service;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import java.util.HashSet;
-import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.server.VaadinService;
 
 @WebListener
 public class AppSecKitInitializer implements HttpSessionListener {
 
-    private static final Set<String> initializedServiceNames = new HashSet<>();
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AppSecKitInitializer.class);
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         VaadinService vaadinService = VaadinService.getCurrent();
-        if (vaadinService != null && !initializedServiceNames
-                .contains(vaadinService.getServiceName())) {
-            BillOfMaterialsStoreInitializer.serviceInit(vaadinService);
-            VulnerabilityStoreInitializer.serviceInit(vaadinService);
-            NotificationInitializer.serviceInit(vaadinService);
-            initializedServiceNames.add(vaadinService.getServiceName());
+        if (vaadinService != null) {
+            if (isDebugMode(vaadinService)) {
+                AppSecService appSecService = AppSecService.getInstance();
+                appSecService.init();
+                LOGGER.info("AppSecService initialized");
+                appSecService.scanForVulnerabilities()
+                        .thenRun(appSecService::scheduleAutomaticScan);
+                LOGGER.info("AppSecService auto-scan scheduled every "
+                        + appSecService.getConfiguration().getAutoScanInterval()
+                                .toString());
+                NotificationInitializer.serviceInit(vaadinService);
+            } else {
+                LOGGER.info(
+                        "AppSec Kit not enabled in production mode. Run the "
+                                + "application in debug mode to initialize AppSec Kit");
+            }
         }
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         // NOP
+    }
+
+    private static boolean isDebugMode(VaadinService vaadinService) {
+        return !vaadinService.getDeploymentConfiguration().isProductionMode();
     }
 }

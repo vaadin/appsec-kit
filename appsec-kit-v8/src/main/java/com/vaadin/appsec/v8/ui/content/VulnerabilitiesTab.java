@@ -121,25 +121,27 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
         grid.addItemClickListener(e -> {
             if (e.getMouseEventDetails().isDoubleClick()) {
-                showDetails(e.getItem());
+                showVulnerabilityDetails(e.getItem());
             }
         });
 
         Button showDetails = new Button("Show details");
         showDetails.setEnabled(false);
-        addComponent(showDetails);
-        setComponentAlignment(showDetails, Alignment.BOTTOM_RIGHT);
-        showDetails.addClickListener(
-                e -> showDetails(grid.getSelectedItems().iterator().next()));
+        getMainContent().addComponent(showDetails);
+        getMainContent().setComponentAlignment(showDetails,
+                Alignment.BOTTOM_RIGHT);
+        showDetails.addClickListener(e -> showVulnerabilityDetails(
+                grid.getSelectedItems().iterator().next()));
         grid.addSelectionListener(e -> showDetails
                 .setEnabled(e.getFirstSelectedItem().isPresent()));
     }
 
-    private void showDetails(VulnerabilityDTO item) {
-        parent.showDetails(new VulnerabilityDetailsView(item, () -> {
-            parent.showMainContent();
-            refresh();
-        }));
+    private void showVulnerabilityDetails(VulnerabilityDTO vulnerabilityDTO) {
+        parent.showDetails(
+                new VulnerabilityDetailsView(vulnerabilityDTO, () -> {
+                    parent.showMainContent();
+                    refresh();
+                }));
     }
 
     @SuppressWarnings("unchecked")

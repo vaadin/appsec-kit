@@ -1,5 +1,4 @@
-/*
- * -
+/*-
  * Copyright (C) 2023 Vaadin Ltd
  *
  * This program is available under Vaadin Commercial License and Service Terms.
@@ -10,7 +9,8 @@
 
 package com.vaadin.appsec.v7.ui.content;
 
-import com.vaadin.appsec.v7.data.SeverityLevel;
+import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -24,10 +24,16 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 public abstract class AbstractAppSecContent extends VerticalLayout {
 
+    private final VerticalLayout mainContent;
+
     public AbstractAppSecContent() {
+        super();
         setSizeFull();
-        setMargin(true);
-        setSpacing(true);
+        mainContent = new VerticalLayout();
+        mainContent.setSizeFull();
+        mainContent.setMargin(false);
+        mainContent.setSpacing(true);
+        showMainContent();
     }
 
     /**
@@ -68,24 +74,18 @@ public abstract class AbstractAppSecContent extends VerticalLayout {
         HorizontalLayout filterBar = new HorizontalLayout();
         filterBar.setSpacing(true);
         filterBar.setDefaultComponentAlignment(Alignment.BOTTOM_LEFT);
-        filterBar.setWidth("100%");
+        filterBar.setWidth(100, Unit.PERCENTAGE);
 
         filterBar.addComponents(filters);
         filterBar.setExpandRatio(filterBar.getComponent(filters.length - 1), 1);
 
         filterBar.addComponents(buildClearButton(), buildFilterButton());
 
-        addComponent(filterBar);
+        mainContent.addComponent(filterBar);
     }
 
-    protected BeanItemContainer<SeverityLevel> buildSeverityContainer() {
-        BeanItemContainer<SeverityLevel> cont = new BeanItemContainer<>(
-                SeverityLevel.class);
-        cont.addBean(SeverityLevel.NA);
-        cont.addBean(SeverityLevel.LOW);
-        cont.addBean(SeverityLevel.MEDIUM);
-        cont.addBean(SeverityLevel.HIGH);
-        return cont;
+    VerticalLayout getMainContent() {
+        return mainContent;
     }
 
     /**
@@ -99,4 +99,38 @@ public abstract class AbstractAppSecContent extends VerticalLayout {
      */
     protected void clearFilters() {
     }
+
+    protected void showDetails(Component detailsContent) {
+        removeAllComponents();
+        addComponent(detailsContent);
+        setExpandRatio(detailsContent, 1);
+    }
+
+    protected void showMainContent() {
+        removeAllComponents();
+        addComponent(mainContent);
+        setExpandRatio(mainContent, 1);
+    }
+
+    static BeanItemContainer<SeverityLevel> buildSeverityContainer() {
+        BeanItemContainer<SeverityLevel> cont = new BeanItemContainer<>(
+                SeverityLevel.class);
+        cont.addBean(SeverityLevel.NA);
+        cont.addBean(SeverityLevel.LOW);
+        cont.addBean(SeverityLevel.MEDIUM);
+        cont.addBean(SeverityLevel.HIGH);
+        return cont;
+    }
+
+    static BeanItemContainer<AppSecData.VulnerabilityStatus> buildDevStatusContainer() {
+        BeanItemContainer<AppSecData.VulnerabilityStatus> cont = new BeanItemContainer<>(
+                AppSecData.VulnerabilityStatus.class);
+        cont.addBean(AppSecData.VulnerabilityStatus.NOT_SET);
+        cont.addBean(AppSecData.VulnerabilityStatus.NOT_AFFECTED);
+        cont.addBean(AppSecData.VulnerabilityStatus.FALSE_POSITIVE);
+        cont.addBean(AppSecData.VulnerabilityStatus.IN_TRIAGE);
+        cont.addBean(AppSecData.VulnerabilityStatus.EXPLOITABLE);
+        return cont;
+    }
+
 }

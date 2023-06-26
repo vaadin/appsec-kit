@@ -12,9 +12,9 @@ package com.vaadin.appsec.v7.ui.content;
 
 import java.util.stream.Collectors;
 
-import com.vaadin.appsec.v7.data.DependencyDTO;
-import com.vaadin.appsec.v7.data.SeverityLevel;
-import com.vaadin.appsec.v7.service.AppSecDataProvider;
+import com.vaadin.appsec.backend.AppSecService;
+import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
@@ -28,13 +28,16 @@ public class DependenciesTab extends AbstractAppSecContent {
     private Grid grid;
     private ComboBox group;
     private ComboBox severity;
+    private MainView parent;
 
     /**
      * Instantiates a new Dependencies tab.
      */
-    public DependenciesTab() {
+    public DependenciesTab(MainView parent) {
+        this.parent = parent;
         buildFilters();
         buildGrid();
+        setMargin(true);
     }
 
     private void buildFilters() {
@@ -90,8 +93,13 @@ public class DependenciesTab extends AbstractAppSecContent {
         BeanItemContainer<DependencyDTO> cont = new BeanItemContainer<>(
                 DependencyDTO.class);
         grid.setContainerDataSource(cont);
-        grid.setColumns("name", "numOfVulnerabilities", "group", "version",
-                "severityLevel", "riskScore");
+        grid.removeAllColumns();
+        grid.addColumn("name");
+        grid.addColumn("numOfVulnerabilities");
+        grid.addColumn("group");
+        grid.addColumn("version");
+        grid.addColumn("severityLevel");
+        grid.addColumn("riskScore");
         grid.getColumn("name").setHeaderCaption("Dependency");
         grid.getColumn("numOfVulnerabilities")
                 .setHeaderCaption("# of vulnerabilities");
@@ -99,11 +107,13 @@ public class DependenciesTab extends AbstractAppSecContent {
         grid.getColumn("severityLevel").setHeaderCaption("Severity");
         grid.getColumn("riskScore").setHeaderCaption("Risk score");
 
-        addComponent(grid);
-        setExpandRatio(grid, 1);
+        getMainContent().addComponent(grid);
+        getMainContent().setExpandRatio(grid, 1);
 
-        grid.addItemClickListener(item -> {
-            // TODO Open details view for clicked dependency
+        grid.addItemClickListener(e -> {
+            if (e.isDoubleClick()) {
+                parent.showVulnerabilitiesTabFor((DependencyDTO) e.getItemId());
+            }
         });
     }
 
@@ -114,7 +124,7 @@ public class DependenciesTab extends AbstractAppSecContent {
 
     public void refresh() {
         getContainer().removeAllItems();
-        AppSecDataProvider.getDependencies()
+        AppSecService.getInstance().getDependencies()
                 .forEach(dep -> getContainer().addBean(dep));
 
         BeanItemContainer<String> groupsCont = new BeanItemContainer<>(

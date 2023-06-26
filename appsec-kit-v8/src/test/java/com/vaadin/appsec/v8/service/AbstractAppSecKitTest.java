@@ -22,14 +22,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.LoggerFactory;
 
-<<<<<<< HEAD
 import com.vaadin.appsec.backend.AppSecConfiguration;
 import com.vaadin.appsec.backend.AppSecService;
-=======
-import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
-import com.vaadin.appsec.backend.service.VulnerabilityStore;
-import com.vaadin.server.ServiceInitEvent;
->>>>>>> fd7081c (Clear data from singletons before each test)
 import com.vaadin.server.VaadinService;
 
 public abstract class AbstractAppSecKitTest {
@@ -46,20 +40,11 @@ public abstract class AbstractAppSecKitTest {
     @Before
     public void abstractAppSecKitTestSetup() throws Exception {
         toClose = MockitoAnnotations.openMocks(this);
-<<<<<<< HEAD
 
         configuration = new AppSecConfiguration();
         configuration.setBomFilePath(Paths.get(AbstractAppSecKitTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
         AppSecService.getInstance().setConfiguration(configuration);
-=======
-        when(service.getDeploymentConfiguration().isProductionMode())
-                .thenReturn(false);
-
-        // Clear data from singletons before each test
-        BillOfMaterialsStore.getInstance().init(null);
-        VulnerabilityStore.getInstance().init(null);
->>>>>>> fd7081c (Clear data from singletons before each test)
     }
 
     @After

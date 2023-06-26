@@ -27,7 +27,7 @@ import com.vaadin.ui.UI;
 /**
  * A class for initializing and running the notification mechanism.
  */
-public class NotificationInitializer extends AbstractInitializer {
+public class NotificationInitializer {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(NotificationInitializer.class);
@@ -58,7 +58,7 @@ public class NotificationInitializer extends AbstractInitializer {
                 e.getSession().addUIProvider(new AppSecUIProvider());
                 createNotificationThread(e.getSession()).start();
             });
-            LOGGER.debug("NotificationInitListener initialized.");
+            LOGGER.info("NotificationInitListener initialized.");
         }
     }
 
@@ -66,7 +66,7 @@ public class NotificationInitializer extends AbstractInitializer {
             final VaadinSession session) {
         return new Thread(() -> {
             try {
-                LOGGER.debug(
+                LOGGER.info(
                         "NotificationInitListener notification thread initialized.");
 
                 Thread.sleep(NOTIFICATION_CHECK_INTERVAL);
@@ -128,5 +128,9 @@ public class NotificationInitializer extends AbstractInitializer {
     private static boolean isSessionOpen(VaadinSession session) {
         return !(session.getState() != VaadinSession.State.OPEN
                 || session.getSession() == null);
+    }
+
+    private static boolean isDebugMode(VaadinService vaadinService) {
+        return !vaadinService.getDeploymentConfiguration().isProductionMode();
     }
 }

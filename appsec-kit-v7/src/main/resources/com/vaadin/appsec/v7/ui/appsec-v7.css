@@ -1,6 +1,10 @@
-.appsec-kit-main {
-    min-width: 800px;
+.appsec-kit-root-layout {
+    min-width: 1000px;
     min-height: 500px;
+}
+
+.appseckit-title {
+    font-size: 20px;
 }
 
 .vulnerability-details-view .vulnerability-header {
@@ -43,6 +47,12 @@
     padding-bottom: 3px;
 }
 
+.vulnerability-details-view .vulnerability-back-button {
+    font-size: 24px !important;
+    font-weight: bold !important;
+
+}
+
 .vulnerability-details-view .vaadin-analysis-title,
 .vulnerability-details-view .vulnerability-desc-title,
 .vulnerability-details-view .references-title {
@@ -60,8 +70,35 @@
     margin-top: 20px;
 }
 
+.vulnerability-details-view .va-true-positive {
+    background: pink;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
 .vulnerability-details-view .va-false-positive {
     background: lightblue;
     padding: 3px 10px;
     border-radius: 20px;
+}
+
+.vulnerability-details-view .va-under-review {
+    background: lightgray;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.severity-HIGH .vulnerability-property {
+    color: red;
+    font-weight: bold;
+}
+
+.severity-MEDIUM .vulnerability-property {
+    color: orangered;
+    font-weight: bold;
+}
+
+.severity-LOW .vulnerability-property {
+    color: orange;
+    font-weight: bold;
 }

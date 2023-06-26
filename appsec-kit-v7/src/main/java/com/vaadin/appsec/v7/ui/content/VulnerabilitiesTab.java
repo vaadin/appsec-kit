@@ -12,14 +12,18 @@ package com.vaadin.appsec.v7.ui.content;
 
 import java.util.stream.Collectors;
 
-import com.vaadin.appsec.v7.data.DependencyDTO;
-import com.vaadin.appsec.v7.data.SeverityLevel;
-import com.vaadin.appsec.v7.data.VulnerabilityDTO;
-import com.vaadin.appsec.v7.service.AppSecDataProvider;
+import com.vaadin.appsec.backend.AppSecService;
+import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.SeverityLevel;
+import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
 
 /**
@@ -31,13 +35,16 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     private ComboBox severity;
     private ComboBox vaadinAnalysis;
     private ComboBox devAnalysis;
+    private MainView parent;
 
     /**
      * Instantiates a new Vulnerabilities tab.
      */
-    public VulnerabilitiesTab() {
+    public VulnerabilitiesTab(MainView parent) {
+        this.parent = parent;
         buildFilters();
         buildGrid();
+        setMargin(true);
     }
 
     private void buildFilters() {
@@ -47,10 +54,12 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         // TODO Set vaadin analysis options
 
         devAnalysis = new ComboBox("Developer analysis");
-        // TODO Set dev analysis options
+        devAnalysis.setContainerDataSource(
+                AbstractAppSecContent.buildDevStatusContainer());
 
         severity = new ComboBox("Severity level");
-        severity.setContainerDataSource(buildSeverityContainer());
+        severity.setContainerDataSource(
+                AbstractAppSecContent.buildSeverityContainer());
 
         buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
     }
@@ -72,7 +81,9 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                 .getValue();
 
         // TODO Add filtering for vaadin analysis
-        // TODO Add filtering for developer analysis
+
+        final AppSecData.VulnerabilityStatus devAnalysisFilter = (AppSecData.VulnerabilityStatus) devAnalysis
+                .getValue();
 
         getContainer().addContainerFilter(new Container.Filter() {
             @Override
@@ -87,13 +98,18 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                         .equals(vulnerabilityDTO.getSeverityLevel())) {
                     return false;
                 }
+                if (devAnalysisFilter != null && !devAnalysisFilter
+                        .equals(vulnerabilityDTO.getDeveloperStatus())) {
+                    return false;
+                }
                 return true;
             }
 
             @Override
             public boolean appliesToProperty(Object propertyId) {
                 return "dependency".equals(propertyId)
-                        || "severityLevel".equals(propertyId);
+                        || "severityLevel".equals(propertyId)
+                        || "developerStatus".equals(propertyId);
             }
         });
     }
@@ -105,23 +121,37 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         BeanItemContainer<VulnerabilityDTO> cont = new BeanItemContainer<>(
                 VulnerabilityDTO.class);
         grid.setContainerDataSource(cont);
-
-        grid.setColumns("identifier", "dependency", "severityLevel",
-                "riskScore", "vaadinAnalysis", "developerAnalysis");
+        grid.removeAllColumns();
+        grid.addColumn("identifier");
+        grid.addColumn("dependency");
+        grid.addColumn("severityLevel");
+        grid.addColumn("riskScore");
+        grid.addColumn("vaadinAnalysis");
+        grid.addColumn("developerStatus");
         grid.getColumn("identifier")
                 .setHeaderCaption("Vulnerability name or identifier");
         grid.getColumn("severityLevel").setHeaderCaption("Severity");
         grid.getColumn("riskScore").setHeaderCaption("Risk score");
         grid.getColumn("vaadinAnalysis").setHeaderCaption("Vaadin analysis");
-        grid.getColumn("developerAnalysis")
+        grid.getColumn("developerStatus")
                 .setHeaderCaption("Developer analysis");
 
-        addComponent(grid);
-        setExpandRatio(grid, 1);
+        getMainContent().addComponent(grid);
+        getMainContent().setExpandRatio(grid, 1);
 
-        grid.addItemClickListener(item -> {
-            // TODO Open details view for clicked vulnerability
+        grid.addItemClickListener(event -> {
+            showVulnerabilityDetails((VulnerabilityDTO) event.getItemId());
         });
+
+        Button showDetails = new Button("Show details");
+        showDetails.setEnabled(false);
+        getMainContent().addComponent(showDetails);
+        getMainContent().setComponentAlignment(showDetails,
+                Alignment.BOTTOM_RIGHT);
+        showDetails.addClickListener(e -> showVulnerabilityDetails(
+                (VulnerabilityDTO) grid.getSelectedRows().iterator().next()));
+        grid.addSelectionListener(
+                e -> showDetails.setEnabled(e.getSelected().size() != 0));
     }
 
     @SuppressWarnings("unchecked")
@@ -132,7 +162,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
     public void refresh() {
         getContainer().removeAllItems();
-        AppSecDataProvider.getVulnerabilities()
+        AppSecService.getInstance().getVulnerabilities()
                 .forEach(vln -> getContainer().addBean(vln));
 
         BeanItemContainer<DependencyDTO> depsCont = new BeanItemContainer<>(
@@ -141,5 +171,25 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                 .map(VulnerabilityDTO::getDependency)
                 .collect(Collectors.toSet()).forEach(depsCont::addBean);
         dependency.setContainerDataSource(depsCont);
+    }
+
+    /**
+     * Filters the Vulnerability list using the given item.
+     *
+     * @param item
+     *            filter
+     */
+    public void filterOn(DependencyDTO item) {
+        clearFilters();
+        dependency.setValue(item);
+        applyFilters();
+    }
+
+    private void showVulnerabilityDetails(VulnerabilityDTO vulnerabilityDTO) {
+        parent.showDetails(
+                new VulnerabilityDetailsView(vulnerabilityDTO, () -> {
+                    parent.showMainContent();
+                    refresh();
+                }));
     }
 }

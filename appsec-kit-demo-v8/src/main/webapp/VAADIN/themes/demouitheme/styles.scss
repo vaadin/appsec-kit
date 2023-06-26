@@ -1,8 +1,0 @@
-@import "demouitheme.scss";
-@import "addons.scss";
-
-.demouitheme {
-  @include addons;
-  @include demouitheme;
-
-}

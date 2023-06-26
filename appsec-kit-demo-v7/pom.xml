@@ -18,9 +18,9 @@
 	</prerequisites>
 
 	<properties>
-		<vaadin.version>7.7.24</vaadin.version>
-		<vaadin.plugin.version> 7.7.24 </vaadin.plugin.version>
-		<jetty.plugin.version>9.4.9.v20180320</jetty.plugin.version>
+		<vaadin.version>7.4.0</vaadin.version>
+		<vaadin.plugin.version>7.4.0</vaadin.plugin.version>
+		<jetty.plugin.version>9.3.30.v20211001</jetty.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -78,18 +78,6 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-client</artifactId>
 		</dependency>
-		<!-- Added these two dependencies to get vulnerabilities returned -->
-		<dependency>
-			<groupId>net.minidev</groupId>
-			<artifactId>json-smart</artifactId>
-			<version>2.4.8</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mikesamuel</groupId>
-			<artifactId>json-sanitizer</artifactId>
-			<version>1.2.0</version>
-		</dependency>
-		<!-- -->
 	</dependencies>
 
 	<build>
