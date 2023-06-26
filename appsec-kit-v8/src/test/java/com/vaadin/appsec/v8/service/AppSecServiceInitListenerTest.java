@@ -31,10 +31,10 @@ public class AppSecServiceInitListenerTest extends AbstractAppSecKitTest {
         AppSecServiceInitListener listener = new AppSecServiceInitListener();
         listener.serviceInit(new ServiceInitEvent(service));
 
-        assertEquals("Unexpected count of log messages. ", 1,
+        assertEquals("Unexpected count of log messages. ", 2,
                 logAppender.list.size());
         assertEquals("AppSecService initialization failed.",
-                "AppSecService initialized.",
+                "AppSecService initialized",
                 logAppender.list.get(0).getMessage());
     }
 
