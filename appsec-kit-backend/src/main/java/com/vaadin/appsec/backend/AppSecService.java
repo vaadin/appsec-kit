@@ -114,6 +114,7 @@ public class AppSecService {
      * {@link AppSecConfiguration#setAutoScanInterval(java.time.Duration)}.
      */
     public void scheduleAutomaticScan() {
+        checkForInitialization();
         long initialDelay = 0;
         long autoScanPeriod = configuration.getAutoScanInterval().getSeconds();
         Instant lastScan = data.getLastScan();
