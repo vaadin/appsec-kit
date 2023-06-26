@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.Before;
@@ -40,6 +41,8 @@ public class AppSecServiceTest {
 
     private AppSecService service;
 
+    private TestScheduledExecutorService testExecutorService;
+
     @Before
     public void setup() throws Exception {
         fixedClock = Clock.fixed(Instant.ofEpochSecond(1687450676),
@@ -47,13 +50,52 @@ public class AppSecServiceTest {
         dataFilePath = Files.createTempFile("appsec-kit", "testfile");
         AppSecService.MAPPER.writeValue(dataFilePath.toFile(),
                 new AppSecData());
+
+        testExecutorService = new TestScheduledExecutorService();
+
         configuration = new AppSecConfiguration();
         configuration.setDataFilePath(dataFilePath);
         configuration.setBomFilePath(Paths.get(AppSecServiceTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
+        configuration.setTaskExecutor(testExecutorService);
+
         service = AppSecService.getInstance();
         service.setConfiguration(configuration);
         service.setClock(fixedClock);
+    }
+
+    @Test(expected = AppSecException.class)
+    public void serviceNotInitialized_scanForVulnerabilities_throws()
+            throws Exception {
+        service.scanForVulnerabilities().get();
+    }
+
+    @Test(expected = AppSecException.class)
+    public void serviceNotInitialized_scheduleAutomaticScan_throws()
+            throws Exception {
+        service.scheduleAutomaticScan();
+    }
+
+    @Test
+    public void scheduleAutomaticScan_noLastScan_noInitialDelay() {
+        service.init();
+
+        service.scheduleAutomaticScan();
+
+        assertEquals(0, testExecutorService.getLastInitialDelaySet());
+    }
+
+    @Test
+    public void scheduleAutomaticScan_lastScanExists_initialDelayCalculated() {
+        service.init();
+
+        // Sets the last scan to now - 23 hours
+        service.getData()
+                .setLastScan(fixedClock.instant().minus(23, ChronoUnit.HOURS));
+        service.scheduleAutomaticScan();
+
+        // Expect initial delay of 1 hour
+        assertEquals(3600, testExecutorService.getLastInitialDelaySet());
     }
 
     @Test
