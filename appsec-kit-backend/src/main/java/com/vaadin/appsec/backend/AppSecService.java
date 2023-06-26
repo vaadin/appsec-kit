@@ -273,7 +273,7 @@ public class AppSecService {
     }
 
     private void checkForInitialization() {
-        if (data == null) {
+        if (data == null || bomStore.getBom() == null) {
             throw new AppSecException(
                     "The service has not been initialized. You should run the "
                             + "init() method after setting a new configuration");
