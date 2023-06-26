@@ -15,7 +15,6 @@ import java.util.Date;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.dto.DependencyDTO;
-import com.vaadin.appsec.backend.service.VulnerabilityStore;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -25,11 +24,14 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 
 /**
- * Results tab content
+ * AppSec Kit main view.
  */
 public class MainView extends AbstractAppSecContent {
+
     private VulnerabilitiesTab vulnerabilitiesTab;
+
     private DependenciesTab dependenciesTab;
+
     private TabSheet tabSheet;
 
     private Label lastScannedLabel;
@@ -37,7 +39,7 @@ public class MainView extends AbstractAppSecContent {
     private DateFormat formatter;
 
     /**
-     * Instantiates a new Results tab.
+     * Instantiates a new view.
      */
     public MainView() {
         buildLayout();
@@ -61,18 +63,16 @@ public class MainView extends AbstractAppSecContent {
         UI ui = UI.getCurrent();
         Button scanNow = new Button("Scan now");
         scanNow.setDisableOnClick(true);
+        AppSecService.getInstance().addScanEventListener(event -> {
+            ui.access(() -> {
+                scanNow.setEnabled(true);
+                refresh();
+                ui.push();
+            });
+        });
         scanNow.addClickListener(e -> {
             lastScannedLabel.setValue("Scanning...");
-            // TODO Needs to be refactored when listener mechanism is in place
-            new Thread(() -> {
-                VulnerabilityStore.getInstance().refresh(() -> {
-                    ui.access(() -> {
-                        scanNow.setEnabled(true);
-                        refresh();
-                        ui.push();
-                    });
-                });
-            }).start();
+            AppSecService.getInstance().scanForVulnerabilities();
         });
         headerBar.addComponent(scanNow);
 

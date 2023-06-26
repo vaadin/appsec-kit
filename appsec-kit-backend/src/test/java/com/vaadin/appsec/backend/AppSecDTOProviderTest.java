@@ -9,51 +9,51 @@
 
 package com.vaadin.appsec.backend;
 
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.cyclonedx.exception.ParseException;
-import org.cyclonedx.model.Bom;
-import org.cyclonedx.parsers.JsonParser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.appsec.backend.model.dto.DependencyDTO;
 import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
-import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
-import com.vaadin.appsec.backend.service.VulnerabilityStore;
 
 public class AppSecDTOProviderTest {
 
-    public static final String TEST_RESOURCE_BOM_PATH = "../../../../bom.json";
+    static final String TEST_RESOURCE_BOM_PATH = "../../../../bom.json";
+
+    private BillOfMaterialsStore bomStore;
+
+    private VulnerabilityStore vulnerabilityStore;
+
+    private OpenSourceVulnerabilityService osvService;
 
     @Before
     public void setup() {
-        // Clear data from singletons before each test
-        BillOfMaterialsStore.getInstance().init(null);
-        VulnerabilityStore.getInstance().init(null);
+        bomStore = new BillOfMaterialsStore();
+        osvService = new OpenSourceVulnerabilityService();
+        vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
 
         // Init BOM Store
         URL resource = AppSecDTOProviderTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH);
         try {
-            BillOfMaterialsStore.getInstance().init(new JsonParser()
-                    .parse(Paths.get(resource.toURI()).toFile()));
+            bomStore.readBomFile(Paths.get(resource.toURI()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         // Init vulnerability store
-        VulnerabilityStore.getInstance().refresh(() -> {
-        });
+        vulnerabilityStore.refresh();
     }
 
     @Test
     public void testGetDependencies() {
-        List<DependencyDTO> dependencies = AppSecDTOProvider.getDependencies();
+        AppSecDTOProvider dtoProvider = new AppSecDTOProvider(
+                vulnerabilityStore, bomStore);
+        List<DependencyDTO> dependencies = dtoProvider.getDependencies();
 
         Assert.assertEquals("Mismatch in expected dependency count.", 2,
                 dependencies.size());
@@ -61,7 +61,9 @@ public class AppSecDTOProviderTest {
 
     @Test
     public void testGetVulnerabilities() {
-        List<VulnerabilityDTO> vulnerabilities = AppSecDTOProvider
+        AppSecDTOProvider dtoProvider = new AppSecDTOProvider(
+                vulnerabilityStore, bomStore);
+        List<VulnerabilityDTO> vulnerabilities = dtoProvider
                 .getVulnerabilities();
 
         Assert.assertEquals("Mismatch in expected vulnerability count.", 3,

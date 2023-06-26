@@ -25,7 +25,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 
 /**
- * A Vaadin service init listener for initializing the notification mechanism.
+ * A Vaadin service listener for initializing the notifications for AppSec Kit.
  * Will be initialized automatically by Vaadin.
  */
 public class NotificationInitListener extends AbstractInitListener {
@@ -55,7 +55,7 @@ public class NotificationInitListener extends AbstractInitListener {
                 e.getSession().addUIProvider(new AppSecUIProvider());
                 createNotificationThread(e.getSession()).start();
             });
-            LOGGER.debug("NotificationInitListener initialized.");
+            LOGGER.info("NotificationInitListener initialized.");
         }
     }
 

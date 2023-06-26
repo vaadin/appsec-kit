@@ -28,8 +28,10 @@ public class AppSecConfigurationTest {
         AppSecConfiguration conf = new AppSecConfiguration();
         Path dataFilePath = conf.getDataFilePath();
 
-        assertEquals(Paths.get(AppSecConfiguration.DEFAULT_DATA_PATH,
-                AppSecConfiguration.FILE_NAME), dataFilePath);
+        assertEquals(
+                Paths.get(AppSecConfiguration.DEFAULT_DATA_FILE_PATH,
+                        AppSecConfiguration.DEFAULT_DATA_FILE_NAME),
+                dataFilePath);
     }
 
     @Test
@@ -40,7 +42,9 @@ public class AppSecConfigurationTest {
         AppSecConfiguration conf = new AppSecConfiguration();
         Path dataFilePath = conf.getDataFilePath();
 
-        assertEquals(Paths.get("custom-path", AppSecConfiguration.FILE_NAME),
+        assertEquals(
+                Paths.get("custom-path",
+                        AppSecConfiguration.DEFAULT_DATA_FILE_NAME),
                 dataFilePath);
     }
 

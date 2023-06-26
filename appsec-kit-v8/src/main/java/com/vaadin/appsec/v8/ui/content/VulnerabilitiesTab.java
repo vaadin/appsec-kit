@@ -12,7 +12,7 @@ package com.vaadin.appsec.v8.ui.content;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.vaadin.appsec.backend.AppSecDTOProvider;
+import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.AppSecData;
 import com.vaadin.appsec.backend.model.dto.DependencyDTO;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
@@ -62,6 +62,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
     }
 
+    @Override
     protected void clearFilters() {
         dependency.setValue(null);
         vaadinAnalysis.setValue(null);
@@ -70,6 +71,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         getListDataProvider().clearFilters();
     }
 
+    @Override
     protected void applyFilters() {
         DependencyDTO dependencyFilter = dependency.getValue();
         String vaadinAnalysisFilter = vaadinAnalysis.getValue();
@@ -149,7 +151,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     public void refresh() {
         Set<VulnerabilityDTO> selectedItems = grid.getSelectedItems();
         grid.deselectAll();
-        grid.setItems(AppSecDTOProvider.getVulnerabilities());
+        grid.setItems(AppSecService.getInstance().getVulnerabilities());
         dependency.setItems(getListDataProvider().getItems().stream()
                 .map(VulnerabilityDTO::getDependency)
                 .collect(Collectors.toSet()));

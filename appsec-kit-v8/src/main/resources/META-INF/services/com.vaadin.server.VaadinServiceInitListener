@@ -1,3 +1,2 @@
-com.vaadin.appsec.v8.service.BillOfMaterialsStoreInitListener
-com.vaadin.appsec.v8.service.VulnerabilityStoreInitListener
+com.vaadin.appsec.v8.service.AppSecServiceInitListener
 com.vaadin.appsec.v8.service.NotificationInitListener

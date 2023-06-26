@@ -9,7 +9,7 @@
 
 package com.vaadin.appsec.v8.service;
 
-import java.lang.reflect.Method;
+import java.nio.file.Paths;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -22,57 +22,34 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.LoggerFactory;
 
-import com.vaadin.appsec.backend.service.BillOfMaterialsStore;
-import com.vaadin.appsec.backend.service.VulnerabilityStore;
-import com.vaadin.server.ServiceInitEvent;
+import com.vaadin.appsec.backend.AppSecConfiguration;
+import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.server.VaadinService;
 
-import static org.mockito.Mockito.when;
-
 public abstract class AbstractAppSecKitTest {
-    public static final String TEST_RESOURCE_BOM_PATH = "../../../../../bom.json";
+
+    static final String TEST_RESOURCE_BOM_PATH = "/bom.json";
+
+    protected AppSecConfiguration configuration;
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected VaadinService service;
 
     private AutoCloseable toClose;
 
     @Before
-    public void abstractAppSecKitTestSetup() {
+    public void abstractAppSecKitTestSetup() throws Exception {
         toClose = MockitoAnnotations.openMocks(this);
-        when(service.getDeploymentConfiguration().isProductionMode())
-                .thenReturn(false);
 
-        // Clear data from singletons before each test
-        BillOfMaterialsStore.getInstance().init(null);
-        VulnerabilityStore.getInstance().init(null);
+        configuration = new AppSecConfiguration();
+        configuration.setBomFilePath(Paths.get(AbstractAppSecKitTest.class
+                .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
+        AppSecService.getInstance().setConfiguration(configuration);
     }
 
     @After
     public void tearDown() throws Exception {
         toClose.close();
-    }
-
-    protected BillOfMaterialsStoreInitListener initBomStoreInitListener(
-            String pathToBom) {
-        BillOfMaterialsStoreInitListener bomStoreInitListener = new BillOfMaterialsStoreInitListener();
-
-        try {
-            Method setBomPath = BillOfMaterialsStoreInitListener.class
-                    .getDeclaredMethod("setBomPath", String.class);
-            setBomPath.setAccessible(true);
-            setBomPath.invoke(bomStoreInitListener, pathToBom);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        bomStoreInitListener.serviceInit(new ServiceInitEvent(service));
-
-        return bomStoreInitListener;
-    }
-
-    protected void initVulnStoreInitListener() {
-        VulnerabilityStoreInitListener vlnStoreInitListener = new VulnerabilityStoreInitListener();
-        vlnStoreInitListener.serviceInit(new ServiceInitEvent(service));
     }
 
     protected ListAppender<ILoggingEvent> createListAppender(

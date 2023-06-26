@@ -9,32 +9,31 @@
 
 package com.vaadin.appsec.v8.service;
 
-import java.util.List;
-
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
-import org.junit.Assert;
 import org.junit.Test;
 
-import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
-import com.vaadin.appsec.backend.service.VulnerabilityStore;
 import com.vaadin.server.ServiceInitEvent;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 public class NoticationInitListenerTest extends AbstractAppSecKitTest {
 
     @Test
     public void testVulnStoreInit_initsProperly_debugMode() {
+        when(service.getDeploymentConfiguration().isProductionMode())
+                .thenReturn(false);
+
         ListAppender<ILoggingEvent> logAppender = createListAppender(
                 NotificationInitListener.class.getName());
 
         NotificationInitListener notificationInitListener = new NotificationInitListener();
         notificationInitListener.serviceInit(new ServiceInitEvent(service));
 
-        Assert.assertEquals("Unexpected count of log messages. ", 1,
+        assertEquals("Unexpected count of log messages. ", 1,
                 logAppender.list.size());
-        Assert.assertEquals("NotificationInitListener initialization failed.",
+        assertEquals("NotificationInitListener initialization failed.",
                 "NotificationInitListener initialized.",
                 logAppender.list.get(0).getMessage());
     }
@@ -50,7 +49,7 @@ public class NoticationInitListenerTest extends AbstractAppSecKitTest {
         NotificationInitListener notificationInitListener = new NotificationInitListener();
         notificationInitListener.serviceInit(new ServiceInitEvent(service));
 
-        Assert.assertEquals("Unexpected count of log messages. ", 0,
+        assertEquals("Unexpected count of log messages. ", 0,
                 logAppender.list.size());
     }
 }

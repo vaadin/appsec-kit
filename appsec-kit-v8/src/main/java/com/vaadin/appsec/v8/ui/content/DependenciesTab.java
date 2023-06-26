@@ -11,7 +11,7 @@ package com.vaadin.appsec.v8.ui.content;
 
 import java.util.stream.Collectors;
 
-import com.vaadin.appsec.backend.AppSecDTOProvider;
+import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.dto.DependencyDTO;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.data.provider.ListDataProvider;
@@ -50,6 +50,7 @@ public class DependenciesTab extends AbstractAppSecContent {
         buildFilterBar(group, severity/* ,riskScore */);
     }
 
+    @Override
     protected void clearFilters() {
         group.setValue(null);
         severity.setValue(null);
@@ -57,6 +58,7 @@ public class DependenciesTab extends AbstractAppSecContent {
         getListDataProvider().clearFilters();
     }
 
+    @Override
     protected void applyFilters() {
         String groupFilter = group.getValue();
         SeverityLevel severityFilter = severity.getValue();
@@ -107,7 +109,7 @@ public class DependenciesTab extends AbstractAppSecContent {
 
     @Override
     public void refresh() {
-        grid.setItems(AppSecDTOProvider.getDependencies());
+        grid.setItems(AppSecService.getInstance().getDependencies());
         group.setItems(getListDataProvider().getItems().stream()
                 .map(DependencyDTO::getGroup).collect(Collectors.toSet()));
         applyFilters();
