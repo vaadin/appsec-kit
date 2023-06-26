@@ -27,8 +27,13 @@ public class AppSecServiceInitListener extends AbstractInitListener {
     @Override
     public void serviceInit(ServiceInitEvent event) {
         if (isDebugMode(event.getSource())) {
-            AppSecService.getInstance().init();
-            LOGGER.info("AppSecService initialized.");
+            AppSecService appSecService = AppSecService.getInstance();
+            appSecService.init();
+            LOGGER.info("AppSecService initialized");
+            appSecService.scheduleAutomaticScan();
+            LOGGER.info("AppSecService auto-scan scheduled every "
+                    + appSecService.getConfiguration().getAutoScanInterval()
+                            .toString());
         } else {
             LOGGER.info("AppSec Kit not enabled in production mode. Run the "
                     + "application in debug mode to initialize AppSec Kit");

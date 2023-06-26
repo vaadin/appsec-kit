@@ -247,6 +247,17 @@ public class AppSecService {
     }
 
     /**
+     * Gets the current configuration. Changes to the instance returned from
+     * this method will not be applied until the instance is set with
+     * {@link #setConfiguration(AppSecConfiguration)}.
+     *
+     * @return the current configuration
+     */
+    public AppSecConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    /**
      * Allows to set the configuration for this singleton instance. When a new
      * configuration is set, the service need to be initialized again with
      * {@link #init()}.
