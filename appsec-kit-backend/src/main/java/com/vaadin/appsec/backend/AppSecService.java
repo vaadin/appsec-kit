@@ -103,7 +103,7 @@ public class AppSecService {
             bomStore.readBomFile(bomFilePath);
         } catch (ParseException e) {
             throw new AppSecException(
-                    "Cannot parse the SBOM file: " + bomFilePath.toString(), e);
+                    "Cannot parse the SBOM file: " + bomFilePath, e);
         }
         readOrCreateDataFile();
     }
