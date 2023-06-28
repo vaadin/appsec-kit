@@ -20,6 +20,16 @@ import org.slf4j.LoggerFactory;
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.server.VaadinService;
 
+/**
+ * Listener for HTTP session creation. Will initialize AppSec Kit services
+ * automatically once invoked.
+ *
+ * Note: If your Vaadin 7 application is integrated into another servlet-based
+ * application, it could happen that VaadinServlet is not initiating the HTTP
+ * session. In that case you need to call
+ * {@link AppSecKitInitializer#sessionCreated(HttpSessionEvent)} manually using
+ * {@code null} as parameter.
+ */
 @WebListener
 public class AppSecKitInitializer implements HttpSessionListener {
 
@@ -45,6 +55,10 @@ public class AppSecKitInitializer implements HttpSessionListener {
                         "AppSec Kit not enabled in production mode. Run the "
                                 + "application in debug mode to initialize AppSec Kit");
             }
+        } else {
+            LOGGER.info(
+                    "VaadinService was not available during HTTP session init. "
+                            + "You may need to run AppSecKitInitializer manually.");
         }
     }
 
