@@ -163,9 +163,11 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     }
 
     public void refresh() {
-        getContainer().removeAllItems();
+        BeanItemContainer<VulnerabilityDTO> container = new BeanItemContainer<>(
+                VulnerabilityDTO.class);
         AppSecService.getInstance().getVulnerabilities()
-                .forEach(vln -> getContainer().addBean(vln));
+                .forEach(container::addBean);
+        grid.setContainerDataSource(container);
 
         BeanItemContainer<DependencyDTO> depsCont = new BeanItemContainer<>(
                 DependencyDTO.class);
