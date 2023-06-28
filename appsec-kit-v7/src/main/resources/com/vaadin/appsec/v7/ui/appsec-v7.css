@@ -47,6 +47,12 @@
     padding-bottom: 3px;
 }
 
+.vulnerability-details-view .vulnerability-back-button {
+    font-size: 24px !important;
+    font-weight: bold !important;
+
+}
+
 .vulnerability-details-view .vaadin-analysis-title,
 .vulnerability-details-view .vulnerability-desc-title,
 .vulnerability-details-view .references-title {

@@ -1,0 +1,3720 @@
+{
+  "bomFormat" : "CycloneDX",
+  "specVersion" : "1.4",
+  "serialNumber" : "urn:uuid:f0c70e23-ce1b-4bc9-8839-f9b6ccb8047e",
+  "version" : 1,
+  "metadata" : {
+    "timestamp" : "2023-05-25T09:49:18Z",
+    "tools" : [
+      {
+        "vendor" : "OWASP Foundation",
+        "name" : "CycloneDX Maven plugin",
+        "version" : "2.7.7",
+        "hashes" : [
+          {
+            "alg" : "MD5",
+            "content" : "436dfb24c63a322708e4a5143d8543af"
+          },
+          {
+            "alg" : "SHA-1",
+            "content" : "3ef2e8728dc9eff2f129c34057e46e9d2b10629a"
+          },
+          {
+            "alg" : "SHA-256",
+            "content" : "c185b79bf0f9264f43bc8c222c44db67bea275bb727e3327cf9aea6bf45292c9"
+          },
+          {
+            "alg" : "SHA-512",
+            "content" : "41488733e31e6c5315327dcc86187c2b9a6b96cd08f7e2157ce130688afde29c313fc6a73edb8a76333a930c78874aa2eac874448920030c0f7af0ac05e65ced"
+          },
+          {
+            "alg" : "SHA-384",
+            "content" : "f9462f86240fd9fc0942f34981e6d2371f252aa1a4e5e8c3c14e7f0f1a4e4de69ef972e51cf09a749afb6d97c13e67ed"
+          },
+          {
+            "alg" : "SHA3-384",
+            "content" : "c755af6239348bc7dd1e1e6b5f14f7cf7e1560d689b252d9610cd865fa4b419d0b8e26260731dfc5da2176b6e706b414"
+          },
+          {
+            "alg" : "SHA3-256",
+            "content" : "309aac91005470c9c834354ab918759e2ae7ec52fc1676002621a5bbdf3b7827"
+          },
+          {
+            "alg" : "SHA3-512",
+            "content" : "c634570dcf8302e61005e5fa91a9a0d9b81542f731967b3c9f6d3ef89e3b945bd36d7ab69e2ebad8124b9c05da504361c8b36a8ce528d844409eeb7df4eea6ce"
+          }
+        ]
+      }
+    ],
+    "component" : {
+      "group" : "com.vaadin",
+      "name" : "appsec-kit-demo-v8",
+      "version" : "1.0-SNAPSHOT",
+      "description" : "A parent POM for all artifacts by Vaadin Ltd.",
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "Vaadin Commercial License and Service Terms",
+            "url" : "https://vaadin.com/commercial-license-and-service-terms"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/appsec-kit-demo-v8@1.0-SNAPSHOT?type=war",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://vaadin.com/appsec-kit/appsec-kit-demo-v8"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/maven-integration/appsec-kit/appsec-kit-demo-v8"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/appsec-kit-demo-v8@1.0-SNAPSHOT?type=war"
+    },
+    "properties" : [
+      {
+        "name" : "maven.goal",
+        "value" : "makeBom"
+      },
+      {
+        "name" : "maven.scopes",
+        "value" : "compile,provided,runtime,system"
+      }
+    ]
+  },
+  "components" : [
+    {
+      "group" : "com.vaadin",
+      "name" : "appsec-kit-v8",
+      "version" : "1.0-SNAPSHOT",
+      "description" : "A parent POM for all artifacts by Vaadin Ltd.",
+      "scope" : "optional",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "fa6a5985e0f7750030685a8b9c3af712"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "af4a4452c27e8cbfa0bd312f49bd67b6f672e2f4"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "8ccee46a290b38ddfc2895272a6cb4e0fc0539ff2ad963316b8af6bb76e21f78"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "9b823caf0e998252c56bb33e724af6c17ddc523c9328a602d4df8fd430fd0e6ee21fc15c997a892992396d2963f121704dd5282058577f8a3fc849f93d64fa87"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "ac12a4006b0bb38377c5e1cc17b6736da9725690a247b4aad93376a6b6076196ba49924678fb43d02e655391c47ce640"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "5822e5689ada56c62b11a0cd0d8c08b0739822d14baa244d893c1006f07f379c0133b89158f6980b9c4fe3b85c35c8f5"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "205a453f46708d99593eadea1043b3f46ec116134ffc0e0b1f507221dab6e4a4"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "7934c7c12d1375ac28a472c9ff25c5fd702bd726f3f1e231858d766fef5ba0ca6fa84c484da4dd54d44d5dcc910926606dc120dc90e271c53d6affdccf3588a9"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "Vaadin Commercial License and Service Terms",
+            "url" : "https://vaadin.com/commercial-license-and-service-terms"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/appsec-kit-v8@1.0-SNAPSHOT?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://vaadin.com/appsec-kit/appsec-kit-v8"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/maven-integration/appsec-kit/appsec-kit-v8"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/appsec-kit-v8@1.0-SNAPSHOT?type=jar"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "appsec-kit-backend",
+      "version" : "1.0-SNAPSHOT",
+      "description" : "A parent POM for all artifacts by Vaadin Ltd.",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "8493e61d9b77686fbddffa53e3625311"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "dff418ca88c2573798b34113b66cc45c7bebef4d"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "10360ddd71fe985f817a56b91cc7a481e0c966a3ea8af154cf2e83623f7dbcb7"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "50ea0a62603b3e66aeea3cc65f628d1a32cf7028a7dd03b2b3ee8d8929b8e464dfe0387d28911cff4b68813c7583f95dfc4ec06f9502a7c18524eb9af23b9c7e"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "ac693ede190ab80b4c5bf2b89697a867547fd6393d17e154f5704cef95f5a1492b69fb08b34332749a2855156524d61d"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "51fe73b36841a1299c74cb3613caa3fcb5b65c30cb05802e6ff4ee35fbd3467ab7bd70409b78ccad343b852832bd1cbd"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "854262c5965917b5cf39826717192d9f28b8d09f7584b3c0c30e86c2fa53137e"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "a3abf4f5b83b5a8d5a937707c725d5b38794c592eb34aaeee8fd0078b6a5f8c2165df2c545b3e5711b101070e042e9b35893e4b31b5fd2c88d5714cad549e571"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "Vaadin Commercial License and Service Terms",
+            "url" : "https://vaadin.com/commercial-license-and-service-terms"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/appsec-kit-backend@1.0-SNAPSHOT?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://vaadin.com/appsec-kit/appsec-kit-backend"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/maven-integration/appsec-kit/appsec-kit-backend"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/appsec-kit-backend@1.0-SNAPSHOT?type=jar"
+    },
+    {
+      "publisher" : "OWASP Foundation",
+      "group" : "org.cyclonedx",
+      "name" : "cyclonedx-core-java",
+      "version" : "7.3.2",
+      "description" : "The CycloneDX core module provides a model representation of the BOM along with utilities to assist in creating, parsing, and validating BOMs.",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "a64dcd07f6320e5edaead40cdac5d2ae"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "2a454fbde41c35b9c613b9d5060c1e2c7bf277fd"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "88193228f85a955127dc73e1c72efc9e08e18a01d227df47d0865dc20eceffd1"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "7fa59ef77325e5ed84549f501592b418e50d7e1dac99a3f335e99d08d6d59e9983605c6356bdc94b6e175bcf08fb2728805479ab1d14a21c49834f4413155419"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "d4cddd5fcc7ac4040205191fcd9beb09a19c5687828c8c725e04a90741b98fe032bf64487bd53e04cab201360ff6e2e8"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "0890f2cc1dcf98c8e48e41172f183a6ebb90391ac8d040b8976f53cd3a9b56eb393382b814a2950996ad4f3879b1a5e3"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "a57e5490445b752c8ed390babdef31aeda8a3ea599001ce844472d290f41d07d"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "e94760233b5f4e3de376d97584de848147d37f2d0cedf34f199c513112019f9c25d77b3effa3f9e395d89cad88447cfac24964b954c98d9e2f67dda08573b652"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0",
+            "url" : "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.cyclonedx/cyclonedx-core-java@7.3.2?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/CycloneDX/cyclonedx-core-java"
+        },
+        {
+          "type" : "build-system",
+          "url" : "https://github.com/CycloneDX/cyclonedx-core-java/actions"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/CycloneDX/cyclonedx-core-java/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/CycloneDX/cyclonedx-core-java.git"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.cyclonedx/cyclonedx-core-java@7.3.2?type=jar"
+    },
+    {
+      "publisher" : "The Apache Software Foundation",
+      "group" : "commons-io",
+      "name" : "commons-io",
+      "version" : "2.11.0",
+      "description" : "The Apache Commons IO library contains utility classes, stream implementations, file filters, file comparators, endian transformation classes, and much more.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "3b4b7ccfaeceeac240b804839ee1a1ca"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "a2503f302b11ebde7ebc3df41daebe0e4eea3689"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "961b2f6d87dbacc5d54abf45ab7a6e2495f89b75598962d8c723cea9bc210908"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "5bd78eed456ede30119319c5bed8e3e4c443b6fd7bdb3a7a5686647bd83094d0c3e2832a7575cfb60e4ef25f08106b93476939d3adcfecf5533cc030b3039e10"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "114f1e324d90ad887c177876d410f5787a8e8da6c48d4b2862d365802c0efded3a88cb24046976bf6276cadad3712f0f"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "80288c03ad4d80d69f91d056ffc5570d49a9c76bf54ad2dff0121ecde26a560df76d05156f281f5c6db2a38ff07a873d"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "5adfb5ccaf5f21a549422f426118a9542673926fcd18c68390cf813e791dcf6c"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "7573f47f0babb53cefdc7c2309a0b982d800139064537b0797da442853d081010ad7c3c74a500598a0f800639a5d540eca21963ea652c68613907059bd4278c2"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/commons-io/commons-io@2.11.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://commons.apache.org/proper/commons-io/"
+        },
+        {
+          "type" : "build-system",
+          "url" : "https://builds.apache.org/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://repository.apache.org/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://issues.apache.org/jira/browse/IO"
+        },
+        {
+          "type" : "mailing-list",
+          "url" : "https://mail-archives.apache.org/mod_mbox/commons-user/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://gitbox.apache.org/repos/asf?p=commons-io.git"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/commons-io/commons-io@2.11.0?type=jar"
+    },
+    {
+      "publisher" : "The Apache Software Foundation",
+      "group" : "org.apache.commons",
+      "name" : "commons-lang3",
+      "version" : "3.12.0",
+      "description" : "Apache Commons Lang, a package of Java utility classes for the classes that are in java.lang's hierarchy, or are considered to be so standard as to justify existence in java.lang.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "19fe50567358922bdad277959ea69545"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "c6842c86792ff03b9f1d1fe2aab8dc23aa6c6f0e"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "d919d904486c037f8d193412da0c92e22a9fa24230b9d67a57855c5c31c7e94e"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "fbdbc0943cb3498b0148e86a39b773f97c8e6013740f72dbc727faeabea402073e2cc8c4d68198e5fc6b08a13b7700236292e99d4785f2c9989f2e5fac11fd81"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "c34b8a0e0eba2168ad56fedeb7a1d710b6f1d3f1ce6aae99a4e0247bd120efbbadc8dcb2f731045b8a16e3efd30604dc"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "8ad6ebe7754bf0caa8cda7e59c0e95360d76e06a7ad6aeec5637985519dbd1dd06e7eed04711039f36ec4c49de280def"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "18ef639b2aeeb5aedffb18dbf20c79f33e300d99fb31b131689639cc470e6e4c"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "fbea96114dcf4f31cfaaa99987be756ddda3a6c74f8c835461997df794d54b92da1f60fe5c3f1f2a43cb8c5f5db7f4048bef77c70993673c7a93f3660fffc8da"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://commons.apache.org/proper/commons-lang/"
+        },
+        {
+          "type" : "build-system",
+          "url" : "https://builds.apache.org/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://repository.apache.org/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://issues.apache.org/jira/browse/LANG"
+        },
+        {
+          "type" : "mailing-list",
+          "url" : "https://mail-archives.apache.org/mod_mbox/commons-user/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://gitbox.apache.org/repos/asf?p=commons-lang.git"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar"
+    },
+    {
+      "group" : "com.github.package-url",
+      "name" : "packageurl-java",
+      "version" : "1.4.1",
+      "description" : "The official Java implementation of the PackageURL specification. PackageURL (purl) is a minimal specification for describing a package via a \"mostly universal\" URL.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "f8b3a23e6402d317b612251c83d292e7"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "0a0d1009191c1cf6b04f40d26e4717596f3a90e0"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "8e23280221afd1e6561d433dfb133252cd287167acb0eca5a991667118ff10a2"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "ea5ed91a395e3c8ef18d575d363dc30302986dc5cc8423e97950708cd48dd87e97176619a246d72e8f5b4ff1a7fbb2afb5e9b3c7a11aa7340b540655ba4d4e9b"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "791d86830598ccce6ea59faaa7ece317b84ce1b245194e39cf576f65250b32c8a62c0660478a4d4038040b8650e520b3"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "c2354f6e79b3feefa44b289a53b9ee05a4db20d75a6a367a4880a2028ec8306fd45c5495962381709b15134136bd3ed6"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "29888a1b55158593ef90003638a7ea204b0cff1d255f48780caa37e1c52bcfe3"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "3bb0b2ef76d2dc0cff23f70541091bd30744d1fb0e240aca4c930f01f70314f1f7cf80552d0116b77333a2c3a3025b217fc3aceca2755469f6871983d5e9740a"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT",
+            "url" : "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.github.package-url/packageurl-java@1.4.1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/package-url/packageurl-java"
+        },
+        {
+          "type" : "build-system",
+          "url" : "https://travis-ci.com/package-url/packageurl-java"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/package-url/packageurl-java/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/package-url/packageurl-java.git"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.github.package-url/packageurl-java@1.4.1?type=jar"
+    },
+    {
+      "publisher" : "FasterXML",
+      "group" : "com.fasterxml.jackson.dataformat",
+      "name" : "jackson-dataformat-xml",
+      "version" : "2.14.2",
+      "description" : "Data format extension for Jackson to offer alternative support for serializing POJOs as XML and deserializing XML as pojos.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "25e7b018ae4124380443b3640ee55a38"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "1c162dd3006c0b7608becd55af4639f2c7b5a79a"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "edbda6c775a36049cf0088b111ab958cca0dc70cb9326918d6cf153cb3fa426b"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "480465e29c123a8becc74799cc38ebb1951b7fa2ee6a05af76c26b7a245fbe0c8161438729f25f38eab0988520b5925872a4b4f068523a2801d76fe53bca0cb7"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "f587c3cd5dfc7f9a97d1943e1244eaa27adf767bb0abedc701f365baba02b856003a9bfd697ddf8d530fb7ac4bb8e290"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "9b705359248dc866aecea82487219173c6c0edd32e57069f3d8575e3ce2fcec11fed88f415dff4c6a24f189b176d15a4"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "10590531489767ad82852cfbc15790d1e2a8dcbf1528025d3714a7cd35551bea"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "f22f8fa99e0a8c1ebca99876e9775ed9da8cf90b9d658feb91a802991074257980e7606a62b3daf325df59417da95d65eae206de4f1af451f6149f8b37c2f38c"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-xml@2.14.2?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/FasterXML/jackson-dataformat-xml"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/FasterXML/jackson-dataformat-xml/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://github.com/FasterXML/jackson-dataformat-xml"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-xml@2.14.2?type=jar"
+    },
+    {
+      "publisher" : "fasterxml.com",
+      "group" : "org.codehaus.woodstox",
+      "name" : "stax2-api",
+      "version" : "4.2.1",
+      "description" : "tax2 API is an extension to basic Stax 1.0 API that adds significant new functionality, such as full-featured bi-direction validation interface and high-performance Typed Access API.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "af8377bc7882332e22456616a9f164f6"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "a3f7325c52240418c2ba257b103c3c550e140c83"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "678567e48b51a42c65c699f266539ad3d676d4b1a5b0ad7d89ece8b9d5772579"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "00efc5d4d17540fb180c5b20d456630a8b3262dff46676689ae916ba16f0fbd9b1a71c7badfb254faad6597f94fed1edb96f77c15f40178eaf4d8cd35cea5e8d"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "97a6a9f0cc666776e4a4f08729c303d2a602ce5c25ee633cd6c54c72f12d11e9d43634ca6ca4ef7da5973a52030384da"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "683a1f110ab84333e7517dabe175b91d7ea2fbead2f9d02acf798c588a7508bc67580642afa8d57441bc56ce610d5b0f"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "5e8e54209fb6b580e928e703ef11645aff1a21dfd47cca2dc0e53d0befaef09c"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "d79338a481605c94e144c967cb7adbc6cfd06ee6a1182b5ebc8cd8ad3deedd707931e404aa197bc94d3b5a5d82a2e6dd6a2f6cc9dafc42ce3ad5061076b05199"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "BSD-4-Clause"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.codehaus.woodstox/stax2-api@4.2.1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://github.com/FasterXML/stax2-api"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/FasterXML/stax2-api/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://github.com/FasterXML/stax2-api"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.codehaus.woodstox/stax2-api@4.2.1?type=jar"
+    },
+    {
+      "publisher" : "FasterXML",
+      "group" : "com.fasterxml.woodstox",
+      "name" : "woodstox-core",
+      "version" : "6.5.0",
+      "description" : "Woodstox is a high-performance XML processor that implements Stax (JSR-173), SAX2 and Stax2 APIs",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "7faa8bf352ed3d280244cbc43f55c658"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "cafa8aac5ddf104d28f172f19294d88d5e8c24c0"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "21ad5f842f5332e0e2b56631178df45a8d205921d8370e2d5f557dc7f76cf4e2"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "491e0659c8ffe61a8aa8a5e099af6722e6c13313b9607490b28c389b35cc15683df1c360b1e5e161d6067540064188213a481f53f434445979c99925fcd2aaff"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "1f20ddfb41422b3a829d0ee2440c37c597e919a1c336df812bb6946639702895b112b6b13859dce195389e2e140a326b"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "f595086bcb02ea7f2d403dbf8f640da6ec11eecad366849dded6ee35cc757280084dc1aa98fb4dd07a52bad745ea38d5"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "19bacb8d935f29a492edde2d2a0c36b74714c37181aa8cfdc5232383ae0015d4"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "678f14a93c4e60ea806aae894db1e89ed3ff3fdf53e899071ad96d4f9038169f0f50d6ea427436a47337273de3fa2f82ba67849180e9b89ce8ebf9252645fa85"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.woodstox/woodstox-core@6.5.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/FasterXML/woodstox"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/FasterXML/woodstox/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/FasterXML/woodstox"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.fasterxml.woodstox/woodstox-core@6.5.0?type=jar"
+    },
+    {
+      "group" : "com.networknt",
+      "name" : "json-schema-validator",
+      "version" : "1.0.77",
+      "description" : "A json schema validator that supports draft v4, v6, v7, v2019-09 and v2020-12",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "15b19c3f5e1c9f5c86de5da7f95b0fe2"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "29d953a66be49e6aeb8dac1310818b8e037e237b"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "968991e5718520cdd7b224770f790cf2c241cddf64d10a36c21f9f8b4a15e79c"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "bcb98ae58eafec71e85b2611ae4e8d089a3de52cc4f89884b6e40488399d0015a4d00af7054446ef1e01760cf21c6aa5e370f37768f94402b1a7c603a0a91822"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "f3ab73077b7d8628fe0b44d593d246dad39af4d61fcdcaaca602184b5b9bd68cf763a1de5430ebf257a59652f5758990"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "08bdd945d9a217855379790ea75883632069d7db6504eae80c9c021d241c0026bfe761fd409f1c2234d135883a0fe984"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "e34b8300367ae06dfe64d386893aef27e6e82b14245b4fbfc5e4ab1aafb79214"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "7523e5f2d37ab6ac9ef93f78cb23b82ea2c2507bdc051a0c508b4b729980c6984fdca2a181331f3a468ff705fc5aba5ac9365b42861bc72a18e663690c395fe2"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.networknt/json-schema-validator@1.0.77?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/networknt/json-schema-validator"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/networknt/json-schema-validator/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com:networknt/json-schema-validator.git"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.networknt/json-schema-validator@1.0.77?type=jar"
+    },
+    {
+      "group" : "com.ethlo.time",
+      "name" : "itu",
+      "version" : "1.7.0",
+      "description" : "Extremely fast date/time parser and formatter - RFC 3339 (ISO 8601 profile) and W3C format",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "4f9277e3108caa3314836d8f20f9cf94"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "00c6977b9d42efa3f8c95c31db5313a96ffc1724"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "55ceb418c9e8138c4fcf62e213c4c814d89e8a84c827d395407cbecba5d791e7"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "b29808a998e120d6fa97a19ea92402e57d06b92ddb98b892ae7c9de044b9e1d805dca2f7c0fe7faaa1fced7eecbda927d709113727a050972f24a75aa29525b8"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "f63cbcc14966028fc81feec87bb5f948e0acc0a1683e9147eafe71c98cf3bb38d871bdccfdf70d94c985e1727b00ae7a"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "f95deb0a7c863dfc3e595a1398beecfd4baa7c3b5c8f43c3324e374de58d8e13891b32cb62d67d0e44df384fa320246e"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "37b170afbaa74ad33e4dfb402aae14a2a026fbde83cbad0e61aee65b5a01f55d"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "f87bbab20f0ffd19ad27225b623b44cfa693fc83b27eb828acf0beeda846a13a9139a11e32d59cf81aa93da08af02335dddf59b2afc5a36900478a04c09c6218"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.ethlo.time/itu@1.7.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/ethlo/itu"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com:ethlo/itu"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.ethlo.time/itu@1.7.0?type=jar"
+    },
+    {
+      "publisher" : "FasterXML",
+      "group" : "com.fasterxml.jackson.core",
+      "name" : "jackson-core",
+      "version" : "2.15.0",
+      "description" : "Core Jackson processing abstractions (aka Streaming API), implementation for JSON",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "884fa0e39483933acc1168184c002bb9"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "12f334a1dc9c6d2854c43ae314024dde8b3ad572"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "5b483f68fa9dd6aa37da37d1f79dd5c4b9464238f4f0660a242cb6b5c724950c"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "8cff3de29dfd4a4869b4fcf018771f11313845ed67dfd08518dd668f2a818bbff6532a1737dd10a5a20b1f27fd4705a0b9ee32adad06c7087ca0ab2b81f2164b"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "b81d5537f1b061a0bf1f332c384c205707c099d2e43cb029727efa7ba089259e9d78c475a3c0689b8879a4aaf98427b4"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "d02c844d613289e7415774cfff17c3b319a935ffb46a2b2f86f4479a8c27c4584f9c37b79388c7230af4d1b0623faad6"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "e6545c56d6043df2f224041cc29754b4b6067a44b7ccdbd05b4ccae86f911721"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "8f233f21aaa6ad2142a75522aef0519596ccf1962b64a5c3bfd28ae81976d1b0ace427df19fb76c7a585fec7cd59f91cec4c82c85b8a728255a7f3aa7dbe12be"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/FasterXML/jackson-core"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/FasterXML/jackson-core/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/FasterXML/jackson-core"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0?type=jar"
+    },
+    {
+      "publisher" : "FasterXML",
+      "group" : "com.fasterxml.jackson.core",
+      "name" : "jackson-databind",
+      "version" : "2.15.0",
+      "description" : "General data-binding functionality for Jackson: works on core streaming API",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "2cfab8609aef4ef886ec2c8f4167bb24"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "0d41caa3a4e9f85382702a059a65c512f85ac230"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "00c5a5d5ae71ac8e8d5b8da606841e2251c806355939cb5d51c4cdc6b644a0dc"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "2e71b6bda082a09f1c85c783896d13dc68dc818f1cb02e773a1569890b0daef8ea6ab4d863f465681fe07525eb9773d37ff2bd7eff6ba4f05b736d50c471e124"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "391f4616dee41be92754fe83e88da2033c81d83e5304173a34325ce52a584255e9034786bfecda85d3b563e78810d7ae"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "72adacef4d228b9161024615511614083556afd9d684567b8a7bb6e7ee55dbfce4efdc10ca74b1a874c0037ed6db9fa0"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "f13a5196937900cf3c582ada8c83e360c23c4f9cc0f6b9abc9aa0cf5a9ce99c9"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "5165c9041d2e1a05ad04fe7942ecf3e0bf18a713081b749e9687467e501afebf7682b466363f49d69c81ae2786423efa6c3564300ee443c72c6b6d6d8ab27e5c"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/FasterXML/jackson"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/FasterXML/jackson-databind/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/FasterXML/jackson-databind"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.0?type=jar"
+    },
+    {
+      "publisher" : "FasterXML",
+      "group" : "com.fasterxml.jackson.core",
+      "name" : "jackson-annotations",
+      "version" : "2.15.0",
+      "description" : "Core annotations used for value types, used by Jackson data binding package.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "cb0a97fc66b8cfa001aee80d51dc6722"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "89b0fd554928425a776a6e97ed010034312af21d"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "91adcd3dcf5fd9a16499934e7536a23d456692a0093e3d4fd52f138c3936348c"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "a35abe45ffd708ec5f312e293026f564b405ea82ba7e999783c65e9172095761ba52229949572bb8ee10a264050f486d0ef334a9eab2c77be359fcb1788f393f"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "7dfece1492e1441d31475e5e9dfcf547043dfa3ea131b35584fac4fa3fac5949acd43f4baf802b98bdfff5853b08c1f7"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "54e0ddf27c85829a285695ceeba2d61ace91a3a60da409417617292dc1a7cedb2cfc289ec031f7dfcdd9f0dac1c65737"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "c1f08795bf74741f06069ec1bd672a51f4a1202c251e07b33016275ba185b43e"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "7faf2eb6e38d4e4121282e19d67587f043006f3a4929819ff5afac0d1a3f7a3bc5797cd7022782f6c0e8c856ba76001a46d6daa590d8b7bcce8ce4b7512d8e31"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.15.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/FasterXML/jackson"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/FasterXML/jackson-annotations/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/FasterXML/jackson-annotations"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.15.0?type=jar"
+    },
+    {
+      "group" : "us.springett",
+      "name" : "cvss-calculator",
+      "version" : "1.4.1",
+      "description" : "A Java library for calculating CVSSv2, CVSSv3, and CVSSv3.1 scores and vectors",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "4e02c31221121da4920f7e419b058ee2"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "8db4648d457df0aa955d34270f416647cbddba36"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "fa47029010c209762cad63cd3ea4dfb95cb83a6dedc6d148be579991cf7cc682"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "8f6813108e648c7a5988f73c2ea7c555626f7c6f4c73e7b37e5a5138dc1436378dbf7ac4ffde453cacbae5079cfd9691cd2101d39b1359afffa759b9f523129c"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "2f49681f515b1dd5338f026f42b951ac0237d293fd824f917b077f9e58d33eef601d1de6c9cd1eb6ff0d6cdcd78ed9c7"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "5b164d8a49c78480d7fcf74be67463d881a4604a8b69c933fc2395a1ebf497a8fd9fd8ee3a6b756f777200a5f7310f19"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "c230ea81db59948d037caf9ea09b50227a3c5ffb31ee40f06d9d96a5d1259dd7"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "19a8092b01599aad845b0af0c48123c50f0ff0812171798b8bdeada4285117643643cb5248248d7123e4be37aec84673dd349fb4345d2e5014537543cb474bbb"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0",
+            "url" : "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/us.springett/cvss-calculator@1.4.1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/stevespringett/cvss-calculator"
+        },
+        {
+          "type" : "build-system",
+          "url" : "https://travis-ci.org/stevespringett/cvss-calculator"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/stevespringett/cvss-calculator/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/stevespringett/cvss-calculator.git"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/us.springett/cvss-calculator@1.4.1?type=jar"
+    },
+    {
+      "group" : "javax.validation",
+      "name" : "validation-api",
+      "version" : "2.0.1.Final",
+      "description" : "Bean Validation API",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "5d02c034034a7a16725ceff787e191d6"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "cb855558e6271b1b32e716d24cb85c7f583ce09e"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "9873b46df1833c9ee8f5bc1ff6853375115dadd8897bcb5a0dffb5848835ee6c"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "2f136d337c49a83dc0eff1caae74ba11413269b779257ae0b76864e207abd729b2392ab2ae3a3dc7a6d065d60baef844ad797a11f69589119a827ccee5c20840"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "c0559eff2537f82b11f611546b0b387f8076efdee8e90537b2c9f0f2325cc7686c1fbbf4b00d6217dc33677f4d5382f8"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "e26cb51beade8cd45a737002c98a400c800928b9a26a702a1833c29e1e0868af355460416d9d813b0830a184a9fefc08"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "987342d3fd7c3275cdbde0295e91a0dfac15058f73b57341ba40cce62f581195"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "c8e8c4f83fb4c3d881c7dfda07650b035db00251aa8b8030f00c4a0cf1ed919665a76c44a0da78b1bda118279cbf26646c1b813c1f3c21be2b8099020ffdfd01"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0",
+            "url" : "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/javax.validation/validation-api@2.0.1.Final?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://beanvalidation.org"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://hibernate.atlassian.net/projects/BVAL/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/beanvalidation/beanvalidation-api"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/javax.validation/validation-api@2.0.1.Final?type=jar"
+    },
+    {
+      "publisher" : "GlassFish Community",
+      "group" : "javax.servlet",
+      "name" : "javax.servlet-api",
+      "version" : "3.0.1",
+      "description" : "Java.net - The Source for Java Technology Collaboration",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "3ef236ac4c24850cd54abff60be25f35"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "6bf0ebb7efd993e222fc1112377b5e92a13b38dd"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "377d8bde87ac6bc7f83f27df8e02456d5870bb78c832dac656ceacc28b016e56"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "1e087f1e4632048f1c6ea12e3820a30c7a6e66b13277ec8e784d8c5aba99335cd90cdb08e23756e815324cc9c8dc22d0937c7ccf4b89ee00222cd5e4a1d2a0de"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "400399c84adfb450fe8f181c43ce7036d47a27c904707454abc97c8ddb89ec57033d740af53fb48e5c1a1a0da5649096"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "a60e811e353a61f7c7c5fb4118dcdf911074502a189b3174bdea176bae663763aa111e9c2cf54fa175735fe25072bef9"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "1b271f5b14ef4d629b0e2f044f0d49927f2bd5862c4d1bf6accf356b89c7823a"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "3db8e064f87c1c5b8a3a152575a6651cd72361beac31000c8b9f66c919016ece425f8f541ff35ff6c999241686b32a207a5add68d459f00e3e07e83d7752aefd"
+        }
+      ],
+      "licenses" : [
+        {
+          "expression" : "(CDDL-1.0 OR GPL-2.0-with-classpath-exception)"
+        }
+      ],
+      "purl" : "pkg:maven/javax.servlet/javax.servlet-api@3.0.1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://servlet-spec.java.net"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://maven.java.net/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "http://java.net/jira/browse/SERVLET_SPEC"
+        },
+        {
+          "type" : "mailing-list",
+          "url" : "users@servlet-spec.java.net"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://svn.java.net/svn/glassfish~svn/tags/javax.servlet-api-3.0.1"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/javax.servlet/javax.servlet-api@3.0.1?type=jar"
+    },
+    {
+      "publisher" : "Vaadin Ltd",
+      "group" : "com.vaadin",
+      "name" : "vaadin-server",
+      "version" : "8.20.0",
+      "description" : "Vaadin server",
+      "scope" : "required",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "2140d853ac0a34254ca48240bc0e51fd"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "8815bb8aad29f61db7377dc32eb9d5bb9bdd83fc"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "dbc13196d83dd67d532c2f2c8c35d7bf05fac1b15acecc9f90edb5b8442b5e98"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "2120ad56ebb51f1f7d8f0969f1d274e8004f2dd395f5e1406bcbdba53b8a1b3fcead9932dbc5cfb5cbbd0c077e4e24000a36cd180216377e431345d0e0197eda"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "ffedde4e0b508a92a1a493683f5af3033c40b270f6ee33b8e661205a2623f4f11e9a4f06b9cf687dfdbd308aec6d7aaf"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "0a62367beef67b9010823ca50ed4746f5430135d0c9783cbf03b9f4a965b9d0471e1a482b50ac54d40346bc53ba8b6ca"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "6d83b71b1838b64b4e172e661dc773e5ddaac408754631f1bffabfb79b449812"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "c8be781a5a68f64770a0e9b7309a685e7ac69dea68680a991acec81dfcacd4b00a846f2ad2cc6d8b93b319e14825b538da8d3b34c813945e107128eba32f4a85"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "Vaadin Commercial License",
+            "url" : "https://vaadin.com/commercial-license-and-service-terms"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-server@8.20.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://vaadin.com/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/framework/vaadin-server"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/vaadin-server@8.20.0?type=jar"
+    },
+    {
+      "publisher" : "Vaadin",
+      "group" : "com.vaadin",
+      "name" : "vaadin-sass-compiler",
+      "version" : "0.9.13",
+      "description" : "A pure Java implementation of the http://sass-lang.com compiler",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "76261c154b1d70a6f4ff669def72364b"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "663088831773c35e033ea1538b96d817ce7cef52"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "8d802c5e3ff25a7aa3b4475cc356ee1daa7b586bd670b86b1c432d55b5d339df"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "5dfd39f8d2b9968c37792a156896144dcd149fe0cbe57c161f020ce8d12eef81a1fa053b0e6f27cc759be5d8690e1a8bf56cf7a5fac7eb0c16d58bc577ea98d4"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "c2133b273f5de5ed8842eaea9a499892cf8522fda327db221544f7bbebeb633e8e4100bfea4b5fe0bd36d2817101ebf0"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "0511e413fa23273b418f020e8f2e75cae2bb63e97ef5abce433ee3d67fc9d089086a876950e5d1d2409945128b1f32b7"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "989e1b1b6915c62ce4e780c9e85c68a0843ec8ed9102e4a43a363fec8d69b089"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "b947c3f8d9861cb734f7b6e74771f23578893631a12e4c67f9e23744db270372dccd9f44762964049fb633173b6cd8db34fc4e200a5e30f777d72fc5b0cc46b7"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0",
+            "url" : "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-sass-compiler@0.9.13?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://vaadin.com/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "http://oss.sonatype.org/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://github.com/vaadin/sass-compiler"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/vaadin-sass-compiler@0.9.13?type=jar"
+    },
+    {
+      "publisher" : "World Wide Web Consortium",
+      "group" : "org.w3c.css",
+      "name" : "sac",
+      "version" : "1.3",
+      "description" : "SAC is a standard interface for CSS parsers.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "eb04fa63fc70c722f2b8ec156166343b"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "cdb2dcb4e22b83d6b32b93095f644c3462739e82"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "003785669f921aafe4f137468dd20a01a36111e94fd7449f26c16e7924d82d23"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "2e8e54a7426fde22f27add41bbd6c002d386377008eca83659083b91070e5be7d5579105fc0113319fdb323bb70795eb6a8cf9877b6c0dcc3349661a926ff547"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "0d7f2004e17d6d6709e71e91a04069163f0bf5db5f1740e571cc9f98b19e83d479a28f6ceb3ce72e0daafe3fbcd5b684"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "097339f35cc2f3da500a676d1d8ad6e4c6b26801d8107e928edc8ff8916db86fa64745f3e441ac0ae8a91a2273e4f934"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "c6ed2339cb02fdf058cc660fa74c6f736c0a71e8341da443bb1e94fda671d541"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "4f6efe3e15d0bea59bc1eaeecbbedadf10fd49e84a57a934e499c1bd0dc421d8a4a25ad99fdbe1faf2242a66e5732d9f3a97f3f534a6fd585c7d59b0db7d5208"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "W3C"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.w3c.css/sac@1.3?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://www.w3.org/Style/CSS/SAC/"
+        },
+        {
+          "type" : "mailing-list",
+          "url" : "http://lists.w3.org/Archives/Public/www-style/"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.w3c.css/sac@1.3?type=jar"
+    },
+    {
+      "publisher" : "W3C",
+      "group" : "com.vaadin.external.flute",
+      "name" : "flute",
+      "version" : "1.3.0.gg2",
+      "description" : "Flute implements The Simple API for CSS (SAC) using JavaCC.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "9b792f9bc5cd201b014602fbd9f51db5"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "048e8c3a235544a0506ca3081519ce114169242a"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "5341fe246cd6fa73e3c512217ecd0bfccf2d4ad8196b707fb88778fae2ed451d"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "6484e4ab4a7c9b2ef193f7e7f24e70864c0ca7cda34d0a94446aa1c124fed8671c8ed44d08c416937a44197cc667a8189b98a543b875ed8ccbb67e67f3ab1564"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "d2c5a5b97b967eac298b6f30ea4550bb676cbbff753889d45f77ac3840f4f3b73ef7532842705ace161afe4d73e93fd2"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "de9d745b729786811cce4f224e2d29cfcc9336597132b0bd09320ab024d339b2c6e28bc163c292e76d6fbc1c770a3189"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "8b8f26f4dbe679d20db5aa6968ad828d535d0c21c2310942bbb461cadfab8d10"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "2ab37131abe66572845c71b1f2b14f68a7d7c4a5163d6be119d4af595d93f52c81ecdf060d53625d066ffa4f098efc8d3f4e70359164f7c0c2a1788fc2754c43"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "W3C Software Copyright Notice and License",
+            "url" : "http://www.w3.org/Consortium/Legal/copyright-software-19980720"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.flute/flute@1.3.0.gg2?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://www.w3.org"
+        },
+        {
+          "type" : "distribution",
+          "url" : "http://oss.sonatype.org/content/repositories/vaadin-releases/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://www.w3.org/"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin.external.flute/flute@1.3.0.gg2?type=jar"
+    },
+    {
+      "publisher" : "Vaadin Ltd",
+      "group" : "com.vaadin",
+      "name" : "vaadin-shared",
+      "version" : "8.20.0",
+      "description" : "Vaadin shared",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "39376366da1cd86a2074dec5ed856321"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "d0fe121311dcf3ca84e4ec1c2954647ff0a053aa"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "750e5f0180834b3493087c4cccbc163e850470f207c1113015e1030fbad5d323"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "70421866878964fa3c4bc11d04994272d80af3f978aba13ee8ca86f761d2a0668ae66aec1aa44c9a6a9091a9d2533df57f34abee2ad6358caee805fd1fbd073c"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "7fd36ace5930465c2a45102a5d82091aa140e18d9ed4359f0bf4f3699b566d9163617658fa2b42c9200e2ca2e1b33d9a"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "e0104380d56febb34ac738044412ec5664e2bcedd43c851c8077ebab69e482fced9e50a8b67dbc039903cb1307ec0938"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "2017940f31c4eaa8060d56a1e6ead0758ad442c7db37adadd00dbe7c3a3ae3e2"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "7c8f32be78acedafb7d57032e932981df3483b29c1dbdc91043b3d2773bf908e22bf4cde0c2057947f5df287438e36c07b6d0d87bb48174efe5b5f45df2316d5"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "Vaadin Commercial License",
+            "url" : "https://vaadin.com/commercial-license-and-service-terms"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-shared@8.20.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://vaadin.com/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/framework/vaadin-shared"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/vaadin-shared@8.20.0?type=jar"
+    },
+    {
+      "group" : "com.vaadin.external.gwt",
+      "name" : "gwt-elemental",
+      "version" : "2.8.2.vaadin2",
+      "description" : "A parent POM for all artifacts by Vaadin Ltd.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "67327ac528eca7d4259d1160ab455448"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "abdfd4fcfbc0652298061be8c70a56a6d6e868b2"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "04f75ee196fffc2253282322e60e99fae3fb434f8d63de3c3098d89f4ed53274"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "cf2859dcb5826b21b6bb8be705608f36e270b0a95945d69ae820c98327f3354d4150b46f9b279c045cf96d998cb8ac3950ba5fa49987c13e78ea54ee93e9e941"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "97f3934ec4d6217f392bb2d3ae731e9c1e6b72f04858467ceab13216489c0f51ab18dff2d82ab61ebd873d5729a3f6fd"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "a41a6ba12b4e8d148ca995cb1bf9e5f6ebfb0640ce92f56fa22bc450e06c6759a0d873c5101f29b3f591433614ff1d01"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "c4104edab947ca0657291d238c556beb0af13e489806785649b5d64cc2a191c4"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "a96ebfe8ef3ac1720c7098c4f48609a8967063f2da7562a1ee673e7a8cf2bb451a61db3439a4f05aff36cf8e7408fd7675961c72fb3786894517254bc62848cd"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://vaadin.com/gwt-elemental"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/maven-integration/gwt-elemental"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "license-checker",
+      "version" : "1.11.2",
+      "description" : "A parent POM for all artifacts by Vaadin Ltd.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "6b2f34ed0f558f94e2e2052f39f9e62c"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "1a199808fface075f0f2292f8bdd3ea921bf8457"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "dc76e0ac18581bcc65aa46143bf30d9298e3bdffd3732f81dccd06c61b3cf5de"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "e038decb7a270241f3279c64df2e1973fe5c5c7a6691acfdfb2bbe911392afaf0e35fe332308f8bf93e43d8ccbee0f86d45d5880fc26c110cea046a0c22687a7"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "515c8d83f3684e2a632ca96f83c42ce63376d06049cd1954fcda7ba147cfdb46f2dbb309fd2ad058906c9a85607a4587"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "4708528edbad2ea0b63e107d763829994586e83c65370262662612eff0e44538b17dd34034b836aba4362421aa4511e2"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "225dc6080bbbf7c569adcd480b09d071a12ad4befa494841261b38463c810bf2"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "24afd6f6e1c01f0fb18c3c9a825b784324dd0efb7739e5305b5c34c936c67f1953874f26dbddd1b56394ebdb92172585f055753d305b556614da075df0ed74dc"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/license-checker@1.11.2?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/vaadin/license-checker-vaadin10"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/maven-integration/license-checker-parent/license-checker"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/license-checker@1.11.2?type=jar"
+    },
+    {
+      "publisher" : "oshi",
+      "group" : "com.github.oshi",
+      "name" : "oshi-core",
+      "version" : "6.1.4",
+      "description" : "A JNA-based (native) operating system information library for Java that aims to provide a cross-platform implementation to retrieve system information, such as version, memory, CPU, disk, battery, etc.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "e981ed24cdcff7aed8f1c58cb86574a7"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "d255136f0abb2c946babc329333c9a1792ba1831"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "9b96406bbdb7707f35e9c4c2b8c3fbd74104d51203ac7c39224a2159d42d4fcb"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "b465083dfbc9308f34987bea5181db5d2dff76369cfcd5a58dd24921ee1c52a5d65776c1f036ad5bc349e56b9c0943b18c7f0162c5c879ec5912329e57b47e8a"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "d4be53fa86b929ae2a845759e56b034b7bef93417a97b65162704629f57508b7e002f51b4e22642b08f459a46658a4fa"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "8e573c624d0e6d937e55de15a26ff2cda0e8a8acc1cb4d57cdfef356b9897baf5b7df227060f2624c6cd74304c179678"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "081c02ca8e3feeaf90e869c45a425ef3ee9526b6e57450b57c5d4e798a55d97b"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "5a98664b065c467eb3a618e353a15b5dd7afba106693cdea79bb04c862caa4844321f5260c1505d0da4ba2faca8b4d411e0e3335cca3961560a9930d252085e6"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT",
+            "url" : "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.github.oshi/oshi-core@6.1.4?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/oshi/oshi/oshi-core"
+        },
+        {
+          "type" : "build-system",
+          "url" : "https://github.com/oshi/oshi/actions"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/oshi/oshi/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/oshi/oshi.git"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.github.oshi/oshi-core@6.1.4?type=jar"
+    },
+    {
+      "group" : "net.java.dev.jna",
+      "name" : "jna",
+      "version" : "5.10.0",
+      "description" : "Java Native Access",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "2b884b01ad2f62d4f5dd11387a8bf799"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "7cf4c87dd802db50721db66947aa237d7ad09418"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "e335c10679f743207d822c5f7948e930319835492575a9dba6b94f8a3b96fcc8"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "7daf6a8605afff8bfc564b73b1a09ec8384f3ed2a5970f5e29ac3ac52336808e3cb2a083a22e8e00a6da8913b6dfdc093b92ba18a4f6f9ffafbd70006e308fa6"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "999156f37fe9380036bc2321c60f80a1d4d61c656364c6a90f715922ba6d8888567f339da92b3dc4b7ce0bec6c5851bb"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "17fa9e36142242164f29de325874a8e945474d0b737e867550c214263bfa3348b215d802efa4790f867cff95ac478c07"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "9507447194b8f958d95d53d2133d00e3888609772c9cc2cb098cb8ebf999c9d5"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "38b450d055611dfcd99360ace116640c61dcb2657b240c5da5cdd2bae0f29c349388461a73f61467d89622a93c46222179cceccc0f585fc86af55a20933dcc4c"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "LGPL-2.1-or-later",
+            "url" : "https://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html"
+          }
+        },
+        {
+          "license" : {
+            "id" : "Apache-2.0",
+            "url" : "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/java-native-access/jna"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/java-native-access/jna"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar"
+    },
+    {
+      "group" : "net.java.dev.jna",
+      "name" : "jna-platform",
+      "version" : "5.10.0",
+      "description" : "Java Native Access Platform",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "c1ab841070c388ec32b77cdc05f084fb"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "fbed7d9669dba47714ad0d4f4454290a997aee69"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "1f71afd977051bf0109ef5e3767d4e2afd777be894d89788cc0f38ad68f6a16f"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "bc8bfd5a5c9a8a145ea789ac946dc3ee6e9b7f5b721733567df8a1aff0a8499d6b1434306226004bc8bc58fe41ec1fc8a99d5420301682b72f379ae526bfa4e5"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "33a6abf4c295736ddfe832bb2f5aab16fc4a705c9d8e8060fd5925ec97325d8b215fa334da52280db8996d5c7cf27440"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "41516a4dde4ef9d6b3ec0872616d0ce21acf042b91bf5176ef9506b872da06c1cb4986f239665c307e22540dfd1379e0"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "5a05220aad651a2a2e5e6e386ab2d394a3af647dba24ce94108177fb4e3ba9cb"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "ba3645097d9ab0d2641d31ea29941057370e0514a19df05184380001f0c8ba32907e1bf962d491e3aa2949dde9bb7c3c4e32c756b97afb2b8b7a3ddbca5ef0e5"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "LGPL-2.1-or-later",
+            "url" : "https://www.gnu.org/licenses/old-licenses/lgpl-2.1-standalone.html"
+          }
+        },
+        {
+          "license" : {
+            "id" : "Apache-2.0",
+            "url" : "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/net.java.dev.jna/jna-platform@5.10.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/java-native-access/jna"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/java-native-access/jna"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/net.java.dev.jna/jna-platform@5.10.0?type=jar"
+    },
+    {
+      "publisher" : "QOS.ch",
+      "group" : "org.slf4j",
+      "name" : "slf4j-api",
+      "version" : "1.7.36",
+      "description" : "The slf4j API",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "872da51f5de7f3923da4de871d57fd85"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "6c62681a2f655b49963a5983b8b0950a6120ae14"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "f9b033fc019a44f98b16048da7e2b59edd4a6a527ba60e358f65ab88e0afae03a9340f1b3e8a543d49fa542290f499c5594259affa1ff3e6e7bf3b428d4c610b"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "2b14ad035877087157e379d3277dcdcd79e58d6bdb147c47d29e377d75ce53ad42cafbf22f5fb7827c7e946ff4876b9a"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "3bc3110dafb8d5be16a39f3b2671a466463cd99eb39610c0e4719a7bf2d928f2ea213c734887c6926a07c4cca7769e4b"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "ba2608179fcf46e2291a90b9cbb4aa30d718e481f59c350cc21c73b88d826881"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "14c4edcd19702ef607d78826839d8a6d3a39157df54b89a801d3d3cbbe1307131a77671b041c761122730fb1387888c5ec2e46bdd80e1cb07f8f144676441824"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT",
+            "url" : "https://opensource.org/licenses/MIT"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://www.slf4j.org"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/qos-ch/slf4j/slf4j-api"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar"
+    },
+    {
+      "publisher" : "Connect2id Ltd.",
+      "group" : "com.nimbusds",
+      "name" : "nimbus-jose-jwt",
+      "version" : "9.23",
+      "description" : "Java library for Javascript Object Signing and Encryption (JOSE) and JSON Web Tokens (JWT)",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "7bc1585a7fc47bb9cc66e376c1406b4b"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "e2fb2b3784fffdba251db0c29c9f7cb42c670906"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "33ab8084fdae1d75be1b061b1489d4a12045bd7b50c2e24ff152911e4551ec07"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "c9f9f637319b0192688c9c3ef738704e1bbdc332a519e107babf888f989b5cef9abf544127dc49ccd0d05ef178d77f5fb0bac5d8e602663d2ea63802524bdb1f"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "c2639cbc7179ea574a35e601e49fd42e69f29b0ad9bf8b273b551972fd167ce6fb146ddf7dbb7dcd6093e2e9f5002203"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "13fffaee4f3b0486180a7dd2fc229d0112d81234ea35ea82e0077be6b8d9ec52f2148ec281ab83aedb4d8bd05bf00311"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "1efcf46c5de6cdefefeb6625d1fa543ba983aad596707632f0ed3393fa7003a3"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "7dcd01a09414996cbaf798ccb3a1f80906abccb01aaf29c0914fda56e80bc0e3fe4eff40fb3821e1cb124a766e6619c04de86c8fc8e2d74caee223b801115775"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.nimbusds/nimbus-jose-jwt@9.23?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://bitbucket.org/connect2id/nimbus-jose-jwt"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://bitbucket.org/connect2id/nimbus-jose-jwt"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.nimbusds/nimbus-jose-jwt@9.23?type=jar"
+    },
+    {
+      "group" : "org.lucee",
+      "name" : "jcip-annotations",
+      "version" : "1.0.0",
+      "description" : "OSGi Version of jcip-annotations",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "4524f9677bcaac7f15e2d4feec5da1b9"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "ae61631d04820071895117d5d549f4e4efd9e07f"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "408e4831d7fcfcb16d137e51443130ece5b96052ca631af9bc1b81643f3e29d9"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "0de2b5d28ed35b85c92bd1c20ff308e258e76957880c22d7eec168db615120002bc112dfff5e9eab6d0f2f77cd3b2e718a84ef8c89ff872edf067b461cbfd61e"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "e7efd1e38c9f28163b9eeb20c61bcafcb7c8ba7e2ee83adcd168c0de196c8fa2dc06a350af57832e7fe946f83b526bb2"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "7ea935f6a85207005c39ce54bfe786adb6f4f9c6d989b7e1ed5123e795415d5c050679e4b6f3e670aa162bf756670cda"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "180921e09ab7bae312d2519e09eb2c01fa1e099b4e846742b49ccc385b36f4de"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "b6c992995d3c92b1fbcd1db08a69b73b19fb0d6e480123ae510e627d6fa6be933b8ed9444580b80c03291978d7d832cf8124b6c80e6f887390564dd1403b07ff"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.lucee/jcip-annotations@1.0.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://maven.lucee.org/jcip-annotations/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/lucee/osgi-bundle-jcip-annotations"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.lucee/jcip-annotations@1.0.0?type=jar"
+    },
+    {
+      "group" : "com.vaadin",
+      "name" : "open",
+      "version" : "8.4.0.3",
+      "description" : "Java port of https://github.com/sindresorhus/open",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "b6c17e059959b36093d85562fbf33598"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "c5cd0db6622e77875683b9daf3a0b9e901e1c35f"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "739c981ee25c6d82392b4e6ab40dab8ad3c3c919f5f5c0e057332a6b28ff69a7"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "80ec4021b8084f382b1407954dfea13d1aa19a4ad7bd7b8daaa44621afef1fc0954b16d8acad11a3d4dd5b5a31e574564c71e162b7c70e0903835fba39ba39c7"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "4cc019654852b3989fc6b0018fae6efa8f3ffa7f9cbe273829e865a1063aecf78517668b693779bac297a76473f6c809"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "e60face4134cb3e39569a6a1f472e320e0cb6175f43bcc2bedecbf8f8dc910e2f5f994a89e9914a5d9635199ba5665c7"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "121b5c0c9162b494d4a77fc24e2f93652273b516be2d5629eefef6e06bd9253e"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "d339241f04df3c58ed4ce5bb320dff2251d874ddbee6566e6c94f4a70fa8b5392568db9964901a64a5b6d451ca96aa158a4f7656e4cb346b570441f096429470"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/open@8.4.0.3?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://vaadin.com/open"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/maven-integration/open"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/open@8.4.0.3?type=jar"
+    },
+    {
+      "publisher" : "Jonathan Hedley",
+      "group" : "org.jsoup",
+      "name" : "jsoup",
+      "version" : "1.15.3",
+      "description" : "jsoup is a Java library for working with real-world HTML. It provides a very convenient API for fetching URLs and extracting and manipulating data, using the best of HTML5 DOM methods and CSS selectors. jsoup implements the WHATWG HTML5 specification, and parses HTML to the same DOM as modern browsers do.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "4f16c3b17b8c1b0173b1ed9f99f2c27c"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "f6e1d8a8819f854b681c8eaa57fd59a42329e10c"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "e20a5e78b1372f2a4e620832db4442d5077e5cbde280b24c666a3770844999bc"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "2fd0b947ca5295ef470b6bcda9029f0b7eaf568e57f097eae631bf5b8ff56a0d42c7cec10de3e889bcc6fdee503c2f6c8bb187d878552a364d69ac68a31f919f"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "0a791f2414e017c30e48080bcf2fc9a3a733169a899010302c4ec0f1ac6a817cb691f9dade3658ed4a36e0e707d19147"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "e97b8bc81858af6bef5aa0eff5f554507cf22569d0cd1b57be2fd8ce471ff917bac1b6a997e4b61f5d601a9387f9b070"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "0285822976fabf0e54ceb543dbb1e305514028232c242c7b9cdef55ff07ee5f9"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "395baa8567244ad9ad7c0aeca2f8136217ba29d647031ca0137ca4c91bce57b4fb5e5c4270aa94833bd1dd2e72982c2f91f56f876d67bda823765a84e9668ae8"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.jsoup/jsoup@1.15.3?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://jsoup.org/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/jhy/jsoup/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/jhy/jsoup"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.jsoup/jsoup@1.15.3?type=jar"
+    },
+    {
+      "group" : "com.vaadin.external",
+      "name" : "gentyref",
+      "version" : "1.2.0.vaadin1",
+      "description" : "Generic type reflection library",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "af96718e7ca1afc81628ae799649f60e"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "c914574fdf1d7c7b85f58965d10f7a83811bb7c6"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "7fbb7aaa015944f08c0fcf394e4e4e6854ee5a4714c10835adab8d0e4c15c46a"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "71f6d99fef4d8c925349c9b499beced9f98e4ab6153d525de9beb5fcec890955b4609991c5e9addcf478a525afd4b22ed803d127b838b656780c1507b3e562ec"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "acd0e9ce0d9e1e5ab06b457baf744890b10223ca99c789f7ce8f93f7da501325f3261500f9c45ddccade755c778f007e"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "e4f1929e4f6195a9bb68625e008f5fbfe7bc6df6f230d7c37ea5bb763d4e086e2df9a5d9204d84ab12257c4d774c0874"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "7d6a8d15e46c367138ea2af3ca861fe260c0a5ed37d8792b8b9368d2be56a6d2"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "55a93adad2306e9f2e3745e8e6dd20f43456a42d09fa8d77134f92f01af4f0f460dc8787277f4c05769d6f2dbd7827b4f7c316d23a051531eb8f21a54739e390"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://code.google.com/p/gentyref/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "http://code.google.com/p/gentyref/issues/list"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/gentyref"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1?type=jar"
+    },
+    {
+      "publisher" : "Vaadin Ltd",
+      "group" : "com.vaadin",
+      "name" : "vaadin-push",
+      "version" : "8.20.0",
+      "description" : "Vaadin server push support",
+      "scope" : "optional",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "c1c82143dc8acb3450e0d7d2ffb86702"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "25136c04123d7ad691b437110d27d739f848fab0"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "68f6dcb3ae0a1f571f04240052015f5c0b3e168085177a9ccc4f9b7cdfd7213f"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "f54068aefc9aa6ae6d8e30637e8c1d4ad4fbb4e8c251713413ae7633c3ae9c514b905ae9b7a29ca390cdee7d630a6df34fd018ba2f55881593b68b5dacc3bfd7"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "a4bb98a99da5b1833d3c11c007a1f5045c74fd3862b59043373a3d83aa78d3736744c486fe568c3fa19e5399ea1dca0c"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "1f94ce9795f31ae7d7e6019326ebb61156401a4955f213c4c38880d59b3ce45f271cb24cfb338ad23245c5d60ddca63f"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "dc84b16166191d87c1a99f78124eb776e1dc57fa4c52fcbdcfe5bbf997629e44"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "99165b24122400798e8fc93a1b1815845f9febf0ffd88c6f21ad5d2e5c6691b102af4a3358f49e40643d276fd51727fc8a2cf87af0b2633659366bd7233f721d"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "Vaadin Commercial License",
+            "url" : "https://vaadin.com/commercial-license-and-service-terms"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-push@8.20.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://vaadin.com/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/framework/vaadin-push"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/vaadin-push@8.20.0?type=jar"
+    },
+    {
+      "group" : "com.vaadin.external.atmosphere",
+      "name" : "atmosphere-runtime",
+      "version" : "2.4.30.vaadin5",
+      "description" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "086159d0c3cd694032282013566c8047"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "fee5f0714f69183bcfb62a3317153c521ffcb262"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "2c9e171b08993f6ae85d383d6914700c07df4008e42cd07b3d29ba8fb47982b2"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "79b974a182f7bb170ac2e752ef7f13d182ded33c25119c1037af0949c9f0d11204d704ebbcc2172543ede162b1636deea86ced061de31e5f6d3cd87bf5359773"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "1745d7def74fb43077f1a3787ebf179d34ea1703aa98ce2b986043e4267c8265e2ac70c70d80293149ebef94d1016f64"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "a0d652097fa28e70c746400a5b3de7a8e644b6e334d85129bedfde64d97d7f8c56f5cd5fef2b65f216cc33b26fbc84fe"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "0660e3daa14c888d7fd2dffdb99de338f8a48bb25a66e37c29487b2080ab6418"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "4be87a698127bf8203c4292fe32939793360ab0bdf8f2472a0b8c37856fa3f941c708302974f537787eb7c11ac89521d90ef83f7c3c6c813162f32f4d1069ed0"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "CDDL",
+            "url" : "https://glassfish.dev.java.net/public/CDDLv1.0.html"
+          }
+        },
+        {
+          "license" : {
+            "id" : "Apache-2.0",
+            "url" : "https://www.apache.org/licenses/LICENSE-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/Atmosphere/atmosphere"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/Atmosphere/atmosphere/issues"
+        },
+        {
+          "type" : "mailing-list",
+          "url" : "https://groups.google.com/group/atmosphere-framework"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://github.com/Atmosphere/atmosphere/atmosphere-runtime"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5?type=jar"
+    },
+    {
+      "publisher" : "The Apache Software Foundation",
+      "group" : "commons-codec",
+      "name" : "commons-codec",
+      "version" : "1.15",
+      "description" : "The Apache Commons Codec package contains simple encoder and decoders for various formats such as Base64 and Hexadecimal. In addition to these widely used encoders and decoders, the codec package also maintains a collection of phonetic encoding utilities.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "303baf002ce6d382198090aedd9d79a2"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "b3e9f6d63a790109bf0d056611fbed1cf69055826defeb9894a71369d246ed63"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "da30a716770795fce390e4dd340a8b728f220c6572383ffef55bd5839655d5611fcc06128b2144f6cdcb36f53072a12ec80b04afee787665e7ad0b6e888a6787"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "05d0506283716472175d44c2a4766523397bf8a007c18848f9c9a61718cc8aa437f9cb4b91771037ab29a960860b62a0"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "12fad4ef78274b06f97b1243cea6f970088abde082d2de9377d915a34b44f7d7d67807c03e59c849b69f1544e2a9a1be"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "87be248f33f241121f54aad61a9a460a79eabefbf1b5b0dd22aeb95b581f727e"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "8c992c9c569ebaa0bf956a4c5b34fbf5e1ed1c212c2dd896fa216183ee0bcd341e96698af4b9cec7e8880762faa081a3d3a27f51349aa457cb8e373e4f57c788"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/commons-codec/commons-codec@1.15?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://commons.apache.org/proper/commons-codec/"
+        },
+        {
+          "type" : "build-system",
+          "url" : "https://builds.apache.org/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://repository.apache.org/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://issues.apache.org/jira/browse/CODEC"
+        },
+        {
+          "type" : "mailing-list",
+          "url" : "https://mail-archives.apache.org/mod_mbox/commons-user/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/apache/commons-codec"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/commons-codec/commons-codec@1.15?type=jar"
+    },
+    {
+      "group" : "com.vaadin.external.slf4j",
+      "name" : "vaadin-slf4j-jdk14",
+      "version" : "1.6.1",
+      "description" : "Slf4j API + JDK14 binding rebased to com.vaadin.external",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "34fa1d2e66fafb0af3d5bede2b528df6"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "2268b4bb8226e01963357bc9a02a5d56c9992b8a"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "a1f953caaedf990ba23d2d9122e0349b49fef9b0e4a1474617d144f60ad1b7a8"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "d57edd230da5d6a47e3e6dd867fada6ac570a0e1f964bcda9bccd2931f99130d9603b2b93db6ef4b3306826f5322a005fc5b98457367f5f0aabf25fb598d4c2f"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "8e4a2ae6d75630a43af228e7abe475e818816e9e5a930b090d56bb7212bb9a0f0d5d81b5a151f6c9c63eceb78b06bc90"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "07578e538f8c0ca240b7db2c07fc6964b0616e33980203f44b2d9d8b01d725a021385103bd9f6e222f6f26127bb4f830"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "a72c44abf6a6d78b94f5cefb8130eee4c09078cab9b69399305b34433b8f57ef"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "27ad03bb4ab919a6ae8b2164b2fb94d170748e5df96acb2cec0e468a708a5ddd9fe68f615fc37532efaa57241483df5e2f836eed300a3edad763946176eb98ac"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "MIT"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://www.slf4j.org"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/qos-ch/slf4j"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1?type=jar"
+    },
+    {
+      "publisher" : "Vaadin Ltd",
+      "group" : "com.vaadin",
+      "name" : "vaadin-client-compiled",
+      "version" : "8.20.0",
+      "description" : "Vaadin client compiled",
+      "scope" : "optional",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "a594b62aec62cb99b9cb487f7b38135c"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "5a431db3ba712549220db337a33bde95572041a4"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "c92ace1a038f176498c49b85c01d0f1125fbb9f7571df64b3f8e2f16b952502a"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "0519c5c221314823e7646103d9f55426b16bb00ce93c8d1fe73f99c99c4166784fa54be2b493d8e1f350fdfdb8cd6c7f8723966bbe6ad84f427882c294d4fb63"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "aaa07d1bc6ab777436c70f552d3419fa6a07ec12d0d0332bac61101a6722302a15305c13ae0f1fd1b632acfc83ddff00"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "98bdf4b52c1476959bf734125da1538e69455735e31d2b0da59740b1119bc77b6780c340f6ce127ad997885794ebe51c"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "b39cff989371ebd2b0e446d2900b0f04ed9462dd59a57a972712bff4267b4838"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "e1eca3ca3fbc87860e82daf904832931e152daf3cb7763ecb7e0a4a5a507548dd2dc8f3b75302c7758915a20faded4b8dc5af2ad2d43149f4688db44f5cd229c"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "Vaadin Commercial License",
+            "url" : "https://vaadin.com/commercial-license-and-service-terms"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-client-compiled@8.20.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://vaadin.com/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/framework/vaadin-client-compiled"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/vaadin-client-compiled@8.20.0?type=jar"
+    },
+    {
+      "publisher" : "Vaadin Ltd",
+      "group" : "com.vaadin",
+      "name" : "vaadin-themes",
+      "version" : "8.20.0",
+      "description" : "Vaadin themes",
+      "scope" : "optional",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "bdd58350fa79c111197a575c84a1006c"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "abaf1f4152fd1d3df71cb4d5391de2961cb91b7c"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "d20d944877280d4c910bc4b6d00046247cebb79bd072b38a628983efad6d2891"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "66f065be6866a4c53e5b1d264ef6623474bfc937802630fc3dd1f21ec329be1517858c431e89fa3163664cc0d273c1552265bebedfa02e2ce6eb7b4ec6097127"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "31c6b9bb74c0b47f525729c992d50220b2f2dce9daa1ecfdc227aeb10810e3322d449ed7acd44cd0f44a3a303d29e5f1"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "991607c59ef3595543e5f99f0c0ddbe12db1f86093d78886972517e88be30b89e623e6f298b912b7eab462dfa8296261"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "7c461f42d58d9c6a4b2c46069a4956e9a0548f7a8a513e38496abbf2d757d4fc"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "b762745b3a3e7ed86a15082108bf602620ecc500a9be9c20254c0883714ed4a31a6b6c8ed5298d67593f54b044b0451dcd4077668b1467b1cd483296fc7960e2"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "Vaadin Commercial License",
+            "url" : "https://vaadin.com/commercial-license-and-service-terms"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-themes@8.20.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://vaadin.com/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/framework/vaadin-themes"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/vaadin-themes@8.20.0?type=jar"
+    },
+    {
+      "publisher" : "Vaadin Ltd",
+      "group" : "com.vaadin",
+      "name" : "vaadin-client",
+      "version" : "8.20.0",
+      "description" : "Vaadin client",
+      "scope" : "optional",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "db1499bd3231cdcdb112b45af56a9206"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "dba1aa8dd0ce7b39b66d8a2bf406ed7f806c916c"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "9f06e76bf57b569271874e33d9dca9ed0bfff8ceaad4ec1113e1b7de33620f96"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "e5ba5c15e76fd6ab61a72674de85bd0baa4ed436877febaed0e86a77f1a14954852df7ab355867ba242e38f5aed204942fb94b30b9fc80def225da35f902ca5e"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "86ae3fe709c57dd5407ffcf93f300860edb758fd981767bcd333b10ee57f5fd4dfce30670d2df5aaa837d5f747652fb6"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "f00b85a524154f067f6a652aee040b475510d7cd56b422ea341b58cd35229daaa52754c70ce9f4282735fb914c6a7a4c"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "2eb1d416624a9be29534bff4c1be20e4aa93e74a4a89065b48bf28aa00776b5a"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "fe9bc285fa644abd9959ef01f7a9ddbcc4a24d127ea08a78e35fa303f9b194a946de054be9bacc381989c9fd468a274af1af2a13a6679c7426b1767549270dbd"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "Vaadin Commercial License",
+            "url" : "https://vaadin.com/commercial-license-and-service-terms"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.vaadin/vaadin-client@8.20.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://vaadin.com/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/vaadin/framework/vaadin-client"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.vaadin/vaadin-client@8.20.0?type=jar"
+    },
+    {
+      "group" : "com.google.gwt",
+      "name" : "gwt-elemental",
+      "version" : "2.8.2",
+      "description" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "ee0fd628040f9c62b469fb266414be34"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "3c1ee3d01c3ed13e8807fccb5c375ec1f0aaebf0"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "d60ef0745fc975c797818de33edca3b0ae56028727cd5bddd96abb039c8cedac"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "f07a4a9ff6285241734563f6400cb9d98aa7ba951cb0cad025be378f9dc15613c7492d1d9d657a64d9428a9bd9753bfd4eb4758f3e7bf35c0e98c763edffdf76"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "20c0245cd900872cbd0a328cde986e79c8175f885b506268844a7fe4fc5f262a118c891bf45f4c8b14bdb5020d530d68"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "b10c9922c01b5c6f7daec2cb3e6d72ba8c9f382f60fb925491798769e1ae6cc4a45429ab6ccf6cd3ff251b01dc8d8716"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "bbe601b239bac2cf838e59f3e9e2f5c6038889db08bce14220256186dbc636d2"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "274a1d530f6e576150e860710b5c69dcc2fe4cb5b48e7704323652a901e26787f6fa79cc2993abd52c3fb2d97fb1659850cafba2603832639412fd26b0c4ce97"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "GWT Terms",
+            "url" : "http://www.gwtproject.org/terms.html"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.google.gwt/gwt-elemental@2.8.2?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://www.gwtproject.org/gwt-elemental/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://svn.sonatype.org/spice/tags/oss-parent-4/gwt/gwt-elemental"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.google.gwt/gwt-elemental@2.8.2?type=jar"
+    },
+    {
+      "group" : "com.google.gwt",
+      "name" : "gwt-user",
+      "version" : "2.8.2",
+      "description" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "4344edd17705723debc1e1820943ad73"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "a2b9be2c996a658c4e009ba652a9c6a81c88a797"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "9f420f0d0c2f177d71cb1794b3be1418f9755f6e4181101af3951b8302b9556d"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "44fd1ce12492519e2a75a6fd8aff06d88b4c646b075143b3c37cd082d3a6130ad7cca107e6d50913ad323eebf462654a060f2e47206541d06031b0222f0143a4"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "b3418c5d5f502610eb3af9b7fb7ad57884ae56aca8f4b8a96e61deabfba8aa3b565871c05126e0bb0b0e2b4bf561cd59"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "5fd9297f9b1582331d3e71f7e7f4ec4944ce2bc6757ae009853bba37aadc65c26f3585b257501a05c5165a813b96d4a3"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "1330c635d7e72e5afa7e0b15eeff71ab37ad37102be0f5b3088a5108087b330e"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "6b947ff5941b7427ef6e7e743eeedc1f7584b4d4d09bd2776e50d7135c469bfa0427f78068259689a71b6f7851812ae973029d558cba4f250873d979b7d847db"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "GWT Terms",
+            "url" : "http://www.gwtproject.org/terms.html"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.google.gwt/gwt-user@2.8.2?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://www.gwtproject.org/gwt-user/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://svn.sonatype.org/spice/tags/oss-parent-4/gwt/gwt-user"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.google.gwt/gwt-user@2.8.2?type=jar"
+    },
+    {
+      "group" : "com.google.jsinterop",
+      "name" : "jsinterop-annotations",
+      "version" : "1.0.2",
+      "description" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "8644058594a4f656b7d0e2ade4209756"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "abd7319f53d018e11108a88f599bd16492448dd2"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "fcaf44731f5b6a606fa428a6d1a9ede11dc628c6f7d0f91c235aa71e337bf014"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "34330e368db2e5122350dcc9237711694e4ea03bbc315163ed5fd6fd8f649ddb2dbd1224b28207802603f869de61a15439924a1fef0e864abc134242d36e1ccb"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "1bc1eec780390431c92cb94a553c859db3961613dd54a36d9e708e50bb2ecbdb28aab1f653d8e926bd474abb9dac02ea"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "546e0f6dfa2af13fd18ae7c312ad0d06c56452ce947068dcd38c8d20f3dae1f4bf2289382e0a2444d2b63694fc7c37cf"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "48c210f43a9c46402670e2eecc834c48530600affdd8828bca16aa0e9c98fa4f"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "adda59087134be83fc971bb30ecec470a8674e6b74dcf57b1976ed7c3db22be02b5f67eafc7a98db1769ab213cc834becfac32491da83e11d1f8aab6578357e3"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "GWT Terms",
+            "url" : "http://www.gwtproject.org/terms.html"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.google.jsinterop/jsinterop-annotations@1.0.2?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://www.gwtproject.org/jsinterop-annotations/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://svn.sonatype.org/spice/tags/oss-parent-4/jsinterop/jsinterop-annotations"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.google.jsinterop/jsinterop-annotations@1.0.2?type=jar"
+    },
+    {
+      "group" : "com.google.jsinterop",
+      "name" : "jsinterop-annotations",
+      "version" : "1.0.2",
+      "description" : "Sonatype helps open source projects to set up Maven repositories on https://oss.sonatype.org/",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "28e63b0b2da746938da412393a3b2be1"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "33716f8aef043f2f02b78ab4a1acda6cd90a7602"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "9091354e2fccf3585fd0de6c5aac78418d84b15d59e5401cfb3c70ebf4950459"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "4b831dba987768e6361e632242839433097c1f077eb1e5e2720d16dc10ccee11337423e7b1091821145455a54d493ffa51d6a1d5e43a66638c48e793d59e17f2"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "54a014bc19d58d9eacbe687dbbcf4c7267ed2d7d7bd6dbb88fbcea534140066f903f353c00c185e64ac19b84950be808"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "694ff0c4785a08f4b7d4b05c9c298fdfae65980d7434d7b2cd2929d74731460f197256996de8904e17de312bef44dda8"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "b2b1ee685a1c7d81f1b9f785f8502be0a5a5dfa548fdee13ac96fd36f9e29b87"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "58e453e824481239330adc9840323cfc40d5cdafd3a719e1ed854443a40e42bdcf0f6fcdfbf0a9614ad43675610af548d67c856b9ef4e8c0ee3043c8bf031d28"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "name" : "GWT Terms",
+            "url" : "http://www.gwtproject.org/terms.html"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.google.jsinterop/jsinterop-annotations@1.0.2?classifier=sources&type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://www.gwtproject.org/jsinterop-annotations/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://svn.sonatype.org/spice/tags/oss-parent-4/jsinterop/jsinterop-annotations"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.google.jsinterop/jsinterop-annotations@1.0.2?classifier=sources&type=jar"
+    },
+    {
+      "group" : "javax.validation",
+      "name" : "validation-api",
+      "version" : "1.0.0.GA",
+      "description" : "Bean Validation (JSR-303) API.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "f816682933b59c5ffe32bdb4ab4bf628"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "7a561191db2203550fbfa40d534d4997624cd369"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "a394d52a9b7fe2bb14f0718d2b3c8308ffe8f37e911956012398d55c9f9f9b54"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "88bcde2fc9446b09cb24e73137cd16ed54953a6d93f33e8500ca196e4cec07ac03ebc446f4629291e6437d2f3757802236e56974cd3023bb25886e69e2330fc0"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "24e761d5671500b271a43ae333c49233d9148f7d95dff294a2a7d670706cc59ae8e8a54c5d2bbc9882247f19217fb104"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "cab5754cf8c04343e5830976bbcace5d44371619144a49e2c56671bc5a0d2f6dace9245c609993819994a0b0d3c44800"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "30e68399475a07f430a184e4ad379eff1a2ef269103fc01e3e773a466a5d1c64"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "d13aa73b8b555d1426bfa4ca8418b709c082cbff86b550ad60eb6a91dffab38ab83d96b3155df7b5063b9bd30fb9af6db1e8922e853f1388463e9c851c285a49"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/javax.validation/validation-api@1.0.0.GA?classifier=sources&type=jar",
+      "externalReferences" : [
+        {
+          "type" : "issue-tracker",
+          "url" : "http://opensource.atlassian.com/projects/hibernate/browse/BVAL"
+        },
+        {
+          "type" : "vcs",
+          "url" : "http://fisheye.jboss.org/browse/Hibernate/beanvalidation/api/tags/v1_0_0_GA"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/javax.validation/validation-api@1.0.0.GA?classifier=sources&type=jar"
+    },
+    {
+      "publisher" : "Chemouni Uriel",
+      "group" : "net.minidev",
+      "name" : "json-smart",
+      "version" : "2.4.8",
+      "description" : "JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. It is easy for machines to parse and generate. It is based on a subset of the JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999. JSON is a text format that is completely language independent but uses conventions that are familiar to programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. These properties make JSON an ideal data-interchange language.",
+      "scope" : "optional",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "20a8427206313ed3aa85cdc47f730415"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "7c62f5f72ab05eb54d40e2abf0360a2fe9ea477f"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "174a9ad578b56644e62b3965d8bf94ac3a76e707c6343b8abac9d3671438b4b2"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "13f4609fe72df98c81f86d25616e5b0ce1426688aa5a9dd953733fa98a8deadb87b3e69a77741dc9d31dd4485265d3b9e4ec71d99346e4a7558f2500f3677714"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "1426a97474b44c58d1f30c70afec9dd658207d89ce5067932bb4dbe2ddb31970d31d2b682631e208d4b7f435b97b14aa"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "f80d75137a6ed01e53a7a168a39d33b15c26de832268d61a80affa7f9472639f2b19165fb4fdd1b6cbcc2601cf1b413c"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "60607471f4e886f0959dae77ac61ffd1b5662f9d39bd7efc552290e90e965c38"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "84f2e3c1840bbec18ad0fade94791a759f9a2e0de4dfe3a52fc9a54d2a7cffa94e8645273c7417db7ebd9e3a35884eaa6381ca6a6d5d48eae5bb0563b741247a"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/net.minidev/json-smart@2.4.8?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://urielch.github.io/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/netplex/json-smart-v2"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/net.minidev/json-smart@2.4.8?type=jar"
+    },
+    {
+      "publisher" : "Chemouni Uriel",
+      "group" : "net.minidev",
+      "name" : "accessors-smart",
+      "version" : "2.4.8",
+      "description" : "Java reflect give poor performance on getter setter an constructor calls, accessors-smart use ASM to speed up those calls.",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "e5761631acc11ded0255af1249937e85"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "6e1bee5a530caba91893604d6ab41d0edcecca9a"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "7dd705aa1ac0e030f8ee2624e8e77239ae1eef6ccc2621c0b8c189866ee1c42c"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "45405c083334b05efa07572497b9d510ca771af32ce93d960be802216a9714ffff8418384ea48e197d3dfb6ebec4ec3e610155841e8a257a7fb9a4bd6a1b668f"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "9f3a75bcd9a9c00dc7437d0dfcf075d411c4bcc125ab6761f0bec3f00eec4d0e5c7d0e7f304f69d3491a12f542ee0823"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "764e26adb705500f3e1a81b8360ce2c9d2c23ec09e3fcc9b673378d5e10fb8846843547ec0c5383e2bed1a20c48aaa43"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "7017996397067155374396bea86ac9871f6c672da91c91faf2ff8aa8b154624d"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "a1050d7f9e728546989c62e1a9ca7b583070012d766e7e77ed0d958a2271cf21326b8ed8d2d4690277e8da5b7ac3599a617ff68418fb5be903f6b59ad21dae8b"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/net.minidev/accessors-smart@2.4.8?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://urielch.github.io/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/netplex/json-smart-v2"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/net.minidev/accessors-smart@2.4.8?type=jar"
+    },
+    {
+      "publisher" : "OW2",
+      "group" : "org.ow2.asm",
+      "name" : "asm",
+      "version" : "9.1",
+      "description" : "ASM, a very small and fast Java bytecode manipulation framework",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "54b9f5d15e4877a4ea4cf9ec48e07afa"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "a99500cf6eea30535eeac6be73899d048f8d12a8"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "cda4de455fab48ff0bcb7c48b4639447d4de859a7afc30a094a986f0936beba2"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "0a586544f3053ec8425d252b6f7e3e6772f010eb81d75020b4fd4759a561a4534dab4f805ffd18130594d1abbeb1ad7116b9d3a1e2e643d427e12bb866655954"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "9f936b2ffa1f1fccfea3c53b5206a6d94fa193aa12a0cdec2f0baf98f0cb2a0b699e99291c60be44fab6b39a1f6f2e10"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "142b7dc3b521f681f41e8467cf292ba87ed6bfb88d57372bf6d9cc3e3042cc49fd735b367d2336ff43a3ccb64b5bc87e"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "be955c19490cbd305f4168b6ead4116659ef6fbdf96954d2c124ae8d3f4c4739"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "fa07cc8156842f8c18e286517fd751b3e2d51be13e2e8181f1b75a6c1f98715eb3ef583cbda01ca95ca0806ffc9817d4d9ab327dca6a16152c367a319e128fed"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "BSD-3-Clause",
+            "url" : "https://opensource.org/licenses/BSD-3-Clause"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.ow2.asm/asm@9.1?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "http://asm.ow2.io/"
+        },
+        {
+          "type" : "distribution",
+          "url" : "http://repository.ow2.org/nexus/service/local/staging/deploy/maven2"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://gitlab.ow2.org/asm/asm/issues"
+        },
+        {
+          "type" : "mailing-list",
+          "url" : "https://mail.ow2.org/wws/arc/asm/"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://gitlab.ow2.org/asm/asm/"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.ow2.asm/asm@9.1?type=jar"
+    },
+    {
+      "publisher" : "OWASP",
+      "group" : "com.mikesamuel",
+      "name" : "json-sanitizer",
+      "version" : "1.2.0",
+      "description" : "Given JSON-like content, converts it to valid JSON. This can be attached at either end of a data-pipeline to help satisfy Postel's principle: be conservative in what you do, be liberal in what you accept from others Applied to JSON-like content from others, it will produce well-formed JSON that should satisfy any parser you use. Applied to your output before you send, it will coerce minor mistakes in encoding and make it easier to embed your JSON in HTML and XML.",
+      "scope" : "optional",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "e41a16f0affcc0d9bc1a9b59ee8c69be"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "3d079c2fde77b61b736a0fda76d844138726b3d7"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "6f5e1edc0ec54b09253f97c6c417e5f5021018e55abd2fbf0c8529268b1be5e3"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "10242b3da4722b92d85fe397df1e3944a51f9e8d4adaf7677d0d3afb8edd81e6f4b2793e18aa9c0c813e8716fea16d15a7b64554e9e687bf81f4b8e4b63c1e24"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "84635cfc6af5bb4ce631c04100081b457245119422345475de44e42e75832b6853c75ce68754847d79cffe1a2d4db2e5"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "7dcf3e22a1b1cab3f9c2ba5bb7f31d3109eae2c0f312a6848f9a365e5cdb463ba622303e479373a82bf1ad11138da893"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "97217f48b9a60959151ca985df67edb55df4ee6b321c855e6fefa7ce98f3c6b7"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "68ecb62d34bb76e6aa766325af237290a5fac25cd8f2140a04b404af00b2dd45c983f90baf4586a9414e66f44da763b61d989b7f5785d7c5abad7b90e7691960"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/com.mikesamuel/json-sanitizer@1.2.0?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://github.com/OWASP/json-sanitizer"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/OWASP/json-sanitizer/issues"
+        },
+        {
+          "type" : "mailing-list",
+          "url" : "https://groups.google.com/forum/#!forum/json-sanitizer-support"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/OWASP/json-sanitizer"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/com.mikesamuel/json-sanitizer@1.2.0?type=jar"
+    }
+  ],
+  "dependencies" : [
+    {
+      "ref" : "pkg:maven/com.vaadin/appsec-kit-demo-v8@1.0-SNAPSHOT?type=war",
+      "dependsOn" : [
+        "pkg:maven/com.vaadin/appsec-kit-v8@1.0-SNAPSHOT?type=jar",
+        "pkg:maven/javax.servlet/javax.servlet-api@3.0.1?type=jar",
+        "pkg:maven/com.vaadin/vaadin-server@8.20.0?type=jar",
+        "pkg:maven/com.vaadin/vaadin-push@8.20.0?type=jar",
+        "pkg:maven/com.vaadin/vaadin-client-compiled@8.20.0?type=jar",
+        "pkg:maven/com.vaadin/vaadin-themes@8.20.0?type=jar",
+        "pkg:maven/com.vaadin/vaadin-client@8.20.0?type=jar",
+        "pkg:maven/net.minidev/json-smart@2.4.8?type=jar",
+        "pkg:maven/com.mikesamuel/json-sanitizer@1.2.0?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/appsec-kit-v8@1.0-SNAPSHOT?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.vaadin/appsec-kit-backend@1.0-SNAPSHOT?type=jar",
+        "pkg:maven/javax.validation/validation-api@2.0.1.Final?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/appsec-kit-backend@1.0-SNAPSHOT?type=jar",
+      "dependsOn" : [
+        "pkg:maven/org.cyclonedx/cyclonedx-core-java@7.3.2?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.0?type=jar",
+        "pkg:maven/us.springett/cvss-calculator@1.4.1?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.cyclonedx/cyclonedx-core-java@7.3.2?type=jar",
+      "dependsOn" : [
+        "pkg:maven/commons-codec/commons-codec@1.15?type=jar",
+        "pkg:maven/commons-io/commons-io@2.11.0?type=jar",
+        "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar",
+        "pkg:maven/com.github.package-url/packageurl-java@1.4.1?type=jar",
+        "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-xml@2.14.2?type=jar",
+        "pkg:maven/com.networknt/json-schema-validator@1.0.77?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/commons-codec/commons-codec@1.15?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/commons-io/commons-io@2.11.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.github.package-url/packageurl-java@1.4.1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.fasterxml.jackson.dataformat/jackson-dataformat-xml@2.14.2?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.15.0?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.0?type=jar",
+        "pkg:maven/org.codehaus.woodstox/stax2-api@4.2.1?type=jar",
+        "pkg:maven/com.fasterxml.woodstox/woodstox-core@6.5.0?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.15.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.0?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.fasterxml.jackson.core/jackson-annotations@2.15.0?type=jar",
+        "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.codehaus.woodstox/stax2-api@4.2.1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.fasterxml.woodstox/woodstox-core@6.5.0?type=jar",
+      "dependsOn" : [
+        "pkg:maven/org.codehaus.woodstox/stax2-api@4.2.1?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.networknt/json-schema-validator@1.0.77?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.0?type=jar",
+        "pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar",
+        "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar",
+        "pkg:maven/com.ethlo.time/itu@1.7.0?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.ethlo.time/itu@1.7.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/us.springett/cvss-calculator@1.4.1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/javax.validation/validation-api@2.0.1.Final?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/javax.servlet/javax.servlet-api@3.0.1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/vaadin-server@8.20.0?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.vaadin/vaadin-sass-compiler@0.9.13?type=jar",
+        "pkg:maven/com.vaadin/vaadin-shared@8.20.0?type=jar",
+        "pkg:maven/com.vaadin/license-checker@1.11.2?type=jar",
+        "pkg:maven/org.jsoup/jsoup@1.15.3?type=jar",
+        "pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/vaadin-sass-compiler@0.9.13?type=jar",
+      "dependsOn" : [
+        "pkg:maven/org.w3c.css/sac@1.3?type=jar",
+        "pkg:maven/com.vaadin.external.flute/flute@1.3.0.gg2?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.w3c.css/sac@1.3?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin.external.flute/flute@1.3.0.gg2?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/vaadin-shared@8.20.0?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/license-checker@1.11.2?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.vaadin.external.gwt/gwt-elemental@2.8.2.vaadin2?type=jar",
+        "pkg:maven/com.github.oshi/oshi-core@6.1.4?type=jar",
+        "pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar",
+        "pkg:maven/com.nimbusds/nimbus-jose-jwt@9.23?type=jar",
+        "pkg:maven/org.lucee/jcip-annotations@1.0.0?type=jar",
+        "pkg:maven/com.vaadin/open@8.4.0.3?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.github.oshi/oshi-core@6.1.4?type=jar",
+      "dependsOn" : [
+        "pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar",
+        "pkg:maven/net.java.dev.jna/jna-platform@5.10.0?type=jar",
+        "pkg:maven/org.slf4j/slf4j-api@1.7.36?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/net.java.dev.jna/jna-platform@5.10.0?type=jar",
+      "dependsOn" : [
+        "pkg:maven/net.java.dev.jna/jna@5.10.0?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.nimbusds/nimbus-jose-jwt@9.23?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/org.lucee/jcip-annotations@1.0.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/open@8.4.0.3?type=jar",
+      "dependsOn" : [
+        "pkg:maven/commons-io/commons-io@2.11.0?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.jsoup/jsoup@1.15.3?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin.external/gentyref@1.2.0.vaadin1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/vaadin-push@8.20.0?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin.external.atmosphere/atmosphere-runtime@2.4.30.vaadin5?type=jar",
+      "dependsOn" : [
+        "pkg:maven/commons-codec/commons-codec@1.15?type=jar",
+        "pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin.external.slf4j/vaadin-slf4j-jdk14@1.6.1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/vaadin-client-compiled@8.20.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/vaadin-themes@8.20.0?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.vaadin/vaadin-client@8.20.0?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.vaadin/vaadin-shared@8.20.0?type=jar",
+        "pkg:maven/com.vaadin/vaadin-server@8.20.0?type=jar",
+        "pkg:maven/com.google.gwt/gwt-elemental@2.8.2?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.google.gwt/gwt-elemental@2.8.2?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.google.gwt/gwt-user@2.8.2?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.google.gwt/gwt-user@2.8.2?type=jar",
+      "dependsOn" : [
+        "pkg:maven/com.google.jsinterop/jsinterop-annotations@1.0.2?type=jar",
+        "pkg:maven/com.google.jsinterop/jsinterop-annotations@1.0.2?classifier=sources&type=jar",
+        "pkg:maven/javax.validation/validation-api@2.0.1.Final?type=jar",
+        "pkg:maven/javax.validation/validation-api@1.0.0.GA?classifier=sources&type=jar",
+        "pkg:maven/javax.servlet/javax.servlet-api@3.0.1?type=jar",
+        "pkg:maven/org.w3c.css/sac@1.3?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/com.google.jsinterop/jsinterop-annotations@1.0.2?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.google.jsinterop/jsinterop-annotations@1.0.2?classifier=sources&type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/javax.validation/validation-api@1.0.0.GA?classifier=sources&type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/net.minidev/json-smart@2.4.8?type=jar",
+      "dependsOn" : [
+        "pkg:maven/net.minidev/accessors-smart@2.4.8?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/net.minidev/accessors-smart@2.4.8?type=jar",
+      "dependsOn" : [
+        "pkg:maven/org.ow2.asm/asm@9.1?type=jar"
+      ]
+    },
+    {
+      "ref" : "pkg:maven/org.ow2.asm/asm@9.1?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/com.mikesamuel/json-sanitizer@1.2.0?type=jar",
+      "dependsOn" : [ ]
+    }
+  ]
+}

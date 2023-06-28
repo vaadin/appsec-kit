@@ -1,0 +1,43 @@
+/*
+ * -
+ * Copyright (C) 2023 Vaadin Ltd
+ *
+ * This program is available under Vaadin Commercial License and Service Terms.
+ *
+ *
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
+ */
+
+package com.vaadin.appsec.v7.ui;
+
+import java.util.Set;
+
+import com.vaadin.server.UIClassSelectionEvent;
+import com.vaadin.server.UICreateEvent;
+import com.vaadin.server.UIProvider;
+import com.vaadin.ui.UI;
+
+/**
+ * UI provider for providing the AppSecUI class for UI instantiation when the
+ * request contains 'vaadin-appsec-kit' parameter.
+ */
+public class AppSecUIProvider extends UIProvider {
+
+    public static final String VAADIN_APPSEC_KIT_URL_PARAM = "vaadin-appsec-kit";
+
+    @Override
+    public Class<? extends UI> getUIClass(
+            UIClassSelectionEvent uiClassSelectionEvent) {
+        Set<String> requestParameters = uiClassSelectionEvent.getRequest()
+                .getParameterMap().keySet();
+        if (requestParameters.contains(VAADIN_APPSEC_KIT_URL_PARAM)) {
+            return AppSecUI.class;
+        }
+        return null;
+    }
+
+    @Override
+    public String getTheme(UICreateEvent event) {
+        return "valo";
+    }
+}
