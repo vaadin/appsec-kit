@@ -9,6 +9,7 @@
 
 package com.vaadin.appsec.v8.ui;
 
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.appsec.v8.ui.content.MainView;
@@ -21,6 +22,7 @@ import com.vaadin.ui.VerticalLayout;
  */
 @StyleSheet("appsec-v8.css")
 @Push
+@PreserveOnRefresh
 public class AppSecUI extends UI {
 
     private MainView mainView;

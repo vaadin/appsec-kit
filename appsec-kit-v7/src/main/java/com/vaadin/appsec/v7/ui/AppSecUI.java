@@ -10,6 +10,7 @@
 
 package com.vaadin.appsec.v7.ui;
 
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.appsec.v7.ui.content.MainView;
@@ -22,6 +23,7 @@ import com.vaadin.ui.UI;
  */
 @StyleSheet("appsec-v7.css")
 @Push(transport = Transport.LONG_POLLING)
+@PreserveOnRefresh
 public class AppSecUI extends UI {
 
     private MainView mainView;

@@ -14,7 +14,9 @@ import java.time.Instant;
 import java.util.Date;
 
 import com.vaadin.appsec.backend.AppSecService;
+import com.vaadin.appsec.backend.Registration;
 import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.shared.communication.PushMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -34,6 +36,8 @@ public class MainView extends AbstractAppSecContent {
     private Label lastScannedLabel;
 
     private DateFormat formatter;
+    private Button scanNow;
+    private Registration scanListener;
 
     /**
      * Instantiates a new Results tab.
@@ -61,16 +65,8 @@ public class MainView extends AbstractAppSecContent {
         lastScannedLabel.setWidthUndefined();
         headerBar.addComponent(lastScannedLabel);
 
-        UI ui = UI.getCurrent();
-        Button scanNow = new Button("Scan now");
+        scanNow = new Button("Scan now");
         scanNow.setDisableOnClick(true);
-        AppSecService.getInstance().addScanEventListener(event -> {
-            ui.access(() -> {
-                scanNow.setEnabled(true);
-                refresh();
-                ui.push();
-            });
-        });
         scanNow.addClickListener(e -> {
             lastScannedLabel.setValue("Scanning...");
             AppSecService.getInstance().scanForVulnerabilities();
@@ -111,5 +107,35 @@ public class MainView extends AbstractAppSecContent {
     void showVulnerabilitiesTabFor(DependencyDTO item) {
         tabSheet.setSelectedTab(vulnerabilitiesTab);
         vulnerabilitiesTab.filterOn(item);
+    }
+
+    @Override
+    public void attach() {
+        super.attach();
+        removeScanListener();
+        scanListener = AppSecService.getInstance()
+                .addScanEventListener(event -> {
+                    MainView.this.getUI().access(() -> {
+                        scanNow.setEnabled(true);
+                        refresh();
+                        if (PushMode.MANUAL == MainView.this.getUI()
+                                .getPushConfiguration().getPushMode()) {
+                            MainView.this.getUI().push();
+                        }
+                    });
+                });
+    }
+
+    @Override
+    public void detach() {
+        super.detach();
+        removeScanListener();
+    }
+
+    private void removeScanListener() {
+        if (scanListener != null) {
+            scanListener.remove();
+            scanListener = null;
+        }
     }
 }
