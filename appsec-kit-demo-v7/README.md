@@ -9,7 +9,7 @@ some vulnerabilities to show in the scan results.
 Workflow
 ========
 
-To built the application, run "mvn install". This needs to be run before jetty is
+To build the application, run "mvn install". This needs to be run before jetty is
 started in order to generate the SBOM file. 
 
 To run the application, run "mvn jetty:run" and open http://localhost:8080/.
