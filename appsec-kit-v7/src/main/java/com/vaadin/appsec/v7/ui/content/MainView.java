@@ -7,7 +7,7 @@
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
 
-package com.vaadin.appsec.v8.ui.content;
+package com.vaadin.appsec.v7.ui.content;
 
 import java.text.DateFormat;
 import java.time.Instant;
@@ -26,42 +26,43 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 
 /**
- * AppSec Kit main view.
+ * Results tab content
  */
 public class MainView extends AbstractAppSecContent {
-
     private VulnerabilitiesTab vulnerabilitiesTab;
-
     private DependenciesTab dependenciesTab;
-
     private TabSheet tabSheet;
 
     private Label lastScannedLabel;
 
     private DateFormat formatter;
-    private Registration scanListener;
     private Button scanNow;
+    private Registration scanListener;
 
     /**
-     * Instantiates a new view.
+     * Instantiates a new Results tab.
      */
     public MainView() {
         buildLayout();
         formatter = DateFormat.getDateTimeInstance(DateFormat.DEFAULT,
                 DateFormat.DEFAULT, UI.getCurrent().getLocale());
+        setMargin(true);
     }
 
     private void buildLayout() {
         Label appTitle = new Label("Vaadin AppSec Kit");
         appTitle.addStyleName("appseckit-title");
-        appTitle.setSizeFull();
+        appTitle.setWidth(100, Unit.PERCENTAGE);
 
         HorizontalLayout headerBar = new HorizontalLayout();
+        headerBar.setSpacing(true);
         headerBar.setWidth(100, Unit.PERCENTAGE);
-        headerBar.addComponentsAndExpand(appTitle);
+        headerBar.addComponent(appTitle);
+        headerBar.setExpandRatio(appTitle, 1);
         headerBar.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
 
         lastScannedLabel = new Label();
+        lastScannedLabel.setWidthUndefined();
         headerBar.addComponent(lastScannedLabel);
 
         scanNow = new Button("Scan now");
