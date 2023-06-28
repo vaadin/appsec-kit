@@ -9,7 +9,6 @@
 
 package com.vaadin.appsec.v8.ui.content;
 
-import javax.swing.*;
 import java.text.DateFormat;
 import java.time.Instant;
 import java.util.Date;
