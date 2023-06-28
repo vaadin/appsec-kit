@@ -178,7 +178,8 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     /**
      * Filters the Vulnerability list using the given item.
      *
-     * @param item filter
+     * @param item
+     *            filter
      */
     public void filterOn(DependencyDTO item) {
         clearFilters();
