@@ -140,7 +140,9 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         getMainContent().setExpandRatio(grid, 1);
 
         grid.addItemClickListener(event -> {
-            showVulnerabilityDetails((VulnerabilityDTO) event.getItemId());
+            if (event.isDoubleClick()) {
+                showVulnerabilityDetails((VulnerabilityDTO) event.getItemId());
+            }
         });
 
         Button showDetails = new Button("Show details");
@@ -176,8 +178,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     /**
      * Filters the Vulnerability list using the given item.
      *
-     * @param item
-     *            filter
+     * @param item filter
      */
     public void filterOn(DependencyDTO item) {
         clearFilters();

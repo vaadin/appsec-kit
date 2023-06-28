@@ -14,13 +14,14 @@ import com.vaadin.annotations.Push;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.appsec.v7.ui.content.MainView;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.shared.ui.ui.Transport;
 import com.vaadin.ui.UI;
 
 /**
  * UI class for displaying main content of AppSec Kit.
  */
 @StyleSheet("appsec-v7.css")
-@Push
+@Push(transport = Transport.LONG_POLLING)
 public class AppSecUI extends UI {
 
     private MainView mainView;

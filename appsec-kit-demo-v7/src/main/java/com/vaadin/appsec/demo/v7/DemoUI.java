@@ -23,7 +23,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @Theme("valo")
-@Push
+@Push(transport = Transport.LONG_POLLING)
 public class DemoUI extends UI {
 
     @Override
