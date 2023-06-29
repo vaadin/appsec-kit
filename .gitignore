@@ -64,3 +64,6 @@ flow-tests/**/.pnpmfile.cjs
 flow-tests/**/*.npmrc
 
 *.xml.versionsBackup
+
+rebel.xml
+appsec-data.json
