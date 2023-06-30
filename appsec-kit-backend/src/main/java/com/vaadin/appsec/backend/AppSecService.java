@@ -71,6 +71,8 @@ public class AppSecService {
 
     private final AppSecDTOProvider dtoProvider;
 
+    private final GitHubService githubService;
+
     private AppSecConfiguration configuration;
 
     private AppSecData data;
@@ -90,6 +92,7 @@ public class AppSecService {
         osvService = new OpenSourceVulnerabilityService();
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
         dtoProvider = new AppSecDTOProvider(vulnerabilityStore, bomStore);
+        githubService = new GitHubService();
         this.configuration = configuration;
     }
 
@@ -106,6 +109,26 @@ public class AppSecService {
                     "Cannot parse the SBOM file: " + bomFilePath.toString(), e);
         }
         readOrCreateDataFile();
+    }
+
+    /**
+     * Gets the list of Vaadin Framework 7 versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    public List<String> getSupportedFramework7Versions() {
+        return githubService.getFramework7Versions();
+    }
+
+    /**
+     * Gets the list of Vaadin Framework 8 versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    public List<String> getSupportedFramework8Versions() {
+        return githubService.getFramework8Versions();
     }
 
     /**
