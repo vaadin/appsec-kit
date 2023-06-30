@@ -92,8 +92,7 @@ public class NotificationInitializer {
                     }
                 }, NOTIFICATION_CHECK_INTERVAL, NOTIFICATION_CHECK_INTERVAL,
                         TimeUnit.MILLISECONDS);
-        scheduledChecks.put(session.getSession().getId(),
-                scheduledNotificationCheck);
+        scheduledChecks.put(sessionId, scheduledNotificationCheck);
     }
 
     @SuppressWarnings("unchecked")
