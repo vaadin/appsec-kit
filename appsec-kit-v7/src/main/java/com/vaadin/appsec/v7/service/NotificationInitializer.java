@@ -16,6 +16,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.v7.ui.AppSecUIProvider;
 import com.vaadin.appsec.v7.ui.AppSecUI;
 import com.vaadin.server.VaadinService;
@@ -56,32 +57,32 @@ public class NotificationInitializer {
         if (isDebugMode(vaadinService)) {
             vaadinService.addSessionInitListener(e -> {
                 e.getSession().addUIProvider(new AppSecUIProvider());
-                createNotificationThread(e.getSession()).start();
+                startNotificationTask(e.getSession());
             });
             LOGGER.info("NotificationInitListener initialized.");
         }
     }
 
-    private static Thread createNotificationThread(
-            final VaadinSession session) {
-        return new Thread(() -> {
-            try {
-                LOGGER.info(
-                        "NotificationInitListener notification thread initialized.");
+    private static void startNotificationTask(final VaadinSession session) {
+        AppSecService.getInstance().getConfiguration().getTaskExecutor()
+                .submit(() -> {
+                    try {
+                        LOGGER.info(
+                                "NotificationInitListener notification thread initialized.");
 
-                Thread.sleep(NOTIFICATION_CHECK_INTERVAL);
+                        Thread.sleep(NOTIFICATION_CHECK_INTERVAL);
 
-                while (isSessionOpen(session)) {
-                    session.access(() -> {
-                        session.getUIs()
-                                .forEach(ui -> notifyUiIfNeeded(session, ui));
-                    });
-                    Thread.sleep(NOTIFICATION_CHECK_INTERVAL);
-                }
-            } catch (InterruptedException e) {
-                // NOP
-            }
-        });
+                        while (isSessionOpen(session)) {
+                            session.access(() -> {
+                                session.getUIs().forEach(
+                                        ui -> notifyUiIfNeeded(session, ui));
+                            });
+                            Thread.sleep(NOTIFICATION_CHECK_INTERVAL);
+                        }
+                    } catch (InterruptedException e) {
+                        // NOP
+                    }
+                });
     }
 
     @SuppressWarnings("unchecked")
