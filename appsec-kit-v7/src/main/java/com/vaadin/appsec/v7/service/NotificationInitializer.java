@@ -74,9 +74,6 @@ public class NotificationInitializer {
         final ScheduledFuture<?> scheduledNotificationCheck = AppSecService
                 .getInstance().getConfiguration().getTaskExecutor()
                 .scheduleAtFixedRate(() -> {
-                    LOGGER.info(
-                            "NotificationInitListener notification thread initialized.");
-
                     if (isSessionOpen(session)) {
                         session.access(() -> {
                             session.getUIs().forEach(
@@ -93,6 +90,9 @@ public class NotificationInitializer {
                 }, NOTIFICATION_CHECK_INTERVAL, NOTIFICATION_CHECK_INTERVAL,
                         TimeUnit.MILLISECONDS);
         scheduledChecks.put(sessionId, scheduledNotificationCheck);
+        LOGGER.info(
+                "NotificationInitListener notification thread initialized.");
+
     }
 
     @SuppressWarnings("unchecked")
