@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
 import com.vaadin.appsec.backend.model.dto.DependencyDTO;
 import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
 
@@ -129,6 +130,19 @@ public class AppSecService {
      */
     public List<String> getSupportedFramework8Versions() {
         return githubService.getFramework8Versions();
+    }
+
+    /**
+     * Gets the Vaadin Security Team assessments about known vulnerability
+     * coming from transitive dependencies of the current maintained Vaadin
+     * versions.
+     *
+     * @see #getSupportedFramework7Versions()
+     * @see #getSupportedFramework8Versions()
+     * @return the vulnerability analysis
+     */
+    public VulnerabilityAnalysis getVulnerabilityAnalysis() {
+        return githubService.getVulnerabilityAnalysis();
     }
 
     /**

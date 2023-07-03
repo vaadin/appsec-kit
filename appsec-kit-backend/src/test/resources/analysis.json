@@ -1,0 +1,34 @@
+{
+  "vulnerabilities": {
+    "CVE-123-XYZ": {
+      "dependency": {
+        "name": "org.acme:foobar",
+        "affectedVersions": [ "2.0.0", "[3.2.0,3.2.3)" ]
+      },
+      "assessments": {
+        "com.vaadin:foo": {
+          "affectedVersions": {
+            "[1.2.3,1.3.0)": {
+              "status": "TRUE_POSITIVE",
+              "comment": "The risk is true",
+              "fixedIn": "1.4.0"
+            },
+            "1.3.0": {
+              "status": "FALSE_POSITIVE",
+              "comment": "Vulnerability still there, but we fixed it in our API",
+              "fixedIn": "1.4.0"
+            }
+          }
+        },
+        "com.vaadin:bar": {
+          "affectedVersions": {
+            "1.0.0": {
+              "status": "FALSE_POSITIVE",
+              "comment": "Vulnerability does not affect this module"
+            }
+          }
+        }
+      }
+    }
+  }
+}

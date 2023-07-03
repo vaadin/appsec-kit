@@ -18,6 +18,7 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,6 +44,8 @@ public class AppSecServiceTest {
 
     private TestScheduledExecutorService testExecutorService;
 
+    private ObjectMapper mapper;
+
     @Before
     public void setup() throws Exception {
         fixedClock = Clock.fixed(Instant.ofEpochSecond(1687450676),
@@ -62,6 +65,8 @@ public class AppSecServiceTest {
         service = AppSecService.getInstance();
         service.setConfiguration(configuration);
         service.setClock(fixedClock);
+
+        mapper = new ObjectMapper();
     }
 
     @Test(expected = AppSecException.class)

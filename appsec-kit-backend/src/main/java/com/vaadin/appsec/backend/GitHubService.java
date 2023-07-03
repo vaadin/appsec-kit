@@ -9,6 +9,7 @@
 package com.vaadin.appsec.backend;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.Collator;
 import java.util.List;
@@ -21,12 +22,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 
+import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
+
 import static java.util.regex.Pattern.compile;
 
 class GitHubService {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class GitHubRelease implements Comparable<GitHubRelease> {
+    static class GitHubRelease implements Comparable<GitHubRelease> {
 
         @JsonProperty("tag_name")
         private String tagName;
@@ -64,6 +67,8 @@ class GitHubService {
 
     static final ObjectMapper MAPPER = new ObjectMapper();
 
+    static final String VAADIN_ANALYSIS_URI = "https://raw.githubusercontent.com/vaadin/vulnerability-analysis/main/analysis.json";
+
     static final String FRAMEWORK_RELEASES_URI = "https://api.github.com/repos/vaadin/framework/releases";
 
     static final Pattern FRAMEWORK_8_PATTERN = compile("^8\\.\\d+.\\d+$");
@@ -73,6 +78,8 @@ class GitHubService {
     static final long NUMBER_OF_LATEST_MAINTAINED_VERSIONS = 4;
 
     private List<GitHubRelease> releasesCache;
+
+    private VulnerabilityAnalysis analysisCache;
 
     List<String> getFramework8Versions() {
         return getFrameworkVersions(FRAMEWORK_8_PATTERN);
@@ -91,16 +98,53 @@ class GitHubService {
 
     private List<GitHubRelease> getReleasesFromGitHub() {
         if (releasesCache == null) {
-            ObjectReader listReader = MAPPER
-                    .readerForListOf(GitHubRelease.class);
-            try {
-                URL frameworkTagsUrl = new URL(FRAMEWORK_RELEASES_URI);
-                releasesCache = listReader.readValue(frameworkTagsUrl);
-            } catch (IOException e) {
-                throw new AppSecException(
-                        "Cannot get Vaadin releases from GitHub", e);
-            }
+            updateReleasesCache();
         }
         return releasesCache;
+    }
+
+    void updateReleasesCache() {
+        ObjectReader listReader = MAPPER.readerForListOf(GitHubRelease.class);
+        try {
+            URL frameworkTagsUrl = getFrameworkReleasesUrl();
+            releasesCache = listReader.readValue(frameworkTagsUrl);
+        } catch (IOException e) {
+            throw new AppSecException("Cannot get Vaadin releases from GitHub",
+                    e);
+        }
+    }
+
+    VulnerabilityAnalysis getVulnerabilityAnalysis() {
+        if (analysisCache == null) {
+            updateAnalysisCache();
+        }
+        return analysisCache;
+    }
+
+    void updateAnalysisCache() {
+        ObjectReader jsonReader = MAPPER.readerFor(VulnerabilityAnalysis.class);
+        try {
+            URL analysisUrl = getVaadinAnalysisUrl();
+            analysisCache = jsonReader.readValue(analysisUrl);
+        } catch (IOException e) {
+            throw new AppSecException("Cannot get Vaadin analysis from GitHub",
+                    e);
+        }
+    }
+
+    protected URL getFrameworkReleasesUrl() {
+        try {
+            return new URL(FRAMEWORK_RELEASES_URI);
+        } catch (MalformedURLException e) {
+            throw new AppSecException("Invalid releases URL", e);
+        }
+    }
+
+    protected URL getVaadinAnalysisUrl() {
+        try {
+            return new URL(VAADIN_ANALYSIS_URI);
+        } catch (MalformedURLException e) {
+            throw new AppSecException("Invalid analysis URL", e);
+        }
     }
 }
