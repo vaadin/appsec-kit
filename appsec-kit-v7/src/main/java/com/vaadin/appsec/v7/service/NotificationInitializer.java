@@ -12,12 +12,17 @@ package com.vaadin.appsec.v7.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vaadin.appsec.v7.ui.AppSecUIProvider;
+import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.v7.ui.AppSecUI;
+import com.vaadin.appsec.v7.ui.AppSecUIProvider;
 import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.Position;
@@ -46,6 +51,8 @@ public class NotificationInitializer {
      */
     private static final int NOTIFICATION_DELAY = 24 * 60 * 60 * 1000;
 
+    private static final Map<String, ScheduledFuture<?>> scheduledChecks = new ConcurrentHashMap<>();
+
     /**
      * Initializes the notification service
      *
@@ -56,32 +63,36 @@ public class NotificationInitializer {
         if (isDebugMode(vaadinService)) {
             vaadinService.addSessionInitListener(e -> {
                 e.getSession().addUIProvider(new AppSecUIProvider());
-                createNotificationThread(e.getSession()).start();
+                startNotificationTask(e.getSession());
             });
             LOGGER.info("NotificationInitListener initialized.");
         }
     }
 
-    private static Thread createNotificationThread(
-            final VaadinSession session) {
-        return new Thread(() -> {
-            try {
-                LOGGER.info(
-                        "NotificationInitListener notification thread initialized.");
+    private static void startNotificationTask(final VaadinSession session) {
+        final String sessionId = session.getSession().getId();
+        final ScheduledFuture<?> scheduledNotificationCheck = AppSecService
+                .getInstance().getConfiguration().getTaskExecutor()
+                .scheduleAtFixedRate(() -> {
+                    if (isSessionOpen(session)) {
+                        session.access(() -> {
+                            session.getUIs().forEach(
+                                    ui -> notifyUiIfNeeded(session, ui));
+                        });
+                    } else {
+                        ScheduledFuture<?> thisCheck = scheduledChecks
+                                .get(sessionId);
+                        if (thisCheck != null) {
+                            thisCheck.cancel(true);
+                            scheduledChecks.remove(sessionId);
+                        }
+                    }
+                }, NOTIFICATION_CHECK_INTERVAL, NOTIFICATION_CHECK_INTERVAL,
+                        TimeUnit.MILLISECONDS);
+        scheduledChecks.put(sessionId, scheduledNotificationCheck);
+        LOGGER.info(
+                "NotificationInitListener notification thread initialized.");
 
-                Thread.sleep(NOTIFICATION_CHECK_INTERVAL);
-
-                while (isSessionOpen(session)) {
-                    session.access(() -> {
-                        session.getUIs()
-                                .forEach(ui -> notifyUiIfNeeded(session, ui));
-                    });
-                    Thread.sleep(NOTIFICATION_CHECK_INTERVAL);
-                }
-            } catch (InterruptedException e) {
-                // NOP
-            }
-        });
     }
 
     @SuppressWarnings("unchecked")
