@@ -10,12 +10,12 @@
 
 package com.vaadin.appsec.v7.service;
 
-import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +40,8 @@ public class AppSecKitInitializer implements HttpSessionListener {
 
     private static final List<String> initializedVaadinServiceNames = new CopyOnWriteArrayList<>();
 
+    private final NotificationInitializer notificationInitializer = new NotificationInitializer();
+
     @Override
     public synchronized void sessionCreated(HttpSessionEvent se) {
         VaadinService vaadinService = VaadinService.getCurrent();
@@ -55,7 +57,7 @@ public class AppSecKitInitializer implements HttpSessionListener {
                 LOGGER.info("AppSecService auto-scan scheduled every "
                         + appSecService.getConfiguration().getAutoScanInterval()
                                 .toString());
-                NotificationInitializer.serviceInit(vaadinService);
+                notificationInitializer.serviceInit(vaadinService);
                 initializedVaadinServiceNames.add(serviceName);
             } else {
                 LOGGER.info(

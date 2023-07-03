@@ -16,7 +16,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class AppSecServiceInitListenerTest extends AbstractAppSecKitTest {
+public class AppSecKitInitializerTest extends AbstractAppSecKitTest {
 
     @Test
     public void debugMode_kitInitialized() {
