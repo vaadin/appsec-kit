@@ -10,7 +10,9 @@
 package com.vaadin.appsec.v7;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
@@ -32,11 +34,17 @@ public class LicenseCheckerWebListener implements HttpSessionListener {
 
     static final String PRODUCT_NAME = "vaadin-appsec-kit";
 
+    private static final List<String> initializedVaadinServiceNames = new CopyOnWriteArrayList<>();
+
     @Override
-    public void sessionCreated(HttpSessionEvent se) {
+    public synchronized void sessionCreated(HttpSessionEvent se) {
         VaadinService vaadinService = VaadinService.getCurrent();
         if (vaadinService != null) {
-            checkLicense(vaadinService);
+            String serviceName = vaadinService.getServiceName();
+            if (!initializedVaadinServiceNames.contains(serviceName)) {
+                checkLicense(vaadinService);
+                initializedVaadinServiceNames.add(serviceName);
+            }
         }
     }
 

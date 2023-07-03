@@ -38,6 +38,7 @@ public class LicenseCheckerWebListenerTest {
     @Before
     public void setup() {
         service = mock(VaadinService.class, Answers.RETURNS_DEEP_STUBS);
+        when(service.getServiceName()).thenReturn("foo");
         licenseChecker = mockStatic(LicenseChecker.class);
         VaadinService.setCurrent(service);
     }
@@ -66,6 +67,10 @@ public class LicenseCheckerWebListenerTest {
         BuildType buildType = null;
         licenseChecker.verify(() -> LicenseChecker.checkLicense(
                 LicenseCheckerWebListener.PRODUCT_NAME, version, buildType));
+
+        // Verify the license is checked only once per service
+        listener.sessionCreated(null);
+        licenseChecker.verifyNoMoreInteractions();
     }
 
     @Test
