@@ -207,6 +207,8 @@ public class AppSecService {
         Executor executor = configuration.getTaskExecutor();
         return CompletableFuture
                 .supplyAsync(vulnerabilityStore::refresh, executor)
+                .thenRun(githubService::updateReleasesCache)
+                .thenRun(githubService::updateAnalysisCache)
                 .thenRun(this::updateLastScanTime)
                 .thenApply(vulnerabilities -> new AppSecScanEvent(this))
                 .thenAccept(this::invokeEventListeners);
