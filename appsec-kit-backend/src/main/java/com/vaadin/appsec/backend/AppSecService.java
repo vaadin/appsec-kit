@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
 import com.vaadin.appsec.backend.model.dto.DependencyDTO;
 import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
 
@@ -132,6 +133,19 @@ public class AppSecService {
     }
 
     /**
+     * Gets the Vaadin Security Team assessments about known vulnerability
+     * coming from transitive dependencies of the current maintained Vaadin
+     * versions.
+     *
+     * @see #getSupportedFramework7Versions()
+     * @see #getSupportedFramework8Versions()
+     * @return the vulnerability analysis
+     */
+    public VulnerabilityAnalysis getVulnerabilityAnalysis() {
+        return githubService.getVulnerabilityAnalysis();
+    }
+
+    /**
      * Schedules automatic scan for vulnerabilities at a fixed rate set to the
      * value configured with
      * {@link AppSecConfiguration#setAutoScanInterval(java.time.Duration)}.
@@ -193,6 +207,8 @@ public class AppSecService {
         Executor executor = configuration.getTaskExecutor();
         return CompletableFuture
                 .supplyAsync(vulnerabilityStore::refresh, executor)
+                .thenRun(githubService::updateReleasesCache)
+                .thenRun(githubService::updateAnalysisCache)
                 .thenRun(this::updateLastScanTime)
                 .thenApply(vulnerabilities -> new AppSecScanEvent(this))
                 .thenAccept(this::invokeEventListeners);

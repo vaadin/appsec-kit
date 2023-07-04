@@ -8,17 +8,35 @@
  */
 package com.vaadin.appsec.backend;
 
+import java.net.URL;
 import java.util.List;
 
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+
+import com.vaadin.appsec.backend.model.analysis.Assessment;
+import com.vaadin.appsec.backend.model.analysis.Vulnerability;
+import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
 
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 
 public class GitHubServiceTest {
 
-    private GitHubService service = new GitHubService();
+    static class TestGitHubService extends GitHubService {
+
+        @Override
+        protected URL getFrameworkReleasesUrl() {
+            return getClass().getClassLoader().getResource("releases.json");
+        }
+
+        @Override
+        protected URL getVaadinAnalysisUrl() {
+            return getClass().getClassLoader().getResource("analysis.json");
+        }
+    }
+
+    private GitHubService service = new TestGitHubService();
 
     @Test
     public void getFramework7Versions() {
@@ -38,5 +56,24 @@ public class GitHubServiceTest {
                 versions.size());
         versions.forEach(
                 version -> MatcherAssert.assertThat(version, startsWith("8.")));
+    }
+
+    @Test
+    public void getVulnerabilityAnalysis() {
+        VulnerabilityAnalysis vulnerabilityAnalysis = service
+                .getVulnerabilityAnalysis();
+
+        Vulnerability vulnerability = vulnerabilityAnalysis.getVulnerabilities()
+                .entrySet().stream().findFirst().get().getValue();
+
+        assertEquals("org.acme:foobar",
+                vulnerability.getDependency().getName());
+
+        Assessment assessment = vulnerability.getAssessments().entrySet()
+                .stream().findFirst().get().getValue();
+
+        int affectedVersionsSize = assessment.getAffectedVersions().size();
+
+        assertEquals(2, affectedVersionsSize);
     }
 }
