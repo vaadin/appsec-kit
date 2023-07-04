@@ -63,6 +63,11 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>license-checker</artifactId>
+                <version>1.12.3</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
