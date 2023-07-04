@@ -32,7 +32,7 @@ public class LicenseCheckerWebListener implements HttpSessionListener {
 
     static final String VERSION_PROPERTY = "appsec-kit.version";
 
-    static final String PRODUCT_NAME = "vaadin-appsec-kit-v7";
+    static final String PRODUCT_NAME = "vaadin-appsec-kit";
 
     private static final List<String> initializedVaadinServiceNames = new CopyOnWriteArrayList<>();
 
