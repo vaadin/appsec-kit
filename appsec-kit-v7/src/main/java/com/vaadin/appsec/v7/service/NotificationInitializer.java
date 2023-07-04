@@ -45,11 +45,11 @@ public class NotificationInitializer {
 
     private final Map<VaadinSession, Registration> scanEventRegistrations = new ConcurrentHashMap<>();
 
-    public void serviceInit(VaadinService service) {
+    void serviceInit(VaadinService service) {
         if (isDebugMode(service)) {
             service.addSessionInitListener(this::subscribeSessionToScanEvents);
             service.addSessionDestroyListener(this::removeSessionRegistration);
-            LOGGER.info("NotificationInitListener initialized.");
+            LOGGER.info("Subscribed to AppSec Kit scan events");
         }
     }
 

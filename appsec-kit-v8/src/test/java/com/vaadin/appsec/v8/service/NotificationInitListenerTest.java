@@ -18,7 +18,7 @@ import com.vaadin.server.ServiceInitEvent;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class NoticationInitListenerTest extends AbstractAppSecKitTest {
+public class NotificationInitListenerTest extends AbstractAppSecKitTest {
 
     @Test
     public void testVulnStoreInit_initsProperly_debugMode() {
@@ -34,7 +34,7 @@ public class NoticationInitListenerTest extends AbstractAppSecKitTest {
         assertEquals("Unexpected count of log messages. ", 1,
                 logAppender.list.size());
         assertEquals("NotificationInitListener initialization failed.",
-                "NotificationInitListener initialized.",
+                "Subscribed to AppSec Kit scan events",
                 logAppender.list.get(0).getMessage());
     }
 

@@ -38,7 +38,7 @@ public class AppSecKitInitializer implements HttpSessionListener {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecKitInitializer.class);
 
-    private static final List<String> initializedVaadinServiceNames = new CopyOnWriteArrayList<>();
+    private final List<String> initializedVaadinServiceNames = new CopyOnWriteArrayList<>();
 
     private final NotificationInitializer notificationInitializer = new NotificationInitializer();
 

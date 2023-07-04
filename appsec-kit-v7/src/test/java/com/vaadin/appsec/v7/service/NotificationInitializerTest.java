@@ -37,7 +37,7 @@ public class NotificationInitializerTest extends AbstractAppSecKitTest {
         assertEquals("Unexpected count of log messages. ", 1,
                 logAppender.list.size());
         assertEquals("NotificationInitListener initialization failed.",
-                "NotificationInitListener initialized.",
+                "Subscribed to AppSec Kit scan events",
                 logAppender.list.get(0).getMessage());
     }
 

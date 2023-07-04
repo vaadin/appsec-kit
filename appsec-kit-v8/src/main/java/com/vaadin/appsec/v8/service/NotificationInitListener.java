@@ -52,7 +52,7 @@ public class NotificationInitListener extends AbstractInitListener {
         if (isDebugMode(service)) {
             service.addSessionInitListener(this::subscribeSessionToScanEvents);
             service.addSessionDestroyListener(this::removeSessionRegistration);
-            LOGGER.info("NotificationInitListener initialized.");
+            LOGGER.info("Subscribed to AppSec Kit scan events");
         }
     }
 
