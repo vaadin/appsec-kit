@@ -36,13 +36,6 @@ public class NotificationInitializer {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(NotificationInitializer.class);
 
-    /**
-     * Notification timeout (in ms). Set to 24 hours to essentially make it
-     * persistent until either the appsec link is clicked or the notification is
-     * dismissed.
-     */
-    private static final int NOTIFICATION_DELAY = 24 * 60 * 60 * 1000;
-
     private final Map<VaadinSession, Registration> scanEventRegistrations = new ConcurrentHashMap<>();
 
     void serviceInit(VaadinService service) {
@@ -88,7 +81,9 @@ public class NotificationInitializer {
         Notification n = new Notification("Vaadin AppSec Kit", msg,
                 Notification.Type.TRAY_NOTIFICATION);
         n.setPosition(Position.TOP_RIGHT);
-        n.setDelayMsec(NOTIFICATION_DELAY);
+        int delay = (int) AppSecService.getInstance().getConfiguration()
+                .getAutoScanInterval().toMillis();
+        n.setDelayMsec(delay);
         n.setHtmlContentAllowed(true);
         ui.access(() -> n.show(ui.getPage()));
     }
