@@ -10,19 +10,18 @@
 
 package com.vaadin.appsec.v7.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecService;
+import com.vaadin.appsec.backend.Registration;
 import com.vaadin.appsec.v7.ui.AppSecUI;
 import com.vaadin.appsec.v7.ui.AppSecUIProvider;
+import com.vaadin.server.SessionDestroyEvent;
+import com.vaadin.server.SessionInitEvent;
 import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.Position;
@@ -37,91 +36,42 @@ public class NotificationInitializer {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(NotificationInitializer.class);
 
-    private static final String NOTIFIED_UIS_SESSION_PARAM = "vaadin-appsec-kit-notified-uis";
-    /**
-     * New UI instance check interval (in ms). Determines how often the session
-     * is checked for new UI instances which might need a notification shown.
-     */
-    private static final int NOTIFICATION_CHECK_INTERVAL = 5000;
+    private final Map<VaadinSession, Registration> scanEventRegistrations = new ConcurrentHashMap<>();
 
-    /**
-     * Notification timeout (in ms). Set to 24 hours to essentially make it
-     * persistent until either the appsec link is clicked or the notification is
-     * dismissed.
-     */
-    private static final int NOTIFICATION_DELAY = 24 * 60 * 60 * 1000;
-
-    private static final Map<String, ScheduledFuture<?>> scheduledChecks = new ConcurrentHashMap<>();
-
-    /**
-     * Initializes the notification service
-     *
-     * @param vaadinService
-     *            current VaadinService instance
-     */
-    static void serviceInit(VaadinService vaadinService) {
-        if (isDebugMode(vaadinService)) {
-            vaadinService.addSessionInitListener(e -> {
-                e.getSession().addUIProvider(new AppSecUIProvider());
-                startNotificationTask(e.getSession());
-            });
-            LOGGER.info("NotificationInitListener initialized.");
+    void serviceInit(VaadinService service) {
+        if (isDebugMode(service)) {
+            service.addSessionInitListener(this::subscribeSessionToScanEvents);
+            service.addSessionDestroyListener(this::removeSessionRegistration);
+            LOGGER.info("Subscribed to AppSec Kit scan events");
         }
     }
 
-    private static void startNotificationTask(final VaadinSession session) {
-        final String sessionId = session.getSession().getId();
-        final ScheduledFuture<?> scheduledNotificationCheck = AppSecService
-                .getInstance().getConfiguration().getTaskExecutor()
-                .scheduleAtFixedRate(() -> {
-                    if (isSessionOpen(session)) {
-                        session.access(() -> {
-                            session.getUIs().forEach(
-                                    ui -> notifyUiIfNeeded(session, ui));
-                        });
-                    } else {
-                        ScheduledFuture<?> thisCheck = scheduledChecks
-                                .get(sessionId);
-                        if (thisCheck != null) {
-                            thisCheck.cancel(true);
-                            scheduledChecks.remove(sessionId);
-                        }
-                    }
-                }, NOTIFICATION_CHECK_INTERVAL, NOTIFICATION_CHECK_INTERVAL,
-                        TimeUnit.MILLISECONDS);
-        scheduledChecks.put(sessionId, scheduledNotificationCheck);
-        LOGGER.info(
-                "NotificationInitListener notification thread initialized.");
-
+    private void removeSessionRegistration(SessionDestroyEvent e) {
+        VaadinSession session = e.getSession();
+        Registration registration = scanEventRegistrations.get(session);
+        if (registration != null) {
+            registration.remove();
+        }
     }
 
-    @SuppressWarnings("unchecked")
-    private static void notifyUiIfNeeded(VaadinSession session, UI ui) {
+    private void subscribeSessionToScanEvents(SessionInitEvent e) {
+        VaadinSession session = e.getSession();
+        session.addUIProvider(new AppSecUIProvider());
+        AppSecService appSecService = AppSecService.getInstance();
+        Registration scanEventRegistration = appSecService
+                .addScanEventListener(scanEvent -> {
+                    int newVulns = scanEvent.getNewVulnerabilities().size();
+                    if (isSessionOpen(session) && newVulns > 0) {
+                        session.getUIs().forEach(this::doNotifyUI);
+                    }
+                });
+        scanEventRegistrations.put(session, scanEventRegistration);
+    }
+
+    private void doNotifyUI(UI ui) {
         if (ui instanceof AppSecUI) {
             return;
         }
-
-        List<Integer> notifiedUIs;
-        Object notifiedUIsFromSession = session
-                .getAttribute(NOTIFIED_UIS_SESSION_PARAM);
-
-        try {
-            notifiedUIs = new ArrayList<>(
-                    (List<Integer>) notifiedUIsFromSession);
-        } catch (RuntimeException e) {
-            notifiedUIs = new ArrayList<>();
-        }
-
-        // Notify UI
-        if (!notifiedUIs.contains(ui.getUIId())) {
-            doNotifyUI(ui);
-            notifiedUIs.add(ui.getUIId());
-        }
-
-        session.setAttribute(NOTIFIED_UIS_SESSION_PARAM, notifiedUIs);
-    }
-
-    private static void doNotifyUI(UI ui) {
         String link = "<a href=\"?"
                 + AppSecUIProvider.VAADIN_APPSEC_KIT_URL_PARAM
                 + "\" target=\"_blank\">here</a>";
@@ -131,17 +81,19 @@ public class NotificationInitializer {
         Notification n = new Notification("Vaadin AppSec Kit", msg,
                 Notification.Type.TRAY_NOTIFICATION);
         n.setPosition(Position.TOP_RIGHT);
-        n.setDelayMsec(NOTIFICATION_DELAY);
+        int delay = (int) AppSecService.getInstance().getConfiguration()
+                .getAutoScanInterval().toMillis();
+        n.setDelayMsec(delay);
         n.setHtmlContentAllowed(true);
-        n.show(ui.getPage());
+        ui.access(() -> n.show(ui.getPage()));
     }
 
-    private static boolean isSessionOpen(VaadinSession session) {
+    private boolean isSessionOpen(VaadinSession session) {
         return !(session.getState() != VaadinSession.State.OPEN
                 || session.getSession() == null);
     }
 
-    private static boolean isDebugMode(VaadinService vaadinService) {
+    private boolean isDebugMode(VaadinService vaadinService) {
         return !vaadinService.getDeploymentConfiguration().isProductionMode();
     }
 }

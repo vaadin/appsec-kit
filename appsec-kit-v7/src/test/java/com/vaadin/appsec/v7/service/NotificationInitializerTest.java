@@ -12,24 +12,32 @@ package com.vaadin.appsec.v7.service;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class NoticationInitListenerTest extends AbstractAppSecKitTest {
+public class NotificationInitializerTest extends AbstractAppSecKitTest {
+
+    private NotificationInitializer noitificationInitializer;
+
+    @Before
+    public void setup() {
+        noitificationInitializer = new NotificationInitializer();
+    }
 
     @Test
     public void testNotificationInitializer_initsProperly_debugMode() {
         ListAppender<ILoggingEvent> logAppender = createListAppender(
                 NotificationInitializer.class.getName());
 
-        NotificationInitializer.serviceInit(service);
+        noitificationInitializer.serviceInit(service);
 
-        Assert.assertEquals("Unexpected count of log messages. ", 1,
+        assertEquals("Unexpected count of log messages. ", 1,
                 logAppender.list.size());
-        Assert.assertEquals("NotificationInitListener initialization failed.",
-                "NotificationInitListener initialized.",
+        assertEquals("NotificationInitListener initialization failed.",
+                "Subscribed to AppSec Kit scan events",
                 logAppender.list.get(0).getMessage());
     }
 
@@ -41,9 +49,9 @@ public class NoticationInitListenerTest extends AbstractAppSecKitTest {
         ListAppender<ILoggingEvent> logAppender = createListAppender(
                 NotificationInitializer.class.getName());
 
-        NotificationInitializer.serviceInit(service);
+        noitificationInitializer.serviceInit(service);
 
-        Assert.assertEquals("Unexpected count of log messages. ", 0,
+        assertEquals("Unexpected count of log messages. ", 0,
                 logAppender.list.size());
     }
 }
