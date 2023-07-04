@@ -93,7 +93,7 @@ public class NotificationInitListener extends AbstractInitListener {
         n.setPosition(Position.TOP_RIGHT);
         n.setDelayMsec(NOTIFICATION_DELAY);
         n.setHtmlContentAllowed(true);
-        n.show(ui.getPage());
+        ui.access(() -> n.show(ui.getPage()));
     }
 
     private boolean isSessionOpen(VaadinSession session) {
