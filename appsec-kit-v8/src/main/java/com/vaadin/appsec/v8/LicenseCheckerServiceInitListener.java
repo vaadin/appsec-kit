@@ -28,7 +28,7 @@ public class LicenseCheckerServiceInitListener
 
     static final String VERSION_PROPERTY = "appsec-kit.version";
 
-    static final String PRODUCT_NAME = "vaadin-appsec-kit";
+    static final String PRODUCT_NAME = "vaadin-appsec-kit-v8";
 
     @Override
     public void serviceInit(ServiceInitEvent event) {
