@@ -206,7 +206,6 @@ public class AppSecService {
     public CompletableFuture<Void> scanForVulnerabilities() {
         checkForInitialization();
         Executor executor = configuration.getTaskExecutor();
-        LOGGER.debug("Scan for vulnerabilities started...");
         return CompletableFuture
                 .supplyAsync(vulnerabilityStore::refresh, executor)
                 .thenRun(githubService::updateReleasesCache)
@@ -327,6 +326,8 @@ public class AppSecService {
         if (dataFile.exists()) {
             try {
                 data = MAPPER.readValue(dataFile, AppSecData.class);
+                LOGGER.debug("Reading AppSec Kit data file "
+                        + dataFile.getAbsolutePath());
             } catch (IOException e) {
                 throw new AppSecException(
                         "Cannot read the AppSec Kit data file: "
@@ -335,6 +336,8 @@ public class AppSecService {
             }
         } else {
             data = new AppSecData();
+            LOGGER.debug("AppSec Kit data file created "
+                    + dataFile.getAbsolutePath());
         }
     }
 

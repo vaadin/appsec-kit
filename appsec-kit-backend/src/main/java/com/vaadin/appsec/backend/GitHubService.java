@@ -68,6 +68,11 @@ class GitHubService {
         public int compareTo(GitHubRelease o) {
             return Collator.getInstance().compare(tagName, o.tagName);
         }
+
+        @Override
+        public String toString() {
+            return "GitHubRelease{" + "tagName='" + tagName + '\'' + '}';
+        }
     }
 
     static final ObjectMapper MAPPER = new ObjectMapper();
@@ -113,7 +118,8 @@ class GitHubService {
         try {
             URL frameworkTagsUrl = getFrameworkReleasesUrl();
             releasesCache = listReader.readValue(frameworkTagsUrl);
-            LOGGER.debug("Vaadin releases cache is updated from GitHub");
+            LOGGER.debug("Vaadin releases cache updated from GitHub "
+                    + releasesCache);
         } catch (IOException e) {
             throw new AppSecException("Cannot get Vaadin releases from GitHub",
                     e);
@@ -132,7 +138,8 @@ class GitHubService {
         try {
             URL analysisUrl = getVaadinAnalysisUrl();
             analysisCache = jsonReader.readValue(analysisUrl);
-            LOGGER.debug("Vaadin analysis cache is updated from GitHub");
+            LOGGER.debug("Vaadin analysis cache updated from GitHub "
+                    + analysisCache);
         } catch (IOException e) {
             throw new AppSecException("Cannot get Vaadin analysis from GitHub",
                     e);

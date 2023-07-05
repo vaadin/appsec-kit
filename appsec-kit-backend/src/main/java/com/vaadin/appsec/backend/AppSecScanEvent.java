@@ -46,7 +46,7 @@ public class AppSecScanEvent extends EventObject {
         List<VulnerabilityDTO> newVulnerabilities = getSource()
                 .getVulnerabilities().stream().filter(this::newVulnerabilities)
                 .collect(Collectors.toList());
-        LOGGER.debug("Get new vulnerabilities: " + newVulnerabilities);
+        LOGGER.debug("New vulnerabilities found " + newVulnerabilities);
         return newVulnerabilities;
     }
 

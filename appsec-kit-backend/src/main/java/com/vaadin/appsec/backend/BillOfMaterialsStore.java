@@ -39,7 +39,7 @@ class BillOfMaterialsStore {
         JsonParser parser = new JsonParser();
         File bomFile = bomFilePath.toFile();
         bom = parser.parse(bomFile);
-        LOGGER.debug("Reading the BOM from " + bomFile.getAbsolutePath()
-                + " file finished");
+        LOGGER.debug("Reading Bill Of Materials from file "
+                + bomFile.getAbsolutePath());
     }
 }

@@ -10,6 +10,7 @@ package com.vaadin.appsec.backend;
 
 import java.io.Serializable;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
@@ -80,11 +81,16 @@ public class AppSecConfiguration implements Serializable {
     public Path getBomFilePath() {
         if (bomFilePath == null) {
             try {
-                bomFilePath = Paths.get(AppSecConfiguration.class
-                        .getResource(DEFAULT_BOM_FILE_PATH).toURI());
+                URL bomFileUrl = AppSecConfiguration.class
+                        .getResource(DEFAULT_BOM_FILE_PATH);
+                bomFilePath = Paths.get(bomFileUrl.toURI());
+            } catch (NullPointerException e) {
+                throw new AppSecException(
+                        "SBOM file not found on path " + DEFAULT_BOM_FILE_PATH,
+                        e);
             } catch (URISyntaxException e) {
                 throw new AppSecException(
-                        "Invalid SBOM file path: " + DEFAULT_BOM_FILE_PATH, e);
+                        "Invalid SBOM file path " + DEFAULT_BOM_FILE_PATH, e);
             }
         }
         return bomFilePath;

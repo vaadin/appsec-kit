@@ -29,10 +29,10 @@ public class AppSecServiceInitListener extends AbstractInitListener {
         if (isDebugMode(event.getSource())) {
             AppSecService appSecService = AppSecService.getInstance();
             appSecService.init();
-            LOGGER.info("AppSecService initialized");
+            LOGGER.info("AppSec Kit initialized");
             appSecService.scanForVulnerabilities()
                     .thenRun(appSecService::scheduleAutomaticScan);
-            LOGGER.info("AppSecService auto-scan scheduled every "
+            LOGGER.info("Vulnerability auto-scan scheduled every "
                     + appSecService.getConfiguration().getAutoScanInterval()
                             .toString());
         } else {

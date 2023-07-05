@@ -65,4 +65,10 @@ public class Dependency implements Serializable {
         Dependency other = (Dependency) obj;
         return Objects.equals(name, other.name);
     }
+
+    @Override
+    public String toString() {
+        return "Dependency{" + "name='" + name + '\'' + ", affectedVersions="
+                + affectedVersions + '}';
+    }
 }
