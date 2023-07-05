@@ -25,7 +25,7 @@ class RateLimiter {
         this.lastRequestTime = System.currentTimeMillis();
     }
 
-    void acquire() throws InterruptedException {
+    void limit() throws InterruptedException {
         semaphore.acquire();
         long currentTime = System.currentTimeMillis();
         long timeElapsed = currentTime - lastRequestTime;
