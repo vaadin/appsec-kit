@@ -8,7 +8,33 @@
  */
 package com.vaadin.appsec.backend.model.analysis;
 
+/**
+ * Status of a vulnerability assessment.
+ */
 public enum AssessmentStatus {
 
-    TRUE_POSITIVE, FALSE_POSITIVE, UNDER_REVIEW;
+    /**
+     * The vulnerability is a true positive.
+     */
+    TRUE_POSITIVE("True Positive"),
+
+    /**
+     * The vulnerability is a false positive.
+     */
+    FALSE_POSITIVE("False Positive"),
+
+    /**
+     * The vulnerability is under review.
+     */
+    UNDER_REVIEW("Under Review");
+
+    private final String caption;
+
+    private AssessmentStatus(String caption) {
+        this.caption = caption;
+    }
+
+    public String getCaption() {
+        return caption;
+    }
 }

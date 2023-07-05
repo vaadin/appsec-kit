@@ -23,7 +23,6 @@ import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
 
 /**
@@ -64,6 +63,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
     }
 
+    @Override
     protected void clearFilters() {
         dependency.setValue(null);
         vaadinAnalysis.setValue(null);
@@ -72,6 +72,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         getContainer().removeAllContainerFilters();
     }
 
+    @Override
     protected void applyFilters() {
         getContainer().removeAllContainerFilters();
 
@@ -162,6 +163,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                 .getContainerDataSource();
     }
 
+    @Override
     public void refresh() {
         BeanItemContainer<VulnerabilityDTO> container = new BeanItemContainer<>(
                 VulnerabilityDTO.class);

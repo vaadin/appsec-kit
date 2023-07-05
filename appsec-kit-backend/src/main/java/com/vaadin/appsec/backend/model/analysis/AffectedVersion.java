@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.artifact.versioning.VersionRange;
 
 /**
  * The assessment for a specific version (or range) affected by a vulnerability.
@@ -34,6 +37,16 @@ public class AffectedVersion implements Serializable {
      */
     public String getVersionRange() {
         return versionRange;
+    }
+
+    public boolean isInRange(String version) {
+        try {
+            VersionRange range = VersionRange
+                    .createFromVersionSpec(versionRange);
+            return range.containsVersion(new DefaultArtifactVersion(version));
+        } catch (InvalidVersionSpecificationException e) {
+            throw new IllegalArgumentException("Not parsable version", e);
+        }
     }
 
     void setVersionRange(String versionRange) {
