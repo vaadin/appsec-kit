@@ -45,6 +45,8 @@ public class AppSecConfiguration implements Serializable {
 
     private Duration autoScanInterval = Duration.ofDays(1);
 
+    private int osvApiRatePerSecond = 25;
+
     /**
      * Gets the data-file path.
      *
@@ -160,10 +162,32 @@ public class AppSecConfiguration implements Serializable {
         this.autoScanInterval = autoScanInterval;
     }
 
+    /**
+     * Gets the rate per second value for the OpenSourceVulnerability API calls.
+     *
+     * @return the rate per second value for the OpenSourceVulnerability API
+     *         calls
+     */
+    public int getOsvApiRatePerSecond() {
+        return osvApiRatePerSecond;
+    }
+
+    /**
+     * Sets the rate per second value for the OpenSourceVulnerability API calls.
+     *
+     * @param osvApiRatePerSecond
+     *            the rate per second value for the OpenSourceVulnerability API
+     *            calls
+     */
+    public void setOsvApiRatePerSecond(int osvApiRatePerSecond) {
+        this.osvApiRatePerSecond = osvApiRatePerSecond;
+    }
+
     @Override
     public String toString() {
         return "AppSecConfiguration{" + "dataFilePath=" + dataFilePath
                 + ", bomFilePath=" + bomFilePath + ", taskExecutor="
-                + taskExecutor + ", autoScanInterval=" + autoScanInterval + '}';
+                + taskExecutor + ", autoScanInterval=" + autoScanInterval
+                + ", osvApiRatePerSecond=" + osvApiRatePerSecond + '}';
     }
 }

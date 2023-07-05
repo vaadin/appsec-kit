@@ -91,7 +91,8 @@ public class AppSecService {
      */
     private AppSecService(AppSecConfiguration configuration) {
         bomStore = new BillOfMaterialsStore();
-        osvService = new OpenSourceVulnerabilityService();
+        osvService = new OpenSourceVulnerabilityService(
+                configuration.getOsvApiRatePerSecond());
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
         dtoProvider = new AppSecDTOProvider(vulnerabilityStore, bomStore);
         githubService = new GitHubService();

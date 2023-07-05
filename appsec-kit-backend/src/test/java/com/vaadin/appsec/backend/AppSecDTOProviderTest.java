@@ -33,7 +33,7 @@ public class AppSecDTOProviderTest {
     @Before
     public void setup() {
         bomStore = new BillOfMaterialsStore();
-        osvService = new OpenSourceVulnerabilityService();
+        osvService = new OpenSourceVulnerabilityService(25);
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
 
         // Init BOM Store
