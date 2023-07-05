@@ -126,4 +126,10 @@ public class Package implements Serializable {
     public void setPurl(String purl) {
         this.purl = purl;
     }
+
+    @Override
+    public String toString() {
+        return "Package{" + "ecosystem='" + ecosystem + '\'' + ", name='" + name
+                + '\'' + '}';
+    }
 }

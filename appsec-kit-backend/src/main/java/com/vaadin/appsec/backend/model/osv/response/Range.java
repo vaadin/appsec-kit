@@ -175,4 +175,10 @@ public class Range {
             return this.value;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Range{" + "type=" + type + ", repo='" + repo + '\''
+                + ", events=" + events + '}';
+    }
 }

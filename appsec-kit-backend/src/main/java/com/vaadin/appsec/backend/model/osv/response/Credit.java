@@ -160,4 +160,10 @@ public class Credit {
             return this.value;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Credit{" + "name='" + name + '\'' + ", contact=" + contact
+                + ", type=" + type + '}';
+    }
 }

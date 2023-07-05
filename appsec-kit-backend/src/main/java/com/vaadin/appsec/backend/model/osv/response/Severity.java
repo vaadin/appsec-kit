@@ -124,4 +124,9 @@ public class Severity {
             return this.value;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Severity{" + "type=" + type + ", score='" + score + '\'' + '}';
+    }
 }
