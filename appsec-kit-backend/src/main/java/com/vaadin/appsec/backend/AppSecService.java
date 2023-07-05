@@ -39,7 +39,8 @@ import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
  */
 public class AppSecService {
 
-    static final Logger LOGGER = LoggerFactory.getLogger(AppSecService.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AppSecService.class);
 
     static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -205,6 +206,7 @@ public class AppSecService {
     public CompletableFuture<Void> scanForVulnerabilities() {
         checkForInitialization();
         Executor executor = configuration.getTaskExecutor();
+        LOGGER.debug("Scan for vulnerabilities started...");
         return CompletableFuture
                 .supplyAsync(vulnerabilityStore::refresh, executor)
                 .thenRun(githubService::updateReleasesCache)
@@ -309,6 +311,7 @@ public class AppSecService {
         this.configuration = configuration;
         this.data = null;
         cancelScheduledScan();
+        LOGGER.debug("Set AppSec configuration: " + configuration);
     }
 
     private void checkForInitialization() {

@@ -12,6 +12,9 @@ import java.util.EventObject;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vaadin.appsec.backend.model.AppSecData;
 import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
 
@@ -19,6 +22,9 @@ import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
  * Event fired when a scan for vulnerabilities has been completed.
  */
 public class AppSecScanEvent extends EventObject {
+
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AppSecScanEvent.class);
 
     AppSecScanEvent(AppSecService source) {
         super(source);
@@ -37,8 +43,11 @@ public class AppSecScanEvent extends EventObject {
      * @return the list of new vulnerabilities
      */
     public List<VulnerabilityDTO> getNewVulnerabilities() {
-        return getSource().getVulnerabilities().stream()
-                .filter(this::newVulnerabilities).collect(Collectors.toList());
+        List<VulnerabilityDTO> newVulnerabilities = getSource()
+                .getVulnerabilities().stream().filter(this::newVulnerabilities)
+                .collect(Collectors.toList());
+        LOGGER.debug("Get new vulnerabilities: " + newVulnerabilities);
+        return newVulnerabilities;
     }
 
     private boolean newVulnerabilities(VulnerabilityDTO vulnerability) {

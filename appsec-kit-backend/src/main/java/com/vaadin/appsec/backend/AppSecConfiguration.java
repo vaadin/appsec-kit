@@ -153,4 +153,11 @@ public class AppSecConfiguration implements Serializable {
         }
         this.autoScanInterval = autoScanInterval;
     }
+
+    @Override
+    public String toString() {
+        return "AppSecConfiguration{" + "dataFilePath=" + dataFilePath
+                + ", bomFilePath=" + bomFilePath + ", taskExecutor="
+                + taskExecutor + ", autoScanInterval=" + autoScanInterval + '}';
+    }
 }
