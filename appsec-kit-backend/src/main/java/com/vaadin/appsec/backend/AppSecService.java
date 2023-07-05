@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
 import com.vaadin.appsec.backend.model.dto.DependencyDTO;
 import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
 
@@ -71,6 +72,8 @@ public class AppSecService {
 
     private final AppSecDTOProvider dtoProvider;
 
+    private final GitHubService githubService;
+
     private AppSecConfiguration configuration;
 
     private AppSecData data;
@@ -90,6 +93,7 @@ public class AppSecService {
         osvService = new OpenSourceVulnerabilityService();
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
         dtoProvider = new AppSecDTOProvider(vulnerabilityStore, bomStore);
+        githubService = new GitHubService();
         this.configuration = configuration;
     }
 
@@ -106,6 +110,39 @@ public class AppSecService {
                     "Cannot parse the SBOM file: " + bomFilePath, e);
         }
         readOrCreateDataFile();
+    }
+
+    /**
+     * Gets the list of Vaadin Framework 7 versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    public List<String> getSupportedFramework7Versions() {
+        return githubService.getFramework7Versions();
+    }
+
+    /**
+     * Gets the list of Vaadin Framework 8 versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    public List<String> getSupportedFramework8Versions() {
+        return githubService.getFramework8Versions();
+    }
+
+    /**
+     * Gets the Vaadin Security Team assessments about known vulnerability
+     * coming from transitive dependencies of the current maintained Vaadin
+     * versions.
+     *
+     * @see #getSupportedFramework7Versions()
+     * @see #getSupportedFramework8Versions()
+     * @return the vulnerability analysis
+     */
+    public VulnerabilityAnalysis getVulnerabilityAnalysis() {
+        return githubService.getVulnerabilityAnalysis();
     }
 
     /**
@@ -170,6 +207,8 @@ public class AppSecService {
         Executor executor = configuration.getTaskExecutor();
         return CompletableFuture
                 .supplyAsync(vulnerabilityStore::refresh, executor)
+                .thenRun(githubService::updateReleasesCache)
+                .thenRun(githubService::updateAnalysisCache)
                 .thenRun(this::updateLastScanTime)
                 .thenApply(vulnerabilities -> new AppSecScanEvent(this))
                 .thenAccept(this::invokeEventListeners);

@@ -10,10 +10,12 @@
 
 package com.vaadin.appsec.v7.service;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,11 +38,17 @@ public class AppSecKitInitializer implements HttpSessionListener {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecKitInitializer.class);
 
+    private final List<String> initializedVaadinServiceNames = new CopyOnWriteArrayList<>();
+
+    private final NotificationInitializer notificationInitializer = new NotificationInitializer();
+
     @Override
-    public void sessionCreated(HttpSessionEvent se) {
+    public synchronized void sessionCreated(HttpSessionEvent se) {
         VaadinService vaadinService = VaadinService.getCurrent();
         if (vaadinService != null) {
-            if (isDebugMode(vaadinService)) {
+            String serviceName = vaadinService.getServiceName();
+            if (isDebugMode(vaadinService)
+                    && !initializedVaadinServiceNames.contains(serviceName)) {
                 AppSecService appSecService = AppSecService.getInstance();
                 appSecService.init();
                 LOGGER.info("AppSecService initialized");
@@ -49,7 +57,8 @@ public class AppSecKitInitializer implements HttpSessionListener {
                 LOGGER.info("AppSecService auto-scan scheduled every "
                         + appSecService.getConfiguration().getAutoScanInterval()
                                 .toString());
-                NotificationInitializer.serviceInit(vaadinService);
+                notificationInitializer.serviceInit(vaadinService);
+                initializedVaadinServiceNames.add(serviceName);
             } else {
                 LOGGER.info(
                         "AppSec Kit not enabled in production mode. Run the "
@@ -58,7 +67,8 @@ public class AppSecKitInitializer implements HttpSessionListener {
         } else {
             LOGGER.info(
                     "VaadinService was not available during HTTP session init. "
-                            + "You may need to run AppSecKitInitializer manually.");
+                            + "You may need to run AppSecKitInitializer manually. "
+                            + "See documentation for more information.");
         }
     }
 

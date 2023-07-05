@@ -37,7 +37,7 @@
         <maven.javadoc.version>3.4.1</maven.javadoc.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <maven.formatter.version>2.16.0</maven.formatter.version>
-        <jackson.version>2.15.2</jackson.version>
+        <jackson.version>2.14.3</jackson.version>
     </properties>
 
     <repositories>
@@ -62,6 +62,11 @@
                 <version>${jackson.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>license-checker</artifactId>
+                <version>1.12.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
