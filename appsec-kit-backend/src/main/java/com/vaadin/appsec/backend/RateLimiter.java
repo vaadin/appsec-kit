@@ -10,10 +10,16 @@ package com.vaadin.appsec.backend;
 
 import java.util.concurrent.Semaphore;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Rate limiter for limiting the calls to an API.
  */
 class RateLimiter {
+
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(RateLimiter.class);
 
     private final Semaphore semaphore;
     private final int ratePerSecond;
@@ -31,6 +37,7 @@ class RateLimiter {
         long timeElapsed = currentTime - lastRequestTime;
         long timeToWait = 1000L / ratePerSecond - timeElapsed;
         if (timeToWait > 0) {
+            LOGGER.debug("Apply rate limit");
             Thread.sleep(timeToWait);
         }
         lastRequestTime = System.currentTimeMillis();
