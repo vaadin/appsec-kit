@@ -16,7 +16,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <vaadin.version>7.7.0</vaadin.version>
+        <vaadin7.version>7.7.0</vaadin7.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-server</artifactId>
-            <version>${vaadin.version}</version>
+            <version>${vaadin7.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

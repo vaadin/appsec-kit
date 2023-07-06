@@ -22,11 +22,9 @@
     </licenses>
 
     <modules>
-        <module>appsec-kit-demo-v8</module>
-        <module>appsec-kit-demo-v7</module>
         <module>appsec-kit-backend</module>
-        <module>appsec-kit-v8</module>
         <module>appsec-kit-v7</module>
+        <module>appsec-kit-v8</module>
     </modules>
 
     <properties>
@@ -127,4 +125,18 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>demo</id>
+            <activation>
+                <property>
+                    <name>!release</name>
+                </property>
+            </activation>
+            <modules>
+                <module>appsec-kit-demo-v7</module>
+                <module>appsec-kit-demo-v8</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
