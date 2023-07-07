@@ -60,7 +60,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         severity.setContainerDataSource(
                 AbstractAppSecContent.buildSeverityContainer());
 
-        buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
+        buildFilterBar(dependency, /* vaadinAnalysis, */ devAnalysis, severity);
     }
 
     @Override

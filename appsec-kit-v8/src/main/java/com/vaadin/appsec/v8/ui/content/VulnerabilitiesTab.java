@@ -59,7 +59,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         severity.setItems(SeverityLevel.NA, SeverityLevel.LOW,
                 SeverityLevel.MEDIUM, SeverityLevel.HIGH);
 
-        buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
+        buildFilterBar(dependency, /* vaadinAnalysis, */ devAnalysis, severity);
     }
 
     @Override
@@ -109,8 +109,6 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                 .setCaption("Vulnerability name or identifier");
         grid.addColumn(VulnerabilityDTO::getDependency)
                 .setCaption("Dependency");
-        grid.addColumn(v -> v.getDependency().getVersion())
-                .setCaption("Version");
         grid.addColumn(VulnerabilityDTO::getSeverityLevel)
                 .setCaption("Severity");
         grid.addColumn(VulnerabilityDTO::getRiskScore).setCaption("Risk score");
