@@ -10,6 +10,7 @@
 package com.vaadin.appsec.backend.model.osv.request;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -56,5 +57,11 @@ public class QueryBatchRequestPayload implements Serializable {
      */
     public void setQueries(QueryRequestPayload[] queries) {
         this.queries = queries;
+    }
+
+    @Override
+    public String toString() {
+        return "QueryBatchRequestPayload{" + "queries="
+                + Arrays.toString(queries) + '}';
     }
 }

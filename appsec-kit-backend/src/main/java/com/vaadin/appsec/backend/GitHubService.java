@@ -21,12 +21,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
 
 import static java.util.regex.Pattern.compile;
 
 class GitHubService {
+
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(GitHubService.class);
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class GitHubRelease implements Comparable<GitHubRelease> {
@@ -62,6 +67,11 @@ class GitHubService {
         @Override
         public int compareTo(GitHubRelease o) {
             return Collator.getInstance().compare(tagName, o.tagName);
+        }
+
+        @Override
+        public String toString() {
+            return "GitHubRelease{" + "tagName='" + tagName + '\'' + '}';
         }
     }
 
@@ -108,6 +118,8 @@ class GitHubService {
         try {
             URL frameworkTagsUrl = getFrameworkReleasesUrl();
             releasesCache = listReader.readValue(frameworkTagsUrl);
+            LOGGER.debug("Vaadin releases cache updated from GitHub "
+                    + releasesCache);
         } catch (IOException e) {
             throw new AppSecException("Cannot get Vaadin releases from GitHub",
                     e);
@@ -126,6 +138,8 @@ class GitHubService {
         try {
             URL analysisUrl = getVaadinAnalysisUrl();
             analysisCache = jsonReader.readValue(analysisUrl);
+            LOGGER.debug("Vaadin analysis cache updated from GitHub "
+                    + analysisCache);
         } catch (IOException e) {
             throw new AppSecException("Cannot get Vaadin analysis from GitHub",
                     e);

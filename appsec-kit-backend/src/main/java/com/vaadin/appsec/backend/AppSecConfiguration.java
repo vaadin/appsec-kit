@@ -10,6 +10,7 @@ package com.vaadin.appsec.backend;
 
 import java.io.Serializable;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
@@ -43,6 +44,8 @@ public class AppSecConfiguration implements Serializable {
             .newSingleThreadScheduledExecutor();
 
     private Duration autoScanInterval = Duration.ofDays(1);
+
+    private int osvApiRatePerSecond = 25;
 
     /**
      * Gets the data-file path.
@@ -80,11 +83,16 @@ public class AppSecConfiguration implements Serializable {
     public Path getBomFilePath() {
         if (bomFilePath == null) {
             try {
-                bomFilePath = Paths.get(AppSecConfiguration.class
-                        .getResource(DEFAULT_BOM_FILE_PATH).toURI());
+                URL bomFileUrl = AppSecConfiguration.class
+                        .getResource(DEFAULT_BOM_FILE_PATH);
+                bomFilePath = Paths.get(bomFileUrl.toURI());
+            } catch (NullPointerException e) {
+                throw new AppSecException(
+                        "SBOM file not found on path " + DEFAULT_BOM_FILE_PATH,
+                        e);
             } catch (URISyntaxException e) {
                 throw new AppSecException(
-                        "Invalid SBOM file path: " + DEFAULT_BOM_FILE_PATH, e);
+                        "Invalid SBOM file path " + DEFAULT_BOM_FILE_PATH, e);
             }
         }
         return bomFilePath;
@@ -152,5 +160,34 @@ public class AppSecConfiguration implements Serializable {
                     "The auto-scan period cannot be null");
         }
         this.autoScanInterval = autoScanInterval;
+    }
+
+    /**
+     * Gets the rate per second value for the OpenSourceVulnerability API calls.
+     *
+     * @return the rate per second value for the OpenSourceVulnerability API
+     *         calls
+     */
+    public int getOsvApiRatePerSecond() {
+        return osvApiRatePerSecond;
+    }
+
+    /**
+     * Sets the rate per second value for the OpenSourceVulnerability API calls.
+     *
+     * @param osvApiRatePerSecond
+     *            the rate per second value for the OpenSourceVulnerability API
+     *            calls
+     */
+    public void setOsvApiRatePerSecond(int osvApiRatePerSecond) {
+        this.osvApiRatePerSecond = osvApiRatePerSecond;
+    }
+
+    @Override
+    public String toString() {
+        return "AppSecConfiguration{" + "dataFilePath=" + dataFilePath
+                + ", bomFilePath=" + bomFilePath + ", taskExecutor="
+                + taskExecutor + ", autoScanInterval=" + autoScanInterval
+                + ", osvApiRatePerSecond=" + osvApiRatePerSecond + '}';
     }
 }

@@ -33,9 +33,8 @@ public class AppSecServiceInitListenerTest extends AbstractAppSecKitTest {
 
         assertEquals("Unexpected count of log messages. ", 2,
                 logAppender.list.size());
-        assertEquals("AppSecService initialization failed.",
-                "AppSecService initialized",
-                logAppender.list.get(0).getMessage());
+        assertEquals("AppSec Kit initialization failed.",
+                "AppSec Kit initialized", logAppender.list.get(0).getMessage());
     }
 
     @Test
@@ -51,7 +50,7 @@ public class AppSecServiceInitListenerTest extends AbstractAppSecKitTest {
 
         assertEquals("Unexpected count of log messages. ", 1,
                 logAppender.list.size());
-        assertEquals("AppSecService shouldn't initialize in production mode.",
+        assertEquals("AppSec Kit shouldn't initialize in production mode.",
                 "AppSec Kit not enabled in production mode. Run the "
                         + "application in debug mode to initialize AppSec Kit",
                 logAppender.list.get(0).getMessage());

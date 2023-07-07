@@ -122,4 +122,11 @@ public class QueryRequestPayload implements Serializable {
     public void setPackage(Package aPackage) {
         this.aPackage = aPackage;
     }
+
+    @Override
+    public String toString() {
+        return "QueryRequestPayload{" + "commit='" + commit + '\''
+                + ", version='" + version + '\'' + ", aPackage=" + aPackage
+                + '}';
+    }
 }

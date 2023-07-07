@@ -9,6 +9,8 @@
 
 package com.vaadin.appsec.backend.model.osv.response;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -54,5 +56,11 @@ public class QueryBatchResponse {
      */
     public void setResults(VulnerabilityIdArray[] results) {
         this.results = results;
+    }
+
+    @Override
+    public String toString() {
+        return "QueryBatchResponse{" + "results=" + Arrays.toString(results)
+                + '}';
     }
 }

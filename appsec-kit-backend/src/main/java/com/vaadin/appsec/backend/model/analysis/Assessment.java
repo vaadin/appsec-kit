@@ -88,4 +88,10 @@ public class Assessment implements Serializable {
         Assessment other = (Assessment) obj;
         return Objects.equals(name, other.name);
     }
+
+    @Override
+    public String toString() {
+        return "Assessment{" + "name='" + name + '\'' + ", affectedVersions="
+                + affectedVersions + '}';
+    }
 }
