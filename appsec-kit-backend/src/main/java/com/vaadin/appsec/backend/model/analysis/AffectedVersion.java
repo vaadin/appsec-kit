@@ -108,4 +108,11 @@ public class AffectedVersion implements Serializable {
         AffectedVersion other = (AffectedVersion) obj;
         return Objects.equals(versionRange, other.versionRange);
     }
+
+    @Override
+    public String toString() {
+        return "AffectedVersion{" + "versionRange='" + versionRange + '\''
+                + ", status=" + status + ", comment='" + comment + '\''
+                + ", fixedIn='" + fixedIn + '\'' + '}';
+    }
 }

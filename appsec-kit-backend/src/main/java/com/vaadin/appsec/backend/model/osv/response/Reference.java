@@ -137,4 +137,9 @@ public class Reference {
             return this.value;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Reference{" + "type=" + type + ", url=" + url + '}';
+    }
 }

@@ -183,4 +183,10 @@ public class Affected {
     public void setDatabaseSpecific(DatabaseSpecific databaseSpecific) {
         this.databaseSpecific = databaseSpecific;
     }
+
+    @Override
+    public String toString() {
+        return "Affected{" + "aPackage=" + aPackage + ", ranges=" + ranges
+                + '}';
+    }
 }

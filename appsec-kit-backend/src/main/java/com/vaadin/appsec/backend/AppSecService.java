@@ -39,7 +39,8 @@ import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
  */
 public class AppSecService {
 
-    static final Logger LOGGER = LoggerFactory.getLogger(AppSecService.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AppSecService.class);
 
     static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -90,7 +91,8 @@ public class AppSecService {
      */
     private AppSecService(AppSecConfiguration configuration) {
         bomStore = new BillOfMaterialsStore();
-        osvService = new OpenSourceVulnerabilityService();
+        int osvApiRatePerSecond = configuration.getOsvApiRatePerSecond();
+        osvService = new OpenSourceVulnerabilityService(osvApiRatePerSecond);
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
         dtoProvider = new AppSecDTOProvider(vulnerabilityStore, bomStore);
         githubService = new GitHubService();
@@ -107,7 +109,7 @@ public class AppSecService {
             bomStore.readBomFile(bomFilePath);
         } catch (ParseException e) {
             throw new AppSecException(
-                    "Cannot parse the SBOM file: " + bomFilePath.toString(), e);
+                    "Cannot parse the SBOM file: " + bomFilePath, e);
         }
         readOrCreateDataFile();
     }
@@ -309,6 +311,7 @@ public class AppSecService {
         this.configuration = configuration;
         this.data = null;
         cancelScheduledScan();
+        LOGGER.debug("Set AppSec configuration: " + configuration);
     }
 
     private void checkForInitialization() {
@@ -324,6 +327,8 @@ public class AppSecService {
         if (dataFile.exists()) {
             try {
                 data = MAPPER.readValue(dataFile, AppSecData.class);
+                LOGGER.debug("Reading AppSec Kit data file "
+                        + dataFile.getAbsolutePath());
             } catch (IOException e) {
                 throw new AppSecException(
                         "Cannot read the AppSec Kit data file: "
@@ -332,6 +337,8 @@ public class AppSecService {
             }
         } else {
             data = new AppSecData();
+            LOGGER.debug("AppSec Kit data file created "
+                    + dataFile.getAbsolutePath());
         }
     }
 
