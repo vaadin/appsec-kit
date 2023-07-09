@@ -42,6 +42,11 @@
             <version>1.4.1</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.commonmark</groupId>
             <artifactId>commonmark</artifactId>
             <version>0.20.0</version>

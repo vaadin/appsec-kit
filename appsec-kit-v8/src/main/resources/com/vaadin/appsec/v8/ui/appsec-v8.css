@@ -82,6 +82,13 @@
     border-radius: 20px;
 }
 
+.vulnerability-details-view .va-not-supported {
+    background: red;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
 .severity-HIGH .vulnerability-property {
     color: red;
     font-weight: bold;

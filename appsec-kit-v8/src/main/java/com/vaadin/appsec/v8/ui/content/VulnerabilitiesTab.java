@@ -59,7 +59,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         severity.setItems(SeverityLevel.NA, SeverityLevel.LOW,
                 SeverityLevel.MEDIUM, SeverityLevel.HIGH);
 
-        buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
+        buildFilterBar(dependency, /* vaadinAnalysis, */ devAnalysis, severity);
     }
 
     @Override
