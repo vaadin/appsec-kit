@@ -85,8 +85,7 @@ class AppSecDTOProvider {
                         .findFirst().orElse(null);
                 if (dependencyDTO != null) {
                     String id = getVulnerabilityId(v);
-                    Vulnerability vulnerabilityDTO = new Vulnerability(
-                            id);
+                    Vulnerability vulnerabilityDTO = new Vulnerability(id);
                     vulnerabilityDTO.setDependency(dependencyDTO);
                     vulnerabilityDTOS.add(vulnerabilityDTO);
                     vulnerabilityDTO.setDatePublished(v.getPublished());

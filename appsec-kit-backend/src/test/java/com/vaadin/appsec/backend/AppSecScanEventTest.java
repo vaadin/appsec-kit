@@ -45,8 +45,7 @@ public class AppSecScanEventTest {
         data.getVulnerabilities().put("foo", new VulnerabilityAssessment());
 
         AppSecScanEvent event = new AppSecScanEvent(service);
-        List<Vulnerability> newVulnerabilities = event
-                .getNewVulnerabilities();
+        List<Vulnerability> newVulnerabilities = event.getNewVulnerabilities();
 
         assertEquals(0, newVulnerabilities.size());
     }
@@ -56,8 +55,7 @@ public class AppSecScanEventTest {
         vulnerabilities.add(new Vulnerability("foo"));
 
         AppSecScanEvent event = new AppSecScanEvent(service);
-        List<Vulnerability> newVulnerabilities = event
-                .getNewVulnerabilities();
+        List<Vulnerability> newVulnerabilities = event.getNewVulnerabilities();
 
         assertEquals(1, newVulnerabilities.size());
         assertEquals("foo", newVulnerabilities.get(0).getIdentifier());

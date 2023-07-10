@@ -107,10 +107,8 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
         grid.addColumn(Vulnerability::getIdentifier)
                 .setCaption("Vulnerability name or identifier");
-        grid.addColumn(Vulnerability::getDependency)
-                .setCaption("Dependency");
-        grid.addColumn(Vulnerability::getSeverityLevel)
-                .setCaption("Severity");
+        grid.addColumn(Vulnerability::getDependency).setCaption("Dependency");
+        grid.addColumn(Vulnerability::getSeverityLevel).setCaption("Severity");
         grid.addColumn(Vulnerability::getRiskScore).setCaption("Risk score");
         grid.addColumn(Vulnerability::getVaadinAnalysis)
                 .setCaption("Vaadin analysis");
@@ -155,8 +153,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         grid.deselectAll();
         grid.setItems(AppSecService.getInstance().getVulnerabilities());
         dependency.setItems(getListDataProvider().getItems().stream()
-                .map(Vulnerability::getDependency)
-                .collect(Collectors.toSet()));
+                .map(Vulnerability::getDependency).collect(Collectors.toSet()));
         applyFilters();
         selectedItems.forEach(grid::select);
 

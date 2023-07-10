@@ -185,7 +185,8 @@ public class AppSecData implements Serializable {
      * @param vulnerabilities
      *            the vulnerabilities
      */
-    public void setVulnerabilities(Map<String, VulnerabilityAssessment> vulnerabilities) {
+    public void setVulnerabilities(
+            Map<String, VulnerabilityAssessment> vulnerabilities) {
         this.vulnerabilities = vulnerabilities;
     }
 }

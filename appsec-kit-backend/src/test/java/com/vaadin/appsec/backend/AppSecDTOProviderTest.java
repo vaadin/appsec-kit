@@ -63,8 +63,7 @@ public class AppSecDTOProviderTest {
     public void testGetVulnerabilities() {
         AppSecDTOProvider dtoProvider = new AppSecDTOProvider(
                 vulnerabilityStore, bomStore);
-        List<Vulnerability> vulnerabilities = dtoProvider
-                .getVulnerabilities();
+        List<Vulnerability> vulnerabilities = dtoProvider.getVulnerabilities();
 
         Assert.assertEquals("Mismatch in expected vulnerability count.", 3,
                 vulnerabilities.size());

@@ -63,8 +63,9 @@ public class GitHubServiceTest {
         VulnerabilityAnalysis vulnerabilityAnalysis = service
                 .getVulnerabilityAnalysis();
 
-        VulnerabilityDetails vulnerability = vulnerabilityAnalysis.getVulnerabilities()
-                .entrySet().stream().findFirst().get().getValue();
+        VulnerabilityDetails vulnerability = vulnerabilityAnalysis
+                .getVulnerabilities().entrySet().stream().findFirst().get()
+                .getValue();
 
         assertEquals("org.acme:foobar",
                 vulnerability.getDependency().getName());

@@ -76,8 +76,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     protected void applyFilters() {
         getContainer().removeAllContainerFilters();
 
-        final Dependency dependencyFilter = (Dependency) dependency
-                .getValue();
+        final Dependency dependencyFilter = (Dependency) dependency.getValue();
         final SeverityLevel severityFilter = (SeverityLevel) severity
                 .getValue();
 
@@ -159,8 +158,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
     @SuppressWarnings("unchecked")
     private BeanItemContainer<Vulnerability> getContainer() {
-        return (BeanItemContainer<Vulnerability>) grid
-                .getContainerDataSource();
+        return (BeanItemContainer<Vulnerability>) grid.getContainerDataSource();
     }
 
     @Override
@@ -173,8 +171,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
         BeanItemContainer<Dependency> depsCont = new BeanItemContainer<>(
                 Dependency.class);
-        getContainer().getItemIds().stream()
-                .map(Vulnerability::getDependency)
+        getContainer().getItemIds().stream().map(Vulnerability::getDependency)
                 .collect(Collectors.toSet()).forEach(depsCont::addBean);
         dependency.setContainerDataSource(depsCont);
     }
