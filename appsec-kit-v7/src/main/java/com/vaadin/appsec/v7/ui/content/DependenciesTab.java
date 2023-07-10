@@ -13,7 +13,7 @@ package com.vaadin.appsec.v7.ui.content;
 import java.util.stream.Collectors;
 
 import com.vaadin.appsec.backend.AppSecService;
-import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
@@ -66,7 +66,7 @@ public class DependenciesTab extends AbstractAppSecContent {
             @Override
             public boolean passesFilter(Object itemId, Item item)
                     throws UnsupportedOperationException {
-                DependencyDTO dependencyDTO = (DependencyDTO) itemId;
+                Dependency dependencyDTO = (Dependency) itemId;
                 if (groupFilter != null
                         && !groupFilter.equals(dependencyDTO.getGroup())) {
                     return false;
@@ -90,8 +90,8 @@ public class DependenciesTab extends AbstractAppSecContent {
         grid = new Grid();
         grid.setSizeFull();
 
-        BeanItemContainer<DependencyDTO> cont = new BeanItemContainer<>(
-                DependencyDTO.class);
+        BeanItemContainer<Dependency> cont = new BeanItemContainer<>(
+                Dependency.class);
         grid.setContainerDataSource(cont);
         grid.removeAllColumns();
         grid.addColumn("name");
@@ -112,14 +112,14 @@ public class DependenciesTab extends AbstractAppSecContent {
 
         grid.addItemClickListener(e -> {
             if (e.isDoubleClick()) {
-                parent.showVulnerabilitiesTabFor((DependencyDTO) e.getItemId());
+                parent.showVulnerabilitiesTabFor((Dependency) e.getItemId());
             }
         });
     }
 
     @SuppressWarnings("unchecked")
-    private BeanItemContainer<DependencyDTO> getContainer() {
-        return (BeanItemContainer<DependencyDTO>) grid.getContainerDataSource();
+    private BeanItemContainer<Dependency> getContainer() {
+        return (BeanItemContainer<Dependency>) grid.getContainerDataSource();
     }
 
     public void refresh() {
@@ -129,7 +129,7 @@ public class DependenciesTab extends AbstractAppSecContent {
 
         BeanItemContainer<String> groupsCont = new BeanItemContainer<>(
                 String.class);
-        getContainer().getItemIds().stream().map(DependencyDTO::getGroup)
+        getContainer().getItemIds().stream().map(Dependency::getGroup)
                 .collect(Collectors.toSet()).forEach(groupsCont::addBean);
         group.setContainerDataSource(groupsCont);
     }

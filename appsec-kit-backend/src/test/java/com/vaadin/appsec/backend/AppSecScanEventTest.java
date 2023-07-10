@@ -16,8 +16,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.vaadin.appsec.backend.model.AppSecData;
-import com.vaadin.appsec.backend.model.AppSecData.Vulnerability;
-import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
+import com.vaadin.appsec.backend.model.AppSecData.VulnerabilityAssessment;
+import com.vaadin.appsec.backend.model.dto.Vulnerability;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -28,7 +28,7 @@ public class AppSecScanEventTest {
 
     private AppSecData data;
 
-    private List<VulnerabilityDTO> vulnerabilities;
+    private List<Vulnerability> vulnerabilities;
 
     @Before
     public void setup() {
@@ -41,11 +41,11 @@ public class AppSecScanEventTest {
 
     @Test
     public void newVulnerabilties_noneExpected() {
-        vulnerabilities.add(new VulnerabilityDTO("foo"));
-        data.getVulnerabilities().put("foo", new Vulnerability());
+        vulnerabilities.add(new Vulnerability("foo"));
+        data.getVulnerabilities().put("foo", new VulnerabilityAssessment());
 
         AppSecScanEvent event = new AppSecScanEvent(service);
-        List<VulnerabilityDTO> newVulnerabilities = event
+        List<Vulnerability> newVulnerabilities = event
                 .getNewVulnerabilities();
 
         assertEquals(0, newVulnerabilities.size());
@@ -53,10 +53,10 @@ public class AppSecScanEventTest {
 
     @Test
     public void newVulnerabilties_oneExpected() {
-        vulnerabilities.add(new VulnerabilityDTO("foo"));
+        vulnerabilities.add(new Vulnerability("foo"));
 
         AppSecScanEvent event = new AppSecScanEvent(service);
-        List<VulnerabilityDTO> newVulnerabilities = event
+        List<Vulnerability> newVulnerabilities = event
                 .getNewVulnerabilities();
 
         assertEquals(1, newVulnerabilities.size());

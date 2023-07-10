@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.vaadin.appsec.backend.model.AppSecData;
-import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
+import com.vaadin.appsec.backend.model.dto.Vulnerability;
 
 /**
  * Event fired when a scan for vulnerabilities has been completed.
@@ -36,12 +36,12 @@ public class AppSecScanEvent extends EventObject {
      *
      * @return the list of new vulnerabilities
      */
-    public List<VulnerabilityDTO> getNewVulnerabilities() {
+    public List<Vulnerability> getNewVulnerabilities() {
         return getSource().getVulnerabilities().stream()
                 .filter(this::newVulnerabilities).collect(Collectors.toList());
     }
 
-    private boolean newVulnerabilities(VulnerabilityDTO vulnerability) {
+    private boolean newVulnerabilities(Vulnerability vulnerability) {
         String vulnerabilityId = vulnerability.getIdentifier();
         AppSecData data = getSource().getData();
         return !data.getVulnerabilities().containsKey(vulnerabilityId);

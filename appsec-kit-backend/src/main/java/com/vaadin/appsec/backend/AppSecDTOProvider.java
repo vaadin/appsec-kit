@@ -25,10 +25,10 @@ import org.cyclonedx.model.Component;
 import us.springett.cvss.Cvss;
 
 import com.vaadin.appsec.backend.model.AppSecData;
-import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.appsec.backend.model.dto.SeverityLevelComparator;
-import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
+import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Affected;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 
@@ -48,12 +48,12 @@ class AppSecDTOProvider {
         this.bomStore = bomStore;
     }
 
-    List<DependencyDTO> getDependencies() {
+    List<Dependency> getDependencies() {
         final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
                 .getVulnerabilities();
 
         return bomStore.getBom().getComponents().stream().map(c -> {
-            DependencyDTO dep = new DependencyDTO(c.getGroup(), c.getName(),
+            Dependency dep = new Dependency(c.getGroup(), c.getName(),
                     c.getVersion());
             updateVulnerabilityStatistics(dep, vulnerabilities,
                     getConcatDepName(c));
@@ -61,23 +61,23 @@ class AppSecDTOProvider {
         }).collect(Collectors.toList());
     }
 
-    List<VulnerabilityDTO> getVulnerabilities() {
-        final List<DependencyDTO> dependencies = getDependencies();
+    List<Vulnerability> getVulnerabilities() {
+        final List<Dependency> dependencies = getDependencies();
         final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
                 .getVulnerabilities();
-        final Map<String, AppSecData.Vulnerability> devAnalysis = AppSecService
+        final Map<String, AppSecData.VulnerabilityAssessment> devAnalysis = AppSecService
                 .getInstance().getData().getVulnerabilities();
 
         Parser parser = Parser.builder().build();
         HtmlRenderer renderer = HtmlRenderer.builder().build();
 
-        List<VulnerabilityDTO> vulnerabilityDTOS = new ArrayList<>();
+        List<Vulnerability> vulnerabilityDTOS = new ArrayList<>();
         for (OpenSourceVulnerability v : vulnerabilities) {
             for (Affected affected : v.getAffected()) {
                 String depGroup = getDepGroup(affected);
                 String depName = getDepName(affected);
 
-                DependencyDTO dependencyDTO = dependencies.stream()
+                Dependency dependencyDTO = dependencies.stream()
                         .filter(d -> d.getGroup().equals(depGroup)
                                 && d.getName().equals(depName)
                                 && affected.getVersions()
@@ -85,7 +85,7 @@ class AppSecDTOProvider {
                         .findFirst().orElse(null);
                 if (dependencyDTO != null) {
                     String id = getVulnerabilityId(v);
-                    VulnerabilityDTO vulnerabilityDTO = new VulnerabilityDTO(
+                    Vulnerability vulnerabilityDTO = new Vulnerability(
                             id);
                     vulnerabilityDTO.setDependency(dependencyDTO);
                     vulnerabilityDTOS.add(vulnerabilityDTO);
@@ -96,7 +96,7 @@ class AppSecDTOProvider {
                         vulnerabilityDTO.setDetails(renderer.render(document));
                     }
 
-                    AppSecData.Vulnerability vulnDevAnalysis = devAnalysis
+                    AppSecData.VulnerabilityAssessment vulnDevAnalysis = devAnalysis
                             .get(id);
                     if (vulnDevAnalysis != null) {
                         vulnerabilityDTO.setDeveloperStatus(
@@ -118,7 +118,7 @@ class AppSecDTOProvider {
         return vulnerabilityDTOS;
     }
 
-    private static void updateVulnerabilityStatistics(DependencyDTO dependency,
+    private static void updateVulnerabilityStatistics(Dependency dependency,
             List<OpenSourceVulnerability> vulnerabilities,
             String concatDepName) {
         int vulnerabilityCount = 0;

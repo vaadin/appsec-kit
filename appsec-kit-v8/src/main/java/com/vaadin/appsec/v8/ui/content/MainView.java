@@ -15,7 +15,7 @@ import java.util.Date;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.Registration;
-import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.shared.communication.PushMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -103,7 +103,7 @@ public class MainView extends AbstractAppSecContent {
                 : formatter.format(Date.from(lastScan))));
     }
 
-    void showVulnerabilitiesTabFor(DependencyDTO item) {
+    void showVulnerabilitiesTabFor(Dependency item) {
         tabSheet.setSelectedTab(vulnerabilitiesTab);
         vulnerabilitiesTab.filterOn(item);
     }
