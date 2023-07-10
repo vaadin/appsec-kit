@@ -15,7 +15,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 import com.vaadin.appsec.backend.model.analysis.Assessment;
-import com.vaadin.appsec.backend.model.analysis.Vulnerability;
+import com.vaadin.appsec.backend.model.analysis.VulnerabilityDetails;
 import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
 
 import static org.hamcrest.CoreMatchers.startsWith;
@@ -63,8 +63,9 @@ public class GitHubServiceTest {
         VulnerabilityAnalysis vulnerabilityAnalysis = service
                 .getVulnerabilityAnalysis();
 
-        Vulnerability vulnerability = vulnerabilityAnalysis.getVulnerabilities()
-                .entrySet().stream().findFirst().get().getValue();
+        VulnerabilityDetails vulnerability = vulnerabilityAnalysis
+                .getVulnerabilities().entrySet().stream().findFirst().get()
+                .getValue();
 
         assertEquals("org.acme:foobar",
                 vulnerability.getDependency().getName());

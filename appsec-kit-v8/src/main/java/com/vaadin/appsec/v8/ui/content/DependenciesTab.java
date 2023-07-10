@@ -12,7 +12,7 @@ package com.vaadin.appsec.v8.ui.content;
 import java.util.stream.Collectors;
 
 import com.vaadin.appsec.backend.AppSecService;
-import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.ui.ComboBox;
@@ -22,7 +22,7 @@ import com.vaadin.ui.Grid;
  * Dependencies tab content
  */
 public class DependenciesTab extends AbstractAppSecContent {
-    private Grid<DependencyDTO> grid;
+    private Grid<Dependency> grid;
     private ComboBox<String> group;
     private ComboBox<SeverityLevel> severity;
     private ComboBox<Integer> riskScore;
@@ -85,13 +85,13 @@ public class DependenciesTab extends AbstractAppSecContent {
         grid = new Grid<>();
         grid.setSelectionMode(Grid.SelectionMode.NONE);
         grid.setSizeFull();
-        grid.addColumn(DependencyDTO::getName).setCaption("Dependency");
-        grid.addColumn(DependencyDTO::getNumOfVulnerabilities)
+        grid.addColumn(Dependency::getName).setCaption("Dependency");
+        grid.addColumn(Dependency::getNumOfVulnerabilities)
                 .setCaption("# of vulnerabilities");
-        grid.addColumn(DependencyDTO::getGroup).setCaption("Dependency group");
-        grid.addColumn(DependencyDTO::getVersion).setCaption("Version");
-        grid.addColumn(DependencyDTO::getSeverityLevel).setCaption("Severity");
-        grid.addColumn(DependencyDTO::getRiskScore).setCaption("Risk score");
+        grid.addColumn(Dependency::getGroup).setCaption("Dependency group");
+        grid.addColumn(Dependency::getVersion).setCaption("Version");
+        grid.addColumn(Dependency::getSeverityLevel).setCaption("Severity");
+        grid.addColumn(Dependency::getRiskScore).setCaption("Risk score");
 
         getMainContent().addComponentsAndExpand(grid);
 
@@ -103,15 +103,15 @@ public class DependenciesTab extends AbstractAppSecContent {
     }
 
     @SuppressWarnings("unchecked")
-    private ListDataProvider<DependencyDTO> getListDataProvider() {
-        return (ListDataProvider<DependencyDTO>) grid.getDataProvider();
+    private ListDataProvider<Dependency> getListDataProvider() {
+        return (ListDataProvider<Dependency>) grid.getDataProvider();
     }
 
     @Override
     public void refresh() {
         grid.setItems(AppSecService.getInstance().getDependencies());
         group.setItems(getListDataProvider().getItems().stream()
-                .map(DependencyDTO::getGroup).collect(Collectors.toSet()));
+                .map(Dependency::getGroup).collect(Collectors.toSet()));
         applyFilters();
     }
 }

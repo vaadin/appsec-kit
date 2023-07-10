@@ -17,8 +17,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.vaadin.appsec.backend.model.dto.DependencyDTO;
-import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
+import com.vaadin.appsec.backend.model.dto.Dependency;
+import com.vaadin.appsec.backend.model.dto.Vulnerability;
 
 public class AppSecDTOProviderTest {
 
@@ -53,7 +53,7 @@ public class AppSecDTOProviderTest {
     public void testGetDependencies() {
         AppSecDTOProvider dtoProvider = new AppSecDTOProvider(
                 vulnerabilityStore, bomStore);
-        List<DependencyDTO> dependencies = dtoProvider.getDependencies();
+        List<Dependency> dependencies = dtoProvider.getDependencies();
 
         Assert.assertEquals("Mismatch in expected dependency count.", 2,
                 dependencies.size());
@@ -63,8 +63,7 @@ public class AppSecDTOProviderTest {
     public void testGetVulnerabilities() {
         AppSecDTOProvider dtoProvider = new AppSecDTOProvider(
                 vulnerabilityStore, bomStore);
-        List<VulnerabilityDTO> vulnerabilities = dtoProvider
-                .getVulnerabilities();
+        List<Vulnerability> vulnerabilities = dtoProvider.getVulnerabilities();
 
         Assert.assertEquals("Mismatch in expected vulnerability count.", 3,
                 vulnerabilities.size());
