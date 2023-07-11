@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.appsec.backend.model.AppSecData;
-import com.vaadin.appsec.backend.model.AppSecData.Vulnerability;
+import com.vaadin.appsec.backend.model.AppSecData.VulnerabilityAssessment;
 import com.vaadin.appsec.backend.model.AppSecData.VulnerabilityStatus;
 
 import static org.junit.Assert.assertEquals;
@@ -149,7 +149,7 @@ public class AppSecServiceTest {
         Instant now = Instant.now();
         AppSecData data = new AppSecData();
         data.setLastScan(now);
-        Vulnerability vuln = new Vulnerability();
+        VulnerabilityAssessment vuln = new VulnerabilityAssessment();
         vuln.setId("CVE-XXX");
         vuln.setStatus(VulnerabilityStatus.NOT_SET);
         vuln.setUpdated(now);

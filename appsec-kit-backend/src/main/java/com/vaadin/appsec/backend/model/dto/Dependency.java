@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * DTO for a dependency instance, used in the UI.
  */
-public class DependencyDTO {
+public class Dependency {
 
     private String group;
     private String name;
@@ -36,7 +36,7 @@ public class DependencyDTO {
      * @param version
      *            the version
      */
-    public DependencyDTO(@NotNull String group, @NotNull String name,
+    public Dependency(@NotNull String group, @NotNull String name,
             @NotNull String version) {
         this.group = group;
         this.name = name;
@@ -106,7 +106,7 @@ public class DependencyDTO {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        DependencyDTO that = (DependencyDTO) o;
+        Dependency that = (Dependency) o;
         return Objects.equals(group, that.group)
                 && Objects.equals(name, that.name)
                 && Objects.equals(version, that.version);

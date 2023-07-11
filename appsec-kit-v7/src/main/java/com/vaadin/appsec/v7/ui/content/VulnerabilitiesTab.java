@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.AppSecData;
-import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
-import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
+import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.data.Container;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
@@ -76,8 +76,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     protected void applyFilters() {
         getContainer().removeAllContainerFilters();
 
-        final DependencyDTO dependencyFilter = (DependencyDTO) dependency
-                .getValue();
+        final Dependency dependencyFilter = (Dependency) dependency.getValue();
         final SeverityLevel severityFilter = (SeverityLevel) severity
                 .getValue();
 
@@ -90,7 +89,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
             @Override
             public boolean passesFilter(Object itemId, Item item)
                     throws UnsupportedOperationException {
-                VulnerabilityDTO vulnerabilityDTO = (VulnerabilityDTO) itemId;
+                Vulnerability vulnerabilityDTO = (Vulnerability) itemId;
                 if (dependencyFilter != null && !dependencyFilter
                         .equals(vulnerabilityDTO.getDependency())) {
                     return false;
@@ -119,8 +118,8 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         grid = new Grid();
         grid.setSizeFull();
 
-        BeanItemContainer<VulnerabilityDTO> cont = new BeanItemContainer<>(
-                VulnerabilityDTO.class);
+        BeanItemContainer<Vulnerability> cont = new BeanItemContainer<>(
+                Vulnerability.class);
         grid.setContainerDataSource(cont);
         grid.removeAllColumns();
         grid.addColumn("identifier");
@@ -142,7 +141,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
         grid.addItemClickListener(event -> {
             if (event.isDoubleClick()) {
-                showVulnerabilityDetails((VulnerabilityDTO) event.getItemId());
+                showVulnerabilityDetails((Vulnerability) event.getItemId());
             }
         });
 
@@ -152,29 +151,27 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         getMainContent().setComponentAlignment(showDetails,
                 Alignment.BOTTOM_RIGHT);
         showDetails.addClickListener(e -> showVulnerabilityDetails(
-                (VulnerabilityDTO) grid.getSelectedRows().iterator().next()));
+                (Vulnerability) grid.getSelectedRows().iterator().next()));
         grid.addSelectionListener(
                 e -> showDetails.setEnabled(e.getSelected().size() != 0));
     }
 
     @SuppressWarnings("unchecked")
-    private BeanItemContainer<VulnerabilityDTO> getContainer() {
-        return (BeanItemContainer<VulnerabilityDTO>) grid
-                .getContainerDataSource();
+    private BeanItemContainer<Vulnerability> getContainer() {
+        return (BeanItemContainer<Vulnerability>) grid.getContainerDataSource();
     }
 
     @Override
     public void refresh() {
-        BeanItemContainer<VulnerabilityDTO> container = new BeanItemContainer<>(
-                VulnerabilityDTO.class);
+        BeanItemContainer<Vulnerability> container = new BeanItemContainer<>(
+                Vulnerability.class);
         AppSecService.getInstance().getVulnerabilities()
                 .forEach(container::addBean);
         grid.setContainerDataSource(container);
 
-        BeanItemContainer<DependencyDTO> depsCont = new BeanItemContainer<>(
-                DependencyDTO.class);
-        getContainer().getItemIds().stream()
-                .map(VulnerabilityDTO::getDependency)
+        BeanItemContainer<Dependency> depsCont = new BeanItemContainer<>(
+                Dependency.class);
+        getContainer().getItemIds().stream().map(Vulnerability::getDependency)
                 .collect(Collectors.toSet()).forEach(depsCont::addBean);
         dependency.setContainerDataSource(depsCont);
     }
@@ -185,13 +182,13 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
      * @param item
      *            filter
      */
-    public void filterOn(DependencyDTO item) {
+    public void filterOn(Dependency item) {
         clearFilters();
         dependency.setValue(item);
         applyFilters();
     }
 
-    private void showVulnerabilityDetails(VulnerabilityDTO vulnerabilityDTO) {
+    private void showVulnerabilityDetails(Vulnerability vulnerabilityDTO) {
         parent.showDetails(
                 new VulnerabilityDetailsView(vulnerabilityDTO, () -> {
                     parent.showMainContent();

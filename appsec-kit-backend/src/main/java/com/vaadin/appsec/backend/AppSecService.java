@@ -30,8 +30,8 @@ import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.model.AppSecData;
 import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
-import com.vaadin.appsec.backend.model.dto.DependencyDTO;
-import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
+import com.vaadin.appsec.backend.model.dto.Dependency;
+import com.vaadin.appsec.backend.model.dto.Vulnerability;
 
 /**
  * Service that provides access to all AppSec Kit features, such as
@@ -225,7 +225,7 @@ public class AppSecService {
      *
      * @return the list of dependencies
      */
-    public List<DependencyDTO> getDependencies() {
+    public List<Dependency> getDependencies() {
         return dtoProvider.getDependencies();
     }
 
@@ -236,7 +236,7 @@ public class AppSecService {
      *
      * @return the list of vulnerabilities
      */
-    public List<VulnerabilityDTO> getVulnerabilities() {
+    public List<Vulnerability> getVulnerabilities() {
         return dtoProvider.getVulnerabilities();
     }
 

@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.AppSecData;
-import com.vaadin.appsec.backend.model.dto.DependencyDTO;
+import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
-import com.vaadin.appsec.backend.model.dto.VulnerabilityDTO;
+import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -28,8 +28,8 @@ import com.vaadin.ui.Grid;
  */
 public class VulnerabilitiesTab extends AbstractAppSecContent {
     private AbstractAppSecContent parent;
-    private Grid<VulnerabilityDTO> grid;
-    private ComboBox<DependencyDTO> dependency;
+    private Grid<Vulnerability> grid;
+    private ComboBox<Dependency> dependency;
     private ComboBox<SeverityLevel> severity;
     private ComboBox<String> vaadinAnalysis;
     private ComboBox<AppSecData.VulnerabilityStatus> devAnalysis;
@@ -73,7 +73,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
 
     @Override
     protected void applyFilters() {
-        DependencyDTO dependencyFilter = dependency.getValue();
+        Dependency dependencyFilter = dependency.getValue();
         String vaadinAnalysisFilter = vaadinAnalysis.getValue();
         AppSecData.VulnerabilityStatus devAnalysisFilter = devAnalysis
                 .getValue();
@@ -105,16 +105,14 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         grid.setSizeFull();
 
-        grid.addColumn(VulnerabilityDTO::getIdentifier)
+        grid.addColumn(Vulnerability::getIdentifier)
                 .setCaption("Vulnerability name or identifier");
-        grid.addColumn(VulnerabilityDTO::getDependency)
-                .setCaption("Dependency");
-        grid.addColumn(VulnerabilityDTO::getSeverityLevel)
-                .setCaption("Severity");
-        grid.addColumn(VulnerabilityDTO::getRiskScore).setCaption("Risk score");
-        grid.addColumn(VulnerabilityDTO::getVaadinAnalysis)
+        grid.addColumn(Vulnerability::getDependency).setCaption("Dependency");
+        grid.addColumn(Vulnerability::getSeverityLevel).setCaption("Severity");
+        grid.addColumn(Vulnerability::getRiskScore).setCaption("Risk score");
+        grid.addColumn(Vulnerability::getVaadinAnalysis)
                 .setCaption("Vaadin analysis");
-        grid.addColumn(VulnerabilityDTO::getDeveloperStatus)
+        grid.addColumn(Vulnerability::getDeveloperStatus)
                 .setCaption("Developer analysis");
 
         getMainContent().addComponentsAndExpand(grid);
@@ -136,7 +134,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                 .setEnabled(e.getFirstSelectedItem().isPresent()));
     }
 
-    private void showVulnerabilityDetails(VulnerabilityDTO vulnerabilityDTO) {
+    private void showVulnerabilityDetails(Vulnerability vulnerabilityDTO) {
         parent.showDetails(
                 new VulnerabilityDetailsView(vulnerabilityDTO, () -> {
                     parent.showMainContent();
@@ -145,18 +143,17 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     }
 
     @SuppressWarnings("unchecked")
-    private ListDataProvider<VulnerabilityDTO> getListDataProvider() {
-        return (ListDataProvider<VulnerabilityDTO>) grid.getDataProvider();
+    private ListDataProvider<Vulnerability> getListDataProvider() {
+        return (ListDataProvider<Vulnerability>) grid.getDataProvider();
     }
 
     @Override
     public void refresh() {
-        Set<VulnerabilityDTO> selectedItems = grid.getSelectedItems();
+        Set<Vulnerability> selectedItems = grid.getSelectedItems();
         grid.deselectAll();
         grid.setItems(AppSecService.getInstance().getVulnerabilities());
         dependency.setItems(getListDataProvider().getItems().stream()
-                .map(VulnerabilityDTO::getDependency)
-                .collect(Collectors.toSet()));
+                .map(Vulnerability::getDependency).collect(Collectors.toSet()));
         applyFilters();
         selectedItems.forEach(grid::select);
 
@@ -170,7 +167,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
      * @param item
      *            filter
      */
-    public void filterOn(DependencyDTO item) {
+    public void filterOn(Dependency item) {
         clearFilters();
         dependency.setValue(item);
         applyFilters();

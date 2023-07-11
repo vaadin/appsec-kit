@@ -43,7 +43,7 @@ public class AppSecData implements Serializable {
     /**
      * Data object to store the analysis status of a single vulnerability.
      */
-    public static class Vulnerability {
+    public static class VulnerabilityAssessment {
 
         private String id;
 
@@ -139,17 +139,17 @@ public class AppSecData implements Serializable {
             if (this == obj) {
                 return true;
             }
-            if (!(obj instanceof Vulnerability)) {
+            if (!(obj instanceof VulnerabilityAssessment)) {
                 return false;
             }
-            Vulnerability other = (Vulnerability) obj;
+            VulnerabilityAssessment other = (VulnerabilityAssessment) obj;
             return Objects.equals(id, other.id);
         }
     }
 
     private Instant lastScan;
 
-    private Map<String, Vulnerability> vulnerabilities = new HashMap<>();
+    private Map<String, VulnerabilityAssessment> vulnerabilities = new HashMap<>();
 
     /**
      * Gets the timestamp of the most recent vulnerability scan.
@@ -175,7 +175,7 @@ public class AppSecData implements Serializable {
      *
      * @return the vulnerabilities
      */
-    public Map<String, Vulnerability> getVulnerabilities() {
+    public Map<String, VulnerabilityAssessment> getVulnerabilities() {
         return vulnerabilities;
     }
 
@@ -185,7 +185,8 @@ public class AppSecData implements Serializable {
      * @param vulnerabilities
      *            the vulnerabilities
      */
-    public void setVulnerabilities(Map<String, Vulnerability> vulnerabilities) {
+    public void setVulnerabilities(
+            Map<String, VulnerabilityAssessment> vulnerabilities) {
         this.vulnerabilities = vulnerabilities;
     }
 }
