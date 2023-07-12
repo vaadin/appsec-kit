@@ -164,6 +164,8 @@ public class AppSecService {
                 initialDelay = secondsUntilNextScan;
             }
         }
+        LOGGER.debug("Scheduling automatic scan every " + autoScanPeriod
+                + " seconds");
         scheduledScan = configuration.getTaskExecutor()
                 .scheduleAtFixedRate(() -> {
                     vulnerabilityStore.refresh();
@@ -174,6 +176,7 @@ public class AppSecService {
 
     private void cancelScheduledScan() {
         if (scheduledScan != null) {
+            LOGGER.debug("Cancelling scheduled scan...");
             scheduledScan.cancel(false);
         }
     }
@@ -217,6 +220,8 @@ public class AppSecService {
     }
 
     private void invokeEventListeners(AppSecScanEvent event) {
+        LOGGER.debug("Invoking {} scan event listeners...",
+                scanEventListeners.size());
         scanEventListeners.forEach(listener -> listener.scanCompleted(event));
     }
 
@@ -282,6 +287,7 @@ public class AppSecService {
      * disk.
      */
     private synchronized void updateLastScanTime() {
+        LOGGER.debug("Updating last scan time...");
         AppSecData tempData = getData();
         tempData.setLastScan(clock.instant());
         setData(tempData);
