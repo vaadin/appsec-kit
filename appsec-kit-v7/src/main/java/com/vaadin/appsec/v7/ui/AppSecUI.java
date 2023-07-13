@@ -30,7 +30,7 @@ public class AppSecUI extends UI {
 
     private void setup() {
         setSizeFull();
-        getPage().setTitle("Vaadin AppSec Kit");
+        getPage().setTitle("AppSec Kit");
     }
 
     private void buildLayout() {
