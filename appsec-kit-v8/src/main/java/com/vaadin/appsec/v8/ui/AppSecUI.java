@@ -15,7 +15,6 @@ import com.vaadin.annotations.StyleSheet;
 import com.vaadin.appsec.v8.ui.content.MainView;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 /**
  * UI class for displaying main content of AppSec Kit.
@@ -29,7 +28,7 @@ public class AppSecUI extends UI {
 
     private void setup() {
         setSizeFull();
-        getPage().setTitle("Vaadin AppSec Kit");
+        getPage().setTitle("AppSec Kit");
     }
 
     private void buildLayout() {

@@ -54,9 +54,6 @@ public class AppSecKitInitializer implements HttpSessionListener {
                 LOGGER.info("AppSecService initialized");
                 appSecService.scanForVulnerabilities()
                         .thenRun(appSecService::scheduleAutomaticScan);
-                LOGGER.info("AppSecService auto-scan scheduled every "
-                        + appSecService.getConfiguration().getAutoScanInterval()
-                                .toString());
                 notificationInitializer.serviceInit(vaadinService);
                 initializedVaadinServiceNames.add(serviceName);
             } else {

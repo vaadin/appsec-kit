@@ -29,7 +29,7 @@ public class AppSecKitInitializerTest extends AbstractAppSecKitTest {
         AppSecKitInitializer listener = new AppSecKitInitializer();
         listener.sessionCreated(null);
 
-        assertEquals("Unexpected count of log messages. ", 2,
+        assertEquals("Unexpected count of log messages. ", 1,
                 logAppender.list.size());
         assertEquals("AppSecService initialization failed.",
                 "AppSecService initialized",

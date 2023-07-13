@@ -9,14 +9,20 @@
 
 package com.vaadin.appsec.v8.service;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vaadin.appsec.backend.AppSecScanEvent;
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.Registration;
+import com.vaadin.appsec.backend.model.dto.SeverityLevel;
+import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.appsec.v8.ui.AppSecUI;
 import com.vaadin.appsec.v8.ui.AppSecUIProvider;
 import com.vaadin.server.ServiceInitEvent;
@@ -62,33 +68,43 @@ public class NotificationInitListener extends AbstractInitListener {
         session.addUIProvider(new AppSecUIProvider());
         AppSecService appSecService = AppSecService.getInstance();
         Registration scanEventRegistration = appSecService
-                .addScanEventListener(scanEvent -> {
-                    int newVulns = scanEvent.getNewVulnerabilities().size();
+                .addScanEventListener(event -> {
+                    int newVulns = event.getNewVulnerabilities().size();
                     if (isSessionOpen(session) && newVulns > 0) {
-                        session.getUIs().forEach(this::doNotifyUI);
+                        Collection<UI> uis = session.getUIs();
+                        LOGGER.debug("Notifying {} UIs for session {}",
+                                uis.size(), session.getSession().getId());
+                        session.access(
+                                () -> uis.forEach(ui -> doNotifyUI(ui, event)));
                     }
                 });
         scanEventRegistrations.put(session, scanEventRegistration);
     }
 
-    private void doNotifyUI(UI ui) {
+    private void doNotifyUI(UI ui, AppSecScanEvent event) {
         if (ui instanceof AppSecUI) {
             return;
         }
-        String link = "<a href=\"?"
+        List<Vulnerability> vulns = event.getNewVulnerabilities();
+        Map<SeverityLevel, Long> countBySeverity = vulns.stream()
+                .collect(Collectors.groupingBy(Vulnerability::getSeverityLevel,
+                        Collectors.counting()));
+        String link = "<a class=\"appsec-notification-button\" href=\"?"
                 + AppSecUIProvider.VAADIN_APPSEC_KIT_URL_PARAM
-                + "\" target=\"_blank\">here</a>";
-        String msg = "New vulnerabilities found! Click " + link
-                + " to open Vaadin AppSec Kit,"
-                + " or click on this message to dismiss it.";
-        Notification n = new Notification("Vaadin AppSec Kit", msg,
+                + "\" target=\"_blank\">Open AppSec Kit</a>";
+        String msg = "<div>%d vulnerabilities found (%d critical, %d moderate). "
+                + "Open AppSec Kit for details.</div>" + link;
+        Notification n = new Notification("AppSec Kit",
+                String.format(msg, vulns.size(),
+                        countBySeverity.getOrDefault(SeverityLevel.HIGH, 0l),
+                        countBySeverity.getOrDefault(SeverityLevel.MEDIUM, 0l)),
                 Notification.Type.TRAY_NOTIFICATION);
         n.setPosition(Position.TOP_RIGHT);
         int delay = (int) AppSecService.getInstance().getConfiguration()
                 .getAutoScanInterval().toMillis();
         n.setDelayMsec(delay);
         n.setHtmlContentAllowed(true);
-        ui.access(() -> n.show(ui.getPage()));
+        n.show(ui.getPage());
     }
 
     private boolean isSessionOpen(VaadinSession session) {

@@ -52,7 +52,7 @@ public class MainView extends AbstractAppSecContent {
     }
 
     private void buildLayout() {
-        Label appTitle = new Label("Vaadin AppSec Kit");
+        Label appTitle = new Label("AppSec Kit");
         appTitle.addStyleName("appseckit-title");
         appTitle.setSizeFull();
 
