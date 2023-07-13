@@ -89,9 +89,30 @@ public class NotificationInitListener extends AbstractInitListener {
         Map<SeverityLevel, Long> countBySeverity = vulns.stream()
                 .collect(Collectors.groupingBy(Vulnerability::getSeverityLevel,
                         Collectors.counting()));
-        String link = "<a class=\"appsec-notification-button\" href=\"?"
+        // @formatter:off
+        String stylePrimary = "display: inline-block;\n"
+                + "    margin-top: 5px;\n"
+                + "    margin-right: 5px;\n"
+                + "    color: white;\n"
+                + "    font-weight: bold;\n"
+                + "    background-color: black;\n"
+                + "    text-decoration: none;\n"
+                + "    padding: 10px;\n"
+                + "    border-radius: 8px;\n"
+                + "    text-align: center\n";
+        String styleSecondary = "display: inline-block;\n"
+                + "    color: black;\n"
+                + "    font-weight: bold;\n"
+                + "    background-color: white;\n"
+                + "    text-decoration: none;\n"
+                + "    padding: 10px;\n"
+                + "    border-radius: 8px;\n"
+                + "    text-align: center\n";
+        String link = "<a style=\"" + stylePrimary + "\" href=\"?"
                 + AppSecUIProvider.VAADIN_APPSEC_KIT_URL_PARAM
-                + "\" target=\"_blank\">Open AppSec Kit</a>";
+                + "\" target=\"_blank\">Open AppSec Kit</a> "
+                + "<a style=\"" + styleSecondary + "\" href=\"#\">Dismiss</a>";
+        // @formatter:on
         String msg = "<div>%d vulnerabilities found (%d critical, %d moderate). "
                 + "Open AppSec Kit for details.</div>" + link;
         Notification n = new Notification("AppSec Kit",
