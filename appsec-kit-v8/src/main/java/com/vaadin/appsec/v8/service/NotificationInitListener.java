@@ -25,9 +25,13 @@ import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.appsec.v8.ui.AppSecUI;
 import com.vaadin.appsec.v8.ui.AppSecUIProvider;
+import com.vaadin.server.BootstrapFragmentResponse;
+import com.vaadin.server.BootstrapListener;
+import com.vaadin.server.BootstrapPageResponse;
 import com.vaadin.server.ServiceInitEvent;
 import com.vaadin.server.SessionDestroyEvent;
 import com.vaadin.server.SessionInitEvent;
+import com.vaadin.server.UIProvider;
 import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.Position;
@@ -65,20 +69,50 @@ public class NotificationInitListener extends AbstractInitListener {
 
     private void subscribeSessionToScanEvents(SessionInitEvent e) {
         VaadinSession session = e.getSession();
-        session.addUIProvider(new AppSecUIProvider());
-        AppSecService appSecService = AppSecService.getInstance();
-        Registration scanEventRegistration = appSecService
-                .addScanEventListener(event -> {
-                    int newVulns = event.getNewVulnerabilities().size();
-                    if (isSessionOpen(session) && newVulns > 0) {
-                        Collection<UI> uis = session.getUIs();
-                        LOGGER.debug("Notifying {} UIs for session {}",
-                                uis.size(), session.getSession().getId());
-                        session.access(
-                                () -> uis.forEach(ui -> doNotifyUI(ui, event)));
+
+        session.addBootstrapListener(new BootstrapListener() {
+            @Override
+            public void modifyBootstrapFragment(
+                    BootstrapFragmentResponse response) {
+                if (scanEventRegistrations.containsKey(session)) {
+                    // Second to n:th access. Make sure AppSecUIProvider remains
+                    // as first.
+                    List<UIProvider> uiProviders = session.getUIProviders();
+                    UIProvider uiProvider = uiProviders.stream()
+                            .filter(uip -> uip instanceof AppSecUIProvider)
+                            .findFirst().orElse(null);
+                    if (uiProvider != null
+                            && uiProviders.indexOf(uiProvider) > 0) {
+                        session.removeUIProvider(uiProvider);
+                        session.addUIProvider(new AppSecUIProvider());
                     }
-                });
-        scanEventRegistrations.put(session, scanEventRegistration);
+                } else {
+                    // First access
+                    session.addUIProvider(new AppSecUIProvider());
+                    AppSecService appSecService = AppSecService.getInstance();
+                    Registration scanEventRegistration = appSecService
+                            .addScanEventListener(event -> {
+                                int newVulns = event.getNewVulnerabilities()
+                                        .size();
+                                if (isSessionOpen(session) && newVulns > 0) {
+                                    Collection<UI> uis = session.getUIs();
+                                    LOGGER.debug(
+                                            "Notifying {} UIs for session {}",
+                                            uis.size(),
+                                            session.getSession().getId());
+                                    session.access(() -> uis.forEach(
+                                            ui -> doNotifyUI(ui, event)));
+                                }
+                            });
+                    scanEventRegistrations.put(session, scanEventRegistration);
+                }
+            }
+
+            @Override
+            public void modifyBootstrapPage(BootstrapPageResponse response) {
+                // NOP
+            }
+        });
     }
 
     private void doNotifyUI(UI ui, AppSecScanEvent event) {
