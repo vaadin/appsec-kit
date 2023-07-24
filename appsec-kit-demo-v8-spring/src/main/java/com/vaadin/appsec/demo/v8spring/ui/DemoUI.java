@@ -8,6 +8,7 @@
  */
 package com.vaadin.appsec.demo.v8spring.ui;
 
+import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -17,6 +18,7 @@ import com.vaadin.ui.VerticalLayout;
 
 @Theme("valo")
 @SpringUI
+@Push
 public class DemoUI extends UI {
 
     @Override
