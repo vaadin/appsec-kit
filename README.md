@@ -4,4 +4,4 @@ AppSec Kit offers seamless security integration into the development of your Vaa
 
 ## Getting Started
 
-Getting started tutorials are available for [Vaadin 7](https://vaadin.com/docs/v8/appseckit/getting-started) and [Vaadin 8](https://vaadin.com/docs/v7/appseckit/getting-started).
+Getting started tutorials are available for [Vaadin 7](https://vaadin.com/docs/v7/appseckit/getting-started) and [Vaadin 8](https://vaadin.com/docs/v8/appseckit/getting-started).
