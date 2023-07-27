@@ -38,29 +38,25 @@ class BillOfMaterialsStore {
     }
 
     void readBomFile(Path bomFilePath) throws ParseException {
-
         JsonParser parser = new JsonParser();
-        File bomFile = null;
+        File bomFile = bomFilePath.toFile();
         try {
-            bomFile = bomFilePath.toFile();
             bom = parser.parse(bomFile);
         } catch (ParseException e) {
             ClassLoader ccl = Thread.currentThread().getContextClassLoader();
             try (InputStream is = ccl
                     .getResourceAsStream(bomFilePath.toString())) {
                 if (is != null) {
-                    byte[] data = new byte[is.available()];
-                    is.read(data);
-                    bom = parser.parse(data);
+                    bom = parser.parse(is);
                 } else {
-                    // Throw original ParseException is resource stream is null
+                    // Throw original ParseException if resource stream is null
                     throw e;
                 }
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                throw new AppSecException(
+                        "SBOM file not found on path " + bomFilePath, ex);
             }
         }
-
         LOGGER.debug("Reading Bill Of Materials from file "
                 + bomFile.getAbsolutePath());
     }
