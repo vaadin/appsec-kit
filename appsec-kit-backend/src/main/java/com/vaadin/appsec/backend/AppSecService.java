@@ -343,8 +343,7 @@ public class AppSecService {
             }
         } else {
             data = new AppSecData();
-            LOGGER.debug("AppSec Kit data file created "
-                    + dataFile.getAbsolutePath());
+            LOGGER.debug("AppSec Kit data created");
         }
     }
 
@@ -353,6 +352,8 @@ public class AppSecService {
             File dataFile = configuration.getDataFilePath().toFile();
             try {
                 MAPPER.writeValue(dataFile, data);
+                LOGGER.debug("AppSec Kit data file updated "
+                        + dataFile.getAbsolutePath());
             } catch (IOException e) {
                 throw new AppSecException(
                         "Cannot write the AppSec Kit data file: "
