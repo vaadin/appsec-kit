@@ -137,6 +137,7 @@
                 <module>appsec-kit-demo-v7</module>
                 <module>appsec-kit-demo-v8</module>
                 <module>appsec-kit-demo-v8-spring</module>
+                <module>appsec-kit-demo-v8-cdi</module>
             </modules>
         </profile>
     </profiles>
