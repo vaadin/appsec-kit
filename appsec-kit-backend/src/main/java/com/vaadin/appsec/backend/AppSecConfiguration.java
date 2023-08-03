@@ -9,8 +9,7 @@
 package com.vaadin.appsec.backend;
 
 import java.io.Serializable;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
@@ -34,7 +33,11 @@ public class AppSecConfiguration implements Serializable {
 
     static final String DEFAULT_DATA_FILE_NAME = "appsec-data.json";
 
-    static final String DEFAULT_BOM_FILE_PATH = "/resources/bom.json";
+    static final String BOM_PATH_PROPERTY = "vaadin.appsec.bom";
+
+    static final String DEFAULT_BOM_FILE_PATH = "/resources";
+
+    static final String DEFAULT_BOM_FILE_NAME = "bom.json";
 
     private Path dataFilePath;
 
@@ -56,7 +59,12 @@ public class AppSecConfiguration implements Serializable {
         if (dataFilePath == null) {
             String propertyPath = System.getProperty(DATA_PATH_PROPERTY,
                     DEFAULT_DATA_FILE_PATH);
-            dataFilePath = Paths.get(propertyPath, DEFAULT_DATA_FILE_NAME);
+            try {
+                dataFilePath = Paths.get(propertyPath, DEFAULT_DATA_FILE_NAME);
+            } catch (InvalidPathException e) {
+                throw new AppSecException(
+                        "Invalid data file path " + DEFAULT_DATA_FILE_PATH, e);
+            }
         }
         return dataFilePath;
     }
@@ -82,15 +90,11 @@ public class AppSecConfiguration implements Serializable {
      */
     public Path getBomFilePath() {
         if (bomFilePath == null) {
+            String propertyPath = System.getProperty(BOM_PATH_PROPERTY,
+                    DEFAULT_BOM_FILE_PATH);
             try {
-                URL bomFileUrl = AppSecConfiguration.class
-                        .getResource(DEFAULT_BOM_FILE_PATH);
-                bomFilePath = Paths.get(bomFileUrl.toURI());
-            } catch (NullPointerException e) {
-                throw new AppSecException(
-                        "SBOM file not found on path " + DEFAULT_BOM_FILE_PATH,
-                        e);
-            } catch (URISyntaxException e) {
+                bomFilePath = Paths.get(propertyPath, DEFAULT_BOM_FILE_NAME);
+            } catch (InvalidPathException e) {
                 throw new AppSecException(
                         "Invalid SBOM file path " + DEFAULT_BOM_FILE_PATH, e);
             }
