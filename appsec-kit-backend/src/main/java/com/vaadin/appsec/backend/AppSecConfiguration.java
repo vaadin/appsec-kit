@@ -9,6 +9,9 @@
 package com.vaadin.appsec.backend;
 
 import java.io.Serializable;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -63,7 +66,7 @@ public class AppSecConfiguration implements Serializable {
                 dataFilePath = Paths.get(propertyPath, DEFAULT_DATA_FILE_NAME);
             } catch (InvalidPathException e) {
                 throw new AppSecException(
-                        "Invalid data file path " + DEFAULT_DATA_FILE_PATH, e);
+                        "Invalid data file path " + propertyPath, e);
             }
         }
         return dataFilePath;
@@ -92,11 +95,31 @@ public class AppSecConfiguration implements Serializable {
         if (bomFilePath == null) {
             String propertyPath = System.getProperty(BOM_PATH_PROPERTY,
                     DEFAULT_BOM_FILE_PATH);
-            try {
-                bomFilePath = Paths.get(propertyPath, DEFAULT_BOM_FILE_NAME);
-            } catch (InvalidPathException e) {
+            String bomFile = propertyPath + "/" + DEFAULT_BOM_FILE_NAME;
+            URL bomFileUrl = AppSecConfiguration.class.getResource(bomFile);
+            if (bomFileUrl != null) {
+                try {
+                    bomFilePath = Paths.get(bomFileUrl.toURI());
+                } catch (URISyntaxException e) {
+                    throw new AppSecException(
+                            "URI syntax error for SBOM file path: " + bomFile,
+                            e);
+                } catch (InvalidPathException e) {
+                    throw new AppSecException(
+                            "Invalid SBOM file path " + bomFile, e);
+                } catch (FileSystemNotFoundException e) {
+                    // Some web and application servers can use file systems
+                    // which are not supported, therefore a relative path is
+                    // returned
+                    return Paths.get(bomFile);
+                } catch (RuntimeException e) {
+                    throw new AppSecException(
+                            "Error occurred when getting the SBOM file path",
+                            e);
+                }
+            } else {
                 throw new AppSecException(
-                        "Invalid SBOM file path " + DEFAULT_BOM_FILE_PATH, e);
+                        "SBOM file not found on path " + bomFile);
             }
         }
         return bomFilePath;
