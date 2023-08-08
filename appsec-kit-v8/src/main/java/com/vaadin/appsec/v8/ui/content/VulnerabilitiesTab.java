@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.analysis.AssessmentStatus;
 import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
@@ -31,7 +32,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     private Grid<Vulnerability> grid;
     private ComboBox<Dependency> dependency;
     private ComboBox<SeverityLevel> severity;
-    private ComboBox<String> vaadinAnalysis;
+    private ComboBox<AssessmentStatus> vaadinAnalysis;
     private ComboBox<AppSecData.VulnerabilityStatus> devAnalysis;
 
     /**
@@ -47,6 +48,8 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         dependency = new ComboBox<>("Dependency");
 
         vaadinAnalysis = new ComboBox<>("Vaadin analysis");
+        vaadinAnalysis.setItems(AssessmentStatus.TRUE_POSITIVE,
+                AssessmentStatus.FALSE_POSITIVE, AssessmentStatus.UNDER_REVIEW);
 
         devAnalysis = new ComboBox<>("Developer analysis");
         devAnalysis.setItems(AppSecData.VulnerabilityStatus.NOT_SET,
@@ -59,7 +62,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         severity.setItems(SeverityLevel.NA, SeverityLevel.LOW,
                 SeverityLevel.MEDIUM, SeverityLevel.HIGH);
 
-        buildFilterBar(dependency, /* vaadinAnalysis, */ devAnalysis, severity);
+        buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     @Override
     protected void applyFilters() {
         Dependency dependencyFilter = dependency.getValue();
-        String vaadinAnalysisFilter = vaadinAnalysis.getValue();
+        AssessmentStatus vaadinAnalysisFilter = vaadinAnalysis.getValue();
         AppSecData.VulnerabilityStatus devAnalysisFilter = devAnalysis
                 .getValue();
         SeverityLevel severityFilter = severity.getValue();

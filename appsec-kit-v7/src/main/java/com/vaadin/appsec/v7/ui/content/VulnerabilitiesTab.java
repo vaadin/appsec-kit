@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.analysis.AssessmentStatus;
 import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
@@ -50,17 +51,18 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         dependency = new ComboBox("Dependency");
 
         vaadinAnalysis = new ComboBox("Vaadin analysis");
-        // TODO Set vaadin analysis options
+        vaadinAnalysis.setContainerDataSource(
+                AbstractAppSecContent.buildVaadinAnalysisStatusContainer());
 
         devAnalysis = new ComboBox("Developer analysis");
         devAnalysis.setContainerDataSource(
-                AbstractAppSecContent.buildDevStatusContainer());
+                AbstractAppSecContent.buildDevAnalysisStatusContainer());
 
         severity = new ComboBox("Severity level");
         severity.setContainerDataSource(
                 AbstractAppSecContent.buildSeverityContainer());
 
-        buildFilterBar(dependency, /* vaadinAnalysis, */ devAnalysis, severity);
+        buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
     }
 
     @Override
@@ -80,7 +82,8 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
         final SeverityLevel severityFilter = (SeverityLevel) severity
                 .getValue();
 
-        // TODO Add filtering for vaadin analysis
+        final AssessmentStatus vaadinAnalysisFilter = (AssessmentStatus) vaadinAnalysis
+                .getValue();
 
         final AppSecData.VulnerabilityStatus devAnalysisFilter = (AppSecData.VulnerabilityStatus) devAnalysis
                 .getValue();
@@ -96,6 +99,10 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                 }
                 if (severityFilter != null && !severityFilter
                         .equals(vulnerabilityDTO.getSeverityLevel())) {
+                    return false;
+                }
+                if (vaadinAnalysisFilter != null && !vaadinAnalysisFilter
+                        .equals(vulnerabilityDTO.getVaadinAnalysis())) {
                     return false;
                 }
                 if (devAnalysisFilter != null && !devAnalysisFilter
