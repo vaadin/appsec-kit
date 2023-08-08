@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,13 +52,16 @@ class AppSecDTOProvider {
     List<Dependency> getDependencies() {
         final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
                 .getVulnerabilities();
+        final List<org.cyclonedx.model.Dependency> dependencies = bomStore.getBom().getDependencies();
 
-        return bomStore.getBom().getComponents().stream().map(c -> {
-            Dependency dep = new Dependency(c.getGroup(), c.getName(),
-                    c.getVersion());
-            updateVulnerabilityStatistics(dep, vulnerabilities,
-                    getConcatDepName(c));
-            return dep;
+        return bomStore.getBom().getComponents().stream().map(component -> {
+            Dependency dependency = new Dependency(component.getGroup(), component.getName(), component.getVersion());
+            Optional<org.cyclonedx.model.Dependency> bomDep = dependencies.stream()
+                    .filter(dep -> dep.getDependencies().stream().anyMatch(transDep -> transDep.getRef().equals(component.getBomRef())))
+                    .findFirst();
+            bomDep.ifPresent(value -> dependency.setParentBomRef(value.getRef()));
+            updateVulnerabilityStatistics(dependency, vulnerabilities, getConcatDepName(component));
+            return dependency;
         }).collect(Collectors.toList());
     }
 
