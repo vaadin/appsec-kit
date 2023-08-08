@@ -52,15 +52,22 @@ class AppSecDTOProvider {
     List<Dependency> getDependencies() {
         final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
                 .getVulnerabilities();
-        final List<org.cyclonedx.model.Dependency> dependencies = bomStore.getBom().getDependencies();
+        final List<org.cyclonedx.model.Dependency> dependencies = bomStore
+                .getBom().getDependencies();
 
         return bomStore.getBom().getComponents().stream().map(component -> {
-            Dependency dependency = new Dependency(component.getGroup(), component.getName(), component.getVersion());
-            Optional<org.cyclonedx.model.Dependency> bomDep = dependencies.stream()
-                    .filter(dep -> dep.getDependencies().stream().anyMatch(transDep -> transDep.getRef().equals(component.getBomRef())))
+            Dependency dependency = new Dependency(component.getGroup(),
+                    component.getName(), component.getVersion());
+            Optional<org.cyclonedx.model.Dependency> bomDep = dependencies
+                    .stream()
+                    .filter(dep -> dep.getDependencies().stream()
+                            .anyMatch(transDep -> transDep.getRef()
+                                    .equals(component.getBomRef())))
                     .findFirst();
-            bomDep.ifPresent(value -> dependency.setParentBomRef(value.getRef()));
-            updateVulnerabilityStatistics(dependency, vulnerabilities, getConcatDepName(component));
+            bomDep.ifPresent(
+                    value -> dependency.setParentBomRef(value.getRef()));
+            updateVulnerabilityStatistics(dependency, vulnerabilities,
+                    getConcatDepName(component));
             return dependency;
         }).collect(Collectors.toList());
     }
