@@ -20,9 +20,8 @@ public class Dependency {
     private String group;
     private String name;
     private String version;
-
+    private String parentBomRef;
     private Integer numOfVulnerabilities;
-
     private SeverityLevel severityLevel;
     private Double riskScore;
 
@@ -100,21 +99,23 @@ public class Dependency {
         this.version = version;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Dependency that = (Dependency) o;
-        return Objects.equals(group, that.group)
-                && Objects.equals(name, that.name)
-                && Objects.equals(version, that.version);
+    /**
+     * Gets parent dependency's BOM reference (purl).
+     *
+     * @return the parent dependency's BOM reference (purl)
+     */
+    public String getParentBomRef() {
+        return parentBomRef;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(group, name, version);
+    /**
+     * Sets parent dependency's BOM reference (purl).
+     *
+     * @param parentBomRef
+     *            the parent dependency's BOM reference (purl)
+     */
+    public void setParentBomRef(String parentBomRef) {
+        this.parentBomRef = parentBomRef;
     }
 
     /**
@@ -172,6 +173,23 @@ public class Dependency {
      */
     public void setRiskScore(Double riskScore) {
         this.riskScore = riskScore;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Dependency that = (Dependency) o;
+        return Objects.equals(group, that.group)
+                && Objects.equals(name, that.name)
+                && Objects.equals(version, that.version);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(group, name, version);
     }
 
     @Override
