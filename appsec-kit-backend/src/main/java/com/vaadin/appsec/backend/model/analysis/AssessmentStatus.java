@@ -30,11 +30,12 @@ public enum AssessmentStatus {
 
     private final String caption;
 
-    private AssessmentStatus(String caption) {
+    AssessmentStatus(String caption) {
         this.caption = caption;
     }
 
-    public String getCaption() {
+    @Override
+    public String toString() {
         return caption;
     }
 }

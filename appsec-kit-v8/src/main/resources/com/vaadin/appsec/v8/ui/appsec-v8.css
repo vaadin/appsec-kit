@@ -89,6 +89,12 @@
     border-radius: 20px;
 }
 
+.vulnerability-details-view .va-not-available {
+    background: lightgray;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
 .severity-HIGH .vulnerability-property {
     color: red;
     font-weight: bold;

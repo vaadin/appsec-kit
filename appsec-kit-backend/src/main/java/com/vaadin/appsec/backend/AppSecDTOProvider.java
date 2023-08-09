@@ -27,6 +27,9 @@ import org.cyclonedx.model.Component;
 import us.springett.cvss.Cvss;
 
 import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.analysis.AffectedVersion;
+import com.vaadin.appsec.backend.model.analysis.Assessment;
+import com.vaadin.appsec.backend.model.analysis.VulnerabilityDetails;
 import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.appsec.backend.model.dto.SeverityLevelComparator;
@@ -110,6 +113,11 @@ class AppSecDTOProvider {
                         Node document = parser.parse(v.getDetails());
                         vulnerabilityDTO.setDetails(renderer.render(document));
                     }
+
+                    Optional<AffectedVersion> vaadinAnalysis = getVaadinAnalysis(
+                            vulnerabilityDTO);
+                    vaadinAnalysis.ifPresent(affectedVersion -> vulnerabilityDTO
+                            .setVaadinAnalysis(affectedVersion.getStatus()));
 
                     AppSecData.VulnerabilityAssessment vulnDevAnalysis = devAnalysis
                             .get(id);
@@ -231,5 +239,42 @@ class AppSecDTOProvider {
                     .filter(alias -> alias.startsWith("CVE")).findFirst()
                     .orElse(vulnerability.getId());
         }
+    }
+
+    private static Optional<AffectedVersion> getVaadinAnalysis(
+            Vulnerability vulnerabilityDTO) {
+        String vulnerabilityId = vulnerabilityDTO.getIdentifier();
+        VulnerabilityDetails vulnerability = AppSecService.getInstance()
+                .getVulnerabilityAnalysis().getVulnerabilities()
+                .get(vulnerabilityId);
+        if (vulnerability == null) {
+            return Optional.empty();
+        }
+        Dependency dependency = vulnerabilityDTO.getDependency();
+        String parentBomRef = dependency.getParentBomRef();
+        String groupAndName = bomRefToGroupAndName(parentBomRef);
+        Assessment assessment = vulnerability.getAssessments()
+                .get(groupAndName);
+        if (assessment == null) {
+            return Optional.empty();
+        }
+        return assessment.getAffectedVersions().values().stream()
+                .filter(v -> v.isInRange(bomRefToVersion(parentBomRef)))
+                .findFirst();
+    }
+
+    private static String bomRefToGroupAndName(String bomRef) {
+        // pkg:maven/com.vaadin/vaadin-server@8.13.0?type=jar
+        String[] bomRefParts = bomRef.split("/");
+        String[] depParts = bomRefParts[2].split("@");
+        return bomRefParts[1] + ":" + depParts[0];
+    }
+
+    private static String bomRefToVersion(String bomRef) {
+        // pkg:maven/com.vaadin/vaadin-server@8.13.0?type=jar
+        String[] bomRefParts = bomRef.split("/");
+        String[] depParts = bomRefParts[2].split("@");
+        String[] verAndType = depParts[1].split("\\?");
+        return verAndType[0];
     }
 }

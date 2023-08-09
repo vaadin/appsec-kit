@@ -10,6 +10,7 @@
 package com.vaadin.appsec.v7.ui.content;
 
 import com.vaadin.appsec.backend.model.AppSecData;
+import com.vaadin.appsec.backend.model.analysis.AssessmentStatus;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Alignment;
@@ -122,7 +123,16 @@ public abstract class AbstractAppSecContent extends VerticalLayout {
         return cont;
     }
 
-    static BeanItemContainer<AppSecData.VulnerabilityStatus> buildDevStatusContainer() {
+    static BeanItemContainer<AssessmentStatus> buildVaadinAnalysisStatusContainer() {
+        BeanItemContainer<AssessmentStatus> cont = new BeanItemContainer<>(
+                AssessmentStatus.class);
+        cont.addBean(AssessmentStatus.TRUE_POSITIVE);
+        cont.addBean(AssessmentStatus.FALSE_POSITIVE);
+        cont.addBean(AssessmentStatus.UNDER_REVIEW);
+        return cont;
+    }
+
+    static BeanItemContainer<AppSecData.VulnerabilityStatus> buildDevAnalysisStatusContainer() {
         BeanItemContainer<AppSecData.VulnerabilityStatus> cont = new BeanItemContainer<>(
                 AppSecData.VulnerabilityStatus.class);
         cont.addBean(AppSecData.VulnerabilityStatus.NOT_SET);

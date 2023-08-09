@@ -47,12 +47,6 @@
     padding-bottom: 3px;
 }
 
-.vulnerability-details-view .vulnerability-back-button {
-    font-size: 24px !important;
-    font-weight: bold !important;
-
-}
-
 .vulnerability-details-view .vaadin-analysis-title,
 .vulnerability-details-view .vulnerability-desc-title,
 .vulnerability-details-view .references-title {
@@ -65,6 +59,11 @@
     margin-top: 20px;
 }
 
+.vulnerability-details-view .vulnerability-back-button {
+    font-size: 24px !important;
+    font-weight: bold !important;
+}
+
 .vulnerability-details-view .vaadin-analysis-panel {
     border: 1px solid #666;
     margin-top: 20px;
@@ -74,18 +73,36 @@
     background: pink;
     padding: 3px 10px;
     border-radius: 20px;
+    width: auto !important;
 }
 
 .vulnerability-details-view .va-false-positive {
     background: lightblue;
     padding: 3px 10px;
     border-radius: 20px;
+    width: auto !important;
 }
 
 .vulnerability-details-view .va-under-review {
     background: lightgray;
     padding: 3px 10px;
     border-radius: 20px;
+    width: auto !important;
+}
+
+.vulnerability-details-view .va-not-supported {
+    background: red;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 20px;
+    width: auto !important;
+}
+
+.vulnerability-details-view .va-not-available {
+    background: lightgray;
+    padding: 3px 10px;
+    border-radius: 20px;
+    width: auto !important;
 }
 
 .severity-HIGH .vulnerability-property {
