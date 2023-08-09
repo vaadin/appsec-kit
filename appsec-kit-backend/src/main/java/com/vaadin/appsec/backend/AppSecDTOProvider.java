@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -35,6 +36,7 @@ import com.vaadin.appsec.backend.model.dto.SeverityLevelComparator;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Affected;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
+import com.vaadin.appsec.backend.model.osv.response.Range;
 
 /**
  * Helper class to provide bill of materials and vulnerabilities as DTOs for use
@@ -101,8 +103,11 @@ class AppSecDTOProvider {
                     String id = getVulnerabilityId(v);
                     Vulnerability vulnerabilityDTO = new Vulnerability(id);
                     vulnerabilityDTO.setDependency(dependencyDTO);
-                    vulnerabilityDTOS.add(vulnerabilityDTO);
                     vulnerabilityDTO.setDatePublished(v.getPublished());
+
+                    String patchedVersion = getPatchedVersion(affected)
+                            .orElse("---");
+                    vulnerabilityDTO.setPatchedVersion(patchedVersion);
 
                     if (v.getDetails() != null) {
                         Node document = parser.parse(v.getDetails());
@@ -130,6 +135,8 @@ class AppSecDTOProvider {
                         urls.add(ref.getUrl().toString());
                     });
                     vulnerabilityDTO.setReferenceUrls(urls);
+
+                    vulnerabilityDTOS.add(vulnerabilityDTO);
                 }
             }
         }
@@ -192,6 +199,33 @@ class AppSecDTOProvider {
 
     private static String getDepName(Affected affected) {
         return affected.getPackage().getName().split(":")[1];
+    }
+
+    private static Optional<String> getPatchedVersion(Affected affected) {
+        Optional<String> semVer = getFixed(affected, Range.Type.SEMVER);
+        if (semVer.isPresent()) {
+            return semVer;
+        }
+        Optional<String> ecoSystem = getFixed(affected, Range.Type.ECOSYSTEM);
+        if (ecoSystem.isPresent()) {
+            return ecoSystem;
+        }
+        return getFixed(affected, Range.Type.GIT);
+    }
+
+    private static Optional<String> getFixed(Affected affected,
+            Range.Type rangeType) {
+        Optional<Range> range = affected.getRanges().stream()
+                .filter(r -> r.getType().equals(rangeType)).findFirst();
+        if (range.isPresent()) {
+            Optional<Object> fixed = range.get().getEvents().stream()
+                    .map(event -> event.getAdditionalProperties().get("fixed"))
+                    .filter(Objects::nonNull).findFirst();
+            if (fixed.isPresent()) {
+                return Optional.of((String) fixed.get());
+            }
+        }
+        return Optional.empty();
     }
 
     private static String getVulnerabilityId(
