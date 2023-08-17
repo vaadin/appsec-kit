@@ -25,6 +25,7 @@
         <module>appsec-kit-backend</module>
         <module>appsec-kit-v7</module>
         <module>appsec-kit-v8</module>
+        <module>appsec-kit-v24</module>
     </modules>
 
     <properties>
