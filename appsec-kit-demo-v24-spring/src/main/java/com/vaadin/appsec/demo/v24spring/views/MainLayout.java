@@ -6,10 +6,10 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-package com.vaadin.appsec.demo.v24.views;
+package com.vaadin.appsec.demo.v24spring.views;
 
-import com.vaadin.appsec.demo.v24.views.about.AboutView;
-import com.vaadin.appsec.demo.v24.views.helloworld.HelloWorldView;
+import com.vaadin.appsec.demo.v24spring.views.about.AboutView;
+import com.vaadin.appsec.demo.v24spring.views.helloworld.HelloWorldView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.Footer;
@@ -48,7 +48,7 @@ public class MainLayout extends AppLayout {
     }
 
     private void addDrawerContent() {
-        H1 appName = new H1("appsec-kit-demo-v24");
+        H1 appName = new H1("AppSec Kit Demo Vaadin 24 Spring");
         appName.addClassNames(LumoUtility.FontSize.LARGE,
                 LumoUtility.Margin.NONE);
         Header header = new Header(appName);

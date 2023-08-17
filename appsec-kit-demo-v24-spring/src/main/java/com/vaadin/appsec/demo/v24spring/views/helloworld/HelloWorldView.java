@@ -6,9 +6,9 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-package com.vaadin.appsec.demo.v24.views.helloworld;
+package com.vaadin.appsec.demo.v24spring.views.helloworld;
 
-import com.vaadin.appsec.demo.v24.views.MainLayout;
+import com.vaadin.appsec.demo.v24spring.views.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;

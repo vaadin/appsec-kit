@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>com.vaadin</groupId>
-    <artifactId>appsec-kit-demo-v24</artifactId>
+    <artifactId>appsec-kit-demo-v24-spring</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>AppSec Kit Demo for Vaadin 24</name>
+    <name>AppSec Kit Demo for Vaadin 24 Spring</name>
 
     <properties>
         <java.version>17</java.version>

@@ -6,7 +6,7 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-package com.vaadin.appsec.demo.v24;
+package com.vaadin.appsec.demo.v24spring;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
@@ -21,7 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-@Theme(value = "appsec-kit-demo-v24")
+@Theme(value = "appsec-kit-demo-v24-spring")
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {

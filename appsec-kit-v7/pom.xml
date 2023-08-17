@@ -99,7 +99,7 @@
                             <Implementation-Title>${project.name}</Implementation-Title>
                             <Implementation-Vendor>Vaadin Ltd</Implementation-Vendor>
                             <Vaadin-License-Title>Vaadin Commercial License and Service Terms</Vaadin-License-Title>
-                            <Vaadin-Addon>${artifactId}-${project.version}.jar</Vaadin-Addon>
+                            <Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
                         </manifestEntries>
                     </archive>
                 </configuration>
