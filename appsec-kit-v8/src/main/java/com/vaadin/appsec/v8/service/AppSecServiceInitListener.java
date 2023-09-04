@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecService;
+import com.vaadin.appsec.backend.VaadinVersion;
 import com.vaadin.server.ServiceInitEvent;
 
 /**
@@ -28,7 +29,7 @@ public class AppSecServiceInitListener extends AbstractInitListener {
     public void serviceInit(ServiceInitEvent event) {
         if (isDebugMode(event.getSource())) {
             AppSecService appSecService = AppSecService.getInstance();
-            appSecService.init();
+            appSecService.init(VaadinVersion.V8);
             LOGGER.info("AppSec Kit initialized");
             appSecService.scanForVulnerabilities()
                     .thenRun(appSecService::scheduleAutomaticScan);

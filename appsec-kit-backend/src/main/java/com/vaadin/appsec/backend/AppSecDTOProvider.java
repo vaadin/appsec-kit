@@ -35,6 +35,7 @@ import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.appsec.backend.model.dto.SeverityLevelComparator;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Affected;
+import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Range;
 
@@ -57,10 +58,18 @@ class AppSecDTOProvider {
     List<Dependency> getDependencies() {
         final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
                 .getVulnerabilities();
-        final List<org.cyclonedx.model.Dependency> dependencies = bomStore
-                .getBom().getDependencies();
 
-        return bomStore.getBom().getComponents().stream().map(component -> {
+        final List<org.cyclonedx.model.Dependency> dependencies = new ArrayList<>(bomStore.getBom(Ecosystem.MAVEN).getDependencies());
+        if (bomStore.getBom(Ecosystem.NPM) != null) {
+            dependencies.addAll(bomStore.getBom(Ecosystem.NPM).getDependencies());
+        }
+
+        final List<Component> components = new ArrayList<>(bomStore.getBom(Ecosystem.MAVEN).getComponents());
+        if (bomStore.getBom(Ecosystem.NPM) != null) {
+            components.addAll(bomStore.getBom(Ecosystem.NPM).getComponents());
+        }
+
+        return components.stream().map(component -> {
             Dependency dependency = new Dependency(component.getGroup(),
                     component.getName(), component.getVersion());
             Optional<org.cyclonedx.model.Dependency> parentDep = dependencies

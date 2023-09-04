@@ -58,7 +58,7 @@ public class AppSecServiceTest {
 
         configuration = new AppSecConfiguration();
         configuration.setDataFilePath(dataFilePath);
-        configuration.setBomFilePath(Paths.get(AppSecServiceTest.class
+        configuration.setBomMavenFilePath(Paths.get(AppSecServiceTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
         configuration.setTaskExecutor(testExecutorService);
 
@@ -83,7 +83,7 @@ public class AppSecServiceTest {
 
     @Test
     public void scheduleAutomaticScan_noLastScan_noInitialDelay() {
-        service.init();
+        service.init(VaadinVersion.V8);
 
         service.scheduleAutomaticScan();
 
@@ -92,7 +92,7 @@ public class AppSecServiceTest {
 
     @Test
     public void scheduleAutomaticScan_lastScanExists_initialDelayCalculated() {
-        service.init();
+        service.init(VaadinVersion.V8);
 
         // Sets the last scan to now - 23 hours
         service.getData()
@@ -105,7 +105,7 @@ public class AppSecServiceTest {
 
     @Test
     public void scanForVulnerabilities_lastScanUpdated() throws Exception {
-        service.init();
+        service.init(VaadinVersion.V8);
 
         service.scanForVulnerabilities().get();
 
@@ -115,7 +115,7 @@ public class AppSecServiceTest {
     @Test
     public void scanForVulnerabilities_eventListenersExecuted()
             throws Exception {
-        service.init();
+        service.init(VaadinVersion.V8);
 
         AtomicBoolean callbackExecuted = new AtomicBoolean(false);
         service.addScanEventListener(event -> callbackExecuted.set(true));

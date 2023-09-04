@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
+import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 
 public class AppSecDTOProviderTest {
 
@@ -40,7 +41,7 @@ public class AppSecDTOProviderTest {
         URL resource = AppSecDTOProviderTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH);
         try {
-            bomStore.readBomFile(Paths.get(resource.toURI()));
+            bomStore.readBomFile(Paths.get(resource.toURI()), Ecosystem.MAVEN);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

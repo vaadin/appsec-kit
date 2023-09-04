@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +33,7 @@ import com.vaadin.appsec.backend.model.AppSecData;
 import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
 import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
+import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 
 /**
  * Service that provides access to all AppSec Kit features, such as
@@ -65,8 +67,6 @@ public class AppSecService {
 
     private final List<AppSecScanEventListener> scanEventListeners = new ArrayList<>();
 
-    private final OpenSourceVulnerabilityService osvService;
-
     private final VulnerabilityStore vulnerabilityStore;
 
     private final BillOfMaterialsStore bomStore;
@@ -92,7 +92,7 @@ public class AppSecService {
     private AppSecService(AppSecConfiguration configuration) {
         bomStore = new BillOfMaterialsStore();
         int osvApiRatePerSecond = configuration.getOsvApiRatePerSecond();
-        osvService = new OpenSourceVulnerabilityService(osvApiRatePerSecond);
+        OpenSourceVulnerabilityService osvService = new OpenSourceVulnerabilityService(osvApiRatePerSecond);
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
         dtoProvider = new AppSecDTOProvider(vulnerabilityStore, bomStore);
         githubService = new GitHubService();
@@ -102,15 +102,25 @@ public class AppSecService {
     /**
      * Initializes the service reading the SBOM file.
      */
-    public void init() {
+    public void init(VaadinVersion vaadinVersion) {
         cancelScheduledScan();
-        Path bomFilePath = configuration.getBomFilePath();
+
+        Path bomMavenFilePath = configuration.getBomMavenFilePath();
         try {
-            bomStore.readBomFile(bomFilePath);
+            bomStore.readBomFile(bomMavenFilePath, Ecosystem.MAVEN);
         } catch (ParseException e) {
-            throw new AppSecException(
-                    "Cannot parse the SBOM file: " + bomFilePath, e);
+            throw new AppSecException("Cannot parse the Maven SBOM file: " + bomMavenFilePath.toAbsolutePath(), e);
         }
+
+        if (VaadinVersion.isFlow(vaadinVersion)) {
+            Path bomNpmFilePath = configuration.getBomNpmFilePath();
+            try {
+                bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
+            } catch (ParseException e) {
+                throw new AppSecException("Cannot parse the npm SBOM file: " + bomNpmFilePath.toAbsolutePath(), e);
+            }
+        }
+
         readOrCreateDataFile();
     }
 
@@ -198,12 +208,12 @@ public class AppSecService {
 
     /**
      * Scans the application dependencies for vulnerabilities. The scan is
-     * performed against the OSV database (see {@link https://osv.dev/}).
+     * performed against the OSV database (see <a href="https://osv.dev/">osv.dev</a>).
      * <p>
      * The scan is performed asynchronously on a thread created by the
      * {@link Executor} set in the service configuration (the default is a
      * single-thread executor). A custom executor can be set with
-     * {@link AppSecConfiguration#setTaskExecutor(Executor)}.
+     * {@link AppSecConfiguration#setTaskExecutor(ScheduledExecutorService)}.
      *
      * @return a future completed when the scan has ended
      */
@@ -237,7 +247,7 @@ public class AppSecService {
     /**
      * Gets the list of vulnerabilities found in application dependencies. The
      * list is always empty before the first scan. To scan dependencies for
-     * vulnerabilities see {@link #scanForVulnerabilities(Runnable)}.
+     * vulnerabilities see {@link #scanForVulnerabilities()}.
      *
      * @return the list of vulnerabilities
      */
@@ -307,7 +317,7 @@ public class AppSecService {
     /**
      * Allows to set the configuration for this singleton instance. When a new
      * configuration is set, the service need to be initialized again with
-     * {@link #init()}.
+     * {@link #init(VaadinVersion)}.
      *
      * @param configuration
      *            configuration to set
@@ -321,7 +331,7 @@ public class AppSecService {
     }
 
     private void checkForInitialization() {
-        if (data == null || bomStore.getBom() == null) {
+        if (data == null || bomStore.getBom(Ecosystem.MAVEN) == null) {
             throw new AppSecException(
                     "The service has not been initialized. You should run the "
                             + "init() method after setting a new configuration");

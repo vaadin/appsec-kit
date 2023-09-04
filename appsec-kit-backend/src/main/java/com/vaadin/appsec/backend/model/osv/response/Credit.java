@@ -148,7 +148,7 @@ public class Credit {
          */
         public static Type fromValue(String value) {
             for (Type type : values()) {
-                if (type.value().equals(value)) {
+                if (type.value().equalsIgnoreCase(value)) {
                     return type;
                 }
             }

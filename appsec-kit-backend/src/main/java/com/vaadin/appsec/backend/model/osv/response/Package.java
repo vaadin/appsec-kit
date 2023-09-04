@@ -130,6 +130,6 @@ public class Package implements Serializable {
     @Override
     public String toString() {
         return "Package{" + "ecosystem='" + ecosystem + '\'' + ", name='" + name
-                + '\'' + '}';
+                + '\'' + ", purl='" + purl + '\'' + '}';
     }
 }
