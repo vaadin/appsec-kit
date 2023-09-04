@@ -20,7 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecService;
-import com.vaadin.appsec.backend.VaadinVersion;
 import com.vaadin.server.VaadinService;
 
 /**
@@ -51,7 +50,7 @@ public class AppSecKitInitializer implements HttpSessionListener {
             if (isDebugMode(vaadinService)
                     && !initializedVaadinServiceNames.contains(serviceName)) {
                 AppSecService appSecService = AppSecService.getInstance();
-                appSecService.init(VaadinVersion.V7);
+                appSecService.init();
                 LOGGER.info("AppSecService initialized");
                 appSecService.scanForVulnerabilities()
                         .thenRun(appSecService::scheduleAutomaticScan);

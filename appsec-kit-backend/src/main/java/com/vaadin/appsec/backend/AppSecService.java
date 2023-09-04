@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.cyclonedx.exception.ParseException;
+import org.cyclonedx.model.Bom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +44,8 @@ public class AppSecService {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecService.class);
+
+    private static final String FLOW_SERVER = "flow-server";
 
     static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -102,11 +105,8 @@ public class AppSecService {
 
     /**
      * Initializes the service reading the SBOM file.
-     *
-     * @param vaadinVersion
-     *            the Vaadin version to initialize the service with
      */
-    public void init(VaadinVersion vaadinVersion) {
+    public void init() {
         cancelScheduledScan();
 
         Path bomMavenFilePath = configuration.getBomMavenFilePath();
@@ -117,7 +117,7 @@ public class AppSecService {
                     + bomMavenFilePath.toAbsolutePath(), e);
         }
 
-        if (VaadinVersion.isFlow(vaadinVersion)) {
+        if (isFlow(bomStore.getBom(Ecosystem.MAVEN))) {
             Path bomNpmFilePath = configuration.getBomNpmFilePath();
             try {
                 bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
@@ -128,6 +128,11 @@ public class AppSecService {
         }
 
         readOrCreateDataFile();
+    }
+
+    private boolean isFlow(Bom bom) {
+        return bom.getComponents().stream()
+                .anyMatch(comp -> FLOW_SERVER.equals(comp.getName()));
     }
 
     /**
@@ -324,7 +329,7 @@ public class AppSecService {
     /**
      * Allows to set the configuration for this singleton instance. When a new
      * configuration is set, the service need to be initialized again with
-     * {@link #init(VaadinVersion)}.
+     * {@link #init()}.
      *
      * @param configuration
      *            configuration to set
