@@ -102,6 +102,9 @@ public class AppSecService {
 
     /**
      * Initializes the service reading the SBOM file.
+     *
+     * @param vaadinVersion
+     *            the Vaadin version to initialize the service with
      */
     public void init(VaadinVersion vaadinVersion) {
         cancelScheduledScan();
