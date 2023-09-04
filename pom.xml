@@ -162,6 +162,7 @@
         <profile>
             <id>jdk17-demo</id>
             <activation>
+                <jdk>17</jdk>
                 <property>
                     <name>!release</name>
                 </property>
