@@ -124,9 +124,6 @@
     <profiles>
         <profile>
             <id>jdk8-module</id>
-            <activation>
-                <jdk>1.8</jdk>
-            </activation>
             <modules>
                 <module>appsec-kit-backend</module>
                 <module>appsec-kit-v7</module>
@@ -136,11 +133,6 @@
 
         <profile>
             <id>jdk8-demo</id>
-            <activation>
-                <property>
-                    <name>!release</name>
-                </property>
-            </activation>
             <modules>
                 <module>appsec-kit-demo-v7</module>
                 <module>appsec-kit-demo-v8</module>
@@ -151,9 +143,6 @@
 
         <profile>
             <id>jdk17-module</id>
-            <activation>
-                <jdk>17</jdk>
-            </activation>
             <modules>
                 <module>appsec-kit-v24</module>
             </modules>
@@ -161,12 +150,6 @@
 
         <profile>
             <id>jdk17-demo</id>
-            <activation>
-                <jdk>17</jdk>
-                <property>
-                    <name>!release</name>
-                </property>
-            </activation>
             <modules>
                 <module>appsec-kit-demo-v24-spring</module>
             </modules>
