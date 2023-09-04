@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>appsec-kit-v24</artifactId>
+    <name>AppSec Kit Vaadin 24</name>
     <packaging>jar</packaging>
 
     <properties>

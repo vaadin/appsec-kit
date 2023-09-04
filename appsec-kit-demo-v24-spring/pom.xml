@@ -13,9 +13,9 @@
 
     <groupId>com.vaadin</groupId>
     <artifactId>appsec-kit-demo-v24-spring</artifactId>
-    <packaging>jar</packaging>
+    <name>AppSec Kit Demo Vaadin 24 Spring</name>
     <version>1.0-SNAPSHOT</version>
-    <name>AppSec Kit Demo for Vaadin 24 Spring</name>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>17</java.version>
