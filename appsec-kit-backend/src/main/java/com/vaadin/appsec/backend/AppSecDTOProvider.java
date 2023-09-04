@@ -59,12 +59,15 @@ class AppSecDTOProvider {
         final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
                 .getVulnerabilities();
 
-        final List<org.cyclonedx.model.Dependency> dependencies = new ArrayList<>(bomStore.getBom(Ecosystem.MAVEN).getDependencies());
+        final List<org.cyclonedx.model.Dependency> dependencies = new ArrayList<>(
+                bomStore.getBom(Ecosystem.MAVEN).getDependencies());
         if (bomStore.getBom(Ecosystem.NPM) != null) {
-            dependencies.addAll(bomStore.getBom(Ecosystem.NPM).getDependencies());
+            dependencies
+                    .addAll(bomStore.getBom(Ecosystem.NPM).getDependencies());
         }
 
-        final List<Component> components = new ArrayList<>(bomStore.getBom(Ecosystem.MAVEN).getComponents());
+        final List<Component> components = new ArrayList<>(
+                bomStore.getBom(Ecosystem.MAVEN).getComponents());
         if (bomStore.getBom(Ecosystem.NPM) != null) {
             components.addAll(bomStore.getBom(Ecosystem.NPM).getComponents());
         }

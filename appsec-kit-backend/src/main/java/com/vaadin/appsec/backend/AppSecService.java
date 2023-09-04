@@ -92,7 +92,8 @@ public class AppSecService {
     private AppSecService(AppSecConfiguration configuration) {
         bomStore = new BillOfMaterialsStore();
         int osvApiRatePerSecond = configuration.getOsvApiRatePerSecond();
-        OpenSourceVulnerabilityService osvService = new OpenSourceVulnerabilityService(osvApiRatePerSecond);
+        OpenSourceVulnerabilityService osvService = new OpenSourceVulnerabilityService(
+                osvApiRatePerSecond);
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
         dtoProvider = new AppSecDTOProvider(vulnerabilityStore, bomStore);
         githubService = new GitHubService();
@@ -109,7 +110,8 @@ public class AppSecService {
         try {
             bomStore.readBomFile(bomMavenFilePath, Ecosystem.MAVEN);
         } catch (ParseException e) {
-            throw new AppSecException("Cannot parse the Maven SBOM file: " + bomMavenFilePath.toAbsolutePath(), e);
+            throw new AppSecException("Cannot parse the Maven SBOM file: "
+                    + bomMavenFilePath.toAbsolutePath(), e);
         }
 
         if (VaadinVersion.isFlow(vaadinVersion)) {
@@ -117,7 +119,8 @@ public class AppSecService {
             try {
                 bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
             } catch (ParseException e) {
-                throw new AppSecException("Cannot parse the npm SBOM file: " + bomNpmFilePath.toAbsolutePath(), e);
+                throw new AppSecException("Cannot parse the npm SBOM file: "
+                        + bomNpmFilePath.toAbsolutePath(), e);
             }
         }
 
@@ -208,7 +211,8 @@ public class AppSecService {
 
     /**
      * Scans the application dependencies for vulnerabilities. The scan is
-     * performed against the OSV database (see <a href="https://osv.dev/">osv.dev</a>).
+     * performed against the OSV database (see
+     * <a href="https://osv.dev/">osv.dev</a>).
      * <p>
      * The scan is performed asynchronously on a thread created by the
      * {@link Executor} set in the service configuration (the default is a

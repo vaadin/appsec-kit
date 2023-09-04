@@ -23,8 +23,10 @@ public class BillOfMaterialsStoreTest {
     @Test
     public void readBomFile_componentsCountIsCorrect() throws Exception {
         BillOfMaterialsStore store = new BillOfMaterialsStore();
-        store.readBomFile(Paths.get(BillOfMaterialsStoreTest.class
-                .getResource(TEST_RESOURCE_BOM_PATH).toURI()), Ecosystem.MAVEN);
+        store.readBomFile(
+                Paths.get(BillOfMaterialsStoreTest.class
+                        .getResource(TEST_RESOURCE_BOM_PATH).toURI()),
+                Ecosystem.MAVEN);
 
         int components = store.getBom(Ecosystem.MAVEN).getComponents().size();
         assertEquals(2, components);

@@ -14,18 +14,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>appsec-kit-backend</module>
-        <module>appsec-kit-v7</module>
-        <module>appsec-kit-v8</module>
-        <module>appsec-kit-v24</module>
-        <module>appsec-kit-demo-v7</module>
-        <module>appsec-kit-demo-v8</module>
-        <module>appsec-kit-demo-v8-cdi</module>
-        <module>appsec-kit-demo-v8-spring</module>
-        <module>appsec-kit-demo-v24-spring</module>
-    </modules>
-
     <licenses>
         <license>
             <name>Vaadin Commercial License and Service Terms</name>

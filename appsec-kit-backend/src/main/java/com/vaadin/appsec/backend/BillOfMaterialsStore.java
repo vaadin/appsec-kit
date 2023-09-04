@@ -44,7 +44,8 @@ class BillOfMaterialsStore {
         }
     }
 
-    void readBomFile(Path bomFilePath, Ecosystem ecosystem) throws ParseException {
+    void readBomFile(Path bomFilePath, Ecosystem ecosystem)
+            throws ParseException {
         if (Objects.requireNonNull(ecosystem) == Ecosystem.MAVEN) {
             bomMaven = readBomFile(bomFilePath);
         } else {
@@ -69,7 +70,8 @@ class BillOfMaterialsStore {
                     throw e;
                 }
             } catch (IOException ex) {
-                throw new AppSecException("SBOM file not found on path " + bomFilePath, ex);
+                throw new AppSecException(
+                        "SBOM file not found on path " + bomFilePath, ex);
             }
         }
     }
