@@ -11,9 +11,9 @@
 
 	<groupId>com.vaadin</groupId>
 	<artifactId>appsec-kit-demo-v8-spring</artifactId>
-	<name>AppSec Kit Demo Vaadin 8 Spring</name>
-	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>AppSec Kit Demo for Vaadin 8 Spring</name>
 
 	<prerequisites>
 		<maven>3</maven>

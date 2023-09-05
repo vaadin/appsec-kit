@@ -147,12 +147,5 @@
                 <module>appsec-kit-v24</module>
             </modules>
         </profile>
-
-        <profile>
-            <id>jdk17-demo</id>
-            <modules>
-                <module>appsec-kit-demo-v24-spring</module>
-            </modules>
-        </profile>
     </profiles>
 </project>
