@@ -182,6 +182,9 @@ class AppSecDTOProvider {
 
     private static Double findScoreIfHigher(
             OpenSourceVulnerability vulnerability, Double highestScore) {
+        if (vulnerability.getSeverity() == null) {
+            return highestScore;
+        }
         Double hiScoreInVuln = vulnerability.getSeverity().stream()
                 .map(severity -> Cvss.fromVector(severity.getScore()))
                 .map(cvss -> cvss.calculateScore().getBaseScore())
