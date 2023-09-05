@@ -97,7 +97,7 @@ public class AppSecConfiguration implements Serializable {
      *
      * @return the Maven BOM-file path, not {@code null}
      */
-    public Path getBomMavenFilePath() {
+    public Path getBomFilePath() {
         if (bomMavenFilePath == null) {
             String propertyPath = System.getProperty(BOM_MAVEN_PATH_PROPERTY,
                     DEFAULT_BOM_FILE_PATH);
@@ -135,15 +135,15 @@ public class AppSecConfiguration implements Serializable {
     /**
      * Sets the Maven BOM-file path.
      *
-     * @param bomMavenFilePath
+     * @param bomFilePath
      *            the Maven BOM-file path, not {@code null}
      */
-    public void setBomMavenFilePath(Path bomMavenFilePath) {
-        if (bomMavenFilePath == null) {
+    public void setBomFilePath(Path bomFilePath) {
+        if (bomFilePath == null) {
             throw new IllegalArgumentException(
                     "The Maven BOM-file path cannot be null");
         }
-        this.bomMavenFilePath = bomMavenFilePath;
+        this.bomMavenFilePath = bomFilePath;
     }
 
     /**

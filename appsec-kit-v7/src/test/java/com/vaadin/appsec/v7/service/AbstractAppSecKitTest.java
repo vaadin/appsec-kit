@@ -42,7 +42,7 @@ public abstract class AbstractAppSecKitTest {
         toClose = MockitoAnnotations.openMocks(this);
 
         configuration = new AppSecConfiguration();
-        configuration.setBomMavenFilePath(Paths.get(AbstractAppSecKitTest.class
+        configuration.setBomFilePath(Paths.get(AbstractAppSecKitTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
         AppSecService.getInstance().setConfiguration(configuration);
 

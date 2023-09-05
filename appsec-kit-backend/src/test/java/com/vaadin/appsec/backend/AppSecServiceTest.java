@@ -53,7 +53,7 @@ public class AppSecServiceTest {
 
         configuration = new AppSecConfiguration();
         configuration.setDataFilePath(dataFilePath);
-        configuration.setBomMavenFilePath(Paths.get(AppSecServiceTest.class
+        configuration.setBomFilePath(Paths.get(AppSecServiceTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
         configuration.setTaskExecutor(testExecutorService);
 

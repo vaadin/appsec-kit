@@ -108,7 +108,7 @@ public class AppSecService {
     public void init() {
         cancelScheduledScan();
 
-        Path bomMavenFilePath = configuration.getBomMavenFilePath();
+        Path bomMavenFilePath = configuration.getBomFilePath();
         try {
             bomStore.readBomFile(bomMavenFilePath, Ecosystem.MAVEN);
         } catch (ParseException e) {
