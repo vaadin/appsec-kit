@@ -9,9 +9,9 @@
     </parent>
 
     <artifactId>appsec-kit-demo-v8-cdi</artifactId>
-    <packaging>war</packaging>
+    <name>AppSec Kit Demo Vaadin 8 CDI</name>
     <version>1.0-SNAPSHOT</version>
-    <name>AppSec Kit Demo for Vaadin 8 CDI</name>
+    <packaging>war</packaging>
 
     <prerequisites>
         <maven>3</maven>

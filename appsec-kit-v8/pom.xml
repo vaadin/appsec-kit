@@ -2,20 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>appsec-kit</artifactId>
         <groupId>com.vaadin</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>appsec-kit-v8</artifactId>
-
-    <packaging>jar</packaging>
+    <name>AppSec Kit Vaadin 8</name>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <vaadin8.version>8.0.0</vaadin8.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -94,7 +94,7 @@
                             <Implementation-Title>${project.name}</Implementation-Title>
                             <Implementation-Vendor>Vaadin Ltd</Implementation-Vendor>
                             <Vaadin-License-Title>Vaadin Commercial License and Service Terms</Vaadin-License-Title>
-                            <Vaadin-Addon>${artifactId}-${project.version}.jar</Vaadin-Addon>
+                            <Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
                         </manifestEntries>
                     </archive>
                 </configuration>
