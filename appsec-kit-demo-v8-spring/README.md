@@ -9,4 +9,4 @@ some vulnerabilities to show in the scan results.
 Workflow
 ========
 
-To run the application, run `mvn jetty:run` and open http://localhost:8080/.
+To run the application, run `mvn spring-boot:run` and open http://localhost:8080/.
