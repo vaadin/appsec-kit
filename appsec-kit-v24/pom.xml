@@ -12,7 +12,6 @@
 
     <artifactId>appsec-kit-v24</artifactId>
     <name>AppSec Kit Vaadin 24</name>
-    <packaging>jar</packaging>
 
     <properties>
         <vaadin24.version>24.1.5</vaadin24.version>

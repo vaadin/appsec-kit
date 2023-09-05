@@ -12,7 +12,6 @@
 
     <artifactId>appsec-kit-backend</artifactId>
     <name>AppSec Kit Backend</name>
-    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

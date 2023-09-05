@@ -12,7 +12,6 @@
 
     <artifactId>appsec-kit-v7</artifactId>
     <name>AppSec Kit Vaadin 7</name>
-    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
