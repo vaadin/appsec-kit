@@ -35,7 +35,7 @@ public class Dependency {
      * @param version
      *            the version
      */
-    public Dependency(@NotNull String group, @NotNull String name,
+    public Dependency(String group, @NotNull String name,
             @NotNull String version) {
         this.group = group;
         this.name = name;
