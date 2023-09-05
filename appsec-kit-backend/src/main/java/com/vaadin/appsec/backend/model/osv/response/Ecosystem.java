@@ -39,7 +39,7 @@ public enum Ecosystem {
      */
     public static Ecosystem fromValue(String value) {
         for (Ecosystem ecosystem : values()) {
-            if (ecosystem.value().equals(value)) {
+            if (ecosystem.value().equalsIgnoreCase(value)) {
                 return ecosystem;
             }
         }

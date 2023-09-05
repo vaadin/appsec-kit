@@ -16,18 +16,14 @@
 
     <licenses>
         <license>
-          <name>Vaadin Commercial License and Service Terms</name>
-          <url>https://vaadin.com/commercial-license-and-service-terms</url>
+            <name>Vaadin Commercial License and Service Terms</name>
+            <url>https://vaadin.com/commercial-license-and-service-terms</url>
         </license>
     </licenses>
 
-    <modules>
-        <module>appsec-kit-backend</module>
-        <module>appsec-kit-v7</module>
-        <module>appsec-kit-v8</module>
-    </modules>
-
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.jar.version>3.3.0</maven.jar.version>
@@ -127,17 +123,28 @@
 
     <profiles>
         <profile>
-            <id>demo</id>
-            <activation>
-                <property>
-                    <name>!release</name>
-                </property>
-            </activation>
+            <id>jdk8-module</id>
+            <modules>
+                <module>appsec-kit-backend</module>
+                <module>appsec-kit-v7</module>
+                <module>appsec-kit-v8</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>jdk8-demo</id>
             <modules>
                 <module>appsec-kit-demo-v7</module>
                 <module>appsec-kit-demo-v8</module>
-                <module>appsec-kit-demo-v8-spring</module>
                 <module>appsec-kit-demo-v8-cdi</module>
+                <module>appsec-kit-demo-v8-spring</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>jdk17-module</id>
+            <modules>
+                <module>appsec-kit-v24</module>
             </modules>
         </profile>
     </profiles>
