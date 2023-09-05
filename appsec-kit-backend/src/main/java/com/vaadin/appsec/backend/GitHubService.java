@@ -108,7 +108,7 @@ class GitHubService {
     }
 
     private List<String> getVersions(Pattern frameworkVersionPattern,
-                                     boolean isFlow) {
+            boolean isFlow) {
         return getReleasesFromGitHub(isFlow).stream()
                 .map(GitHubRelease::getTagName)
                 .filter(frameworkVersionPattern.asPredicate())
@@ -173,7 +173,8 @@ class GitHubService {
         try {
             return new URL(FRAMEWORK_RELEASES_URI);
         } catch (MalformedURLException e) {
-            throw new AppSecException("Invalid Vaadin framework releases URL", e);
+            throw new AppSecException("Invalid Vaadin framework releases URL",
+                    e);
         }
     }
 

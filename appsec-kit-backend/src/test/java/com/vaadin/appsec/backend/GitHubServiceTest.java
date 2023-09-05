@@ -69,8 +69,8 @@ public class GitHubServiceTest {
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
                 versions.size());
-        versions.forEach(
-                version -> MatcherAssert.assertThat(version, startsWith("24.")));
+        versions.forEach(version -> MatcherAssert.assertThat(version,
+                startsWith("24.")));
     }
 
     @Test
