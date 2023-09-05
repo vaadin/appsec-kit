@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.cyclonedx.exception.ParseException;
-import org.cyclonedx.model.Bom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -117,7 +116,7 @@ public class AppSecService {
                     + bomMavenFilePath.toAbsolutePath(), e);
         }
 
-        if (isFlow(bomStore.getBom(Ecosystem.MAVEN))) {
+        if (isFlow()) {
             Path bomNpmFilePath = configuration.getBomNpmFilePath();
             try {
                 bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
@@ -130,8 +129,8 @@ public class AppSecService {
         readOrCreateDataFile();
     }
 
-    private boolean isFlow(Bom bom) {
-        return bom.getComponents().stream()
+    private boolean isFlow() {
+        return bomStore.getBom(Ecosystem.MAVEN).getComponents().stream()
                 .anyMatch(comp -> FLOW_SERVER.equals(comp.getName()));
     }
 
