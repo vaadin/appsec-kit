@@ -231,6 +231,7 @@ public class AppSecService {
     public CompletableFuture<Void> scanForVulnerabilities() {
         checkForInitialization();
         Executor executor = configuration.getTaskExecutor();
+        boolean isFlow = isFlow();
         return CompletableFuture
                 .supplyAsync(vulnerabilityStore::refresh, executor)
                 .thenRun(() -> githubService.updateReleasesCache(isFlow))
