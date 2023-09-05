@@ -42,6 +42,8 @@ public class AppSecService {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecService.class);
 
+    private static final String FLOW_SERVER = "flow-server";
+
     static final ObjectMapper MAPPER = new ObjectMapper();
 
     static {
@@ -112,6 +114,11 @@ public class AppSecService {
                     "Cannot parse the SBOM file: " + bomFilePath, e);
         }
         readOrCreateDataFile();
+    }
+
+    private boolean isFlow() {
+        return bomStore.getBom().getComponents().stream()
+                .anyMatch(comp -> FLOW_SERVER.equals(comp.getName()));
     }
 
     /**
@@ -210,9 +217,10 @@ public class AppSecService {
     public CompletableFuture<Void> scanForVulnerabilities() {
         checkForInitialization();
         Executor executor = configuration.getTaskExecutor();
+        boolean isFlow = isFlow();
         return CompletableFuture
                 .supplyAsync(vulnerabilityStore::refresh, executor)
-                .thenRun(githubService::updateReleasesCache)
+                .thenRun(() -> githubService.updateReleasesCache(isFlow))
                 .thenRun(githubService::updateAnalysisCache)
                 .thenRun(this::updateLastScanTime)
                 .thenApply(vulnerabilities -> new AppSecScanEvent(this))

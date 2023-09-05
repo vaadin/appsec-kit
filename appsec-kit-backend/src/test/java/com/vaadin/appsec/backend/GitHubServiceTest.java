@@ -31,12 +31,17 @@ public class GitHubServiceTest {
         }
 
         @Override
+        protected URL getFlowReleasesUrl() {
+            return getClass().getClassLoader().getResource("releases.json");
+        }
+
+        @Override
         protected URL getVaadinAnalysisUrl() {
             return getClass().getClassLoader().getResource("analysis.json");
         }
     }
 
-    private GitHubService service = new TestGitHubService();
+    private final GitHubService service = new TestGitHubService();
 
     @Test
     public void getFramework7Versions() {
@@ -56,6 +61,16 @@ public class GitHubServiceTest {
                 versions.size());
         versions.forEach(
                 version -> MatcherAssert.assertThat(version, startsWith("8.")));
+    }
+
+    @Test
+    public void getFlow24Versions() {
+        List<String> versions = service.getFlow24Versions();
+
+        assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
+                versions.size());
+        versions.forEach(
+                version -> MatcherAssert.assertThat(version, startsWith("24.")));
     }
 
     @Test
