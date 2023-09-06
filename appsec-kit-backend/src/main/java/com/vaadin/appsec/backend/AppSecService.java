@@ -129,7 +129,7 @@ public class AppSecService {
         readOrCreateDataFile();
     }
 
-    private boolean isFlow() {
+    boolean isFlow() {
         return bomStore.getBom(Ecosystem.MAVEN).getComponents().stream()
                 .anyMatch(comp -> FLOW_SERVER.equals(comp.getName()));
     }
