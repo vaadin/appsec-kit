@@ -129,7 +129,7 @@ public class AppSecService {
         readOrCreateDataFile();
     }
 
-    private boolean isFlow() {
+    boolean isFlow() {
         return bomStore.getBom(Ecosystem.MAVEN).getComponents().stream()
                 .anyMatch(comp -> FLOW_SERVER.equals(comp.getName()));
     }
@@ -231,10 +231,9 @@ public class AppSecService {
     public CompletableFuture<Void> scanForVulnerabilities() {
         checkForInitialization();
         Executor executor = configuration.getTaskExecutor();
-        boolean isFlow = isFlow();
         return CompletableFuture
                 .supplyAsync(vulnerabilityStore::refresh, executor)
-                .thenRun(() -> githubService.updateReleasesCache(isFlow))
+                .thenRun(githubService::updateReleasesCache)
                 .thenRun(githubService::updateAnalysisCache)
                 .thenRun(this::updateLastScanTime)
                 .thenApply(vulnerabilities -> new AppSecScanEvent(this))

@@ -96,34 +96,34 @@ class GitHubService {
     private VulnerabilityAnalysis analysisCache;
 
     List<String> getFramework7Versions() {
-        return getVersions(FRAMEWORK_7_PATTERN, false);
+        return getVersions(FRAMEWORK_7_PATTERN);
     }
 
     List<String> getFramework8Versions() {
-        return getVersions(FRAMEWORK_8_PATTERN, false);
+        return getVersions(FRAMEWORK_8_PATTERN);
     }
 
     List<String> getFlow24Versions() {
-        return getVersions(FLOW_24_PATTERN, true);
+        return getVersions(FLOW_24_PATTERN);
     }
 
-    private List<String> getVersions(Pattern frameworkVersionPattern,
-            boolean isFlow) {
-        return getReleasesFromGitHub(isFlow).stream()
+    private List<String> getVersions(Pattern frameworkVersionPattern) {
+        return getReleasesFromGitHub().stream()
                 .map(GitHubRelease::getTagName)
                 .filter(frameworkVersionPattern.asPredicate())
                 .limit(NUMBER_OF_LATEST_MAINTAINED_VERSIONS)
                 .collect(Collectors.toList());
     }
 
-    private List<GitHubRelease> getReleasesFromGitHub(boolean isFlow) {
+    private List<GitHubRelease> getReleasesFromGitHub() {
         if (releasesCache == null) {
-            updateReleasesCache(isFlow);
+            updateReleasesCache();
         }
         return releasesCache;
     }
 
-    void updateReleasesCache(boolean isFlow) {
+    void updateReleasesCache() {
+        boolean isFlow = AppSecService.getInstance().isFlow();
         ObjectReader listReader = MAPPER.readerForListOf(GitHubRelease.class);
         try {
             URL frameworkTagsUrl;

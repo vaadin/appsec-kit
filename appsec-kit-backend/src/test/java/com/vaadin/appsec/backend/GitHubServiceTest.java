@@ -9,9 +9,11 @@
 package com.vaadin.appsec.backend;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.hamcrest.MatcherAssert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.appsec.backend.model.analysis.Assessment;
@@ -22,6 +24,8 @@ import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
 
 public class GitHubServiceTest {
+
+    static final String TEST_RESOURCE_BOM_PATH = "/bom.json";
 
     static class TestGitHubService extends GitHubService {
 
@@ -41,7 +45,18 @@ public class GitHubServiceTest {
         }
     }
 
-    private final GitHubService service = new TestGitHubService();
+    private GitHubService service;
+
+    @Before
+    public void setup() throws Exception {
+        service = new TestGitHubService();
+
+        AppSecConfiguration configuration = new AppSecConfiguration();
+        configuration.setBomFilePath(Paths.get(AppSecServiceTest.class
+                .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
+        AppSecService.getInstance().setConfiguration(configuration);
+        AppSecService.getInstance().init();
+    }
 
     @Test
     public void getFramework7Versions() {
