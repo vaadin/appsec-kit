@@ -14,7 +14,7 @@
     <name>AppSec Kit Vaadin 24</name>
 
     <properties>
-        <flow.version>24.1.10</flow.version>
+        <flow.version>24.2.0.alpha8</flow.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,6 +25,11 @@
             <groupId>com.vaadin</groupId>
             <artifactId>appsec-kit-backend</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-server</artifactId>
+            <version>${flow.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -70,6 +75,12 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-text-field-flow</artifactId>
             <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-dev-server</artifactId>
+            <version>${flow.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

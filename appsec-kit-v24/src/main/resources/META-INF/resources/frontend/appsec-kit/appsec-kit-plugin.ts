@@ -1,0 +1,52 @@
+import { LitElement, html, css } from "lit";
+import { customElement } from "lit/decorators.js";
+import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "@vaadin/flow-frontend/vaadin-dev-tools/vaadin-dev-tools";
+
+let ref: DevToolsInterface;
+const devTools: VaadinDevTools = (window as any).Vaadin.devTools;
+
+@customElement("appsec-kit-plugin")
+export class AppSecKitPlugin extends LitElement implements MessageHandler {
+
+    static styles = css`
+        .container {
+            display: flex;
+            padding: 0.75rem;
+            justify-content: space-between;
+        }
+    `;
+
+    render() {
+        return html`
+            <div class="container">
+                <span>No vulnerabilities found.</span>
+                <button class="tab">Open AppSec Kit</button>
+            </div>
+        `;
+    }
+
+    handleMessage(message: ServerMessage): boolean {
+        console.log("appsec-kit-plugin command received: " + message.command);
+        if (message.command === 'appsec-kit-init') {
+            devTools.showNotification("information" as MessageType, "AppSec Kit is running", "AppSec Kit is configured and scanning app dependencies for known vulnerabilities.", "/appsec-kit", "appsec-kit-notification");
+            return true;
+        } else if (message.command === 'appsec-kit-scan') {
+            if (message.data.vulnerabilityCount > 0) {
+                devTools.showNotification("error" as MessageType, "Potential vulnerabilities found");
+            } else {
+                devTools.showNotification("information" as MessageType, "No vulnerabilities found");
+            }
+            return true;
+        } else {
+            return false; // not a plugin command
+        }
+    }
+}
+
+const plugin: DevToolsPlugin = {
+    init: (devToolsInterface: DevToolsInterface): void => {
+        devToolsInterface.addTab("AppSec Kit", 'appsec-kit-plugin');
+        ref = devToolsInterface;
+    }
+};
+(window as any).Vaadin.devToolsPlugins.push(plugin);
