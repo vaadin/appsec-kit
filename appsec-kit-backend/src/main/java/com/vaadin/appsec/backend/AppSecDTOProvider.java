@@ -10,7 +10,6 @@
 package com.vaadin.appsec.backend;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +23,7 @@ import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.cyclonedx.model.Component;
+import org.cyclonedx.model.Property;
 import us.springett.cvss.Cvss;
 
 import com.vaadin.appsec.backend.model.AppSecData;
@@ -38,6 +38,7 @@ import com.vaadin.appsec.backend.model.osv.response.Affected;
 import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Range;
+import com.vaadin.appsec.backend.model.osv.response.Severity;
 
 /**
  * Helper class to provide bill of materials and vulnerabilities as DTOs for use
@@ -45,8 +46,9 @@ import com.vaadin.appsec.backend.model.osv.response.Range;
  */
 class AppSecDTOProvider {
 
-    private final VulnerabilityStore vulnerabilityStore;
+    private static final String DEVELOPMENT_PROPERTY_NAME = "cdx:npm:package:development";
 
+    private final VulnerabilityStore vulnerabilityStore;
     private final BillOfMaterialsStore bomStore;
 
     AppSecDTOProvider(VulnerabilityStore vulnerabilityStore,
@@ -73,18 +75,29 @@ class AppSecDTOProvider {
         }
 
         return components.stream().map(component -> {
-            Dependency dependency = new Dependency(component.getGroup(),
-                    component.getName(), component.getVersion());
-            Optional<org.cyclonedx.model.Dependency> parentDep = dependencies
-                    .stream()
-                    .filter(dep -> dep.getDependencies().stream()
-                            .anyMatch(transDep -> transDep.getRef()
-                                    .equals(component.getBomRef())))
-                    .findFirst();
-            parentDep.ifPresent(
-                    parent -> dependency.setParentBomRef(parent.getRef()));
+            Ecosystem ecosystem = getEcosystem(component);
+            Dependency dependency = new Dependency(ecosystem,
+                    component.getGroup(), component.getName(),
+                    component.getVersion());
+
+            // Finds and sets the parent bom reference for this component
+            dependencies.stream()
+                    .filter(dep -> Objects.nonNull(dep.getDependencies())
+                            && dep.getDependencies().stream()
+                                    .anyMatch(transDep -> transDep.getRef()
+                                            .equals(component.getBomRef())))
+                    .findFirst().ifPresent(parent -> dependency
+                            .setParentBomRef(parent.getRef()));
+
+            // Verifies and sets if a npm dependency is a dev dependency
+            // For Maven dependencies this value is always false
+            if (dependency.getEcosystem() == Ecosystem.NPM) {
+                dependency.setDevDependency(isDevDependency(component));
+            }
+
             updateVulnerabilityStatistics(dependency, vulnerabilities,
                     getConcatDepName(component));
+
             return dependency;
         }).collect(Collectors.toList());
     }
@@ -143,9 +156,8 @@ class AppSecDTOProvider {
                     }
 
                     Set<String> urls = new HashSet<>();
-                    v.getReferences().forEach(ref -> {
-                        urls.add(ref.getUrl().toString());
-                    });
+                    v.getReferences()
+                            .forEach(ref -> urls.add(ref.getUrl().toString()));
                     vulnerabilityDTO.setReferenceUrls(urls);
 
                     vulnerabilityDTOS.add(vulnerabilityDTO);
@@ -155,12 +167,23 @@ class AppSecDTOProvider {
         return vulnerabilityDTOS;
     }
 
+    private boolean isDevDependency(Component component) {
+        for (Property property : component.getProperties()) {
+            if (property.getName().equals(DEVELOPMENT_PROPERTY_NAME)
+                    && property.getValue().equals("true")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static void updateVulnerabilityStatistics(Dependency dependency,
             List<OpenSourceVulnerability> vulnerabilities,
             String concatDepName) {
         int vulnerabilityCount = 0;
-        SeverityLevel highestSeverityLevel = SeverityLevel.NA;
-        Double highestScore = 0.0;
+        SeverityLevel highestSeverityLevel = SeverityLevel.NONE;
+        Double highestScoreNumber = 0.0;
+        String highestScoreString = "";
 
         for (OpenSourceVulnerability vulnerability : vulnerabilities) {
             for (Affected affected : vulnerability.getAffected()) {
@@ -168,25 +191,29 @@ class AppSecDTOProvider {
                     vulnerabilityCount++;
                     highestSeverityLevel = findSeverityIfHigher(vulnerability,
                             highestSeverityLevel);
-                    highestScore = findScoreIfHigher(vulnerability,
-                            highestScore);
+                    highestScoreNumber = findScoreIfHigher(vulnerability,
+                            highestScoreNumber);
+                    highestScoreString = getHighestCvssScoreString(
+                            vulnerability);
                 }
             }
         }
 
         dependency.setNumOfVulnerabilities(vulnerabilityCount);
         dependency.setSeverityLevel(highestSeverityLevel);
-        dependency.setRiskScore(highestScore);
+        dependency.setRiskScore(highestScoreNumber);
+        dependency.setCvssString(highestScoreString);
     }
 
     private static SeverityLevel findSeverityIfHigher(
             OpenSourceVulnerability vulnerability,
             SeverityLevel highestSeverityLevel) {
-        String severity = String.valueOf(vulnerability.databaseSpecific()
-                .getAdditionalProperties().get("severity"));
-        SeverityLevel severityLevel = Arrays.stream(SeverityLevel.values())
-                .filter(sl -> sl.name().equalsIgnoreCase(severity)).findAny()
-                .orElse(SeverityLevel.NA);
+
+        Double vulnScore = getHighestCvssScoreNumber(vulnerability);
+
+        SeverityLevel severityLevel = SeverityLevel
+                .getSeverityLevelForCvssScore(vulnScore);
+
         return SeverityLevelComparator.compareStatic(severityLevel,
                 highestSeverityLevel) > 0 ? severityLevel
                         : highestSeverityLevel;
@@ -197,11 +224,41 @@ class AppSecDTOProvider {
         if (vulnerability.getSeverity() == null) {
             return highestScore;
         }
-        Double hiScoreInVuln = vulnerability.getSeverity().stream()
+        Double vulnScore = getHighestCvssScoreNumber(vulnerability);
+        return vulnScore > highestScore ? vulnScore : highestScore;
+    }
+
+    private static Double getHighestCvssScoreNumber(
+            OpenSourceVulnerability vulnerability) {
+        return vulnerability.getSeverity().stream()
                 .map(severity -> Cvss.fromVector(severity.getScore()))
                 .map(cvss -> cvss.calculateScore().getBaseScore())
                 .max(Comparator.naturalOrder()).orElse(0.0);
-        return hiScoreInVuln > highestScore ? hiScoreInVuln : highestScore;
+    }
+
+    private static String getHighestCvssScoreString(
+            OpenSourceVulnerability vulnerability) {
+        String cvssString = "";
+        double tempScore = 0.0;
+        for (Severity severity : vulnerability.getSeverity()) {
+            double score = Cvss.fromVector(severity.getScore()).calculateScore()
+                    .getBaseScore();
+            if (score > tempScore) {
+                tempScore = score;
+                cvssString = severity.getScore();
+            }
+        }
+        return cvssString;
+    }
+
+    private static Ecosystem getEcosystem(Component component) {
+        // purl (package URL) types:
+        // pkg:maven/com.vaadin/vaadin-server@8.13.0?type=jar
+        // pkg:npm/@cyclonedx/cyclonedx-npm@1.14.0
+        // pkg:npm/npmlog@5.0.1
+        String[] purlParts = component.getPurl().split("/");
+        String[] pkgParts = purlParts[0].split(":");
+        return Ecosystem.fromValue(pkgParts[1]);
     }
 
     private static String getConcatDepName(Component c) {

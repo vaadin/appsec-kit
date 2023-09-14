@@ -116,10 +116,11 @@ public abstract class AbstractAppSecContent extends VerticalLayout {
     static BeanItemContainer<SeverityLevel> buildSeverityContainer() {
         BeanItemContainer<SeverityLevel> cont = new BeanItemContainer<>(
                 SeverityLevel.class);
-        cont.addBean(SeverityLevel.NA);
+        cont.addBean(SeverityLevel.NONE);
         cont.addBean(SeverityLevel.LOW);
         cont.addBean(SeverityLevel.MEDIUM);
         cont.addBean(SeverityLevel.HIGH);
+        cont.addBean(SeverityLevel.CRITICAL);
         return cont;
     }
 

@@ -116,7 +116,7 @@ public class AppSecService {
                     + bomMavenFilePath.toAbsolutePath(), e);
         }
 
-        if (isFlow()) {
+        if (isFlow() && configuration.isIncludeNpmDevDependencies()) {
             Path bomNpmFilePath = configuration.getBomNpmFilePath();
             try {
                 bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
@@ -152,6 +152,16 @@ public class AppSecService {
      */
     public List<String> getSupportedFramework8Versions() {
         return githubService.getFramework8Versions();
+    }
+
+    /**
+     * Gets the list of Vaadin Flow 24 versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    public List<String> getSupportedFlow24Versions() {
+        return githubService.getFlow24Versions();
     }
 
     /**

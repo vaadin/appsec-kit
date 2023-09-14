@@ -14,7 +14,7 @@
     <name>AppSec Kit Vaadin 24</name>
 
     <properties>
-        <vaadin24.version>24.1.5</vaadin24.version>
+        <vaadin24.version>24.1.9</vaadin24.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,6 +31,21 @@
             <artifactId>vaadin-spring</artifactId>
             <version>${vaadin24.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <version>${vaadin24.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-html-components</artifactId>
+            <version>24.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.16.1</version>
         </dependency>
     </dependencies>
 

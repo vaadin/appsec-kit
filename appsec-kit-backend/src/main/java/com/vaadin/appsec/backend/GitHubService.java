@@ -108,8 +108,7 @@ class GitHubService {
     }
 
     private List<String> getVersions(Pattern frameworkVersionPattern) {
-        return getReleasesFromGitHub().stream()
-                .map(GitHubRelease::getTagName)
+        return getReleasesFromGitHub().stream().map(GitHubRelease::getTagName)
                 .filter(frameworkVersionPattern.asPredicate())
                 .limit(NUMBER_OF_LATEST_MAINTAINED_VERSIONS)
                 .collect(Collectors.toList());
