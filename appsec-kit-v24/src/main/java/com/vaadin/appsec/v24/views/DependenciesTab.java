@@ -37,13 +37,13 @@ public class DependenciesTab extends AbstractAppSecView {
     private ComboBox<Boolean> isDevelopment;
     private ComboBox<SeverityLevel> severity;
     private ComboBox<String> riskScore;
-    private boolean includeNpmDependencies;
+    private final boolean includeNpmDevDeps;
     private final AppSecView parent;
 
     public DependenciesTab(AppSecView parent) {
         this.parent = parent;
-        this.includeNpmDependencies = AppSecService.getInstance()
-                .getConfiguration().isIncludeNpmDevDependencies();
+        this.includeNpmDevDeps = AppSecService.getInstance().getConfiguration()
+                .isIncludeNpmDevDependencies();
         buildFilters();
         buildGrid();
         configureSearchField();
@@ -54,7 +54,7 @@ public class DependenciesTab extends AbstractAppSecView {
         searchField.setValue("");
         ecosystem.setValue(null);
         group.setValue(null);
-        if (includeNpmDependencies) {
+        if (includeNpmDevDeps) {
             isDevelopment.setValue(null);
         }
         severity.setValue(null);
@@ -66,7 +66,7 @@ public class DependenciesTab extends AbstractAppSecView {
     protected void applyFilters() {
         Ecosystem ecosystemFilter = ecosystem.getValue();
         String groupFilter = group.getValue();
-        Boolean isDevelopmentFilter = includeNpmDependencies
+        Boolean isDevelopmentFilter = includeNpmDevDeps
                 ? isDevelopment.getValue()
                 : null;
         SeverityLevel severityFilter = severity.getValue();
@@ -83,7 +83,7 @@ public class DependenciesTab extends AbstractAppSecView {
                     && !groupFilter.equals(dependencyDTO.getGroup())) {
                 return false;
             }
-            if (includeNpmDependencies && isDevelopmentFilter != null
+            if (includeNpmDevDeps && isDevelopmentFilter != null
                     && !isDevelopmentFilter == dependencyDTO
                             .isDevDependency()) {
                 return false;
@@ -137,7 +137,7 @@ public class DependenciesTab extends AbstractAppSecView {
 
         group = new ComboBox<>("Dependency group");
 
-        if (includeNpmDependencies) {
+        if (includeNpmDevDeps) {
             isDevelopment = new ComboBox<>("Is development?");
             isDevelopment.setItems(Boolean.TRUE, Boolean.FALSE);
         }
@@ -154,7 +154,7 @@ public class DependenciesTab extends AbstractAppSecView {
         List<Component> components = Stream
                 .of(searchField, ecosystem, group, severity, riskScore)
                 .collect(Collectors.toList());
-        if (includeNpmDependencies) {
+        if (includeNpmDevDeps) {
             components.add(3, isDevelopment);
         }
         Component filterBar = buildFilterBar(
@@ -177,7 +177,7 @@ public class DependenciesTab extends AbstractAppSecView {
                 .setResizable(true).setSortable(true);
         grid.addColumn(Dependency::getVersion).setHeader("Version")
                 .setResizable(true).setSortable(true);
-        if (includeNpmDependencies) {
+        if (includeNpmDevDeps) {
             grid.addColumn(Dependency::isDevDependency)
                     .setHeader("Is development?").setResizable(true)
                     .setSortable(true);

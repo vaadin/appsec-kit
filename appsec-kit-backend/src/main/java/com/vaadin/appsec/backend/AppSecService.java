@@ -116,7 +116,7 @@ public class AppSecService {
                     + bomMavenFilePath.toAbsolutePath(), e);
         }
 
-        if (isFlow() && configuration.isIncludeNpmDevDependencies()) {
+        if (isFlow()) {
             Path bomNpmFilePath = configuration.getBomNpmFilePath();
             try {
                 bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
