@@ -21,10 +21,12 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         LOGGER.info("Plugin connected");
         devToolsInterface.send("appsec-kit-init", Json.createObject());
         AppSecService.getInstance().addScanEventListener(scanEvent -> {
+            LOGGER.info("Scan completed");
             var vulnerabilityCount = scanEvent.getNewVulnerabilities().size();
             var data = Json.createObject();
             data.put("vulnerabilityCount", vulnerabilityCount);
             devToolsInterface.send("appsec-kit-scan", data);
+            LOGGER.info("Vulnerabilities sent to the client: " + vulnerabilityCount);
         });
     }
 

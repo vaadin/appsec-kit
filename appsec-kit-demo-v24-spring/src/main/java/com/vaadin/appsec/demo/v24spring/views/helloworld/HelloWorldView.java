@@ -8,9 +8,11 @@
  */
 package com.vaadin.appsec.demo.v24spring.views.helloworld;
 
+import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.demo.v24spring.views.MainLayout;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -34,9 +36,11 @@ public class HelloWorldView extends HorizontalLayout {
         sayHello.addClickShortcut(Key.ENTER);
 
         setMargin(true);
-        setVerticalComponentAlignment(Alignment.END, name, sayHello);
+        setDefaultVerticalComponentAlignment(Alignment.END);
 
         add(name, sayHello);
+        var button = new Button("Scan", e -> AppSecService.getInstance().scanForVulnerabilities());
+        button.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        add(button);
     }
-
 }

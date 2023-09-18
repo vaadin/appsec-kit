@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "@vaadin/flow-frontend/vaadin-dev-tools/vaadin-dev-tools";
 
 let ref: DevToolsInterface;
@@ -16,10 +16,13 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
         }
     `;
 
+    @property()
+    message: string = "No data available yet.";
+
     render() {
         return html`
             <div class="container">
-                <span>No vulnerabilities found.</span>
+                <span>${this.message}</span>
                 <button class="tab">Open AppSec Kit</button>
             </div>
         `;
@@ -27,14 +30,16 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
 
     handleMessage(message: ServerMessage): boolean {
         console.log("appsec-kit-plugin command received: " + message.command);
-        if (message.command === 'appsec-kit-init') {
-            devTools.showNotification("information" as MessageType, "AppSec Kit is running", "AppSec Kit is configured and scanning app dependencies for known vulnerabilities.", "/appsec-kit", "appsec-kit-notification");
+        if (message.command === "appsec-kit-init") {
+            devTools.showNotification("information" as MessageType, "AppSec Kit is running", "AppSec Kit is configured and scanning app dependencies for known vulnerabilities.", "/appsec-kit", "appsec-kit-running");
             return true;
-        } else if (message.command === 'appsec-kit-scan') {
+        } else if (message.command === "appsec-kit-scan") {
             if (message.data.vulnerabilityCount > 0) {
                 devTools.showNotification("error" as MessageType, "Potential vulnerabilities found");
+                this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
             } else {
                 devTools.showNotification("information" as MessageType, "No vulnerabilities found");
+                this.message = "No vulnerabilitites found."
             }
             return true;
         } else {
@@ -45,7 +50,7 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
 
 const plugin: DevToolsPlugin = {
     init: (devToolsInterface: DevToolsInterface): void => {
-        devToolsInterface.addTab("AppSec Kit", 'appsec-kit-plugin');
+        devToolsInterface.addTab("AppSec Kit", "appsec-kit-plugin");
         ref = devToolsInterface;
     }
 };

@@ -10,15 +10,15 @@ package com.vaadin.appsec.demo.v24spring.views;
 
 import com.vaadin.appsec.demo.v24spring.views.about.AboutView;
 import com.vaadin.appsec.demo.v24spring.views.helloworld.HelloWorldView;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.orderedlayout.Scroller;
-import com.vaadin.flow.component.sidenav.SideNav;
-import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import org.vaadin.lineawesome.LineAwesomeIcon;
@@ -53,11 +53,11 @@ public class MainLayout extends AppLayout {
                 LumoUtility.Margin.NONE);
         Header header = new Header(appName);
 
-        Scroller scroller = new Scroller(createNavigation());
+        Component scroller = new Div(); // new Scroller(createNavigation());
 
         addToDrawer(header, scroller, createFooter());
     }
-
+/*-
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
 
@@ -68,7 +68,7 @@ public class MainLayout extends AppLayout {
 
         return nav;
     }
-
+-*/
     private Footer createFooter() {
         return new Footer();
     }
