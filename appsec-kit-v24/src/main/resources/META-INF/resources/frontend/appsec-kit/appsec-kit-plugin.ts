@@ -8,6 +8,8 @@ const devTools: VaadinDevTools = (window as any).Vaadin.devTools;
 @customElement("appsec-kit-plugin")
 export class AppSecKitPlugin extends LitElement implements MessageHandler {
 
+    static APPSEC_KIT_URI = "/vaadin-appsec-kit";
+
     static styles = css`
         .container {
             display: flex;
@@ -23,15 +25,21 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
         return html`
             <div class="container">
                 <span>${this.message}</span>
-                <button class="tab">Open AppSec Kit</button>
+                <button class="tab" @click="${this.openAppSecKit}">Open AppSec Kit</button>
             </div>
         `;
+    }
+
+    openAppSecKit() {
+        window.open(AppSecKitPlugin.APPSEC_KIT_URI, "_blank");
     }
 
     handleMessage(message: ServerMessage): boolean {
         console.log("appsec-kit-plugin command received: " + message.command);
         if (message.command === "appsec-kit-init") {
-            devTools.showNotification("information" as MessageType, "AppSec Kit is running", "AppSec Kit is configured and scanning app dependencies for known vulnerabilities.", "/appsec-kit", "appsec-kit-running");
+            devTools.showNotification("information" as MessageType, "AppSec Kit is running",
+                    "AppSec Kit is configured and scanning app dependencies for known vulnerabilities.",
+                    AppSecKitPlugin.APPSEC_KIT_URI, "appsec-kit-running");
             return true;
         } else if (message.command === "appsec-kit-scan") {
             if (message.data.vulnerabilityCount > 0) {
