@@ -3,33 +3,41 @@
     min-height: 500px;
 }
 
-.appseckit-title {
-    font-size: 20px;
+.appsec-kit-title {
+    font-size: 25px;
+}
+
+.last-scanned-label {
+    text-align: right;
 }
 
 .vulnerability-details-view .vulnerability-header {
     border-bottom: 1px solid rgb(223, 223, 223);
 }
 
+.vulnerability-details-view .navigate-back-button {
+    color: black;
+}
+
 .vulnerability-details-view .vulnerability-details-content-right {
     background-color: #ddd;
 }
 
-.vulnerability-details-view .vulnerability-details-prop-holder {
+.vulnerability-details-view .vulnerability-details-property-holder {
     padding-right: 30px;
     padding-top: 10px;
 }
 
-.small-margin.v-margin-left {
+.m-s.v-margin-left {
     padding-left: 15px !important;
 }
-.small-margin.v-margin-bottom {
+.m-s.v-margin-bottom {
     padding-bottom: 15px !important;
 }
-.small-margin.v-margin-right {
+.m-s.v-margin-right {
     padding-right: 15px !important;
 }
-.small-margin.v-margin-top {
+.m-s.v-margin-top {
     padding-top: 15px !important;
 }
 
@@ -49,7 +57,7 @@
 .vulnerability-details-view .vaadin-analysis-title,
 .vulnerability-details-view .vulnerability-desc-title,
 .vulnerability-details-view .references-title {
-    font-size: 17px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -63,35 +71,39 @@
     margin-top: 20px;
 }
 
-.vulnerability-details-view .va-true-positive {
+.vulnerability-details-view .vaadin-analysis-true-positive {
     background: pink;
     padding: 3px 10px;
     border-radius: 20px;
 }
 
-.vulnerability-details-view .va-false-positive {
+.vulnerability-details-view .vaadin-analysis-false-positive {
     background: lightblue;
     padding: 3px 10px;
     border-radius: 20px;
 }
 
-.vulnerability-details-view .va-under-review {
+.vulnerability-details-view .vaadin-analysis-under-review {
     background: lightgray;
     padding: 3px 10px;
     border-radius: 20px;
 }
 
-.vulnerability-details-view .va-not-supported {
+.vulnerability-details-view .vaadin-analysis-not-supported {
     background: red;
     color: white;
     padding: 3px 10px;
     border-radius: 20px;
 }
 
-.vulnerability-details-view .va-not-available {
+.vulnerability-details-view .vaadin-analysis-not-available {
     background: lightgray;
     padding: 3px 10px;
     border-radius: 20px;
+}
+
+.vulnerability-details-view .vulnerability-property-label {
+    font-weight: bold;
 }
 
 .severity-CRITICAL .vulnerability-property-label {

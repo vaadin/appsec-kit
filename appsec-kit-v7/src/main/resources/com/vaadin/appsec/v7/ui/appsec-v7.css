@@ -36,12 +36,11 @@
 .vulnerability-details-view .developer-analysis-title {
     font-size: 20px;
     font-weight: bold;
-    border-bottom: 1px solid #666   ;
+    border-bottom: 1px solid #666;
     padding-bottom: 10px;
 }
 
-.vulnerability-details-view .vulnerability-title,
-.vulnerability-details-view .scan-results {
+.vulnerability-details-view .vulnerability-title {
     font-size: 20px;
     font-weight: bold;
     padding-bottom: 3px;
@@ -105,17 +104,27 @@
     width: auto !important;
 }
 
-.severity-HIGH .vulnerability-property {
+.severity-CRITICAL .vulnerability-property-label {
     color: red;
     font-weight: bold;
 }
 
-.severity-MEDIUM .vulnerability-property {
+.severity-HIGH .vulnerability-property-label {
     color: orangered;
     font-weight: bold;
 }
 
-.severity-LOW .vulnerability-property {
+.severity-MEDIUM .vulnerability-property-label {
     color: orange;
+    font-weight: bold;
+}
+
+.severity-LOW .vulnerability-property-label {
+    color: darkkhaki;
+    font-weight: bold;
+}
+
+.severity-NONE .vulnerability-property-label {
+    color: black;
     font-weight: bold;
 }

@@ -155,6 +155,16 @@ public class AppSecService {
     }
 
     /**
+     * Gets the list of Vaadin Flow 24 versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    public List<String> getSupportedFlow24Versions() {
+        return githubService.getFlow24Versions();
+    }
+
+    /**
      * Gets the Vaadin Security Team assessments about known vulnerability
      * coming from transitive dependencies of the current maintained Vaadin
      * versions.

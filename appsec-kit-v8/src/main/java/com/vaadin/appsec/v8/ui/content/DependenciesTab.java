@@ -41,8 +41,9 @@ public class DependenciesTab extends AbstractAppSecContent {
         group = new ComboBox<>("Dependency group");
 
         severity = new ComboBox<>("Severity level");
-        severity.setItems(SeverityLevel.NA, SeverityLevel.LOW,
-                SeverityLevel.MEDIUM, SeverityLevel.HIGH);
+        severity.setItems(SeverityLevel.NONE, SeverityLevel.LOW,
+                SeverityLevel.MEDIUM, SeverityLevel.HIGH,
+                SeverityLevel.CRITICAL);
 
         riskScore = new ComboBox<>("Risk score");
         riskScore.setItems(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);

@@ -28,6 +28,7 @@ import com.vaadin.ui.Grid;
  * Vulnerabilities tab content
  */
 public class VulnerabilitiesTab extends AbstractAppSecContent {
+
     private AbstractAppSecContent parent;
     private Grid<Vulnerability> grid;
     private ComboBox<Dependency> dependency;
@@ -59,8 +60,9 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                 AppSecData.VulnerabilityStatus.EXPLOITABLE);
 
         severity = new ComboBox<>("Severity level");
-        severity.setItems(SeverityLevel.NA, SeverityLevel.LOW,
-                SeverityLevel.MEDIUM, SeverityLevel.HIGH);
+        severity.setItems(SeverityLevel.NONE, SeverityLevel.LOW,
+                SeverityLevel.MEDIUM, SeverityLevel.HIGH,
+                SeverityLevel.CRITICAL);
 
         buildFilterBar(dependency, vaadinAnalysis, devAnalysis, severity);
     }
@@ -159,9 +161,6 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
                 .map(Vulnerability::getDependency).collect(Collectors.toSet()));
         applyFilters();
         selectedItems.forEach(grid::select);
-
-        // TODO Update vaadin analysis options
-        // TODO Update dev analysis options
     }
 
     /**

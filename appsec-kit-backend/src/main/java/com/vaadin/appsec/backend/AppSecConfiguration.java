@@ -59,6 +59,8 @@ public class AppSecConfiguration implements Serializable {
 
     private int osvApiRatePerSecond = 25;
 
+    private boolean includeNpmDevDependencies = true;
+
     /**
      * Gets the data-file path.
      *
@@ -267,6 +269,30 @@ public class AppSecConfiguration implements Serializable {
      */
     public void setOsvApiRatePerSecond(int osvApiRatePerSecond) {
         this.osvApiRatePerSecond = osvApiRatePerSecond;
+    }
+
+    /**
+     * Gets if the npm development dependencies should be included during
+     * vulnerability scanning.
+     *
+     * @return true if the npm development dependencies should be included
+     *         during vulnerability scanning, otherwise false
+     */
+    public boolean isIncludeNpmDevDependencies() {
+        return includeNpmDevDependencies;
+    }
+
+    /**
+     * Sets if the npm development dependencies should be included during
+     * vulnerability scanning.
+     *
+     * @param includeNpmDevDependencies
+     *            true if the npm development dependencies should be included
+     *            during vulnerability scanning, otherwise false
+     */
+    public void setIncludeNpmDevDependencies(
+            boolean includeNpmDevDependencies) {
+        this.includeNpmDevDependencies = includeNpmDevDependencies;
     }
 
     @Override

@@ -14,7 +14,7 @@
     <name>AppSec Kit Vaadin 24</name>
 
     <properties>
-        <vaadin24.version>24.1.5</vaadin24.version>
+        <flow.version>24.1.10</flow.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,9 +28,48 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring</artifactId>
-            <version>${vaadin24.version}</version>
-            <scope>provided</scope>
+            <artifactId>flow-html-components</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-button-flow</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-combo-box-flow</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-grid-flow</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-icons-flow</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-lumo-theme</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-ordered-layout-flow</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-tabs-flow</artifactId>
+            <version>${flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-text-field-flow</artifactId>
+            <version>${flow.version}</version>
         </dependency>
     </dependencies>
 
