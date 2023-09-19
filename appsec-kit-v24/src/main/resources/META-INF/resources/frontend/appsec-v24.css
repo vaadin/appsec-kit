@@ -7,6 +7,10 @@
     font-size: 25px;
 }
 
+.last-scanned-label {
+    text-align: right;
+}
+
 .vulnerability-details-view .vulnerability-header {
     border-bottom: 1px solid rgb(223, 223, 223);
 }

@@ -12,7 +12,7 @@ import java.text.DateFormat;
 import java.time.Instant;
 import java.util.Date;
 
-import com.vaadin.appsec.backend.AppSecScanEventListener;
+import com.vaadin.appsec.backend.AppSecScanEvent;
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.Registration;
 import com.vaadin.appsec.backend.model.dto.Dependency;
@@ -79,6 +79,7 @@ public class AppSecView extends AbstractAppSecView {
 
     private Component buildLastScannedLabel() {
         lastScannedLabel = new Span();
+        lastScannedLabel.addClassName("last-scanned-label");
         lastScannedLabel.setWidth(380, Unit.PIXELS);
         return lastScannedLabel;
     }
@@ -131,7 +132,7 @@ public class AppSecView extends AbstractAppSecView {
         super.onAttach(event);
         removeScanListener();
         scanListener = AppSecService.getInstance()
-                .addScanEventListener(createScanEventListener());
+                .addScanEventListener(this::handleScanEvent);
     }
 
     @Override
@@ -147,9 +148,8 @@ public class AppSecView extends AbstractAppSecView {
         }
     }
 
-    private AppSecScanEventListener createScanEventListener() {
-        return scanEvent -> AppSecView.this.getUI()
-                .ifPresent(this::handleScanNowButton);
+    private void handleScanEvent(AppSecScanEvent event) {
+        getUI().ifPresent(this::handleScanNowButton);
     }
 
     private void handleScanNowButton(UI ui) {
