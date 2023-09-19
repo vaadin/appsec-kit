@@ -27,6 +27,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
+/**
+ * Dependencies tab view contains a detailed list of dependencies.
+ */
 public class DependenciesTab extends AbstractAppSecView {
 
     private Grid<Dependency> grid;
@@ -148,7 +151,7 @@ public class DependenciesTab extends AbstractAppSecView {
                 SeverityLevel.CRITICAL);
 
         riskScore = new ComboBox<>("CVSS score");
-        riskScore.setItems(">= 0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
+        riskScore.setItems(">=0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
                 ">=7", ">=8", ">=9", ">=10");
 
         List<Component> components = Stream
@@ -165,7 +168,6 @@ public class DependenciesTab extends AbstractAppSecView {
     private void buildGrid() {
         grid = new Grid<>();
         grid.setSelectionMode(Grid.SelectionMode.NONE);
-        grid.setColumnReorderingAllowed(true);
         grid.setMultiSort(true, Grid.MultiSortPriority.APPEND);
         grid.setSizeFull();
 

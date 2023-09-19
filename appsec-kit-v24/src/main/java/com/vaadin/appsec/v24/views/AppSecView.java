@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.time.Instant;
 import java.util.Date;
 
+import com.vaadin.appsec.backend.AppSecScanEventListener;
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.Registration;
 import com.vaadin.appsec.backend.model.dto.Dependency;
@@ -24,13 +25,17 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.tabs.TabSheet;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.shared.communication.PushMode;
 
 /**
- * AppSec Kit main view.
+ * AppSec view is the main view for the AppSec Kit.
  */
+@Push
+@PreserveOnRefresh
 @PageTitle("AppSec Kit")
 @CssImport("appsec-v24.css")
 public class AppSecView extends AbstractAppSecView {
@@ -126,15 +131,7 @@ public class AppSecView extends AbstractAppSecView {
         super.onAttach(event);
         removeScanListener();
         scanListener = AppSecService.getInstance()
-                .addScanEventListener(scanEvent -> AppSecView.this.getUI()
-                        .ifPresent(ui -> ui.access(() -> {
-                            scanNowButton.setEnabled(true);
-                            refresh();
-                            if (PushMode.MANUAL == ui.getPushConfiguration()
-                                    .getPushMode()) {
-                                ui.push();
-                            }
-                        })));
+                .addScanEventListener(createScanEventListener());
     }
 
     @Override
@@ -148,5 +145,20 @@ public class AppSecView extends AbstractAppSecView {
             scanListener.remove();
             scanListener = null;
         }
+    }
+
+    private AppSecScanEventListener createScanEventListener() {
+        return scanEvent -> AppSecView.this.getUI()
+                .ifPresent(this::handleScanNowButton);
+    }
+
+    private void handleScanNowButton(UI ui) {
+        ui.access(() -> {
+            scanNowButton.setEnabled(true);
+            refresh();
+            if (PushMode.MANUAL == ui.getPushConfiguration().getPushMode()) {
+                ui.push();
+            }
+        });
     }
 }

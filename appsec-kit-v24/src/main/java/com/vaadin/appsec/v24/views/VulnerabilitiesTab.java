@@ -25,6 +25,9 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.function.ValueProvider;
 
+/**
+ * Vulnerabilities tab view contains a detailed list of vulnerabilities.
+ */
 public class VulnerabilitiesTab extends AbstractAppSecView {
 
     private Grid<Vulnerability> grid;
@@ -139,7 +142,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
                 SeverityLevel.CRITICAL);
 
         riskScore = new ComboBox<>("CVSS score");
-        riskScore.setItems(">= 0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
+        riskScore.setItems(">=0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
                 ">=7", ">=8", ">=9", ">=10");
 
         Component filterBar = buildFilterBar(ecosystem, dependency,
@@ -150,7 +153,6 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     private void buildGrid() {
         grid = new Grid<>();
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
-        grid.setColumnReorderingAllowed(true);
         grid.setMultiSort(true, Grid.MultiSortPriority.APPEND);
         grid.setSizeFull();
 

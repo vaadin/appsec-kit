@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.time.Instant;
 import java.util.Date;
 
+import com.vaadin.appsec.backend.AppSecScanEventListener;
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.Registration;
 import com.vaadin.appsec.backend.model.dto.Dependency;
@@ -114,16 +115,7 @@ public class MainView extends AbstractAppSecContent {
         super.attach();
         removeScanListener();
         scanListener = AppSecService.getInstance()
-                .addScanEventListener(event -> {
-                    MainView.this.getUI().access(() -> {
-                        scanNow.setEnabled(true);
-                        refresh();
-                        if (PushMode.MANUAL == MainView.this.getUI()
-                                .getPushConfiguration().getPushMode()) {
-                            MainView.this.getUI().push();
-                        }
-                    });
-                });
+                .addScanEventListener(createScanEventListener());
     }
 
     @Override
@@ -137,5 +129,19 @@ public class MainView extends AbstractAppSecContent {
             scanListener.remove();
             scanListener = null;
         }
+    }
+
+    private AppSecScanEventListener createScanEventListener() {
+        return scanEvent -> handleScanNow(MainView.this.getUI());
+    }
+
+    private void handleScanNow(UI ui) {
+        ui.access(() -> {
+            scanNow.setEnabled(true);
+            refresh();
+            if (PushMode.MANUAL == ui.getPushConfiguration().getPushMode()) {
+                ui.push();
+            }
+        });
     }
 }

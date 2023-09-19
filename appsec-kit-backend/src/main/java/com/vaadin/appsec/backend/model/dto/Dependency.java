@@ -49,7 +49,7 @@ public class Dependency {
     }
 
     /**
-     * Gets ecosystem.
+     * Gets the dependency ecosystem.
      *
      * @return the ecosystem
      */
@@ -58,7 +58,7 @@ public class Dependency {
     }
 
     /**
-     * Sets ecosystem.
+     * Sets the dependency ecosystem.
      *
      * @param ecosystem
      *            the ecosystem
