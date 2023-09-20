@@ -25,5 +25,5 @@ public interface AppSecScanEventListener extends EventListener, Serializable {
      * @param event
      *            the scan event
      */
-    public void scanCompleted(AppSecScanEvent event);
+    void scanCompleted(AppSecScanEvent event);
 }

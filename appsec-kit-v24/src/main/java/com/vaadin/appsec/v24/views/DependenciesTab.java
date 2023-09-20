@@ -152,7 +152,7 @@ public class DependenciesTab extends AbstractAppSecView {
 
         riskScore = new ComboBox<>("CVSS score");
         riskScore.setItems(">=0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
-                ">=7", ">=8", ">=9", ">=10");
+                ">=7", ">=8", ">=9", "=10");
 
         List<Component> components = Stream
                 .of(searchField, ecosystem, group, severity, riskScore)

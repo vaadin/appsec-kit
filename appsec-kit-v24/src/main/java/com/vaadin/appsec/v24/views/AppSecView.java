@@ -37,7 +37,7 @@ import com.vaadin.flow.shared.communication.PushMode;
 @Push
 @PreserveOnRefresh
 @PageTitle("AppSec Kit")
-@CssImport("appsec-v24.css")
+@CssImport("./appsec-v24.css")
 public class AppSecView extends AbstractAppSecView {
 
     private VulnerabilitiesTab vulnerabilitiesTab;
