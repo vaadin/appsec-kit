@@ -261,7 +261,7 @@ class AppSecDTOProvider {
             }
         }
 
-        return tempBaseScore > highestScoreNumber ? cvssString
+        return tempBaseScore >= highestScoreNumber ? cvssString
                 : highestScoreString;
     }
 
