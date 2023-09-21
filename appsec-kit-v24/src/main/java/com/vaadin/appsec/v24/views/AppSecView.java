@@ -29,14 +29,12 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.tabs.TabSheet;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.shared.communication.PushMode;
 
 /**
  * AppSec view is the main view for the AppSec Kit.
  */
 @Push
-@PreserveOnRefresh
 @PageTitle("AppSec Kit")
 @CssImport("./appsec-v24.css")
 public class AppSecView extends AbstractAppSecView {
