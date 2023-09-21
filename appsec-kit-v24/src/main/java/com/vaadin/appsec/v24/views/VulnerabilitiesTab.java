@@ -122,12 +122,16 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     private void buildFilters() {
         ecosystem = new ComboBox<>("Ecosystem");
         ecosystem.setItems(Ecosystem.MAVEN, Ecosystem.NPM);
+        ecosystem.addValueChangeListener(event -> applyFilters());
 
         dependency = new ComboBox<>("Dependency");
+        dependency.addValueChangeListener(event -> applyFilters());
+        dependency.getStyle().set("--vaadin-combo-box-overlay-width", "350px");
 
         vaadinAnalysis = new ComboBox<>("Vaadin analysis");
         vaadinAnalysis.setItems(AssessmentStatus.TRUE_POSITIVE,
                 AssessmentStatus.FALSE_POSITIVE, AssessmentStatus.UNDER_REVIEW);
+        vaadinAnalysis.addValueChangeListener(event -> applyFilters());
 
         developerAnalysis = new ComboBox<>("Developer analysis");
         developerAnalysis.setItems(AppSecData.VulnerabilityStatus.NOT_SET,
@@ -135,15 +139,18 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
                 AppSecData.VulnerabilityStatus.FALSE_POSITIVE,
                 AppSecData.VulnerabilityStatus.IN_TRIAGE,
                 AppSecData.VulnerabilityStatus.EXPLOITABLE);
+        developerAnalysis.addValueChangeListener(event -> applyFilters());
 
         severity = new ComboBox<>("Severity");
         severity.setItems(SeverityLevel.NONE, SeverityLevel.LOW,
                 SeverityLevel.MEDIUM, SeverityLevel.HIGH,
                 SeverityLevel.CRITICAL);
+        severity.addValueChangeListener(event -> applyFilters());
 
         riskScore = new ComboBox<>("CVSS score");
         riskScore.setItems(">=0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
                 ">=7", ">=8", ">=9", "=10");
+        riskScore.addValueChangeListener(event -> applyFilters());
 
         Component filterBar = buildFilterBar(ecosystem, dependency,
                 vaadinAnalysis, developerAnalysis, severity, riskScore);

@@ -22,6 +22,7 @@ import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -86,6 +87,7 @@ public class AppSecView extends AbstractAppSecView {
 
     private Component buildScanNowButton() {
         scanNowButton = new Button("Scan now");
+        scanNowButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         scanNowButton.setDisableOnClick(true);
         scanNowButton.addClickListener(e -> {
             lastScannedLabel.setText("Scanning...");

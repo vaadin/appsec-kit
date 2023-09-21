@@ -11,7 +11,6 @@ package com.vaadin.appsec.v24.views;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -39,7 +38,7 @@ public abstract class AbstractAppSecView extends VerticalLayout {
         filterBar.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
         filterBar.add(filters);
         filterBar.expand(filters);
-        filterBar.add(buildClearButton(), buildFilterButton());
+        filterBar.add(buildClearButton());
         return filterBar;
     }
 
@@ -50,13 +49,6 @@ public abstract class AbstractAppSecView extends VerticalLayout {
     }
 
     void clearFilters() {
-    }
-
-    Button buildFilterButton() {
-        Button filter = new Button("Filter");
-        filter.addClickListener(e -> applyFilters());
-        filter.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        return filter;
     }
 
     void applyFilters() {

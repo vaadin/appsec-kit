@@ -137,22 +137,28 @@ public class DependenciesTab extends AbstractAppSecView {
 
         ecosystem = new ComboBox<>("Ecosystem");
         ecosystem.setItems(Ecosystem.MAVEN, Ecosystem.NPM);
+        ecosystem.addValueChangeListener(event -> applyFilters());
 
         group = new ComboBox<>("Dependency group");
+        group.addValueChangeListener(event -> applyFilters());
+        group.getStyle().set("--vaadin-combo-box-overlay-width", "350px");
 
         if (includeNpmDevDeps) {
             isDevelopment = new ComboBox<>("Is development?");
             isDevelopment.setItems(Boolean.TRUE, Boolean.FALSE);
+            isDevelopment.addValueChangeListener(event -> applyFilters());
         }
 
         severity = new ComboBox<>("Severity");
         severity.setItems(SeverityLevel.NONE, SeverityLevel.LOW,
                 SeverityLevel.MEDIUM, SeverityLevel.HIGH,
                 SeverityLevel.CRITICAL);
+        severity.addValueChangeListener(event -> applyFilters());
 
         riskScore = new ComboBox<>("CVSS score");
         riskScore.setItems(">=0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
                 ">=7", ">=8", ">=9", "=10");
+        riskScore.addValueChangeListener(event -> applyFilters());
 
         List<Component> components = Stream
                 .of(searchField, ecosystem, group, severity, riskScore)
