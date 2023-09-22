@@ -2,9 +2,6 @@
   "name": "no-name",
   "license": "UNLICENSED",
   "type": "module",
-  "scripts": {
-    "postinstall": "npx @cyclonedx/cyclonedx-npm --output-file target/classes/resources/bom-npm.json --output-format JSON"
-  },
   "dependencies": {
     "@polymer/polymer": "3.5.1",
     "@vaadin/a11y-base": "24.1.9",
@@ -84,7 +81,6 @@
     "proj4": "2.9.0"
   },
   "devDependencies": {
-    "@cyclonedx/cyclonedx-npm": "^1.13.2",
     "@rollup/plugin-replace": "5.0.2",
     "@rollup/pluginutils": "5.0.2",
     "@vitejs/plugin-react": "4.0.0",
@@ -199,7 +195,7 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "a1b128ee198b9b963204fefd4e1f60828496c7063d70312f6625bd5d03325f30"
+    "hash": "4f124c3fd20d358f84671fe3bac0453056f078c2ded5d5bef9a94df3eac2b6e5"
   },
   "overrides": {
     "@vaadin/bundles": "$@vaadin/bundles",
