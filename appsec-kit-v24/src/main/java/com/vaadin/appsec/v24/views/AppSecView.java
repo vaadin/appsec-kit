@@ -22,22 +22,21 @@ import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.tabs.TabSheet;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.shared.communication.PushMode;
 
 /**
  * AppSec view is the main view for the AppSec Kit.
  */
 @Push
-@PreserveOnRefresh
 @PageTitle("AppSec Kit")
-@CssImport("appsec-v24.css")
+@CssImport("./appsec-kit-v24.css")
 public class AppSecView extends AbstractAppSecView {
 
     private VulnerabilitiesTab vulnerabilitiesTab;
@@ -86,6 +85,7 @@ public class AppSecView extends AbstractAppSecView {
 
     private Component buildScanNowButton() {
         scanNowButton = new Button("Scan now");
+        scanNowButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         scanNowButton.setDisableOnClick(true);
         scanNowButton.addClickListener(e -> {
             lastScannedLabel.setText("Scanning...");

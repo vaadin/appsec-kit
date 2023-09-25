@@ -64,7 +64,7 @@ public class AppSecService {
      * @return singleton the singleton instance
      */
     public static AppSecService getInstance() {
-        return AppSecService.InstanceHolder.instance;
+        return InstanceHolder.instance;
     }
 
     private final List<AppSecScanEventListener> scanEventListeners = new ArrayList<>();
@@ -223,6 +223,7 @@ public class AppSecService {
      */
     public Registration addScanEventListener(AppSecScanEventListener listener) {
         scanEventListeners.add(listener);
+        LOGGER.debug("Scan event listener added.");
         return () -> scanEventListeners.remove(listener);
     }
 

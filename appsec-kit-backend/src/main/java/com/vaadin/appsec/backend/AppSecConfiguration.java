@@ -181,6 +181,9 @@ public class AppSecConfiguration implements Serializable {
                             "Error occurred when getting the npm SBOM file path",
                             e);
                 }
+            } else {
+                throw new AppSecException(
+                        "npm SBOM file not found on path " + bomNpmFile);
             }
         }
         return bomNpmFilePath;
