@@ -47,7 +47,7 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
                 this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
             } else {
                 devTools.showNotification("information" as MessageType, "No vulnerabilities found");
-                this.message = "No vulnerabilitites found."
+                this.message = "No vulnerabilities found."
             }
             return true;
         } else {
