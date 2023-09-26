@@ -15,8 +15,6 @@
 
     <properties>
         <java.version>17</java.version>
-        <flow.version>24.2.0.alpha8</flow.version>
-        <spring.boot.version>3.1.3</spring.boot.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
