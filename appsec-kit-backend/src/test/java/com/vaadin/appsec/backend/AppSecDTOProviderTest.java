@@ -66,7 +66,7 @@ public class AppSecDTOProviderTest {
                 vulnerabilityStore, bomStore);
         List<Vulnerability> vulnerabilities = dtoProvider.getVulnerabilities();
 
-        Assert.assertEquals("Mismatch in expected vulnerability count.", 3,
+        Assert.assertEquals("Mismatch in expected vulnerability count.", 4,
                 vulnerabilities.size());
     }
 }
