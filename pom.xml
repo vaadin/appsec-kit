@@ -22,8 +22,16 @@
     </licenses>
 
     <properties>
-        <flow.version>24.2-SNAPSHOT</flow.version>
+        <vaadin7.version>7.7-SNAPSHOT</vaadin7.version>
+        <vaadin8.version>8.21-SNAPSHOT</vaadin8.version>
+        <flow24.version>24.2-SNAPSHOT</flow24.version>
+        <flow24.components.version>24.2-SNAPSHOT</flow24.components.version>
+
+        <!-- v24 -->
         <spring.boot.version>3.1.4</spring.boot.version>
+        <!-- v8 -->
+        <spring.boot2.version>2.2.0.RELEASE</spring.boot2.version>
+
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,6 +48,7 @@
         <repository>
             <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases/</url>
+            <snapshots><enabled>true</enabled></snapshots>
         </repository>
     </repositories>
 
@@ -47,6 +56,7 @@
         <pluginRepository>
             <id>vaadin-prereleases</id>
             <url>https://maven.vaadin.com/vaadin-prereleases/</url>
+            <snapshots><enabled>true</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
 

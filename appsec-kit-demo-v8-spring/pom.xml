@@ -3,11 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.0.RELEASE</version>
-		<relativePath></relativePath>
-	</parent>
+		<groupId>com.vaadin</groupId>
+		<artifactId>appsec-kit</artifactId>
+		<version>1.1-SNAPSHOT</version>
+  </parent>
 
 	<groupId>com.vaadin</groupId>
 	<artifactId>appsec-kit-demo-v8-spring</artifactId>
@@ -20,9 +19,7 @@
 	</prerequisites>
 
 	<properties>
-		<vaadin.version>8.8.0</vaadin.version>
-		<vaadin.plugin.version>8.8.0</vaadin.plugin.version>
-		<vaadin-spring.version>3.2.1</vaadin-spring.version>
+		<vaadin.plugin.version>${vaadin8.version}</vaadin.plugin.version>
 		<org.vaadin.spring.version>0.0.7.RELEASE</org.vaadin.spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -43,10 +40,17 @@
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-bom</artifactId>
-				<version>${vaadin.version}</version>
+				<version>${vaadin8.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot2.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -54,7 +58,7 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>appsec-kit-v8</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.java.dev.jna</groupId>
@@ -85,23 +89,24 @@
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
-			<version>${vaadin-spring.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot</artifactId>
-			<version>${vaadin-spring.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring</artifactId>
-			<version>${vaadin-spring.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<!---->
 		<dependency>
@@ -128,6 +133,11 @@
 
 	<build>
 		<plugins>
+				<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<version>2.2.0.RELEASE</version>
+				</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>

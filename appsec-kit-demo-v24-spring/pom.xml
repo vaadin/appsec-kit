@@ -56,12 +56,12 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-core</artifactId>
-            <version>${flow.version}</version>
+            <version>${flow24.components.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
-            <version>${flow.version}</version>
+            <version>${flow24.components.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -94,8 +94,8 @@
 
             <plugin>
                 <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-maven-plugin</artifactId>
-                <version>${flow.version}</version>
+                <artifactId>flow-maven-plugin</artifactId>
+                <version>${flow24.version}</version>
                 <executions>
                     <execution>
                         <goals>
