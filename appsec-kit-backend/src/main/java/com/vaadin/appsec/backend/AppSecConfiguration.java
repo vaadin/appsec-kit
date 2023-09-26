@@ -33,32 +33,22 @@ public class AppSecConfiguration implements Serializable {
      * The default path of the file to store kit's data in the project root.
      */
     static final String DEFAULT_DATA_FILE_PATH = "";
-
     static final String DEFAULT_DATA_FILE_NAME = "appsec-data.json";
-
     static final String DEFAULT_BOM_FILE_PATH = "/resources";
-
     static final String BOM_MAVEN_PATH_PROPERTY = "vaadin.appsec.bom";
-
     static final String DEFAULT_BOM_MAVEN_FILE_NAME = "bom.json";
-
     static final String BOM_NPM_PATH_PROPERTY = "vaadin.appsec.bom-npm";
-
     static final String DEFAULT_BOM_NPM_FILE_NAME = "bom-npm.json";
+    static final String DEFAULT_PACKAGE_JSON_FILE_PATH = "package.json";
 
     private Path dataFilePath;
-
     private Path bomMavenFilePath;
-
     private Path bomNpmFilePath;
-
+    private Path packageJsonFilePath;
     private ScheduledExecutorService taskExecutor = Executors
             .newSingleThreadScheduledExecutor();
-
     private Duration autoScanInterval = Duration.ofDays(1);
-
     private int osvApiRatePerSecond = 25;
-
     private boolean includeNpmDevDependencies = true;
 
     /**
@@ -204,6 +194,37 @@ public class AppSecConfiguration implements Serializable {
     }
 
     /**
+     * Gets the package.json file path.
+     *
+     * @return the package.json file path, not {@code null}
+     */
+    public Path getPackageJsonFilePath() {
+        if (packageJsonFilePath == null) {
+            try {
+                packageJsonFilePath = Paths.get(DEFAULT_PACKAGE_JSON_FILE_PATH);
+            } catch (InvalidPathException e) {
+                throw new AppSecException("Invalid package.json file path "
+                        + DEFAULT_PACKAGE_JSON_FILE_PATH, e);
+            }
+        }
+        return packageJsonFilePath;
+    }
+
+    /**
+     * Sets the package.json file path.
+     *
+     * @param packageJsonFilePath
+     *            the package.json file path, not {@code null}
+     */
+    public void setPackageJsonFilePath(Path packageJsonFilePath) {
+        if (packageJsonFilePath == null) {
+            throw new IllegalArgumentException(
+                    "The package.json file path cannot be null");
+        }
+        this.packageJsonFilePath = packageJsonFilePath;
+    }
+
+    /**
      * Gets the executor used to run asynchronous tasks.
      *
      * @return the task executor
@@ -304,6 +325,7 @@ public class AppSecConfiguration implements Serializable {
                 + ", bomFilePath=" + bomMavenFilePath
                 + (bomNpmFilePath != null ? ", bomNpmFilePath=" + bomNpmFilePath
                         : "")
+                + ", packageJsonFilePath=" + packageJsonFilePath
                 + ", taskExecutor=" + taskExecutor + ", autoScanInterval="
                 + autoScanInterval + ", osvApiRatePerSecond="
                 + osvApiRatePerSecond + ", includeNpmDevDependencies="
