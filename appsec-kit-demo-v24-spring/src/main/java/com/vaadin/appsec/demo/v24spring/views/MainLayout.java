@@ -8,8 +8,6 @@
  */
 package com.vaadin.appsec.demo.v24spring.views;
 
-import com.vaadin.appsec.demo.v24spring.views.about.AboutView;
-import com.vaadin.appsec.demo.v24spring.views.helloworld.HelloWorldView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -18,10 +16,8 @@ import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
-import org.vaadin.lineawesome.LineAwesomeIcon;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -57,18 +53,7 @@ public class MainLayout extends AppLayout {
 
         addToDrawer(header, scroller, createFooter());
     }
-/*-
-    private SideNav createNavigation() {
-        SideNav nav = new SideNav();
 
-        nav.addItem(new SideNavItem("Hello World", HelloWorldView.class,
-                LineAwesomeIcon.GLOBE_SOLID.create()));
-        nav.addItem(new SideNavItem("About", AboutView.class,
-                LineAwesomeIcon.FILE.create()));
-
-        return nav;
-    }
--*/
     private Footer createFooter() {
         return new Footer();
     }

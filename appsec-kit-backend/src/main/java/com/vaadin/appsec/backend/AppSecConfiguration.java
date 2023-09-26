@@ -306,6 +306,7 @@ public class AppSecConfiguration implements Serializable {
                         : "")
                 + ", taskExecutor=" + taskExecutor + ", autoScanInterval="
                 + autoScanInterval + ", osvApiRatePerSecond="
-                + osvApiRatePerSecond + '}';
+                + osvApiRatePerSecond + ", includeNpmDevDependencies="
+                + includeNpmDevDependencies + '}';
     }
 }

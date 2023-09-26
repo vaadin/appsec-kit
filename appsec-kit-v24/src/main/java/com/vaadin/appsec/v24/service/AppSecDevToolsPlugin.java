@@ -14,7 +14,8 @@ import elemental.json.JsonObject;
 @JsModule(value = "./appsec-kit/appsec-kit-plugin.ts", developmentOnly = true)
 public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AppSecDevToolsPlugin.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AppSecDevToolsPlugin.class);
 
     @Override
     public void handleConnect(DevToolsInterface devToolsInterface) {
@@ -26,12 +27,14 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
             var data = Json.createObject();
             data.put("vulnerabilityCount", vulnerabilityCount);
             devToolsInterface.send("appsec-kit-scan", data);
-            LOGGER.info("Vulnerabilities sent to the client: " + vulnerabilityCount);
+            LOGGER.info("Vulnerabilities sent to the client: "
+                    + vulnerabilityCount);
         });
     }
 
     @Override
-    public boolean handleMessage(String command, JsonObject data, DevToolsInterface devToolsInterface) {
+    public boolean handleMessage(String command, JsonObject data,
+            DevToolsInterface devToolsInterface) {
         LOGGER.info("Command received: " + command);
         devToolsInterface.send("command-received", data);
         return true;
