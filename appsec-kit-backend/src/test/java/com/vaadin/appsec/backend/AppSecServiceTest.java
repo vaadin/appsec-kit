@@ -111,8 +111,7 @@ public class AppSecServiceTest {
         service.init();
 
         AtomicBoolean callbackExecuted = new AtomicBoolean(false);
-        service.addScanEventListener(event -> callbackExecuted.set(true),
-                "Test callback");
+        service.addScanEventListener(event -> callbackExecuted.set(true));
         service.scanForVulnerabilities().get();
 
         assertTrue(callbackExecuted.get());

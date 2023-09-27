@@ -221,10 +221,8 @@ public class AppSecService {
      *            the listener
      * @return a registration object that can be used to remove the listener
      */
-    public Registration addScanEventListener(AppSecScanEventListener listener,
-            String listenerName) {
+    public Registration addScanEventListener(AppSecScanEventListener listener) {
         scanEventListeners.add(listener);
-        LOGGER.debug("Scan event listener added for: " + listenerName);
         return () -> scanEventListeners.remove(listener);
     }
 

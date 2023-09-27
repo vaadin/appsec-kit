@@ -103,7 +103,9 @@ public class NotificationInitListener extends AbstractInitListener {
                                     session.access(() -> uis.forEach(
                                             ui -> doNotifyUI(ui, event)));
                                 }
-                            }, "Session[" + session.getSession().getId() + "]");
+                            });
+                    LOGGER.debug("Scan event listener added for Session["
+                            + session.getSession().getId() + "]");
                     scanEventRegistrations.put(session, scanEventRegistration);
                 }
             }

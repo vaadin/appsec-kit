@@ -30,7 +30,8 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
             devToolsInterface.send("appsec-kit-scan", data);
             LOGGER.info("Vulnerabilities sent to the client: "
                     + vulnerabilityCount);
-        }, "AppSec devtools plugin");
+        });
+        LOGGER.debug("Scan event listener added for AppSec devtools plugin");
         appSecService.scanForVulnerabilities()
                 .thenRun(appSecService::scheduleAutomaticScan);
     }

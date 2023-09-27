@@ -13,6 +13,9 @@ import java.text.DateFormat;
 import java.time.Instant;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vaadin.appsec.backend.AppSecScanEvent;
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.Registration;
@@ -30,6 +33,9 @@ import com.vaadin.ui.UI;
  * AppSec Kit main view.
  */
 public class MainView extends AbstractAppSecContent {
+
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(MainView.class);
 
     private VulnerabilitiesTab vulnerabilitiesTab;
 
@@ -114,7 +120,8 @@ public class MainView extends AbstractAppSecContent {
         super.attach();
         removeScanListener();
         scanListener = AppSecService.getInstance()
-                .addScanEventListener(this::handleScanEvent, "AppSec view");
+                .addScanEventListener(this::handleScanEvent);
+        LOGGER.debug("Scan event listener added for AppSec view");
     }
 
     @Override
