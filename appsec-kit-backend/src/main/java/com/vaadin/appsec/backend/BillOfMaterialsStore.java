@@ -85,7 +85,7 @@ class BillOfMaterialsStore {
                     ? filterOutMavenLibraries(platformCombinedBom)
                     : filterOutNpmDevLibraries(
                             filterOutMavenLibraries(platformCombinedBom));
-            LOGGER.debug("Reading SBOM from file Vaadin platform");
+            LOGGER.debug("Reading SBOM from Vaadin platform");
         } catch (IOException e) {
             throw new AppSecException("Cannot get Vaadin platform SBOM", e);
         }
