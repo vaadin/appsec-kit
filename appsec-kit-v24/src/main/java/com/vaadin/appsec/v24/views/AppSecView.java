@@ -131,8 +131,7 @@ public class AppSecView extends AbstractAppSecView {
     public void onAttach(AttachEvent event) {
         super.onAttach(event);
         removeScanListener();
-        scanListener = AppSecService.getInstance()
-                .addScanEventListener(this::handleScanEvent);
+        scanListener = AppSecService.getInstance().addScanEventListener(this::handleScanEvent, "AppSec view");
     }
 
     @Override

@@ -115,7 +115,7 @@ public class MainView extends AbstractAppSecContent {
         super.attach();
         removeScanListener();
         scanListener = AppSecService.getInstance()
-                .addScanEventListener(this::handleScanEvent);
+                .addScanEventListener(this::handleScanEvent, "AppSec view");
     }
 
     @Override

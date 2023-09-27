@@ -100,7 +100,7 @@ public class NotificationInitializer {
                                     session.access(() -> uis.forEach(
                                             ui -> doNotifyUI(ui, event)));
                                 }
-                            });
+                            }, "Session[" + session.getSession().getId() + "]");
                     scanEventRegistrations.put(session, scanEventRegistration);
                 }
             }
