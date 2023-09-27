@@ -19,6 +19,9 @@ import java.time.Duration;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Configuration settings for AppSec Kit.
  * <p>
@@ -26,6 +29,9 @@ import java.util.concurrent.ScheduledExecutorService;
  * {@link AppSecService#setConfiguration(AppSecConfiguration).
  */
 public class AppSecConfiguration implements Serializable {
+
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AppSecConfiguration.class);
 
     static final String DATA_PATH_PROPERTY = "vaadin.appsec.data";
 
@@ -172,8 +178,7 @@ public class AppSecConfiguration implements Serializable {
                             e);
                 }
             } else {
-                throw new AppSecException(
-                        "npm SBOM file not found on path " + bomNpmFile);
+                LOGGER.warn("npm SBOM file not found on path " + bomNpmFile);
             }
         }
         return bomNpmFilePath;
