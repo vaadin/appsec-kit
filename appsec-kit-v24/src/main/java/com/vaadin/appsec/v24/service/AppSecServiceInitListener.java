@@ -36,8 +36,6 @@ public class AppSecServiceInitListener implements VaadinServiceInitListener {
             AppSecService appSecService = AppSecService.getInstance();
             appSecService.init();
             LOGGER.info("AppSec Kit initialized");
-            appSecService.scanForVulnerabilities()
-                    .thenRun(appSecService::scheduleAutomaticScan);
         } else {
             LOGGER.info("AppSec Kit not enabled in production mode. Run the "
                     + "application in debug mode to initialize AppSec Kit");

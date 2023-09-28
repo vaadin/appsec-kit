@@ -26,12 +26,12 @@ public class DependenciesTab extends AbstractAppSecContent {
     private ComboBox<String> group;
     private ComboBox<SeverityLevel> severity;
     private ComboBox<Integer> riskScore;
-    private MainView parent;
+    private AppSecView parent;
 
     /**
      * Instantiates a new Dependencies tab.
      */
-    public DependenciesTab(MainView parent) {
+    public DependenciesTab(AppSecView parent) {
         this.parent = parent;
         buildFilters();
         buildGrid();

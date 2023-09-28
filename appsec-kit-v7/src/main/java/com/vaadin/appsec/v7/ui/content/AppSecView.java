@@ -6,12 +6,14 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-
 package com.vaadin.appsec.v7.ui.content;
 
 import java.text.DateFormat;
 import java.time.Instant;
 import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecScanEvent;
 import com.vaadin.appsec.backend.AppSecService;
@@ -27,9 +29,13 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 
 /**
- * Results tab content
+ * AppSec view is the main view for the AppSec Kit.
  */
-public class MainView extends AbstractAppSecContent {
+public class AppSecView extends AbstractAppSecContent {
+
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AppSecView.class);
+
     private VulnerabilitiesTab vulnerabilitiesTab;
     private DependenciesTab dependenciesTab;
     private TabSheet tabSheet;
@@ -41,9 +47,9 @@ public class MainView extends AbstractAppSecContent {
     private Registration scanListener;
 
     /**
-     * Instantiates a new Results tab.
+     * Instantiates a new AppSec view.
      */
-    public MainView() {
+    public AppSecView() {
         buildLayout();
         formatter = DateFormat.getDateTimeInstance(DateFormat.DEFAULT,
                 DateFormat.DEFAULT, UI.getCurrent().getLocale());
@@ -116,6 +122,7 @@ public class MainView extends AbstractAppSecContent {
         removeScanListener();
         scanListener = AppSecService.getInstance()
                 .addScanEventListener(this::handleScanEvent);
+        LOGGER.debug("Scan event listener added for AppSec view");
     }
 
     @Override

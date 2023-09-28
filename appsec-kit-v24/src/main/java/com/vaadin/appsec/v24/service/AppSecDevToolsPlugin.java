@@ -21,7 +21,8 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     public void handleConnect(DevToolsInterface devToolsInterface) {
         LOGGER.info("Plugin connected");
         devToolsInterface.send("appsec-kit-init", Json.createObject());
-        AppSecService.getInstance().addScanEventListener(scanEvent -> {
+        AppSecService appSecService = AppSecService.getInstance();
+        appSecService.addScanEventListener(scanEvent -> {
             LOGGER.info("Scan completed");
             var vulnerabilityCount = scanEvent.getNewVulnerabilities().size();
             var data = Json.createObject();
@@ -30,6 +31,9 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
             LOGGER.info("Vulnerabilities sent to the client: "
                     + vulnerabilityCount);
         });
+        LOGGER.debug("Scan event listener added for AppSec devtools plugin");
+        appSecService.scanForVulnerabilities()
+                .thenRun(appSecService::scheduleAutomaticScan);
     }
 
     @Override
