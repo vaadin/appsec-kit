@@ -35,12 +35,12 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     private ComboBox severity;
     private ComboBox vaadinAnalysis;
     private ComboBox devAnalysis;
-    private MainView parent;
+    private AppSecView parent;
 
     /**
      * Instantiates a new Vulnerabilities tab.
      */
-    public VulnerabilitiesTab(MainView parent) {
+    public VulnerabilitiesTab(AppSecView parent) {
         this.parent = parent;
         buildFilters();
         buildGrid();

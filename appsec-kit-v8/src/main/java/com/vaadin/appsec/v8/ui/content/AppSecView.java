@@ -6,7 +6,6 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-
 package com.vaadin.appsec.v8.ui.content;
 
 import java.text.DateFormat;
@@ -30,12 +29,12 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 
 /**
- * AppSec Kit main view.
+ * AppSec view is the main view for the AppSec Kit.
  */
-public class MainView extends AbstractAppSecContent {
+public class AppSecView extends AbstractAppSecContent {
 
     private static final Logger LOGGER = LoggerFactory
-            .getLogger(MainView.class);
+            .getLogger(AppSecView.class);
 
     private VulnerabilitiesTab vulnerabilitiesTab;
 
@@ -50,9 +49,9 @@ public class MainView extends AbstractAppSecContent {
     private Button scanNow;
 
     /**
-     * Instantiates a new view.
+     * Instantiates a new AppSec view.
      */
-    public MainView() {
+    public AppSecView() {
         buildLayout();
         formatter = DateFormat.getDateTimeInstance(DateFormat.DEFAULT,
                 DateFormat.DEFAULT, UI.getCurrent().getLocale());
