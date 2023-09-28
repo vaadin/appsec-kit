@@ -7,7 +7,7 @@
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full
  * license.
  */
-package com.vaadin.appsec.v8;
+package com.vaadin.appsec.v8.service;
 
 import java.io.IOException;
 import java.io.InputStream;
