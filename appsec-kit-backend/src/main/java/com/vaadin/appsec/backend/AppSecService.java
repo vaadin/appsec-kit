@@ -223,7 +223,6 @@ public class AppSecService {
      */
     public Registration addScanEventListener(AppSecScanEventListener listener) {
         scanEventListeners.add(listener);
-        LOGGER.debug("Scan event listener added.");
         return () -> scanEventListeners.remove(listener);
     }
 
