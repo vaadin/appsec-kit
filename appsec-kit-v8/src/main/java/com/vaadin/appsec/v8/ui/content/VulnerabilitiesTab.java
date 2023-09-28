@@ -29,7 +29,7 @@ import com.vaadin.ui.Grid;
  */
 public class VulnerabilitiesTab extends AbstractAppSecContent {
 
-    private AbstractAppSecContent parent;
+    private AppSecView parent;
     private Grid<Vulnerability> grid;
     private ComboBox<Dependency> dependency;
     private ComboBox<SeverityLevel> severity;
@@ -39,7 +39,7 @@ public class VulnerabilitiesTab extends AbstractAppSecContent {
     /**
      * Instantiates a new Vulnerabilities tab.
      */
-    public VulnerabilitiesTab(AbstractAppSecContent parent) {
+    public VulnerabilitiesTab(AppSecView parent) {
         this.parent = parent;
         buildFilters();
         buildGrid();
