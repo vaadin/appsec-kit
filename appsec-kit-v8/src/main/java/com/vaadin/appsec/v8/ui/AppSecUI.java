@@ -6,13 +6,12 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-
 package com.vaadin.appsec.v8.ui;
 
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.StyleSheet;
-import com.vaadin.appsec.v8.ui.content.MainView;
+import com.vaadin.appsec.v8.ui.content.AppSecView;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 
@@ -24,7 +23,7 @@ import com.vaadin.ui.UI;
 @PreserveOnRefresh
 public class AppSecUI extends UI {
 
-    private MainView mainView;
+    private AppSecView appSecView;
 
     private void setup() {
         setSizeFull();
@@ -32,16 +31,16 @@ public class AppSecUI extends UI {
     }
 
     private void buildLayout() {
-        mainView = new MainView();
-        mainView.addStyleName("appsec-kit-root-layout");
-        mainView.addStyleName("small-margin");
-        setContent(mainView);
+        appSecView = new AppSecView();
+        appSecView.addStyleName("appsec-kit-root-layout");
+        appSecView.addStyleName("small-margin");
+        setContent(appSecView);
     }
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         setup();
         buildLayout();
-        mainView.refresh();
+        appSecView.refresh();
     }
 }
