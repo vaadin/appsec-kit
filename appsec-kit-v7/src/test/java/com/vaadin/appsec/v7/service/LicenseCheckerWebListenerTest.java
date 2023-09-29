@@ -7,7 +7,7 @@
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full
  * license.
  */
-package com.vaadin.appsec.v8;
+package com.vaadin.appsec.v7.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +21,6 @@ import org.mockito.MockedStatic;
 
 import com.vaadin.pro.licensechecker.BuildType;
 import com.vaadin.pro.licensechecker.LicenseChecker;
-import com.vaadin.server.ServiceInitEvent;
 import com.vaadin.server.VaadinService;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,7 +29,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
-public class LicenseCheckerServiceInitListenerTest {
+public class LicenseCheckerWebListenerTest {
 
     private VaadinService service;
 
@@ -39,12 +38,15 @@ public class LicenseCheckerServiceInitListenerTest {
     @Before
     public void setup() {
         service = mock(VaadinService.class, Answers.RETURNS_DEEP_STUBS);
+        when(service.getServiceName()).thenReturn("foo");
         licenseChecker = mockStatic(LicenseChecker.class);
+        VaadinService.setCurrent(service);
     }
 
     @After
     public void cleanup() {
         licenseChecker.close();
+        VaadinService.setCurrent(null);
     }
 
     @Test
@@ -52,20 +54,23 @@ public class LicenseCheckerServiceInitListenerTest {
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(false);
 
-        final String version = getProperties().getProperty(
-                LicenseCheckerServiceInitListener.VERSION_PROPERTY);
+        final String version = getProperties()
+                .getProperty(LicenseCheckerWebListener.VERSION_PROPERTY);
 
         // Assert version is in X.Y format
         assertThat(version, matchesPattern("^\\d\\.\\d.*"));
 
-        final LicenseCheckerServiceInitListener listener = new LicenseCheckerServiceInitListener();
-        listener.serviceInit(new ServiceInitEvent(service));
+        final LicenseCheckerWebListener listener = new LicenseCheckerWebListener();
+        listener.sessionCreated(null);
 
         // Verify the license is checked
         BuildType buildType = null;
         licenseChecker.verify(() -> LicenseChecker.checkLicense(
-                LicenseCheckerServiceInitListener.PRODUCT_NAME, version,
-                buildType));
+                LicenseCheckerWebListener.PRODUCT_NAME, version, buildType));
+
+        // Verify the license is checked only once per service
+        listener.sessionCreated(null);
+        licenseChecker.verifyNoMoreInteractions();
     }
 
     @Test
@@ -73,17 +78,17 @@ public class LicenseCheckerServiceInitListenerTest {
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(true);
 
-        final LicenseCheckerServiceInitListener listener = new LicenseCheckerServiceInitListener();
-        listener.serviceInit(new ServiceInitEvent(service));
+        final LicenseCheckerWebListener listener = new LicenseCheckerWebListener();
+        listener.sessionCreated(null);
 
         licenseChecker.verifyNoInteractions();
     }
 
     private Properties getProperties() {
         try {
-            InputStream resourceAsStream = LicenseCheckerServiceInitListener.class
+            InputStream resourceAsStream = LicenseCheckerWebListener.class
                     .getClassLoader().getResourceAsStream(
-                            LicenseCheckerServiceInitListener.PROPERTIES_RESOURCE);
+                            LicenseCheckerWebListener.PROPERTIES_RESOURCE);
             final Properties properties = new Properties();
             properties.load(resourceAsStream);
             return properties;

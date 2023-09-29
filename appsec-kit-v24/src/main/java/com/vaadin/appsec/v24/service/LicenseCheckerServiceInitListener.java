@@ -4,19 +4,19 @@
  * This program is available under Vaadin Commercial License and Service Terms.
  *
  *
- * See <https://vaadin.com/commercial-license-and-service-terms> for the full
- * license.
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-package com.vaadin.appsec.v8;
+package com.vaadin.appsec.v24.service;
 
 import java.io.IOException;
 import java.util.Properties;
 
+import com.vaadin.flow.internal.UsageStatistics;
+import com.vaadin.flow.server.ServiceInitEvent;
+import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.VaadinServiceInitListener;
 import com.vaadin.pro.licensechecker.BuildType;
 import com.vaadin.pro.licensechecker.LicenseChecker;
-import com.vaadin.server.ServiceInitEvent;
-import com.vaadin.server.VaadinService;
-import com.vaadin.server.VaadinServiceInitListener;
 
 /**
  * Service initialization listener to verify the license.
@@ -39,6 +39,8 @@ public class LicenseCheckerServiceInitListener
             properties.load(LicenseCheckerServiceInitListener.class
                     .getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE));
             final String version = properties.getProperty(VERSION_PROPERTY);
+
+            UsageStatistics.markAsUsed(PRODUCT_NAME, version);
 
             // Check the license at runtime if in development mode
             if (!service.getDeploymentConfiguration().isProductionMode()) {
