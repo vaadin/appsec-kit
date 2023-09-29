@@ -39,7 +39,8 @@ public class HelloWorldView extends HorizontalLayout {
         setDefaultVerticalComponentAlignment(Alignment.END);
 
         add(name, sayHello);
-        var button = new Button("Scan", e -> AppSecService.getInstance().scanForVulnerabilities());
+        var button = new Button("Scan",
+                e -> AppSecService.getInstance().scanForVulnerabilities());
         button.addThemeVariants(ButtonVariant.LUMO_ERROR);
         add(button);
     }

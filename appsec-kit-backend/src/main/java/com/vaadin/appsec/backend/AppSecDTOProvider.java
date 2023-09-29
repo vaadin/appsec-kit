@@ -6,7 +6,6 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-
 package com.vaadin.appsec.backend;
 
 import java.util.ArrayList;
@@ -75,7 +74,7 @@ class AppSecDTOProvider {
         }
 
         return components.stream().map(component -> {
-            Ecosystem ecosystem = getEcosystem(component);
+            Ecosystem ecosystem = AppSecUtils.getEcosystem(component);
             Dependency dependency = new Dependency(ecosystem,
                     component.getGroup(), component.getName(),
                     component.getVersion());
@@ -111,11 +110,11 @@ class AppSecDTOProvider {
         Parser parser = Parser.builder().build();
         HtmlRenderer renderer = HtmlRenderer.builder().build();
 
-        List<Vulnerability> vulnerabilityDTOS = new ArrayList<>();
+        List<Vulnerability> vulnerabilityDTOs = new ArrayList<>();
         for (OpenSourceVulnerability vuln : vulnerabilities) {
             for (Affected affected : vuln.getAffected()) {
-                String vulnDepGroup = getVulnDepGroup(affected);
-                String vulnDepName = getVulnDepName(affected);
+                String vulnDepGroup = AppSecUtils.getVulnDepGroup(affected);
+                String vulnDepName = AppSecUtils.getVulnDepName(affected);
 
                 Dependency depDTO = null;
                 for (Dependency dep : dependencies) {
@@ -164,11 +163,11 @@ class AppSecDTOProvider {
                             .forEach(ref -> urls.add(ref.getUrl().toString()));
                     vulnerabilityDTO.setReferenceUrls(urls);
 
-                    vulnerabilityDTOS.add(vulnerabilityDTO);
+                    vulnerabilityDTOs.add(vulnerabilityDTO);
                 }
             }
         }
-        return vulnerabilityDTOS;
+        return vulnerabilityDTOs;
     }
 
     private boolean isDevDependency(Component component) {
@@ -181,7 +180,7 @@ class AppSecDTOProvider {
         return false;
     }
 
-    private static void updateVulnerabilityStatistics(Dependency dependency,
+    private void updateVulnerabilityStatistics(Dependency dependency,
             List<OpenSourceVulnerability> vulnerabilities) {
         int vulnerabilityCount = 0;
         SeverityLevel highestSeverityLevel = SeverityLevel.NONE;
@@ -190,7 +189,8 @@ class AppSecDTOProvider {
 
         for (OpenSourceVulnerability vulnerability : vulnerabilities) {
             for (Affected affected : vulnerability.getAffected()) {
-                String depGroupAndName = getDepGroupAndName(dependency);
+                String depGroupAndName = AppSecUtils
+                        .getDepGroupAndName(dependency);
                 if (depGroupAndName.equals(affected.getPackage().getName())) {
                     vulnerabilityCount++;
                     highestSeverityLevel = findSeverityIfHigher(vulnerability,
@@ -210,7 +210,7 @@ class AppSecDTOProvider {
         dependency.setCvssString(highestScoreString);
     }
 
-    private static SeverityLevel findSeverityIfHigher(
+    private SeverityLevel findSeverityIfHigher(
             OpenSourceVulnerability vulnerability,
             SeverityLevel highestSeverityLevel) {
         if (vulnerability.getSeverity() == null) {
@@ -226,8 +226,8 @@ class AppSecDTOProvider {
                         : highestSeverityLevel;
     }
 
-    private static Double findScoreIfHigher(
-            OpenSourceVulnerability vulnerability, Double highestScore) {
+    private Double findScoreIfHigher(OpenSourceVulnerability vulnerability,
+            Double highestScore) {
         if (vulnerability.getSeverity() == null) {
             return highestScore;
         }
@@ -235,7 +235,7 @@ class AppSecDTOProvider {
         return vulnScore > highestScore ? vulnScore : highestScore;
     }
 
-    private static Double getHighestCvssScoreNumber(
+    private Double getHighestCvssScoreNumber(
             OpenSourceVulnerability vulnerability) {
         return vulnerability.getSeverity().stream()
                 .map(severity -> Cvss.fromVector(severity.getScore()))
@@ -243,7 +243,7 @@ class AppSecDTOProvider {
                 .max(Comparator.naturalOrder()).orElse(0.0);
     }
 
-    private static String getHighestCvssScoreString(
+    private String getHighestCvssScoreString(
             OpenSourceVulnerability vulnerability, Double highestScoreNumber,
             String highestScoreString) {
         if (vulnerability.getSeverity() == null) {
@@ -265,65 +265,7 @@ class AppSecDTOProvider {
                 : highestScoreString;
     }
 
-    private static Ecosystem getEcosystem(Component component) {
-        // purl (package URL) types:
-        // pkg:maven/com.vaadin/vaadin-server@8.13.0?type=jar
-        // pkg:npm/@cyclonedx/cyclonedx-npm@1.14.0
-        // pkg:npm/npmlog@5.0.1
-        String[] purlParts = component.getPurl().split("/");
-        String[] pkgParts = purlParts[0].split(":");
-        return Ecosystem.fromValue(pkgParts[1]);
-    }
-
-    private static String getDepGroupAndName(Dependency dependency) {
-        // Dependency name types:
-        // org.yaml:snakeyaml (Maven with group and name)
-        // @strapi/admin (npm with group and name)
-        // electron (npm with no group)
-        if (dependency.getEcosystem() == Ecosystem.NPM) {
-            if (dependency.getGroup() == null) {
-                return dependency.getName();
-            }
-            return dependency.getGroup() + "/" + dependency.getName();
-        }
-        return dependency.getGroup() + ":" + dependency.getName();
-    }
-
-    private static String getVulnDepGroup(Affected affected) {
-        // Dependency name types:
-        // org.yaml:snakeyaml (Maven with group and name)
-        // @strapi/admin (npm with group and name)
-        // electron (npm with no group)
-        String depName = affected.getPackage().getName();
-        String ecosystem = affected.getPackage().getEcosystem();
-        if (ecosystem.equals(Ecosystem.NPM.toString())) {
-            String[] nameParts = depName.split("/");
-            if (nameParts.length == 2) {
-                return nameParts[0];
-            }
-            return null;
-        }
-        return depName.split(":")[0];
-    }
-
-    private static String getVulnDepName(Affected affected) {
-        // Dependency name types:
-        // org.yaml:snakeyaml (Maven with group and name)
-        // @strapi/admin (npm with group and name)
-        // electron (npm with no group)
-        String depName = affected.getPackage().getName();
-        String ecosystem = affected.getPackage().getEcosystem();
-        if (ecosystem.equals(Ecosystem.NPM.toString())) {
-            String[] nameParts = depName.split("/");
-            if (nameParts.length == 2) {
-                return nameParts[1];
-            }
-            return depName;
-        }
-        return depName.split(":")[1];
-    }
-
-    private static Optional<String> getPatchedVersion(Affected affected) {
+    private Optional<String> getPatchedVersion(Affected affected) {
         Optional<String> semVer = getFixed(affected, Range.Type.SEMVER);
         if (semVer.isPresent()) {
             return semVer;
@@ -335,8 +277,7 @@ class AppSecDTOProvider {
         return getFixed(affected, Range.Type.GIT);
     }
 
-    private static Optional<String> getFixed(Affected affected,
-            Range.Type rangeType) {
+    private Optional<String> getFixed(Affected affected, Range.Type rangeType) {
         Optional<Range> range = affected.getRanges().stream()
                 .filter(r -> r.getType().equals(rangeType)).findFirst();
         if (range.isPresent()) {
@@ -350,8 +291,7 @@ class AppSecDTOProvider {
         return Optional.empty();
     }
 
-    private static String getVulnerabilityId(
-            OpenSourceVulnerability vulnerability) {
+    private String getVulnerabilityId(OpenSourceVulnerability vulnerability) {
         String identifier = vulnerability.getId();
         List<String> aliases = vulnerability.getAliases();
         if (aliases == null || identifier.startsWith("CVE")) {
@@ -363,7 +303,7 @@ class AppSecDTOProvider {
         }
     }
 
-    private static Optional<AffectedVersion> getVaadinAnalysis(
+    private Optional<AffectedVersion> getVaadinAnalysis(
             Vulnerability vulnerabilityDTO) {
         String vulnerabilityId = vulnerabilityDTO.getIdentifier();
         VulnerabilityDetails vulnerability = AppSecService.getInstance()
@@ -374,29 +314,15 @@ class AppSecDTOProvider {
         }
         Dependency dependency = vulnerabilityDTO.getDependency();
         String parentBomRef = dependency.getParentBomRef();
-        String groupAndName = bomRefToGroupAndName(parentBomRef);
+        String groupAndName = AppSecUtils
+                .bomRefToMavenGroupAndName(parentBomRef);
         Assessment assessment = vulnerability.getAssessments()
                 .get(groupAndName);
         if (assessment == null) {
             return Optional.empty();
         }
-        return assessment.getAffectedVersions().values().stream()
-                .filter(v -> v.isInRange(bomRefToVersion(parentBomRef)))
+        return assessment.getAffectedVersions().values().stream().filter(
+                v -> v.isInRange(AppSecUtils.bomRefToVersion(parentBomRef)))
                 .findFirst();
-    }
-
-    private static String bomRefToGroupAndName(String bomRef) {
-        // pkg:maven/com.vaadin/vaadin-server@8.13.0?type=jar
-        String[] bomRefParts = bomRef.split("/");
-        String[] depParts = bomRefParts[2].split("@");
-        return bomRefParts[1] + ":" + depParts[0];
-    }
-
-    private static String bomRefToVersion(String bomRef) {
-        // pkg:maven/com.vaadin/vaadin-server@8.13.0?type=jar
-        String[] bomRefParts = bomRef.split("/");
-        String[] depParts = bomRefParts[2].split("@");
-        String[] verAndType = depParts[1].split("\\?");
-        return verAndType[0];
     }
 }

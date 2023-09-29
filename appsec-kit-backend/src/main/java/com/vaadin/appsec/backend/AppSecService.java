@@ -10,12 +10,14 @@ package com.vaadin.appsec.backend;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ScheduledExecutorService;
@@ -26,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.cyclonedx.exception.ParseException;
+import org.cyclonedx.model.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -117,21 +120,33 @@ public class AppSecService {
         }
 
         if (isFlow()) {
-            Path bomNpmFilePath = configuration.getBomNpmFilePath();
-            try {
-                bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
-            } catch (ParseException e) {
-                throw new AppSecException("Cannot parse the npm SBOM file: "
-                        + bomNpmFilePath.toAbsolutePath(), e);
+            if (isPackageJsonPresent()) {
+                Path bomNpmFilePath = configuration.getBomNpmFilePath();
+                try {
+                    bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
+                } catch (ParseException e) {
+                    throw new AppSecException("Cannot parse the npm SBOM file: "
+                            + bomNpmFilePath.toAbsolutePath(), e);
+                }
+            } else {
+                bomStore.readPlatformCombinedBomFile();
             }
         }
 
         readOrCreateDataFile();
     }
 
+    boolean isPackageJsonPresent() {
+        return Files.exists(configuration.getPackageJsonFilePath());
+    }
+
     boolean isFlow() {
+        return getFlowServerComponent().isPresent();
+    }
+
+    Optional<Component> getFlowServerComponent() {
         return bomStore.getBom(Ecosystem.MAVEN).getComponents().stream()
-                .anyMatch(comp -> FLOW_SERVER.equals(comp.getName()));
+                .filter(comp -> FLOW_SERVER.equals(comp.getName())).findFirst();
     }
 
     /**
