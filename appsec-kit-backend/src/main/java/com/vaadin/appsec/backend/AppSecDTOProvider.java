@@ -111,7 +111,7 @@ class AppSecDTOProvider {
         final List<Dependency> dependencies = getDependencies();
         final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
                 .getVulnerabilities();
-        List<Vulnerability> vulnerabilityDTOs = new ArrayList<>();
+        Set<Vulnerability> vulnerabilityDTOs = new HashSet<>();
 
         for (OpenSourceVulnerability vuln : vulnerabilities) {
             for (Affected affected : vuln.getAffected()) {
@@ -131,7 +131,7 @@ class AppSecDTOProvider {
             }
         }
 
-        return vulnerabilityDTOs;
+        return new ArrayList<>(vulnerabilityDTOs);
     }
 
     // Pseudocode for evaluating if a given version is affected
