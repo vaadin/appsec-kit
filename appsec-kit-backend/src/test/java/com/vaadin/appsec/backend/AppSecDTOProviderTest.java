@@ -24,6 +24,7 @@ import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 public class AppSecDTOProviderTest {
 
     static final String TEST_RESOURCE_BOM_PATH = "../../../../bom.json";
+    static final String TEST_RESOURCE_BOM_NPM_PATH = "../../../../bom-npm.json";
 
     private BillOfMaterialsStore bomStore;
 
@@ -38,10 +39,15 @@ public class AppSecDTOProviderTest {
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
 
         // Init BOM Store
-        URL resource = AppSecDTOProviderTest.class
+        URL bomResource = AppSecDTOProviderTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH);
+        URL bomNpmResource = AppSecDTOProviderTest.class
+                .getResource(TEST_RESOURCE_BOM_NPM_PATH);
         try {
-            bomStore.readBomFile(Paths.get(resource.toURI()), Ecosystem.MAVEN);
+            bomStore.readBomFile(Paths.get(bomResource.toURI()),
+                    Ecosystem.MAVEN);
+            bomStore.readBomFile(Paths.get(bomNpmResource.toURI()),
+                    Ecosystem.NPM);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -56,7 +62,7 @@ public class AppSecDTOProviderTest {
                 vulnerabilityStore, bomStore);
         List<Dependency> dependencies = dtoProvider.getDependencies();
 
-        Assert.assertEquals("Mismatch in expected dependency count.", 2,
+        Assert.assertEquals("Mismatch in expected dependency count.", 4,
                 dependencies.size());
     }
 
@@ -66,7 +72,7 @@ public class AppSecDTOProviderTest {
                 vulnerabilityStore, bomStore);
         List<Vulnerability> vulnerabilities = dtoProvider.getVulnerabilities();
 
-        Assert.assertEquals("Mismatch in expected vulnerability count.", 4,
+        Assert.assertEquals("Mismatch in expected vulnerability count.", 6,
                 vulnerabilities.size());
     }
 }
