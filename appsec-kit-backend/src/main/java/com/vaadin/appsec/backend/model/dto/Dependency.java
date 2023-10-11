@@ -259,6 +259,6 @@ public class Dependency {
 
     @Override
     public String toString() {
-        return group + ":" + name;
+        return (group != null ? group + ":" : "") + name;
     }
 }
