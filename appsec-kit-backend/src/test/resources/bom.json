@@ -227,11 +227,6 @@
     {
       "ref" : "pkg:maven/org.springframework.boot/spring-boot-starter@3.1.4?type=jar",
       "dependsOn" : [
-        "pkg:maven/org.springframework.boot/spring-boot@3.1.4?type=jar",
-        "pkg:maven/org.springframework.boot/spring-boot-autoconfigure@3.1.4?type=jar",
-        "pkg:maven/org.springframework.boot/spring-boot-starter-logging@3.1.4?type=jar",
-        "pkg:maven/jakarta.annotation/jakarta.annotation-api@2.1.1?type=jar",
-        "pkg:maven/org.springframework/spring-core@6.0.12?type=jar",
         "pkg:maven/org.yaml/snakeyaml@1.33?type=jar"
       ]
     },
