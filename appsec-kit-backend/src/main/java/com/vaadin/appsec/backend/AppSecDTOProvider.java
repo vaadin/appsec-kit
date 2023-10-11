@@ -18,6 +18,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
@@ -111,7 +112,7 @@ class AppSecDTOProvider {
         final List<Dependency> dependencies = getDependencies();
         final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
                 .getVulnerabilities();
-        Set<Vulnerability> vulnerabilityDTOs = new HashSet<>();
+        final List<Vulnerability> vulnerabilityDTOs = new ArrayList<>();
 
         for (OpenSourceVulnerability vuln : vulnerabilities) {
             for (Affected affected : vuln.getAffected()) {
@@ -131,7 +132,7 @@ class AppSecDTOProvider {
             }
         }
 
-        return new ArrayList<>(vulnerabilityDTOs);
+        return vulnerabilityDTOs;
     }
 
     // Pseudocode for evaluating if a given version is affected
@@ -168,38 +169,41 @@ class AppSecDTOProvider {
             DefaultArtifactVersion depArtifactVersion = new DefaultArtifactVersion(
                     depVersion);
             for (Range range : ranges) {
-                if (beforeLimits(depArtifactVersion, range)) {
-                    boolean vulnerable = false;
-                    for (Event event : range.getEvents()) {
-                        Optional<DefaultArtifactVersion> introduced = getVersionFromEvent(
-                                event, INTRODUCED);
-                        Optional<DefaultArtifactVersion> fixed = getVersionFromEvent(
-                                event, FIXED);
-                        Optional<DefaultArtifactVersion> lastAffected = getVersionFromEvent(
-                                event, LAST_AFFECTED);
-
-                        if (introduced.isPresent() && depArtifactVersion
-                                .compareTo(introduced.get()) >= 0) {
-                            vulnerable = true;
-                        } else if (fixed.isPresent() && depArtifactVersion
-                                .compareTo(fixed.get()) >= 0) {
-                            vulnerable = false;
-                        } else if (lastAffected.isPresent()
-                                && depArtifactVersion
-                                        .compareTo(lastAffected.get()) > 0) {
-                            vulnerable = false;
-                        }
-                    }
-                    if (vulnerable) {
-                        return true;
-                    }
+                List<Event> events = range.getEvents();
+                if (beforeLimits(events, depArtifactVersion)
+                        && evaluateEvents(events, depArtifactVersion)) {
+                    return true;
                 }
             }
         }
         return false;
     }
 
-    private Optional<DefaultArtifactVersion> getVersionFromEvent(Event event,
+    private boolean evaluateEvents(List<Event> events,
+            ArtifactVersion version) {
+        boolean vulnerable = false;
+        for (Event event : events) {
+            Optional<ArtifactVersion> introduced = getVersionFromEvent(event,
+                    INTRODUCED);
+            Optional<ArtifactVersion> fixed = getVersionFromEvent(event, FIXED);
+            Optional<ArtifactVersion> lastAffected = getVersionFromEvent(event,
+                    LAST_AFFECTED);
+
+            if (introduced.isPresent()
+                    && version.compareTo(introduced.get()) >= 0) {
+                vulnerable = true;
+            } else if (fixed.isPresent()
+                    && version.compareTo(fixed.get()) >= 0) {
+                vulnerable = false;
+            } else if (lastAffected.isPresent()
+                    && version.compareTo(lastAffected.get()) > 0) {
+                vulnerable = false;
+            }
+        }
+        return vulnerable;
+    }
+
+    private Optional<ArtifactVersion> getVersionFromEvent(Event event,
             String eventName) {
         if (event.getAdditionalProperties().containsKey(eventName)) {
             String version = (String) event.getAdditionalProperties()
@@ -209,9 +213,9 @@ class AppSecDTOProvider {
         return Optional.empty();
     }
 
-    private boolean beforeLimits(DefaultArtifactVersion version, Range range) {
+    private boolean beforeLimits(List<Event> events, ArtifactVersion version) {
         boolean noLimitEvent = true;
-        for (Event event : range.getEvents()) {
+        for (Event event : events) {
             if (event.getAdditionalProperties().containsKey(LIMIT)) {
                 noLimitEvent = false;
                 break;
@@ -221,10 +225,9 @@ class AppSecDTOProvider {
             return true;
         }
 
-        for (Event event : range.getEvents()) {
+        for (Event event : events) {
             String limit = (String) event.getAdditionalProperties().get(LIMIT);
-            DefaultArtifactVersion artifactVersion = new DefaultArtifactVersion(
-                    limit);
+            ArtifactVersion artifactVersion = new DefaultArtifactVersion(limit);
             if (version.compareTo(artifactVersion) < 0) {
                 return true;
             }
