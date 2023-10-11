@@ -170,7 +170,7 @@ class AppSecDTOProvider {
             for (Range range : ranges) {
                 if (beforeLimits(depArtifactVersion, range)) {
                     boolean vulnerable = false;
-                    for (Event event : sortEvents(range.getEvents())) {
+                    for (Event event : range.getEvents()) {
                         Optional<DefaultArtifactVersion> introduced = getVersionFromEvent(
                                 event, INTRODUCED);
                         Optional<DefaultArtifactVersion> fixed = getVersionFromEvent(
@@ -197,24 +197,6 @@ class AppSecDTOProvider {
             }
         }
         return false;
-    }
-
-    private List<Event> sortEvents(List<Event> events) {
-        List<Event> sortedEvents = new ArrayList<>();
-        getEvent(events, INTRODUCED).ifPresent(sortedEvents::add);
-        getEvent(events, FIXED).ifPresent(sortedEvents::add);
-        getEvent(events, LAST_AFFECTED).ifPresent(sortedEvents::add);
-        getEvent(events, LIMIT).ifPresent(sortedEvents::add);
-        return sortedEvents;
-    }
-
-    private Optional<Event> getEvent(List<Event> events, String eventName) {
-        for (Event event : events) {
-            if (event.getAdditionalProperties().containsKey(eventName)) {
-                return Optional.of(event);
-            }
-        }
-        return Optional.empty();
     }
 
     private Optional<DefaultArtifactVersion> getVersionFromEvent(Event event,
