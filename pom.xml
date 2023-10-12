@@ -11,7 +11,7 @@
     <name>AppSec Kit</name>
 
     <artifactId>appsec-kit</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <licenses>
@@ -22,18 +22,13 @@
     </licenses>
 
     <properties>
-        <vaadin7.version>7.7-SNAPSHOT</vaadin7.version>
-        <vaadin8.version>8.21-SNAPSHOT</vaadin8.version>
-        <flow24.version>24.2-SNAPSHOT</flow24.version>
-        <flow24.components.version>24.2-SNAPSHOT</flow24.components.version>
+        <flow.version>24.2-SNAPSHOT</flow.version>
+        <flow.components.version>24.2-SNAPSHOT</flow.components.version>
 
-        <!-- v24 -->
         <spring.boot.version>3.1.4</spring.boot.version>
-        <!-- v8 -->
-        <spring.boot2.version>2.2.0.RELEASE</spring.boot2.version>
 
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.jar.version>3.3.0</maven.jar.version>
@@ -59,6 +54,11 @@
             <snapshots><enabled>true</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <modules>
+        <module>appsec-kit-backend</module>
+        <module>appsec-kit-starter</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>
@@ -135,36 +135,16 @@
 
     <profiles>
         <profile>
-            <id>jdk8-module</id>
+            <id>demo</id>
+            <activation>
+                <property>
+                    <name>!release</name>
+                </property>
+            </activation>
             <modules>
-                <module>appsec-kit-backend</module>
-                <module>appsec-kit-v7</module>
-                <module>appsec-kit-v8</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>jdk8-demo</id>
-            <modules>
-                <module>appsec-kit-demo-v7</module>
-                <module>appsec-kit-demo-v8</module>
-                <module>appsec-kit-demo-v8-cdi</module>
-                <module>appsec-kit-demo-v8-spring</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>jdk17-module</id>
-            <modules>
-                <module>appsec-kit-v24</module>
-            </modules>
-        </profile>
-
-        <profile>
-            <id>jdk17-demo</id>
-            <modules>
-                <module>appsec-kit-demo-v24-spring</module>
+                <module>appsec-kit-demo</module>
             </modules>
         </profile>
     </profiles>
+
 </project>
