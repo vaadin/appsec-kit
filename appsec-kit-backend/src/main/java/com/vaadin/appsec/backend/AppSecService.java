@@ -120,7 +120,7 @@ public class AppSecService {
         }
 
         if (isFlow()) {
-            if (isPackageJsonPresent()) {
+            if (bomNpmFileExists()) {
                 Path bomNpmFilePath = configuration.getBomNpmFilePath();
                 try {
                     bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
@@ -136,12 +136,16 @@ public class AppSecService {
         readOrCreateDataFile();
     }
 
-    boolean isPackageJsonPresent() {
-        return Files.exists(configuration.getPackageJsonFilePath());
-    }
-
     boolean isFlow() {
         return getFlowServerComponent().isPresent();
+    }
+
+    boolean bomNpmFileExists() {
+        Path bomNpmFilePath = configuration.getBomNpmFilePath();
+        if (bomNpmFilePath != null) {
+            return Files.exists(bomNpmFilePath);
+        }
+        return false;
     }
 
     Optional<Component> getFlowServerComponent() {

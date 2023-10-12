@@ -1,7 +1,7 @@
-AppSec Kit Demo Vaadin 24 Spring
-===============================
+AppSec Kit Demo
+===============
 
-A simple application for testing and demonstrating Vaadin AppSec Kit with Vaadin 24 and Spring.
+A simple application for testing and demonstrating Vaadin AppSec Kit.
 
 Prerequisites
 =============
@@ -15,13 +15,18 @@ npx --package @cyclonedx/cyclonedx-npm --call exit
 Workflow
 ========
 
-To generate the `Maven` and `npm` SBOM files under the `/resources`, run
+Install npm dependencies before running the `@cyclonedx/cyclonedx-npm` plugin:
+```sh
+npm install
+```
+
+Generate the `Maven` and `npm` SBOM files under the `/resources`:
 ```sh
 mvn install
 ```
 
-To run the application, run
+Run the application:
 ```sh
 `mvn spring-boot:run`
 ```
-and open http://localhost:8080/.
+Open http://localhost:8080/.

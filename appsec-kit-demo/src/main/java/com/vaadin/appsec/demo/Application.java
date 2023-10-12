@@ -8,13 +8,9 @@
  */
 package com.vaadin.appsec.demo;
 
-import java.nio.file.Paths;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.vaadin.appsec.backend.AppSecConfiguration;
-import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
 
@@ -27,12 +23,6 @@ import com.vaadin.flow.theme.Theme;
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
-        String userDir = System.getProperty("user.dir");
-        String packageJsonFilePath = userDir + "/appsec-kit-demo/package.json";
-        AppSecConfiguration configuration = new AppSecConfiguration();
-        configuration.setPackageJsonFilePath(Paths.get(packageJsonFilePath));
-        AppSecService.getInstance().setConfiguration(configuration);
-
         SpringApplication.run(Application.class, args);
     }
 
