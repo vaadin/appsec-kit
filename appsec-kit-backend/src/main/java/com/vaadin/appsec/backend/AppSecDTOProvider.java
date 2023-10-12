@@ -18,6 +18,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.maven.artifact.versioning.ArtifactVersion;
+import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
@@ -35,6 +37,7 @@ import com.vaadin.appsec.backend.model.dto.SeverityLevelComparator;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Affected;
 import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
+import com.vaadin.appsec.backend.model.osv.response.Event;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Range;
 import com.vaadin.appsec.backend.model.osv.response.Severity;
@@ -46,6 +49,11 @@ import static com.vaadin.appsec.backend.BillOfMaterialsStore.DEVELOPMENT_PROPERT
  * in the UI.
  */
 class AppSecDTOProvider {
+
+    private static final String INTRODUCED = "introduced";
+    private static final String FIXED = "fixed";
+    private static final String LAST_AFFECTED = "last_affected";
+    private static final String LIMIT = "limit";
 
     private final VulnerabilityStore vulnerabilityStore;
     private final BillOfMaterialsStore bomStore;
@@ -104,70 +112,168 @@ class AppSecDTOProvider {
         final List<Dependency> dependencies = getDependencies();
         final List<OpenSourceVulnerability> vulnerabilities = vulnerabilityStore
                 .getVulnerabilities();
-        final Map<String, AppSecData.VulnerabilityAssessment> devAnalysis = AppSecService
-                .getInstance().getData().getVulnerabilities();
+        final List<Vulnerability> vulnerabilityDTOs = new ArrayList<>();
 
-        Parser parser = Parser.builder().build();
-        HtmlRenderer renderer = HtmlRenderer.builder().build();
-
-        List<Vulnerability> vulnerabilityDTOs = new ArrayList<>();
         for (OpenSourceVulnerability vuln : vulnerabilities) {
             for (Affected affected : vuln.getAffected()) {
                 String vulnDepGroup = AppSecUtils.getVulnDepGroup(affected);
                 String vulnDepName = AppSecUtils.getVulnDepName(affected);
+                List<String> versions = affected.getVersions();
+                List<Range> ranges = affected.getRanges();
 
-                Dependency depDTO = null;
                 for (Dependency dep : dependencies) {
-                    if (((dep.getGroup() == null && vulnDepGroup == null)
-                            || (dep.getGroup() != null
-                                    && dep.getGroup().equals(vulnDepGroup)))
-                            && dep.getName().equals(vulnDepName) && affected
-                                    .getVersions().contains(dep.getVersion())) {
-                        depDTO = dep;
+                    if (isVulnerable(dep, vulnDepGroup, vulnDepName, versions,
+                            ranges)) {
+                        Vulnerability vulnerabilityDTO = createVulnerabilityDTO(
+                                vuln, dep, affected);
+                        vulnerabilityDTOs.add(vulnerabilityDTO);
                     }
-                }
-
-                if (depDTO != null) {
-                    String id = getVulnerabilityId(vuln);
-                    Vulnerability vulnerabilityDTO = new Vulnerability(id);
-                    vulnerabilityDTO.setDependency(depDTO);
-                    vulnerabilityDTO.setDatePublished(vuln.getPublished());
-
-                    String patchedVersion = getPatchedVersion(affected)
-                            .orElse("---");
-                    vulnerabilityDTO.setPatchedVersion(patchedVersion);
-
-                    if (vuln.getDetails() != null) {
-                        Node document = parser.parse(vuln.getDetails());
-                        vulnerabilityDTO.setDetails(renderer.render(document));
-                    }
-
-                    Optional<AffectedVersion> vaadinAnalysis = getVaadinAnalysis(
-                            vulnerabilityDTO);
-                    vaadinAnalysis.ifPresent(affectedVersion -> vulnerabilityDTO
-                            .setVaadinAnalysis(affectedVersion.getStatus()));
-
-                    AppSecData.VulnerabilityAssessment vulnDevAnalysis = devAnalysis
-                            .get(id);
-                    if (vulnDevAnalysis != null) {
-                        vulnerabilityDTO.setDeveloperStatus(
-                                vulnDevAnalysis.getStatus());
-                        vulnerabilityDTO.setDeveloperAnalysis(
-                                vulnDevAnalysis.getDeveloperAnalysis());
-                        vulnerabilityDTO.setDeveloperUpdated(
-                                vulnDevAnalysis.getUpdated());
-                    }
-
-                    Set<String> urls = new HashSet<>();
-                    vuln.getReferences()
-                            .forEach(ref -> urls.add(ref.getUrl().toString()));
-                    vulnerabilityDTO.setReferenceUrls(urls);
-
-                    vulnerabilityDTOs.add(vulnerabilityDTO);
                 }
             }
         }
+
         return vulnerabilityDTOs;
+    }
+
+    // Pseudocode for evaluating if a given version is affected
+    // is available here https://ossf.github.io/osv-schema/#evaluation
+    private boolean isVulnerable(Dependency dep, String vulnDepGroup,
+            String vulnDepName, List<String> versions, List<Range> ranges) {
+        return isSameGroup(dep.getGroup(), vulnDepGroup)
+                && isSameName(dep.getName(), vulnDepName)
+                && isVersionAffected(dep.getVersion(), versions, ranges);
+    }
+
+    private boolean isSameGroup(String depGroup, String vulnDepGroup) {
+        return (depGroup == null && vulnDepGroup == null)
+                || (depGroup != null && depGroup.equals(vulnDepGroup));
+    }
+
+    private boolean isSameName(String depName, String vulnDepName) {
+        return depName.equals(vulnDepName);
+    }
+
+    private boolean isVersionAffected(String depVersion, List<String> versions,
+            List<Range> ranges) {
+        return includedInVersions(depVersion, versions)
+                || includedInRanges(depVersion, ranges);
+    }
+
+    private boolean includedInVersions(String depVersion,
+            List<String> versions) {
+        return versions != null && versions.contains(depVersion);
+    }
+
+    private boolean includedInRanges(String depVersion, List<Range> ranges) {
+        if (ranges != null) {
+            DefaultArtifactVersion depArtifactVersion = new DefaultArtifactVersion(
+                    depVersion);
+            for (Range range : ranges) {
+                List<Event> events = range.getEvents();
+                if (beforeLimits(events, depArtifactVersion)
+                        && evaluateEvents(events, depArtifactVersion)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean evaluateEvents(List<Event> events,
+            ArtifactVersion version) {
+        boolean vulnerable = false;
+        for (Event event : events) {
+            Optional<ArtifactVersion> introduced = getVersionFromEvent(event,
+                    INTRODUCED);
+            Optional<ArtifactVersion> fixed = getVersionFromEvent(event, FIXED);
+            Optional<ArtifactVersion> lastAffected = getVersionFromEvent(event,
+                    LAST_AFFECTED);
+
+            if (introduced.isPresent()
+                    && version.compareTo(introduced.get()) >= 0) {
+                vulnerable = true;
+            } else if (fixed.isPresent()
+                    && version.compareTo(fixed.get()) >= 0) {
+                vulnerable = false;
+            } else if (lastAffected.isPresent()
+                    && version.compareTo(lastAffected.get()) > 0) {
+                vulnerable = false;
+            }
+        }
+        return vulnerable;
+    }
+
+    private Optional<ArtifactVersion> getVersionFromEvent(Event event,
+            String eventName) {
+        if (event.getAdditionalProperties().containsKey(eventName)) {
+            String version = (String) event.getAdditionalProperties()
+                    .get(eventName);
+            return Optional.of(new DefaultArtifactVersion(version));
+        }
+        return Optional.empty();
+    }
+
+    private boolean beforeLimits(List<Event> events, ArtifactVersion version) {
+        boolean noLimitEvent = true;
+        for (Event event : events) {
+            if (event.getAdditionalProperties().containsKey(LIMIT)) {
+                noLimitEvent = false;
+                break;
+            }
+        }
+        if (noLimitEvent) {
+            return true;
+        }
+
+        for (Event event : events) {
+            String limit = (String) event.getAdditionalProperties().get(LIMIT);
+            ArtifactVersion artifactVersion = new DefaultArtifactVersion(limit);
+            if (version.compareTo(artifactVersion) < 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Vulnerability createVulnerabilityDTO(OpenSourceVulnerability vuln,
+            Dependency depDTO, Affected affected) {
+        String id = getVulnerabilityId(vuln);
+        Vulnerability vulnerabilityDTO = new Vulnerability(id);
+        vulnerabilityDTO.setDependency(depDTO);
+        vulnerabilityDTO.setDatePublished(vuln.getPublished());
+
+        String patchedVersion = getPatchedVersion(affected).orElse("---");
+        vulnerabilityDTO.setPatchedVersion(patchedVersion);
+
+        if (vuln.getDetails() != null) {
+            Node document = Parser.builder().build().parse(vuln.getDetails());
+            vulnerabilityDTO.setDetails(
+                    HtmlRenderer.builder().build().render(document));
+        }
+
+        Optional<AffectedVersion> vaadinAnalysis = getVaadinAnalysis(
+                vulnerabilityDTO);
+        vaadinAnalysis.ifPresent(affectedVersion -> vulnerabilityDTO
+                .setVaadinAnalysis(affectedVersion.getStatus()));
+
+        Map<String, AppSecData.VulnerabilityAssessment> vulnerabilityAssessments = AppSecService
+                .getInstance().getData().getVulnerabilities();
+        AppSecData.VulnerabilityAssessment vulnerabilityAssessment = vulnerabilityAssessments
+                .get(id);
+        if (vulnerabilityAssessment != null) {
+            vulnerabilityDTO
+                    .setDeveloperStatus(vulnerabilityAssessment.getStatus());
+            vulnerabilityDTO.setDeveloperAnalysis(
+                    vulnerabilityAssessment.getDeveloperAnalysis());
+            vulnerabilityDTO
+                    .setDeveloperUpdated(vulnerabilityAssessment.getUpdated());
+        }
+
+        Set<String> urls = new HashSet<>();
+        vuln.getReferences().forEach(ref -> urls.add(ref.getUrl().toString()));
+        vulnerabilityDTO.setReferenceUrls(urls);
+
+        return vulnerabilityDTO;
     }
 
     private boolean isDevDependency(Component component) {
@@ -282,7 +388,7 @@ class AppSecDTOProvider {
                 .filter(r -> r.getType().equals(rangeType)).findFirst();
         if (range.isPresent()) {
             Optional<Object> fixed = range.get().getEvents().stream()
-                    .map(event -> event.getAdditionalProperties().get("fixed"))
+                    .map(event -> event.getAdditionalProperties().get(FIXED))
                     .filter(Objects::nonNull).findFirst();
             if (fixed.isPresent()) {
                 return Optional.of((String) fixed.get());

@@ -1,10 +1,10 @@
 {
   "bomFormat" : "CycloneDX",
   "specVersion" : "1.4",
-  "serialNumber" : "urn:uuid:fcbf2e01-6661-44b6-b383-27b41feea161",
+  "serialNumber" : "urn:uuid:e22f4797-010a-4e95-8224-d0c945977b22",
   "version" : 1,
   "metadata" : {
-    "timestamp" : "2023-06-22T08:21:20Z",
+    "timestamp" : "2023-10-11T11:38:39Z",
     "tools" : [
       {
         "vendor" : "OWASP Foundation",
@@ -48,8 +48,8 @@
     ],
     "component" : {
       "group" : "com.vaadin",
-      "name" : "appsec-kit-demo-v8",
-      "version" : "1.0-SNAPSHOT",
+      "name" : "appsec-kit-demo-v24-spring",
+      "version" : "1.1-SNAPSHOT",
       "description" : "A parent POM for all artifacts by Vaadin Ltd.",
       "licenses" : [
         {
@@ -59,11 +59,11 @@
           }
         }
       ],
-      "purl" : "pkg:maven/com.vaadin/appsec-kit-demo-v8@1.0-SNAPSHOT?type=war",
+      "purl" : "pkg:maven/com.vaadin/appsec-kit-demo-v24-spring@1.1-SNAPSHOT?type=jar",
       "externalReferences" : [
         {
           "type" : "website",
-          "url" : "http://vaadin.com/appsec-kit/appsec-kit-demo-v8"
+          "url" : "http://vaadin.com/appsec-kit/appsec-kit-demo-v24-spring"
         },
         {
           "type" : "distribution",
@@ -71,16 +71,16 @@
         },
         {
           "type" : "vcs",
-          "url" : "https://github.com/vaadin/maven-integration/appsec-kit/appsec-kit-demo-v8"
+          "url" : "https://github.com/vaadin/maven-integration/appsec-kit/appsec-kit-demo-v24-spring"
         }
       ],
       "type" : "library",
-      "bom-ref" : "pkg:maven/com.vaadin/appsec-kit-demo-v8@1.0-SNAPSHOT?type=war"
+      "bom-ref" : "pkg:maven/com.vaadin/appsec-kit-demo-v24-spring@1.1-SNAPSHOT?type=jar"
     },
     "properties" : [
       {
         "name" : "maven.goal",
-        "value" : "makeBom"
+        "value" : "makeAggregateBom"
       },
       {
         "name" : "maven.scopes",
@@ -88,112 +88,45 @@
       }
     ]
   },
-  "components" : [
+  "components": [
     {
-      "group" : "com.vaadin",
-      "name" : "appsec-kit-v8",
-      "version" : "1.0-SNAPSHOT",
-      "description" : "A parent POM for all artifacts by Vaadin Ltd.",
-      "scope" : "optional",
+      "publisher" : "VMware, Inc.",
+      "group" : "org.springframework.boot",
+      "name" : "spring-boot-starter",
+      "version" : "3.1.4",
+      "description" : "Core starter, including auto-configuration support, logging and YAML",
       "hashes" : [
         {
           "alg" : "MD5",
-          "content" : "5a0f1c3e5a7a60dac232db36da040f00"
+          "content" : "5e34ae4dd67f995b245aabc1c5437f57"
         },
         {
           "alg" : "SHA-1",
-          "content" : "c7942a1491c1abaf5eb40da5825ef916a889205e"
+          "content" : "8a615e53a9f45eecc4821917b1423daa68afcf19"
         },
         {
           "alg" : "SHA-256",
-          "content" : "30ca874c079d06cea32152ddc71ba19912a08db887b19df58afc20fb04536a83"
+          "content" : "08266034df7c3ea63b961def06454571d4c3844ee22dab34ef5e292c9354f00d"
         },
         {
           "alg" : "SHA-512",
-          "content" : "4b1afd447e484b3049f8e06a1d8b45328b97233d7beef8f41e4ac67ac3594f67c3dfc39c123cb76cd50bc4d6a71b5780aa09bc0383ab70019cd3f254a6df7314"
+          "content" : "c92e3ae419908cca498c6b09139e5c0602d06ccb4018c276195d6135212214f4e17f02a007fb99ad682aacb94bdcd00b7d1dc0dbe19f73658ced4c81fc9973bf"
         },
         {
           "alg" : "SHA-384",
-          "content" : "61ad826dcf44bf24fff3654df8d8869d054707b771470dfb7ed050c6bcddc3cb4f6a19f32a336c948777f40eb0f5e0a6"
+          "content" : "97c414bdeb28ce5af9f3cf52b2dcac07d69cdba9169cd4a22fbdc73b55ab45cf029f6a701c91a2a0c4c4653fd4828969"
         },
         {
           "alg" : "SHA3-384",
-          "content" : "236b3e63f981697860f09a13a03c11d9f263540c4c1ab77faa588768a90b1518381537b948c48eedea3202f9caa5695c"
+          "content" : "138d9a134b6625c5ab5ceaae6ca75ecbe45bc949abef0dbccba94d498951a4f5a1d9c39cb9b57476994d9e34d6486044"
         },
         {
           "alg" : "SHA3-256",
-          "content" : "b2e4aa7e39b12922087c47454c170338e929ec9a58a70821bd136f9277b770af"
+          "content" : "479c1c9f07003503bbb51c0bdbe8bf840a8e257a8d1d4e02183de1f291e8e3ff"
         },
         {
           "alg" : "SHA3-512",
-          "content" : "8a06e9600f7f36608e9774a5861e83fe16729dec3553278e4bde104e84efec5113aaae6441c938e8579d4074edb4e70383414e76fbb00b8149f7766cb158fe71"
-        }
-      ],
-      "licenses" : [
-        {
-          "license" : {
-            "name" : "Vaadin Commercial License and Service Terms",
-            "url" : "https://vaadin.com/commercial-license-and-service-terms"
-          }
-        }
-      ],
-      "purl" : "pkg:maven/com.vaadin/appsec-kit-v8@1.0-SNAPSHOT?type=jar",
-      "externalReferences" : [
-        {
-          "type" : "website",
-          "url" : "http://vaadin.com/appsec-kit/appsec-kit-v8"
-        },
-        {
-          "type" : "distribution",
-          "url" : "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
-        },
-        {
-          "type" : "vcs",
-          "url" : "https://github.com/vaadin/maven-integration/appsec-kit/appsec-kit-v8"
-        }
-      ],
-      "type" : "library",
-      "bom-ref" : "pkg:maven/com.vaadin/appsec-kit-v8@1.0-SNAPSHOT?type=jar"
-    },
-    {
-      "publisher" : "Vaadin Ltd",
-      "group" : "com.vaadin",
-      "name" : "vaadin-server",
-      "version" : "8.8.0",
-      "description" : "Vaadin server",
-      "scope" : "required",
-      "hashes" : [
-        {
-          "alg" : "MD5",
-          "content" : "5392f095044397e51dfea27f032e64e7"
-        },
-        {
-          "alg" : "SHA-1",
-          "content" : "d18154c4f18b91adf665575d3754dd41d3a0773c"
-        },
-        {
-          "alg" : "SHA-256",
-          "content" : "fda33acc45fca25ad9ce1d80ae11d7b20a15b3b7603d643ff1d90ea7590ecbee"
-        },
-        {
-          "alg" : "SHA-512",
-          "content" : "5b76a643caba111cb5e08dcdfbbe2876fa60a3e595f129b27f9b2ec5833009de96af3e218c65d1170df757a2b76456da3ad5f12c42875b402e832b2ff30cb82a"
-        },
-        {
-          "alg" : "SHA-384",
-          "content" : "932b9ba8983c1d5457eda71a6a5004e9351c8a7fa6abe33404e60a82a58d5420d880fd7e8d82d7210b39879df67ab3ed"
-        },
-        {
-          "alg" : "SHA3-384",
-          "content" : "7f38acab7d0515caa7dc196481aec4c72e47d03191684e9def70cd3114ac2fb9af8f2b0ad81cd953597e7d10d0934a90"
-        },
-        {
-          "alg" : "SHA3-256",
-          "content" : "515116480c15ff288207896f979fb35e35167349b6aa9ad153e206e259814ec3"
-        },
-        {
-          "alg" : "SHA3-512",
-          "content" : "b99643366bf78784971237cebb71c552b3495a8ee727eb9766f68f5ea10226aa2a3e3688cc50be076689ddf875a821769e9d6ee283321ce3c2ccf912a6e6ff41"
+          "content" : "82e5565c1781ee5a6fa39f138d8163b42c7650041b191b90279feed3257732e1ef015e00d4900ddb6ea759ce441c6d1b4dd87a67d7b855f00391dfbb91402d54"
         }
       ],
       "licenses" : [
@@ -203,32 +136,103 @@
           }
         }
       ],
-      "purl" : "pkg:maven/com.vaadin/vaadin-server@8.8.0?type=jar",
+      "purl" : "pkg:maven/org.springframework.boot/spring-boot-starter@3.1.4?type=jar",
       "externalReferences" : [
         {
           "type" : "website",
-          "url" : "https://vaadin.com/"
+          "url" : "https://spring.io/projects/spring-boot"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://github.com/spring-projects/spring-boot/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://github.com/spring-projects/spring-boot"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.springframework.boot/spring-boot-starter@3.1.4?type=jar"
+    },
+    {
+      "group" : "org.yaml",
+      "name" : "snakeyaml",
+      "version" : "1.33",
+      "description" : "YAML 1.1 parser and emitter for Java",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "e0164a637c691c8cf01d29f90a709c02"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "2cd0a87ff7df953f810c344bdf2fe3340b954c69"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "11ff459788f0a2d781f56a4a86d7e69202cebacd0273d5269c4ae9f02f3fd8f0"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "787b72aebb685689ab379ed8f238fc2f4175bb82d285909e39e7ff1ee1b9e64ad8878f4685dadde274f950b0dc77dca3082a52921c11094aa2a535672ae4f33c"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "9f0a0a35df2b339830b9e78294634ea894e7096e01709c82d965e24a9fa9ac6ee15edbbbf23368dcd57741de5bf23086"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "91d8fd581d60be4090d3b522d8c119c12449cff2ce6c436d0e53977e1c9fea8686b2b360fb15f4c3507e4f243d7d6170"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "7dcf0429ecb923a66e00ec633bafeb297e3b90e1cc2be0f85443fd61367f355a"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "59b32910dddf63475893f7c830d58ca320cd6183704d80b8111cee7bb1674f97f5699c8ac52f905a5b9a20128b9e2b6a26a07490f217033c858d9c358bedcafc"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.yaml/snakeyaml@1.33?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml"
         },
         {
           "type" : "distribution",
           "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
         },
         {
+          "type" : "issue-tracker",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/issues"
+        },
+        {
           "type" : "vcs",
-          "url" : "https://github.com/vaadin/framework/vaadin-server"
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/src"
         }
       ],
       "type" : "library",
-      "bom-ref" : "pkg:maven/com.vaadin/vaadin-server@8.8.0?type=jar"
+      "bom-ref" : "pkg:maven/org.yaml/snakeyaml@1.33?type=jar"
     }
   ],
-  "dependencies" : [
+  "dependencies": [
     {
-      "ref" : "pkg:maven/com.vaadin/appsec-kit-demo-v8@1.0-SNAPSHOT?type=war",
+      "ref" : "pkg:maven/org.springframework.boot/spring-boot-starter@3.1.4?type=jar",
       "dependsOn" : [
-        "pkg:maven/com.vaadin/appsec-kit-v8@1.0-SNAPSHOT?type=jar",
-        "pkg:maven/com.vaadin/vaadin-server@8.8.0?type=jar"
+        "pkg:maven/org.yaml/snakeyaml@1.33?type=jar"
       ]
+    },
+    {
+      "ref" : "pkg:maven/org.yaml/snakeyaml@1.33?type=jar",
+      "dependsOn" : [ ]
     }
   ]
 }
