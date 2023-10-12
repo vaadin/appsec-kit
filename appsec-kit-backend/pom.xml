@@ -7,17 +7,11 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>appsec-kit</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <version>3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>appsec-kit-backend</artifactId>
     <name>AppSec Kit Backend</name>
-
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <dependency>
