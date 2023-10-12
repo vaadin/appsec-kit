@@ -28,8 +28,7 @@ public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
         String userDir = System.getProperty("user.dir");
-        String packageJsonFilePath = userDir
-                + "/appsec-kit-demo/package.json";
+        String packageJsonFilePath = userDir + "/appsec-kit-demo/package.json";
         AppSecConfiguration configuration = new AppSecConfiguration();
         configuration.setPackageJsonFilePath(Paths.get(packageJsonFilePath));
         AppSecService.getInstance().setConfiguration(configuration);
