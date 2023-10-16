@@ -32,6 +32,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.tabs.TabSheet;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.shared.communication.PushMode;
 
 /**
@@ -40,6 +41,7 @@ import com.vaadin.flow.shared.communication.PushMode;
 @Push
 @PageTitle("AppSec Kit")
 @CssImport("./appsec-kit.css")
+@AnonymousAllowed
 public class AppSecView extends AbstractAppSecView {
 
     private static final Logger LOGGER = LoggerFactory
