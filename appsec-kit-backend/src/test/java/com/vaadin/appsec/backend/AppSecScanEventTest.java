@@ -15,8 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.vaadin.appsec.backend.model.AppSecData;
-import com.vaadin.appsec.backend.model.AppSecData.VulnerabilityAssessment;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
 
 import static org.junit.Assert.assertEquals;
@@ -26,24 +24,17 @@ public class AppSecScanEventTest {
 
     private AppSecService service;
 
-    private AppSecData data;
-
     private List<Vulnerability> vulnerabilities;
 
     @Before
     public void setup() {
         service = Mockito.mock(AppSecService.class);
-        data = new AppSecData();
         vulnerabilities = new ArrayList<>();
-        when(service.getData()).thenReturn(data);
-        when(service.getVulnerabilities()).thenReturn(vulnerabilities);
+        when(service.getNewVulnerabilities()).thenReturn(vulnerabilities);
     }
 
     @Test
-    public void newVulnerabilties_noneExpected() {
-        vulnerabilities.add(new Vulnerability("foo"));
-        data.getVulnerabilities().put("foo", new VulnerabilityAssessment());
-
+    public void newVulnerabilities_noneExpected() {
         AppSecScanEvent event = new AppSecScanEvent(service);
         List<Vulnerability> newVulnerabilities = event.getNewVulnerabilities();
 
@@ -51,7 +42,7 @@ public class AppSecScanEventTest {
     }
 
     @Test
-    public void newVulnerabilties_oneExpected() {
+    public void newVulnerabilities_oneExpected() {
         vulnerabilities.add(new Vulnerability("foo"));
 
         AppSecScanEvent event = new AppSecScanEvent(service);

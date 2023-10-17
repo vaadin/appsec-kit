@@ -296,6 +296,22 @@ public class AppSecService {
     }
 
     /**
+     * Gets the list of new vulnerabilities. A vulnerability is considered new
+     * if there is no developer assessment data for that vulnerability.
+     *
+     * @return the list of new vulnerabilities
+     */
+    public List<Vulnerability> getNewVulnerabilities() {
+        return getVulnerabilities().stream().filter(this::newVulnerability)
+                .toList();
+    }
+
+    private boolean newVulnerability(Vulnerability vulnerability) {
+        String vulnerabilityId = vulnerability.getIdentifier();
+        return !getData().getVulnerabilities().containsKey(vulnerabilityId);
+    }
+
+    /**
      * Gets the data object, reading it from the file-system if the file exists.
      *
      * @return the data object, not {@code null}
