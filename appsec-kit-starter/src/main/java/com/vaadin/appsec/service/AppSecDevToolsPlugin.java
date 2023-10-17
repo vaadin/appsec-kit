@@ -24,7 +24,6 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
 
     @Override
     public void handleConnect(DevToolsInterface devToolsInterface) {
-        LOGGER.debug("Plugin connected");
         devToolsInterface.send("appsec-kit-init", Json.createObject());
         AppSecService appSecService = AppSecService.getInstance();
 
