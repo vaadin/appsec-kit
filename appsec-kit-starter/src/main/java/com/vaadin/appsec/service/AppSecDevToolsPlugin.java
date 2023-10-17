@@ -20,15 +20,20 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecDevToolsPlugin.class);
 
+    private boolean scanEventListenerAdded = false;
+
     @Override
     public void handleConnect(DevToolsInterface devToolsInterface) {
         LOGGER.debug("Plugin connected");
         devToolsInterface.send("appsec-kit-init", Json.createObject());
         AppSecService appSecService = AppSecService.getInstance();
 
-        appSecService.addScanEventListener(scanEvent -> sendAndLogScanResult(
-                scanEvent.getNewVulnerabilities(), devToolsInterface));
-        LOGGER.debug("Scan event listener added");
+        if (!scanEventListenerAdded) {
+            appSecService.addScanEventListener(scanEvent -> sendAndLogScanResult(
+                    scanEvent.getNewVulnerabilities(), devToolsInterface));
+            scanEventListenerAdded = true;
+            LOGGER.debug("Scan event listener added");
+        }
 
         if (appSecService.getData().getLastScan() == null) {
             appSecService.scanForVulnerabilities();
