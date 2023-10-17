@@ -26,15 +26,15 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         devToolsInterface.send("appsec-kit-init", Json.createObject());
         AppSecService appSecService = AppSecService.getInstance();
 
-        appSecService.addScanEventListener(scanEvent -> sendScanResult(
+        appSecService.addScanEventListener(scanEvent -> sendAndLogScanResult(
                 scanEvent.getNewVulnerabilities(), devToolsInterface));
         LOGGER.debug("Scan event listener added");
 
         if (appSecService.getData().getLastScan() == null) {
             appSecService.scanForVulnerabilities();
-            sendScanResult(appSecService.getNewVulnerabilities(),
-                    devToolsInterface);
         }
+        sendScanResult(appSecService.getNewVulnerabilities(),
+                devToolsInterface);
     }
 
     @Override
@@ -45,14 +45,19 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         return true;
     }
 
-    private void sendScanResult(List<Vulnerability> vulnerabilities,
+    private void sendAndLogScanResult(List<Vulnerability> vulnerabilities,
             DevToolsInterface devToolsInterface) {
         LOGGER.info("Scan completed");
+        sendScanResult(vulnerabilities, devToolsInterface);
+        LOGGER.info("Vulnerabilities sent to the client: "
+                + vulnerabilities.size());
+    }
+
+    private void sendScanResult(List<Vulnerability> vulnerabilities,
+            DevToolsInterface devToolsInterface) {
         var vulnerabilityCount = vulnerabilities.size();
         var data = Json.createObject();
         data.put("vulnerabilityCount", vulnerabilityCount);
         devToolsInterface.send("appsec-kit-scan", data);
-        LOGGER.info(
-                "Vulnerabilities sent to the client: " + vulnerabilityCount);
     }
 }
