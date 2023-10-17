@@ -28,8 +28,10 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         AppSecService appSecService = AppSecService.getInstance();
 
         if (!scanEventListenerAdded) {
-            appSecService.addScanEventListener(scanEvent -> sendAndLogScanResult(
-                    scanEvent.getNewVulnerabilities(), devToolsInterface));
+            appSecService
+                    .addScanEventListener(scanEvent -> sendAndLogScanResult(
+                            scanEvent.getNewVulnerabilities(),
+                            devToolsInterface));
             scanEventListenerAdded = true;
             LOGGER.debug("Scan event listener added");
         }
