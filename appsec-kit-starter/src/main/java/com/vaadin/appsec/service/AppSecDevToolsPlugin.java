@@ -1,12 +1,9 @@
 package com.vaadin.appsec.service;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecService;
-import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.base.devserver.DevToolsInterface;
 import com.vaadin.base.devserver.DevToolsMessageHandler;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -28,18 +25,13 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         AppSecService appSecService = AppSecService.getInstance();
 
         if (!scanEventListenerAdded) {
-            appSecService
-                    .addScanEventListener(scanEvent -> sendAndLogScanResult(
-                            scanEvent.getNewVulnerabilities(),
-                            devToolsInterface));
+            appSecService.addScanEventListener(scanEvent -> sendScanResult(
+                    scanEvent.getNewVulnerabilities().size(),
+                    devToolsInterface));
             scanEventListenerAdded = true;
             LOGGER.debug("Scan event listener added");
         }
-
-        if (appSecService.getData().getLastScan() == null) {
-            appSecService.scanForVulnerabilities();
-        }
-        sendScanResult(appSecService.getNewVulnerabilities(),
+        refreshScanResult(appSecService.getNewVulnerabilities().size(),
                 devToolsInterface);
     }
 
@@ -51,19 +43,23 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         return true;
     }
 
-    private void sendAndLogScanResult(List<Vulnerability> vulnerabilities,
+    private void sendScanResult(int vulnerabilityCount,
             DevToolsInterface devToolsInterface) {
         LOGGER.info("Scan completed");
-        sendScanResult(vulnerabilities, devToolsInterface);
-        LOGGER.info("Vulnerabilities sent to the client: "
-                + vulnerabilities.size());
+        sendData("appsec-kit-scan", vulnerabilityCount, devToolsInterface);
+        LOGGER.info(
+                "Vulnerabilities sent to the client: " + vulnerabilityCount);
     }
 
-    private void sendScanResult(List<Vulnerability> vulnerabilities,
+    private void refreshScanResult(int vulnerabilityCount,
             DevToolsInterface devToolsInterface) {
-        var vulnerabilityCount = vulnerabilities.size();
+        sendData("appsec-kit-refresh", vulnerabilityCount, devToolsInterface);
+    }
+
+    private void sendData(String command, int vulnerabilityCount,
+            DevToolsInterface devToolsInterface) {
         var data = Json.createObject();
         data.put("vulnerabilityCount", vulnerabilityCount);
-        devToolsInterface.send("appsec-kit-scan", data);
+        devToolsInterface.send(command, data);
     }
 }

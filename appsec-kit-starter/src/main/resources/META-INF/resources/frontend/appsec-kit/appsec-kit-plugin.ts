@@ -50,6 +50,13 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
                 this.message = "No vulnerabilities found."
             }
             return true;
+        } else if (message.command === "appsec-kit-refresh") {
+            if (message.data.vulnerabilityCount > 0) {
+                this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
+            } else {
+                this.message = "No vulnerabilities found."
+            }
+            return true;
         } else {
             return false; // not a plugin command
         }
