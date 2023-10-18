@@ -1,9 +1,13 @@
 package com.vaadin.appsec.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecService;
+import com.vaadin.appsec.backend.Registration;
 import com.vaadin.base.devserver.DevToolsInterface;
 import com.vaadin.base.devserver.DevToolsMessageHandler;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -17,21 +21,23 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecDevToolsPlugin.class);
 
-    private boolean scanEventListenerAdded = false;
+    private final Map<DevToolsInterface, Registration> scanEventRegistrations = new HashMap<>();
 
     @Override
     public void handleConnect(DevToolsInterface devToolsInterface) {
         devToolsInterface.send("appsec-kit-init", Json.createObject());
         AppSecService appSecService = AppSecService.getInstance();
 
-        if (!scanEventListenerAdded) {
-            appSecService.addScanEventListener(scanEvent -> sendScanResult(
-                    scanEvent.getNewVulnerabilities().size(),
-                    devToolsInterface));
-            scanEventListenerAdded = true;
+        if (!scanEventRegistrations.containsKey(devToolsInterface)) {
+            Registration registration = appSecService
+                    .addScanEventListener(event -> sendAndLogScanResult(
+                            event.getNewVulnerabilities().size(),
+                            devToolsInterface));
+            scanEventRegistrations.put(devToolsInterface, registration);
             LOGGER.debug("Scan event listener added");
         }
-        refreshScanResult(appSecService.getNewVulnerabilities().size(),
+        sendScanResult("appsec-kit-refresh",
+                appSecService.getNewVulnerabilities().size(),
                 devToolsInterface);
     }
 
@@ -43,20 +49,16 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         return true;
     }
 
-    private void sendScanResult(int vulnerabilityCount,
+    private void sendAndLogScanResult(int vulnerabilityCount,
             DevToolsInterface devToolsInterface) {
         LOGGER.info("Scan completed");
-        sendData("appsec-kit-scan", vulnerabilityCount, devToolsInterface);
+        sendScanResult("appsec-kit-scan", vulnerabilityCount,
+                devToolsInterface);
         LOGGER.info(
                 "Vulnerabilities sent to the client: " + vulnerabilityCount);
     }
 
-    private void refreshScanResult(int vulnerabilityCount,
-            DevToolsInterface devToolsInterface) {
-        sendData("appsec-kit-refresh", vulnerabilityCount, devToolsInterface);
-    }
-
-    private void sendData(String command, int vulnerabilityCount,
+    private void sendScanResult(String command, int vulnerabilityCount,
             DevToolsInterface devToolsInterface) {
         var data = Json.createObject();
         data.put("vulnerabilityCount", vulnerabilityCount);
