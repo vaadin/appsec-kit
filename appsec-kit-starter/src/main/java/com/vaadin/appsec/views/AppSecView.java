@@ -30,9 +30,7 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.page.Push;
-import com.vaadin.flow.component.tabs.TabSheet;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.shared.communication.PushMode;
 
 /**
@@ -41,7 +39,6 @@ import com.vaadin.flow.shared.communication.PushMode;
 @Push
 @PageTitle("AppSec Kit")
 @CssImport("./appsec-kit.css")
-@AnonymousAllowed
 public class AppSecView extends AbstractAppSecView {
 
     private static final Logger LOGGER = LoggerFactory
@@ -49,7 +46,9 @@ public class AppSecView extends AbstractAppSecView {
 
     private VulnerabilitiesTab vulnerabilitiesTab;
     private DependenciesTab dependenciesTab;
+    /*- FIXME Not available in V14
     private TabSheet tabSheet;
+    -*/
     private Span lastScannedLabel;
     private DateFormat formatter;
     private Registration scanListener;
@@ -74,7 +73,9 @@ public class AppSecView extends AbstractAppSecView {
         headerBar.add(buildScanNowButton());
 
         getMainContent().add(headerBar);
+        /*- FIXME Not available in V14
         getMainContent().addAndExpand(buildTabSheet());
+        -*/
     }
 
     private Component buildAppTitle() {
@@ -102,6 +103,7 @@ public class AppSecView extends AbstractAppSecView {
         return scanNowButton;
     }
 
+    /*- FIXME Not available in V14
     private Component buildTabSheet() {
         tabSheet = new TabSheet();
         tabSheet.setSizeFull();
@@ -118,23 +120,26 @@ public class AppSecView extends AbstractAppSecView {
         tabSheet.add("Dependencies", dependenciesTab);
         return tabSheet;
     }
-
+    -*/
     @Override
     public void refresh() {
+        /*- FIXME Not available in V14
         Component component = tabSheet.getComponent(tabSheet.getSelectedTab());
         if (component instanceof AbstractAppSecView abstractAppSecView) {
             abstractAppSecView.refresh();
         }
+        -*/
         Instant lastScan = AppSecService.getInstance().refresh().getLastScan();
         lastScannedLabel.setText("Last Scan: " + (lastScan == null ? "--"
                 : formatter.format(Date.from(lastScan))));
     }
 
     void showVulnerabilitiesTabFor(Dependency item) {
+        /*- FIXME Not available in V14
         tabSheet.setSelectedTab(tabSheet.getTab(vulnerabilitiesTab));
+        -*/
         vulnerabilitiesTab.filterOn(item);
     }
-
     @Override
     public void onAttach(AttachEvent event) {
         super.onAttach(event);

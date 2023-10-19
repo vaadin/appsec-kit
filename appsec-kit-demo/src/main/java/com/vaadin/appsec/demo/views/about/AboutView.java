@@ -15,7 +15,6 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 
 @PageTitle("About")
 @Route(value = "about", layout = MainLayout.class)
@@ -29,7 +28,9 @@ public class AboutView extends VerticalLayout {
         add(img);
 
         H2 header = new H2("This place intentionally left empty");
+        /*- FIXME Not available in V14
         header.addClassNames(Margin.Top.XLARGE, Margin.Bottom.MEDIUM);
+        -*/
         add(header);
         add(new Paragraph("It’s a place where you can grow your own UI 🤗"));
 

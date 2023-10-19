@@ -17,7 +17,6 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.theme.lumo.LumoUtility;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -34,19 +33,23 @@ public class MainLayout extends AppLayout {
 
     private void addHeaderContent() {
         DrawerToggle toggle = new DrawerToggle();
+        /*- FIXME Not available in V14
         toggle.setAriaLabel("Menu toggle");
-
+        -*/
         viewTitle = new H2();
+        /*- FIXME Not available in V14
         viewTitle.addClassNames(LumoUtility.FontSize.LARGE,
                 LumoUtility.Margin.NONE);
-
+        -*/
         addToNavbar(true, toggle, viewTitle);
     }
 
     private void addDrawerContent() {
         H1 appName = new H1("AppSec Kit Demo Vaadin 24 Spring");
+        /*- FIXME Not available in V14
         appName.addClassNames(LumoUtility.FontSize.LARGE,
                 LumoUtility.Margin.NONE);
+        -*/
         Header header = new Header(appName);
 
         Component scroller = new Div(); // new Scroller(createNavigation());

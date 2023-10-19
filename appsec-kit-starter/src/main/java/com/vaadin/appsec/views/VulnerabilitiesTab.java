@@ -160,7 +160,9 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     private void buildGrid() {
         grid = new Grid<>();
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        /*- FIXME Not available in V14
         grid.setMultiSort(true, Grid.MultiSortPriority.APPEND);
+        -*/
         grid.setSizeFull();
 
         grid.addColumn(Vulnerability::getIdentifier)
@@ -173,8 +175,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
         grid.addColumn(Vulnerability::getSeverityLevel).setHeader("Severity")
                 .setResizable(true).setSortable(true);
         grid.addColumn(Vulnerability::getRiskScore).setHeader("CVSS score")
-                .setResizable(true).setSortable(true)
-                .setTooltipGenerator(Vulnerability::getCvssString);
+                .setResizable(true).setSortable(true);
         grid.addColumn(Vulnerability::getVaadinAnalysis)
                 .setHeader("Vaadin analysis").setResizable(true)
                 .setSortable(true);

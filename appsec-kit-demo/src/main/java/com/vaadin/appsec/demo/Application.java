@@ -10,8 +10,8 @@ package com.vaadin.appsec.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
 
 /**
@@ -19,8 +19,8 @@ import com.vaadin.flow.theme.Theme;
  * the application installable on phones, tablets and some desktop browsers.
  */
 @SpringBootApplication
-@Theme(value = "appsec-kit-demo")
-public class Application implements AppShellConfigurator {
+@Theme(themeFolder = "appsec-kit-demo")
+public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

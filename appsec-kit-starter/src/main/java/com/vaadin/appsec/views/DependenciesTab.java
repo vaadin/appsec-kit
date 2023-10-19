@@ -20,7 +20,6 @@ import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.dataview.GridListDataView;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
@@ -33,7 +32,9 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 public class DependenciesTab extends AbstractAppSecView {
 
     private Grid<Dependency> grid;
+    /*- FIXME Not available in V14
     private GridListDataView<Dependency> dataView;
+    -*/
     private TextField searchField;
     private ComboBox<Ecosystem> ecosystem;
     private ComboBox<String> group;
@@ -102,6 +103,7 @@ public class DependenciesTab extends AbstractAppSecView {
 
     @Override
     public void refresh() {
+        /*- FIXME Not available in V14
         dataView = grid.setItems(AppSecService.getInstance().getDependencies());
         dataView.addFilter(dependency -> {
             String searchTerm = searchField.getValue().trim();
@@ -110,10 +112,10 @@ public class DependenciesTab extends AbstractAppSecView {
             }
             return dependency.getName().contains(searchTerm);
         });
-
+        -*/
         List<String> sortedGroups = getListDataProvider().getItems().stream()
                 .map(Dependency::getGroup).filter(Objects::nonNull).distinct()
-                .sorted().toList();
+                .sorted().collect(Collectors.toList());
         group.setItems(sortedGroups);
         applyFilters();
     }
@@ -124,12 +126,15 @@ public class DependenciesTab extends AbstractAppSecView {
     }
 
     private void configureSearchField() {
+        /*- FIXME Not available in V14
         dataView = grid.setItems(AppSecService.getInstance().getDependencies());
-
+        -*/
         searchField.setPlaceholder("Search");
         searchField.setPrefixComponent(new Icon(VaadinIcon.SEARCH));
         searchField.setValueChangeMode(ValueChangeMode.EAGER);
+        /*- FIXME Not available in V14
         searchField.addValueChangeListener(e -> dataView.refreshAll());
+        -*/
     }
 
     private void buildFilters() {
@@ -174,7 +179,9 @@ public class DependenciesTab extends AbstractAppSecView {
     private void buildGrid() {
         grid = new Grid<>();
         grid.setSelectionMode(Grid.SelectionMode.NONE);
+        /*- FIXME Not available in V14
         grid.setMultiSort(true, Grid.MultiSortPriority.APPEND);
+        -*/
         grid.setSizeFull();
 
         grid.addColumn(Dependency::getName).setHeader("Dependency")
@@ -197,8 +204,7 @@ public class DependenciesTab extends AbstractAppSecView {
                 .setHeader("Highest severity").setResizable(true)
                 .setSortable(true);
         grid.addColumn(Dependency::getRiskScore).setHeader("Highest CVSS score")
-                .setResizable(true).setSortable(true)
-                .setTooltipGenerator(Dependency::getCvssString);
+                .setResizable(true).setSortable(true);
 
         grid.addItemClickListener(e -> {
             if (e.getClickCount() == 2) {
