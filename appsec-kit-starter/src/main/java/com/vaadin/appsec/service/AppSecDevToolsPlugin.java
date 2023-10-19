@@ -1,3 +1,11 @@
+/*-
+ * Copyright (C) 2023 Vaadin Ltd
+ *
+ * This program is available under Vaadin Commercial License and Service Terms.
+ *
+ *
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
+ */
 package com.vaadin.appsec.service;
 
 import java.util.HashMap;
@@ -26,42 +34,35 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     @Override
     public void handleConnect(DevToolsInterface devToolsInterface) {
         devToolsInterface.send("appsec-kit-init", Json.createObject());
-        AppSecService appSecService = AppSecService.getInstance();
+        var appSecService = AppSecService.getInstance();
 
         if (!scanEventRegistrations.containsKey(devToolsInterface)) {
-            Registration registration = appSecService
-                    .addScanEventListener(event -> sendAndLogScanResult(
-                            event.getNewVulnerabilities().size(),
-                            devToolsInterface));
+            var registration = appSecService.addScanEventListener(event -> {
+                LOGGER.debug("Scan completed");
+                var vulnerabilityCount = event.getNewVulnerabilities().size();
+                sendScanResult(vulnerabilityCount, devToolsInterface);
+                LOGGER.debug("Vulnerabilities sent to the client: "
+                        + vulnerabilityCount);
+            });
             scanEventRegistrations.put(devToolsInterface, registration);
             LOGGER.debug("Scan event listener added");
         }
-        sendScanResult("appsec-kit-refresh",
-                appSecService.getNewVulnerabilities().size(),
+        sendScanResult(appSecService.getNewVulnerabilities().size(),
                 devToolsInterface);
     }
 
     @Override
     public boolean handleMessage(String command, JsonObject data,
             DevToolsInterface devToolsInterface) {
-        LOGGER.info("Command received: " + command);
+        LOGGER.debug("Command received: " + command);
         devToolsInterface.send("command-received", data);
         return true;
     }
 
-    private void sendAndLogScanResult(int vulnerabilityCount,
-            DevToolsInterface devToolsInterface) {
-        LOGGER.info("Scan completed");
-        sendScanResult("appsec-kit-scan", vulnerabilityCount,
-                devToolsInterface);
-        LOGGER.info(
-                "Vulnerabilities sent to the client: " + vulnerabilityCount);
-    }
-
-    private void sendScanResult(String command, int vulnerabilityCount,
+    private void sendScanResult(int vulnerabilityCount,
             DevToolsInterface devToolsInterface) {
         var data = Json.createObject();
         data.put("vulnerabilityCount", vulnerabilityCount);
-        devToolsInterface.send(command, data);
+        devToolsInterface.send("appsec-kit-scan", data);
     }
 }

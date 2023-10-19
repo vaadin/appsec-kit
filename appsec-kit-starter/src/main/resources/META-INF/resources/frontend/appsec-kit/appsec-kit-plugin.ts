@@ -1,3 +1,11 @@
+/*-
+ * Copyright (C) 2023 Vaadin Ltd
+ *
+ * This program is available under Vaadin Commercial License and Service Terms.
+ *
+ *
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
+ */
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "@vaadin/flow-frontend/vaadin-dev-tools/vaadin-dev-tools";
@@ -47,13 +55,6 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
                 this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
             } else {
                 devTools.showNotification("information" as MessageType, "No vulnerabilities found");
-                this.message = "No vulnerabilities found."
-            }
-            return true;
-        } else if (message.command === "appsec-kit-refresh") {
-            if (message.data.vulnerabilityCount > 0) {
-                this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
-            } else {
                 this.message = "No vulnerabilities found."
             }
             return true;
