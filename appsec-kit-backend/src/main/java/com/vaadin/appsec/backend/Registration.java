@@ -19,5 +19,5 @@ public interface Registration extends Serializable {
     /**
      * Removes the associated listener from the event source.
      */
-    public void remove();
+    void remove();
 }
