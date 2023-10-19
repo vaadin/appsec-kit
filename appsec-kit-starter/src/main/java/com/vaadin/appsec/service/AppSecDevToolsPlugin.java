@@ -38,11 +38,11 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
 
         if (!scanEventRegistrations.containsKey(devToolsInterface)) {
             var registration = appSecService.addScanEventListener(event -> {
-                LOGGER.debug("Scan completed");
                 var vulnerabilityCount = event.getNewVulnerabilities().size();
                 sendScanResult(vulnerabilityCount, devToolsInterface);
-                LOGGER.debug("Vulnerabilities sent to the client: "
-                        + vulnerabilityCount);
+                LOGGER.debug(
+                        "Scan event received. Vulnerabilities sent to the client: "
+                                + vulnerabilityCount);
             });
             scanEventRegistrations.put(devToolsInterface, registration);
             LOGGER.debug("Scan event listener added");
