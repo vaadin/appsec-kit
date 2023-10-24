@@ -89,14 +89,14 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
             var registrationsToRemove = uiScanEventRegistrations.keySet()
                     .stream().filter(ui -> !uis.contains(ui))
                     .collect(Collectors.toList());
-            // In case of page unload (page refresh, closing a tab or a window)
-            // if the session contains only one UI (the currently unloading one)
-            // then we remove that UI and the session from the registrations
-            // because in case of closing a tab or a window these will be
-            // removed, and we don't want to store them anymore. In case of page
-            // refresh a new UI will be created and stored in a newly added
-            // session registrations.
             if (command.equals(APPSEC_KIT_UNLOAD) && uis.size() == 1) {
+                // In case of page unload (page refresh, closing a tab or a
+                // window) if the session contains only one UI (the currently
+                // unloading one) then we remove that UI and the session from
+                // the registrations because in case of closing a tab or a
+                // window these will be removed, and we don't want to store them
+                // anymore. In case of page refresh a new UI will be created and
+                // stored in a newly added session registrations.
                 registrationsToRemove.add(uis.get(0));
             }
             registrationsToRemove.forEach(ui -> {
