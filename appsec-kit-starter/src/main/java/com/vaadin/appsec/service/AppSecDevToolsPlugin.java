@@ -95,8 +95,9 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
                 // unloading one) then we remove that UI and the session from
                 // the registrations because in case of closing a tab or a
                 // window these will be removed, and we don't want to store them
-                // anymore. In case of page refresh a new UI will be created and
-                // stored in a newly added session registrations.
+                // anymore. In case of a page refresh, after the removal, a new
+                // UI will be created, and we will store that in a newly added
+                // session in the registrations.
                 registrationsToRemove.add(uis.get(0));
             }
             registrationsToRemove.forEach(ui -> {
