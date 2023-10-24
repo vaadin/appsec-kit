@@ -8,10 +8,8 @@
  */
 package com.vaadin.appsec.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +18,7 @@ import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.Registration;
 import com.vaadin.base.devserver.DevToolsInterface;
 import com.vaadin.base.devserver.DevToolsMessageHandler;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.server.VaadinSession;
 
 import elemental.json.Json;
 import elemental.json.JsonObject;
@@ -33,17 +29,25 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecDevToolsPlugin.class);
 
-    private static final String APPSEC_KIT_INIT = "appsec-kit-init";
-    private static final String APPSEC_KIT_UNLOAD = "appsec-kit-unload";
-
-    private final Map<String, Map<UI, Registration>> sessionScanEventRegistrations = new HashMap<>();
+    private final Map<DevToolsInterface, Registration> scanEventRegistrations = new HashMap<>();
 
     @Override
     public void handleConnect(DevToolsInterface devToolsInterface) {
-        devToolsInterface.send(APPSEC_KIT_INIT, Json.createObject());
-        handleRegistrations(APPSEC_KIT_INIT, devToolsInterface);
-        sendScanResult(
-                AppSecService.getInstance().getNewVulnerabilities().size(),
+        devToolsInterface.send("appsec-kit-init", Json.createObject());
+        var appSecService = AppSecService.getInstance();
+
+        if (!scanEventRegistrations.containsKey(devToolsInterface)) {
+            var registration = appSecService.addScanEventListener(event -> {
+                var vulnerabilityCount = event.getNewVulnerabilities().size();
+                sendScanResult(vulnerabilityCount, devToolsInterface);
+                LOGGER.debug(
+                        "Scan event received. Vulnerabilities sent to the client: "
+                                + vulnerabilityCount);
+            });
+            scanEventRegistrations.put(devToolsInterface, registration);
+            LOGGER.debug("Scan event listener added");
+        }
+        sendScanResult(appSecService.getNewVulnerabilities().size(),
                 devToolsInterface);
     }
 
@@ -51,65 +55,19 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     public boolean handleMessage(String command, JsonObject data,
             DevToolsInterface devToolsInterface) {
         LOGGER.debug("Command received: " + command);
-        if (command.equals(APPSEC_KIT_UNLOAD)) {
-            handleRegistrations(command, devToolsInterface);
-            return true;
-        } else {
-            return false; // Not a plugin command
-        }
+        return true;
     }
 
-    private void handleRegistrations(String command,
-            DevToolsInterface devToolsInterface) {
-        var session = VaadinSession.getCurrent();
-        session.access(() -> {
-            var sessionId = session.getSession().getId();
-            var uis = new ArrayList<>(session.getUIs());
-            var uiScanEventRegistrations = sessionScanEventRegistrations
-                    .computeIfAbsent(sessionId, s -> new HashMap<>());
-
-            // Adds the scan event listeners and stores the registrations
-            uis.forEach(ui -> {
-                if (!uiScanEventRegistrations.containsKey(ui)) {
-                    var appSecService = AppSecService.getInstance();
-                    var registration = appSecService
-                            .addScanEventListener(event -> {
-                                var count = event.getNewVulnerabilities()
-                                        .size();
-                                sendScanResult(count, devToolsInterface);
-                                LOGGER.debug(
-                                        "Scan event received. Vulnerabilities sent to the client: "
-                                                + count);
-                            });
-                    uiScanEventRegistrations.put(ui, registration);
-                }
-            });
-
-            // Removes scan event listeners and registrations
-            var registrationsToRemove = uiScanEventRegistrations.keySet()
-                    .stream().filter(ui -> !uis.contains(ui))
-                    .collect(Collectors.toList());
-            if (command.equals(APPSEC_KIT_UNLOAD) && uis.size() == 1) {
-                // In case of page unload (page refresh, closing a tab or a
-                // window) if the session contains only one UI (the currently
-                // unloading one) then we remove that UI and the session from
-                // the registrations because in case of closing a tab or a
-                // window these will be removed, and we don't want to store them
-                // anymore. In case of a page refresh, after the removal, a new
-                // UI will be created, and we will store that in a newly added
-                // session in the registrations.
-                registrationsToRemove.add(uis.get(0));
-            }
-            registrationsToRemove.forEach(ui -> {
-                var registration = uiScanEventRegistrations.get(ui);
-                registration.remove();
-                uiScanEventRegistrations.remove(ui);
-                if (uiScanEventRegistrations.isEmpty()) {
-                    sessionScanEventRegistrations.remove(sessionId);
-                }
-            });
-        });
-    }
+    // TODO UIse when handleDisconnect is available
+//    @Override
+//    public void handleDisconnect(DevToolsInterface devToolsInterface) {
+//        if (scanEventRegistrations.containsKey(devToolsInterface)) {
+//            var registration = scanEventRegistrations.get(devToolsInterface);
+//            registration.remove();
+//            scanEventRegistrations.remove(devToolsInterface);
+//            LOGGER.debug("Scan event listener removed");
+//        }
+//    }
 
     private void sendScanResult(int vulnerabilityCount,
             DevToolsInterface devToolsInterface) {

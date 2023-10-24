@@ -66,9 +66,6 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
 const plugin: DevToolsPlugin = {
     init: (devToolsInterface: DevToolsInterface): void => {
         devToolsInterface.addTab("AppSec Kit", "appsec-kit-plugin");
-        window.addEventListener("beforeunload", () => {
-            devToolsInterface.send("appsec-kit-unload", {});
-        });
     }
 };
 (window as any).Vaadin.devToolsPlugins.push(plugin);
