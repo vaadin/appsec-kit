@@ -29,7 +29,7 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecDevToolsPlugin.class);
 
-    private final Map<DevToolsInterface, Registration> scanEventRegistrations = new HashMap<>();
+    protected final Map<DevToolsInterface, Registration> scanEventRegistrations = new HashMap<>();
 
     @Override
     public void handleConnect(DevToolsInterface devToolsInterface) {
@@ -58,16 +58,15 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         return true;
     }
 
-    // TODO UIse when handleDisconnect is available
 //    @Override
-//    public void handleDisconnect(DevToolsInterface devToolsInterface) {
-//        if (scanEventRegistrations.containsKey(devToolsInterface)) {
-//            var registration = scanEventRegistrations.get(devToolsInterface);
-//            registration.remove();
-//            scanEventRegistrations.remove(devToolsInterface);
-//            LOGGER.debug("Scan event listener removed");
-//        }
-//    }
+    public void handleDisconnect(DevToolsInterface devToolsInterface) {
+        if (scanEventRegistrations.containsKey(devToolsInterface)) {
+            var registration = scanEventRegistrations.get(devToolsInterface);
+            registration.remove();
+            scanEventRegistrations.remove(devToolsInterface);
+            LOGGER.debug("Scan event listener removed");
+        }
+    }
 
     private void sendScanResult(int vulnerabilityCount,
             DevToolsInterface devToolsInterface) {
