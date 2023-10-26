@@ -87,6 +87,15 @@ public class AppSecDevToolsPluginTest {
 
         appSecDevToolsPlugin.handleConnect(devToolsInterface);
 
+        verify(devToolsInterface, times(2)).send(commandCaptor.capture(),
+                jsonObjectCaptor.capture());
+        var commands = commandCaptor.getAllValues();
+        assertEquals("appsec-kit-init", commands.get(0));
+        assertEquals("appsec-kit-scan", commands.get(1));
+        var values = jsonObjectCaptor.getAllValues();
+        assertNotNull(values.get(0));
+        assertEquals(1, values.get(1).get("vulnerabilityCount").asNumber());
+
         verify(appSecServiceInstance)
                 .addScanEventListener(appSecScanEventListenerCaptor.capture());
         var appSecScanEventListener = appSecScanEventListenerCaptor.getValue();
@@ -94,14 +103,10 @@ public class AppSecDevToolsPluginTest {
 
         verify(devToolsInterface, times(3)).send(commandCaptor.capture(),
                 jsonObjectCaptor.capture());
-        var commands = commandCaptor.getAllValues();
-        assertEquals("appsec-kit-init", commands.get(0));
-        assertEquals("appsec-kit-scan", commands.get(1));
-        assertEquals("appsec-kit-scan", commands.get(2));
-        var data = jsonObjectCaptor.getAllValues();
-        assertNotNull(data.get(0));
-        assertEquals(1, data.get(1).get("vulnerabilityCount").asNumber());
-        assertEquals(2, data.get(2).get("vulnerabilityCount").asNumber());
+        var command = commandCaptor.getValue();
+        assertEquals("appsec-kit-scan", command);
+        var value = jsonObjectCaptor.getValue();
+        assertEquals(2, value.get("vulnerabilityCount").asNumber());
     }
 
     @Test
