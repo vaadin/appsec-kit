@@ -8,6 +8,7 @@
  */
 package com.vaadin.appsec.service;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.AfterEach;
@@ -23,16 +24,15 @@ import com.vaadin.appsec.backend.AppSecScanEvent;
 import com.vaadin.appsec.backend.AppSecScanEventListener;
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.Registration;
+import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.base.devserver.DevToolsInterface;
 
-import elemental.json.Json;
+import elemental.json.JsonObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -44,16 +44,30 @@ public class AppSecDevToolsPluginTest {
     private DevToolsInterface devToolsInterface;
     private MockedStatic<AppSecService> appSecService;
     private AppSecService appSecServiceInstance;
+    private Registration registration;
 
     @Captor
     private ArgumentCaptor<AppSecScanEventListener> appSecScanEventListenerCaptor;
+    @Captor
+    private ArgumentCaptor<String> commandCaptor;
+    @Captor
+    private ArgumentCaptor<JsonObject> jsonObjectCaptor;
 
     @BeforeEach
     public void setup() {
         appSecDevToolsPlugin = new AppSecDevToolsPlugin();
         devToolsInterface = mock(DevToolsInterface.class);
-        appSecService = mockStatic(AppSecService.class);
+
         appSecServiceInstance = mock(AppSecService.class);
+        registration = mock(Registration.class);
+        when(appSecServiceInstance.addScanEventListener(any()))
+                .thenReturn(registration);
+        var vulnerabilities = Collections
+                .singletonList(new Vulnerability("CVE-000"));
+        when(appSecServiceInstance.getNewVulnerabilities())
+                .thenReturn(vulnerabilities);
+
+        appSecService = mockStatic(AppSecService.class);
         appSecService.when(AppSecService::getInstance)
                 .thenReturn(appSecServiceInstance);
     }
@@ -65,52 +79,11 @@ public class AppSecDevToolsPluginTest {
 
     @Test
     public void handleConnect_sendsCommands() {
-        when(appSecServiceInstance.getNewVulnerabilities())
-                .thenReturn(Collections.emptyList());
-        when(appSecServiceInstance.addScanEventListener(any()))
-                .thenReturn(() -> {
-                });
-
-        appSecDevToolsPlugin.handleConnect(devToolsInterface);
-
-        verify(devToolsInterface, times(2)).send(anyString(), any());
-    }
-
-    @Test
-    public void handleConnect_addsScanEventListener() {
-        when(appSecServiceInstance.getNewVulnerabilities())
-                .thenReturn(Collections.emptyList());
-        when(appSecServiceInstance.addScanEventListener(any()))
-                .thenReturn(() -> {
-                });
-
-        appSecDevToolsPlugin.handleConnect(devToolsInterface);
-
-        verify(appSecServiceInstance, times(1)).addScanEventListener(any());
-        assertEquals(1, appSecDevToolsPlugin.scanEventRegistrations.size());
-    }
-
-    @Test
-    public void handleConnect_doesntAddScanEventListener_ifAlreadyAdded() {
-        when(appSecServiceInstance.getNewVulnerabilities())
-                .thenReturn(Collections.emptyList());
-        appSecDevToolsPlugin.scanEventRegistrations.put(devToolsInterface,
-                () -> {
-                });
-
-        appSecDevToolsPlugin.handleConnect(devToolsInterface);
-
-        verify(appSecServiceInstance, never()).addScanEventListener(any());
-        assertEquals(1, appSecDevToolsPlugin.scanEventRegistrations.size());
-    }
-
-    @Test
-    public void scanEventListener_sendsScanResult() {
+        var vulnerabilities = Arrays.asList(new Vulnerability("CVE-001"),
+                new Vulnerability("CVE-002"));
         var appSecScanEvent = mock(AppSecScanEvent.class);
         when(appSecScanEvent.getNewVulnerabilities())
-                .thenReturn(Collections.emptyList());
-        when(appSecServiceInstance.getNewVulnerabilities())
-                .thenReturn(Collections.emptyList());
+                .thenReturn(vulnerabilities);
 
         appSecDevToolsPlugin.handleConnect(devToolsInterface);
 
@@ -119,38 +92,36 @@ public class AppSecDevToolsPluginTest {
         var appSecScanEventListener = appSecScanEventListenerCaptor.getValue();
         appSecScanEventListener.scanCompleted(appSecScanEvent);
 
-        verify(devToolsInterface, times(3)).send(anyString(), any());
+        verify(devToolsInterface, times(3)).send(commandCaptor.capture(),
+                jsonObjectCaptor.capture());
+        var commands = commandCaptor.getAllValues();
+        assertEquals("appsec-kit-init", commands.get(0));
+        assertEquals("appsec-kit-scan", commands.get(1));
+        assertEquals("appsec-kit-scan", commands.get(2));
+        var data = jsonObjectCaptor.getAllValues();
+        assertNotNull(data.get(0));
+        assertEquals(1, data.get(1).get("vulnerabilityCount").asNumber());
+        assertEquals(2, data.get(2).get("vulnerabilityCount").asNumber());
     }
 
     @Test
-    public void handleMessage_returnsTrue() {
-        var result = appSecDevToolsPlugin.handleMessage("command",
-                Json.createObject(), devToolsInterface);
-        assertTrue(result);
+    public void handleConnect_doesntAddScanEventListener_ifAlreadyAdded() {
+        appSecDevToolsPlugin.handleConnect(devToolsInterface);
+        appSecDevToolsPlugin.handleConnect(devToolsInterface);
+
+        verify(appSecServiceInstance, times(1)).addScanEventListener(any());
     }
 
     @Test
     public void handleDisconnect_removesScanEventListener() {
-        var registration = mock(Registration.class);
-        appSecDevToolsPlugin.scanEventRegistrations.put(devToolsInterface,
-                registration);
-
-        appSecDevToolsPlugin.handleDisconnect(devToolsInterface);
-
-        verify(registration, times(1)).remove();
-        assertEquals(0, appSecDevToolsPlugin.scanEventRegistrations.size());
-    }
-
-    @Test
-    public void handleDisconnect_doesntRemoveScanEventListener_ifAlreadyRemoved() {
         var devToolsInterface1 = mock(DevToolsInterface.class);
-        var registration = mock(Registration.class);
-        appSecDevToolsPlugin.scanEventRegistrations.put(devToolsInterface1,
-                registration);
 
+        appSecDevToolsPlugin.handleConnect(devToolsInterface);
+        appSecDevToolsPlugin.handleConnect(devToolsInterface1);
         appSecDevToolsPlugin.handleDisconnect(devToolsInterface);
+        appSecDevToolsPlugin.handleConnect(devToolsInterface1);
 
-        verify(registration, never()).remove();
-        assertEquals(1, appSecDevToolsPlugin.scanEventRegistrations.size());
+        verify(appSecServiceInstance, times(2)).addScanEventListener(any());
+        verify(registration, times(1)).remove();
     }
 }

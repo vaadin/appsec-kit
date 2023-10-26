@@ -8,8 +8,8 @@
  */
 package com.vaadin.appsec.service;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecDevToolsPlugin.class);
 
-    protected final Map<DevToolsInterface, Registration> scanEventRegistrations = new HashMap<>();
+    private final Map<DevToolsInterface, Registration> scanEventRegistrations = new ConcurrentHashMap<>();
 
     @Override
     public void handleConnect(DevToolsInterface devToolsInterface) {
@@ -54,16 +54,14 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     @Override
     public boolean handleMessage(String command, JsonObject data,
             DevToolsInterface devToolsInterface) {
-        LOGGER.debug("Command received: " + command);
-        return true;
+        return false;
     }
 
     // @Override
     public void handleDisconnect(DevToolsInterface devToolsInterface) {
-        if (scanEventRegistrations.containsKey(devToolsInterface)) {
-            var registration = scanEventRegistrations.get(devToolsInterface);
+        var registration = scanEventRegistrations.remove(devToolsInterface);
+        if (registration != null) {
             registration.remove();
-            scanEventRegistrations.remove(devToolsInterface);
             LOGGER.debug("Scan event listener removed");
         }
     }
