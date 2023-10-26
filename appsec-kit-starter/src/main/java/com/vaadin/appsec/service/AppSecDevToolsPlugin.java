@@ -57,7 +57,7 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         return false;
     }
 
-    // @Override
+    @Override
     public void handleDisconnect(DevToolsInterface devToolsInterface) {
         var registration = scanEventRegistrations.remove(devToolsInterface);
         if (registration != null) {
