@@ -27,8 +27,10 @@ import com.vaadin.appsec.backend.Registration;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.base.devserver.DevToolsInterface;
 
+import elemental.json.Json;
 import elemental.json.JsonObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -115,6 +117,15 @@ public class AppSecDevToolsPluginTest {
         appSecDevToolsPlugin.handleConnect(devToolsInterface);
 
         verify(appSecServiceInstance, times(1)).addScanEventListener(any());
+    }
+
+    @Test
+    public void handleMessage_returnsFalse() {
+        appSecDevToolsPlugin.handleConnect(devToolsInterface);
+        var result = appSecDevToolsPlugin.handleMessage("test-command",
+                Json.createObject(), devToolsInterface);
+
+        assertFalse(result);
     }
 
     @Test
