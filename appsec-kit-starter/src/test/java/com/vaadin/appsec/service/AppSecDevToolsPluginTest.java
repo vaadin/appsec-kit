@@ -125,6 +125,7 @@ public class AppSecDevToolsPluginTest {
         appSecDevToolsPlugin.handleConnect(devToolsInterface1);
         appSecDevToolsPlugin.handleDisconnect(devToolsInterface);
         appSecDevToolsPlugin.handleConnect(devToolsInterface1);
+        appSecDevToolsPlugin.handleDisconnect(devToolsInterface);
 
         verify(appSecServiceInstance, times(2)).addScanEventListener(any());
         verify(registration, times(1)).remove();
