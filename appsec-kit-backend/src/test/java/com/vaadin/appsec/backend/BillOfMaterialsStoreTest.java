@@ -12,8 +12,6 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
-
 import static org.junit.Assert.assertEquals;
 
 public class BillOfMaterialsStoreTest {
@@ -23,12 +21,10 @@ public class BillOfMaterialsStoreTest {
     @Test
     public void readBomFile_componentsCountIsCorrect() throws Exception {
         BillOfMaterialsStore store = new BillOfMaterialsStore();
-        store.readBomFile(
-                Paths.get(BillOfMaterialsStoreTest.class
-                        .getResource(TEST_RESOURCE_BOM_PATH).toURI()),
-                Ecosystem.MAVEN);
+        store.readBomFile(Paths.get(BillOfMaterialsStoreTest.class
+                .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
 
-        int components = store.getBom(Ecosystem.MAVEN).getComponents().size();
+        int components = store.getBom().getComponents().size();
         assertEquals(2, components);
     }
 }

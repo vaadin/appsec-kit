@@ -7,16 +7,14 @@
     <parent>
         <artifactId>appsec-kit</artifactId>
         <groupId>com.vaadin</groupId>
-        <version>1.1-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>appsec-kit-v8</artifactId>
     <name>AppSec Kit Vaadin 8</name>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <vaadin.version>8.0.0</vaadin.version>
     </properties>
 
     <dependencies>
@@ -29,7 +27,7 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-server</artifactId>
-            <version>${vaadin8.version}</version>
+            <version>${vaadin.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -66,6 +64,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <resources>
             <resource>
@@ -73,6 +72,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -83,21 +83,30 @@
                         <index>false</index>
                         <manifest>
                             <addClasspath>false</addClasspath>
-                            <addDefaultImplementationEntries>false</addDefaultImplementationEntries>
+                            <addDefaultImplementationEntries>false
+                            </addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
                             <!-- Package format version - do not change -->
                             <Vaadin-Package-Version>1</Vaadin-Package-Version>
-                            <Implementation-Version>${project.version}</Implementation-Version>
+                            <Implementation-Version>${project.version}
+                            </Implementation-Version>
                             <!-- Must not change this because of the Directory -->
-                            <Implementation-Title>${project.name}</Implementation-Title>
-                            <Implementation-Vendor>Vaadin Ltd</Implementation-Vendor>
-                            <Vaadin-License-Title>Vaadin Commercial License and Service Terms</Vaadin-License-Title>
-                            <Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
+                            <Implementation-Title>${project.name}
+                            </Implementation-Title>
+                            <Implementation-Vendor>Vaadin Ltd
+                            </Implementation-Vendor>
+                            <Vaadin-License-Title>Vaadin Commercial License and
+                                Service Terms
+                            </Vaadin-License-Title>
+                            <Vaadin-Addon>
+                                ${project.artifactId}-${project.version}.jar
+                            </Vaadin-Addon>
                         </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>

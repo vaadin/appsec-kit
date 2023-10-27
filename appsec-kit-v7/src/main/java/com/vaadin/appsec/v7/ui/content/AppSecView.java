@@ -122,7 +122,7 @@ public class AppSecView extends AbstractAppSecContent {
         removeScanListener();
         scanListener = AppSecService.getInstance()
                 .addScanEventListener(this::handleScanEvent);
-        LOGGER.debug("Scan event listener added for AppSec view");
+        LOGGER.debug("Scan event listener added");
     }
 
     @Override

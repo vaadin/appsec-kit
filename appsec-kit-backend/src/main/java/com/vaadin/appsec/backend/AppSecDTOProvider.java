@@ -24,7 +24,6 @@ import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.cyclonedx.model.Component;
-import org.cyclonedx.model.Property;
 import us.springett.cvss.Cvss;
 
 import com.vaadin.appsec.backend.model.AppSecData;
@@ -41,8 +40,6 @@ import com.vaadin.appsec.backend.model.osv.response.Event;
 import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Range;
 import com.vaadin.appsec.backend.model.osv.response.Severity;
-
-import static com.vaadin.appsec.backend.BillOfMaterialsStore.DEVELOPMENT_PROPERTY_NAME;
 
 /**
  * Helper class to provide bill of materials and vulnerabilities as DTOs for use
@@ -69,17 +66,10 @@ class AppSecDTOProvider {
                 .getVulnerabilities();
 
         final List<org.cyclonedx.model.Dependency> dependencies = new ArrayList<>(
-                bomStore.getBom(Ecosystem.MAVEN).getDependencies());
-        if (bomStore.getBom(Ecosystem.NPM) != null) {
-            dependencies
-                    .addAll(bomStore.getBom(Ecosystem.NPM).getDependencies());
-        }
+                bomStore.getBom().getDependencies());
 
         final List<Component> components = new ArrayList<>(
-                bomStore.getBom(Ecosystem.MAVEN).getComponents());
-        if (bomStore.getBom(Ecosystem.NPM) != null) {
-            components.addAll(bomStore.getBom(Ecosystem.NPM).getComponents());
-        }
+                bomStore.getBom().getComponents());
 
         return components.stream().map(component -> {
             Ecosystem ecosystem = AppSecUtils.getEcosystem(component);
@@ -95,12 +85,6 @@ class AppSecDTOProvider {
                                             .equals(component.getBomRef())))
                     .findFirst().ifPresent(parent -> dependency
                             .setParentBomRef(parent.getRef()));
-
-            // Verifies and sets if a npm dependency is a dev dependency
-            // For Maven dependencies this value is always false
-            if (dependency.getEcosystem() == Ecosystem.NPM) {
-                dependency.setDevDependency(isDevDependency(component));
-            }
 
             updateVulnerabilityStatistics(dependency, vulnerabilities);
 
@@ -274,16 +258,6 @@ class AppSecDTOProvider {
         vulnerabilityDTO.setReferenceUrls(urls);
 
         return vulnerabilityDTO;
-    }
-
-    private boolean isDevDependency(Component component) {
-        for (Property property : component.getProperties()) {
-            if (property.getName().equals(DEVELOPMENT_PROPERTY_NAME)
-                    && property.getValue().equals("true")) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void updateVulnerabilityStatistics(Dependency dependency,

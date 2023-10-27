@@ -48,7 +48,7 @@
     ],
     "component" : {
       "group" : "com.vaadin",
-      "name" : "appsec-kit-demo-v24-spring",
+      "name" : "appsec-kit-demo-v8-spring",
       "version" : "1.1-SNAPSHOT",
       "description" : "A parent POM for all artifacts by Vaadin Ltd.",
       "licenses" : [
@@ -59,11 +59,11 @@
           }
         }
       ],
-      "purl" : "pkg:maven/com.vaadin/appsec-kit-demo-v24-spring@1.1-SNAPSHOT?type=jar",
+      "purl" : "pkg:maven/com.vaadin/appsec-kit-demo-v8-spring@1.1-SNAPSHOT?type=jar",
       "externalReferences" : [
         {
           "type" : "website",
-          "url" : "http://vaadin.com/appsec-kit/appsec-kit-demo-v24-spring"
+          "url" : "http://vaadin.com/appsec-kit/appsec-kit-demo-v8-spring"
         },
         {
           "type" : "distribution",
@@ -71,11 +71,11 @@
         },
         {
           "type" : "vcs",
-          "url" : "https://github.com/vaadin/maven-integration/appsec-kit/appsec-kit-demo-v24-spring"
+          "url" : "https://github.com/vaadin/maven-integration/appsec-kit/appsec-kit-demo-v8-spring"
         }
       ],
       "type" : "library",
-      "bom-ref" : "pkg:maven/com.vaadin/appsec-kit-demo-v24-spring@1.1-SNAPSHOT?type=jar"
+      "bom-ref" : "pkg:maven/com.vaadin/appsec-kit-demo-v8-spring@1.1-SNAPSHOT?type=jar"
     },
     "properties" : [
       {

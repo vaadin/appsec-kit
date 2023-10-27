@@ -19,9 +19,6 @@ import java.time.Duration;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Configuration settings for AppSec Kit.
  * <p>
@@ -29,9 +26,6 @@ import org.slf4j.LoggerFactory;
  * {@link AppSecService#setConfiguration(AppSecConfiguration).
  */
 public class AppSecConfiguration implements Serializable {
-
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(AppSecConfiguration.class);
 
     static final String DATA_PATH_PROPERTY = "vaadin.appsec.data";
 
@@ -43,19 +37,13 @@ public class AppSecConfiguration implements Serializable {
     static final String DEFAULT_BOM_FILE_PATH = "/resources";
     static final String BOM_MAVEN_PATH_PROPERTY = "vaadin.appsec.bom";
     static final String DEFAULT_BOM_MAVEN_FILE_NAME = "bom.json";
-    static final String BOM_NPM_PATH_PROPERTY = "vaadin.appsec.bom-npm";
-    static final String DEFAULT_BOM_NPM_FILE_NAME = "bom-npm.json";
-    static final String DEFAULT_PACKAGE_JSON_FILE_PATH = "package.json";
 
     private Path dataFilePath;
     private Path bomMavenFilePath;
-    private Path bomNpmFilePath;
-    private Path packageJsonFilePath;
     private ScheduledExecutorService taskExecutor = Executors
             .newSingleThreadScheduledExecutor();
     private Duration autoScanInterval = Duration.ofDays(1);
     private int osvApiRatePerSecond = 25;
-    private boolean includeNpmDevDependencies = true;
 
     /**
      * Gets the data-file path.
@@ -145,91 +133,6 @@ public class AppSecConfiguration implements Serializable {
     }
 
     /**
-     * Gets the npm BOM-file path.
-     *
-     * @return the npm BOM-file path, not {@code null}
-     */
-    public Path getBomNpmFilePath() {
-        if (bomNpmFilePath == null) {
-            String propertyPath = System.getProperty(BOM_NPM_PATH_PROPERTY,
-                    DEFAULT_BOM_FILE_PATH);
-            String bomNpmFile = propertyPath + "/" + DEFAULT_BOM_NPM_FILE_NAME;
-            URL bomNpmFileUrl = AppSecConfiguration.class
-                    .getResource(bomNpmFile);
-            if (bomNpmFileUrl != null) {
-                try {
-                    bomNpmFilePath = Paths.get(bomNpmFileUrl.toURI());
-                } catch (URISyntaxException e) {
-                    throw new AppSecException(
-                            "URI syntax error for npm SBOM file path: "
-                                    + bomNpmFile,
-                            e);
-                } catch (InvalidPathException e) {
-                    throw new AppSecException(
-                            "Invalid npm SBOM file path " + bomNpmFile, e);
-                } catch (FileSystemNotFoundException e) {
-                    // Some web and application servers can use file systems
-                    // which are not supported, therefore a relative path is
-                    // returned
-                    return Paths.get(bomNpmFile);
-                } catch (RuntimeException e) {
-                    throw new AppSecException(
-                            "Error occurred when getting the npm SBOM file path",
-                            e);
-                }
-            } else {
-                LOGGER.warn("npm SBOM file not found on path " + bomNpmFile);
-            }
-        }
-        return bomNpmFilePath;
-    }
-
-    /**
-     * Sets the npm BOM-file path.
-     *
-     * @param bomNpmFilePath
-     *            the npm BOM-file path, not {@code null}
-     */
-    public void setBomNpmFilePath(Path bomNpmFilePath) {
-        if (bomNpmFilePath == null) {
-            throw new IllegalArgumentException(
-                    "The npm BOM-file path cannot be null");
-        }
-        this.bomNpmFilePath = bomNpmFilePath;
-    }
-
-    /**
-     * Gets the package.json file path.
-     *
-     * @return the package.json file path, not {@code null}
-     */
-    public Path getPackageJsonFilePath() {
-        if (packageJsonFilePath == null) {
-            try {
-                packageJsonFilePath = Paths.get(DEFAULT_PACKAGE_JSON_FILE_PATH);
-            } catch (InvalidPathException e) {
-                throw new AppSecException("Invalid package.json file path "
-                        + DEFAULT_PACKAGE_JSON_FILE_PATH, e);
-            }
-        }
-        return packageJsonFilePath;
-    }
-
-    /**
-     * Sets the package.json file path.
-     *
-     * @param packageJsonFilePath
-     *            the package.json file path, not {@code null}
-     */
-    public void setPackageJsonFilePath(Path packageJsonFilePath) {
-        if (packageJsonFilePath == null) {
-            throw new IllegalArgumentException(
-                    "The package.json file path cannot be null");
-        }
-        this.packageJsonFilePath = packageJsonFilePath;
-    }
-
-    /**
      * Gets the executor used to run asynchronous tasks.
      *
      * @return the task executor
@@ -300,40 +203,11 @@ public class AppSecConfiguration implements Serializable {
         this.osvApiRatePerSecond = osvApiRatePerSecond;
     }
 
-    /**
-     * Gets if the npm development dependencies should be included during
-     * vulnerability scanning.
-     *
-     * @return true if the npm development dependencies should be included
-     *         during vulnerability scanning, otherwise false
-     */
-    public boolean isIncludeNpmDevDependencies() {
-        return includeNpmDevDependencies;
-    }
-
-    /**
-     * Sets if the npm development dependencies should be included during
-     * vulnerability scanning.
-     *
-     * @param includeNpmDevDependencies
-     *            true if the npm development dependencies should be included
-     *            during vulnerability scanning, otherwise false
-     */
-    public void setIncludeNpmDevDependencies(
-            boolean includeNpmDevDependencies) {
-        this.includeNpmDevDependencies = includeNpmDevDependencies;
-    }
-
     @Override
     public String toString() {
         return "AppSecConfiguration{" + "dataFilePath=" + dataFilePath
-                + ", bomFilePath=" + bomMavenFilePath
-                + (bomNpmFilePath != null ? ", bomNpmFilePath=" + bomNpmFilePath
-                        : "")
-                + ", packageJsonFilePath=" + packageJsonFilePath
-                + ", taskExecutor=" + taskExecutor + ", autoScanInterval="
-                + autoScanInterval + ", osvApiRatePerSecond="
-                + osvApiRatePerSecond + ", includeNpmDevDependencies="
-                + includeNpmDevDependencies + '}';
+                + ", bomFilePath=" + bomMavenFilePath + ", taskExecutor="
+                + taskExecutor + ", autoScanInterval=" + autoScanInterval
+                + ", osvApiRatePerSecond=" + osvApiRatePerSecond + '}';
     }
 }

@@ -81,13 +81,9 @@ class GitHubService {
 
     static final String FRAMEWORK_RELEASES_URI = "https://api.github.com/repos/vaadin/framework/releases";
 
-    static final String FLOW_RELEASES_URI = "https://api.github.com/repos/vaadin/flow/releases";
-
     static final Pattern FRAMEWORK_7_PATTERN = compile("^7\\.\\d+.\\d+$");
 
     static final Pattern FRAMEWORK_8_PATTERN = compile("^8\\.\\d+.\\d+$");
-
-    static final Pattern FLOW_24_PATTERN = compile("^24\\.\\d+.\\d+$");
 
     static final long NUMBER_OF_LATEST_MAINTAINED_VERSIONS = 4;
 
@@ -101,10 +97,6 @@ class GitHubService {
 
     List<String> getFramework8Versions() {
         return getVersions(FRAMEWORK_8_PATTERN);
-    }
-
-    List<String> getFlow24Versions() {
-        return getVersions(FLOW_24_PATTERN);
     }
 
     private List<String> getVersions(Pattern frameworkVersionPattern) {
@@ -122,15 +114,9 @@ class GitHubService {
     }
 
     void updateReleasesCache() {
-        boolean isFlow = AppSecService.getInstance().isFlow();
         ObjectReader listReader = MAPPER.readerForListOf(GitHubRelease.class);
         try {
-            URL frameworkTagsUrl;
-            if (isFlow) {
-                frameworkTagsUrl = getFlowReleasesUrl();
-            } else {
-                frameworkTagsUrl = getFrameworkReleasesUrl();
-            }
+            URL frameworkTagsUrl = getFrameworkReleasesUrl();
             releasesCache = listReader.readValue(frameworkTagsUrl);
             LOGGER.debug("Vaadin releases cache updated from GitHub "
                     + releasesCache);
@@ -157,14 +143,6 @@ class GitHubService {
         } catch (IOException e) {
             throw new AppSecException("Cannot get Vaadin analysis from GitHub",
                     e);
-        }
-    }
-
-    protected URL getFlowReleasesUrl() {
-        try {
-            return new URL(FLOW_RELEASES_URI);
-        } catch (MalformedURLException e) {
-            throw new AppSecException("Invalid Vaadin Flow releases URL", e);
         }
     }
 

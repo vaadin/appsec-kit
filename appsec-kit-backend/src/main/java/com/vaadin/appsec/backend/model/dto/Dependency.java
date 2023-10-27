@@ -28,7 +28,6 @@ public class Dependency {
     private SeverityLevel severityLevel;
     private Double riskScore;
     private String cvssString;
-    private boolean devDependency = false;
 
     /**
      * Instantiates a new Dependency dto.
@@ -217,27 +216,6 @@ public class Dependency {
      */
     public void setCvssString(String cvssString) {
         this.cvssString = cvssString;
-    }
-
-    /**
-     * Shows if a npm dependency is a dev dependency. For the Maven dependencies
-     * this is always false.
-     *
-     * @return true if the npm dependency is a dev dependency, otherwise false
-     */
-    public boolean isDevDependency() {
-        return devDependency;
-    }
-
-    /**
-     * Sets the npm dev dependency. For the Maven dependencies this should be
-     * set to false.
-     *
-     * @param devDependency
-     *            the npm dev dependency
-     */
-    public void setDevDependency(boolean devDependency) {
-        this.devDependency = devDependency;
     }
 
     @Override

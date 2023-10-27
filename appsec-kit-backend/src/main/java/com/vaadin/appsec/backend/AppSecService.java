@@ -10,25 +10,23 @@ package com.vaadin.appsec.backend;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.cyclonedx.exception.ParseException;
-import org.cyclonedx.model.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +34,6 @@ import com.vaadin.appsec.backend.model.AppSecData;
 import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
 import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
-import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 
 /**
  * Service that provides access to all AppSec Kit features, such as
@@ -46,8 +43,6 @@ public class AppSecService {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecService.class);
-
-    private static final String FLOW_SERVER = "flow-server";
 
     static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -113,40 +108,13 @@ public class AppSecService {
 
         Path bomMavenFilePath = configuration.getBomFilePath();
         try {
-            bomStore.readBomFile(bomMavenFilePath, Ecosystem.MAVEN);
+            bomStore.readBomFile(bomMavenFilePath);
         } catch (ParseException e) {
             throw new AppSecException("Cannot parse the Maven SBOM file: "
                     + bomMavenFilePath.toAbsolutePath(), e);
         }
 
-        if (isFlow()) {
-            if (isPackageJsonPresent()) {
-                Path bomNpmFilePath = configuration.getBomNpmFilePath();
-                try {
-                    bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
-                } catch (ParseException e) {
-                    throw new AppSecException("Cannot parse the npm SBOM file: "
-                            + bomNpmFilePath.toAbsolutePath(), e);
-                }
-            } else {
-                bomStore.readPlatformCombinedBomFile();
-            }
-        }
-
         readOrCreateDataFile();
-    }
-
-    boolean isPackageJsonPresent() {
-        return Files.exists(configuration.getPackageJsonFilePath());
-    }
-
-    boolean isFlow() {
-        return getFlowServerComponent().isPresent();
-    }
-
-    Optional<Component> getFlowServerComponent() {
-        return bomStore.getBom(Ecosystem.MAVEN).getComponents().stream()
-                .filter(comp -> FLOW_SERVER.equals(comp.getName())).findFirst();
     }
 
     /**
@@ -167,16 +135,6 @@ public class AppSecService {
      */
     public List<String> getSupportedFramework8Versions() {
         return githubService.getFramework8Versions();
-    }
-
-    /**
-     * Gets the list of Vaadin Flow 24 versions for which the kit provides
-     * vulnerability assessments.
-     *
-     * @return the list of versions
-     */
-    public List<String> getSupportedFlow24Versions() {
-        return githubService.getFlow24Versions();
     }
 
     /**
@@ -292,6 +250,22 @@ public class AppSecService {
     }
 
     /**
+     * Gets the list of new vulnerabilities. A vulnerability is considered new
+     * if there is no developer assessment data for that vulnerability.
+     *
+     * @return the list of new vulnerabilities
+     */
+    public List<Vulnerability> getNewVulnerabilities() {
+        return getVulnerabilities().stream().filter(this::newVulnerability)
+                .collect(Collectors.toList());
+    }
+
+    private boolean newVulnerability(Vulnerability vulnerability) {
+        String vulnerabilityId = vulnerability.getIdentifier();
+        return !getData().getVulnerabilities().containsKey(vulnerabilityId);
+    }
+
+    /**
      * Gets the data object, reading it from the file-system if the file exists.
      *
      * @return the data object, not {@code null}
@@ -367,7 +341,7 @@ public class AppSecService {
     }
 
     private void checkForInitialization() {
-        if (data == null || bomStore.getBom(Ecosystem.MAVEN) == null) {
+        if (data == null || bomStore.getBom() == null) {
             throw new AppSecException(
                     "The service has not been initialized. You should run the "
                             + "init() method after setting a new configuration");
