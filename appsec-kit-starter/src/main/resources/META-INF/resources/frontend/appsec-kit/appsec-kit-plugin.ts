@@ -10,7 +10,6 @@ import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "@vaadin/flow-frontend/vaadin-dev-tools/vaadin-dev-tools";
 
-let ref: DevToolsInterface;
 const devTools: VaadinDevTools = (window as any).Vaadin.devTools;
 
 @customElement("appsec-kit-plugin")
@@ -67,7 +66,6 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
 const plugin: DevToolsPlugin = {
     init: (devToolsInterface: DevToolsInterface): void => {
         devToolsInterface.addTab("AppSec Kit", "appsec-kit-plugin");
-        ref = devToolsInterface;
     }
 };
 (window as any).Vaadin.devToolsPlugins.push(plugin);
