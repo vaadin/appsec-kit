@@ -12,14 +12,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-import com.vaadin.flow.theme.Theme;
-
 /**
- * The entry point of the Spring Boot application. Use the @PWA annotation make
- * the application installable on phones, tablets and some desktop browsers.
+ * The entry point of the Spring Boot application.
  */
 @SpringBootApplication
-@Theme(themeFolder = "appsec-kit-demo")
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
