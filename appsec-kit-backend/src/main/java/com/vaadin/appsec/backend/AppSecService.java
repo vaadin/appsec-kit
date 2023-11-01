@@ -23,6 +23,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -293,6 +294,22 @@ public class AppSecService {
      */
     public List<Vulnerability> getVulnerabilities() {
         return dtoProvider.getVulnerabilities();
+    }
+
+    /**
+     * Gets the list of new vulnerabilities. A vulnerability is considered new
+     * if there is no developer assessment data for that vulnerability.
+     *
+     * @return the list of new vulnerabilities
+     */
+    public List<Vulnerability> getNewVulnerabilities() {
+        return getVulnerabilities().stream().filter(this::newVulnerability)
+                .collect(Collectors.toList());
+    }
+
+    private boolean newVulnerability(Vulnerability vulnerability) {
+        String vulnerabilityId = vulnerability.getIdentifier();
+        return !getData().getVulnerabilities().containsKey(vulnerabilityId);
     }
 
     /**
