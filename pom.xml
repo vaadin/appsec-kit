@@ -22,8 +22,8 @@
     </licenses>
 
     <properties>
-        <flow.version>2.9.9</flow.version>
-        <flow.components.version>14.10.8</flow.components.version>
+        <flow.version>2.9.10</flow.version>
+        <flow.components.version>14.10.9</flow.components.version>
 
         <spring.boot.version>2.7.16</spring.boot.version>
 
