@@ -158,7 +158,7 @@ public class VulnerabilitiesView extends AbstractAppSecView {
     }
 
     private void buildGrid() {
-        grid = new Grid<>(Vulnerability.class, false);
+        grid = new Grid<>();
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         grid.setMultiSort(true);
         grid.setSizeFull();

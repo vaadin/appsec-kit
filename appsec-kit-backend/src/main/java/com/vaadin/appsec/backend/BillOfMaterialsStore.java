@@ -11,16 +11,11 @@ package com.vaadin.appsec.backend;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
 import org.cyclonedx.exception.ParseException;
 import org.cyclonedx.model.Bom;
 import org.cyclonedx.model.Component;
@@ -40,11 +35,8 @@ class BillOfMaterialsStore {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(BillOfMaterialsStore.class);
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-
     static final String DEVELOPMENT_PROPERTY_NAME = "cdx:npm:package:development";
     private static final String NO_NAME_REF = "-/no-name@-";
-    private static final String PLATFORM_COMBINED_BOM = "https://github.com/vaadin/platform/releases/download/%s/Software.Bill.Of.Materials.json";
 
     private Bom bomMaven;
     private Bom bomNpm;
@@ -71,24 +63,6 @@ class BillOfMaterialsStore {
                     : filterOutNpmDevLibraries(readBomFile(bomFilePath));
         }
         LOGGER.debug("Reading SBOM from file " + bomFilePath.toAbsolutePath());
-    }
-
-    void readPlatformCombinedBomFile() {
-        ObjectReader jsonReader = MAPPER.readerFor(Bom.class);
-        try {
-            URL platformCombinedBomUrl = getPlatformCombinedBomUrl();
-            Bom platformCombinedBom = jsonReader
-                    .readValue(platformCombinedBomUrl);
-            boolean includeNpmDevDeps = AppSecService.getInstance()
-                    .getConfiguration().isIncludeNpmDevDependencies();
-            bomNpm = includeNpmDevDeps
-                    ? filterOutMavenLibraries(platformCombinedBom)
-                    : filterOutNpmDevLibraries(
-                            filterOutMavenLibraries(platformCombinedBom));
-            LOGGER.debug("Reading SBOM from Vaadin platform");
-        } catch (IOException e) {
-            throw new AppSecException("Cannot get Vaadin platform SBOM", e);
-        }
     }
 
     private Bom readBomFile(Path bomFilePath) throws ParseException {
@@ -158,54 +132,5 @@ class BillOfMaterialsStore {
             }
         }
         bom.setDependencies(dependenciesToInclude);
-    }
-
-    private Bom filterOutMavenLibraries(Bom bom) {
-        List<String> mavenPurls = new ArrayList<>();
-        filterOutMavenComponents(bom, mavenPurls);
-        filterOutMavenDependencies(bom, mavenPurls);
-        return bom;
-    }
-
-    private void filterOutMavenComponents(Bom bom, List<String> mavenPurls) {
-        List<Component> componentsToInclude = new ArrayList<>();
-        for (Component component : bom.getComponents()) {
-            boolean isMavenComp = false;
-            Ecosystem ecosystem = AppSecUtils.getEcosystem(component);
-            if (ecosystem == Ecosystem.MAVEN) {
-                isMavenComp = true;
-                mavenPurls.add(component.getPurl());
-            }
-            if (!isMavenComp) {
-                componentsToInclude.add(component);
-            }
-        }
-        bom.setComponents(componentsToInclude);
-    }
-
-    private void filterOutMavenDependencies(Bom bom, List<String> mavenPurls) {
-        List<Dependency> dependenciesToInclude = new ArrayList<>();
-        for (Dependency dependency : bom.getDependencies()) {
-            if (!mavenPurls.contains(dependency.getRef())) {
-                dependenciesToInclude.add(dependency);
-            }
-        }
-        bom.setDependencies(dependenciesToInclude);
-    }
-
-    private URL getPlatformCombinedBomUrl() {
-        String version;
-        Optional<Component> flowServerComponent = AppSecService.getInstance()
-                .getFlowServerComponent();
-        if (flowServerComponent.isPresent()) {
-            version = flowServerComponent.get().getVersion();
-        } else {
-            throw new AppSecException("Cannot get Vaadin platform version.");
-        }
-        try {
-            return new URL(String.format(PLATFORM_COMBINED_BOM, version));
-        } catch (MalformedURLException e) {
-            throw new AppSecException("Invalid Vaadin platform SBOM URL", e);
-        }
     }
 }

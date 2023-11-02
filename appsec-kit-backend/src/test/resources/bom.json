@@ -93,7 +93,7 @@
       "publisher" : "VMware, Inc.",
       "group" : "org.springframework.boot",
       "name" : "spring-boot-starter",
-      "version" : "3.1.4",
+      "version" : "2.7.16",
       "description" : "Core starter, including auto-configuration support, logging and YAML",
       "hashes" : [
         {
@@ -136,7 +136,7 @@
           }
         }
       ],
-      "purl" : "pkg:maven/org.springframework.boot/spring-boot-starter@3.1.4?type=jar",
+      "purl" : "pkg:maven/org.springframework.boot/spring-boot-starter@2.7.16?type=jar",
       "externalReferences" : [
         {
           "type" : "website",
@@ -152,7 +152,7 @@
         }
       ],
       "type" : "library",
-      "bom-ref" : "pkg:maven/org.springframework.boot/spring-boot-starter@3.1.4?type=jar"
+      "bom-ref" : "pkg:maven/org.springframework.boot/spring-boot-starter@2.7.16?type=jar"
     },
     {
       "group" : "org.yaml",
@@ -225,7 +225,7 @@
   ],
   "dependencies": [
     {
-      "ref" : "pkg:maven/org.springframework.boot/spring-boot-starter@3.1.4?type=jar",
+      "ref" : "pkg:maven/org.springframework.boot/spring-boot-starter@2.7.16?type=jar",
       "dependsOn" : [
         "pkg:maven/org.yaml/snakeyaml@1.33?type=jar"
       ]

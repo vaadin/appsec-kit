@@ -10,12 +10,12 @@ package com.vaadin.appsec.backend;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -120,68 +120,44 @@ public class AppSecService {
                     + bomMavenFilePath.toAbsolutePath(), e);
         }
 
-        if (isFlow()) {
-            if (bomNpmFileExists()) {
-                Path bomNpmFilePath = configuration.getBomNpmFilePath();
-                try {
-                    bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
-                } catch (ParseException e) {
-                    throw new AppSecException("Cannot parse the npm SBOM file: "
-                            + bomNpmFilePath.toAbsolutePath(), e);
-                }
-            } else {
-                bomStore.readPlatformCombinedBomFile();
-            }
+        Path bomNpmFilePath = configuration.getBomNpmFilePath();
+        try {
+            bomStore.readBomFile(bomNpmFilePath, Ecosystem.NPM);
+        } catch (ParseException e) {
+            throw new AppSecException("Cannot parse the npm SBOM file: "
+                    + bomNpmFilePath.toAbsolutePath(), e);
         }
 
         readOrCreateDataFile();
     }
 
-    boolean isFlow() {
-        return getFlowServerComponent().isPresent();
-    }
-
-    boolean bomNpmFileExists() {
-        Path bomNpmFilePath = configuration.getBomNpmFilePath();
-        if (bomNpmFilePath != null) {
-            return Files.exists(bomNpmFilePath);
+    /**
+     * Gets the list of Vaadin Flow versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    public List<String> getSupportedFlowVersions() {
+        Optional<Component> flowServerComponent = getFlowServerComponent();
+        if (flowServerComponent.isPresent()) {
+            String flowServerVersion = flowServerComponent.get().getVersion();
+            if (flowServerVersion.startsWith("23.")) {
+                return githubService.getFlow23Versions();
+            } else if (flowServerVersion.startsWith("2.")) {
+                return githubService.getFlow14Versions();
+            } else {
+                LOGGER.warn("Not supported flow-server version: "
+                        + flowServerVersion);
+            }
+        } else {
+            LOGGER.warn("flow-server dependency not found in Maven SBOM file");
         }
-        return false;
+        return Collections.emptyList();
     }
 
-    Optional<Component> getFlowServerComponent() {
+    private Optional<Component> getFlowServerComponent() {
         return bomStore.getBom(Ecosystem.MAVEN).getComponents().stream()
                 .filter(comp -> FLOW_SERVER.equals(comp.getName())).findFirst();
-    }
-
-    /**
-     * Gets the list of Vaadin Framework 7 versions for which the kit provides
-     * vulnerability assessments.
-     *
-     * @return the list of versions
-     */
-    public List<String> getSupportedFramework7Versions() {
-        return githubService.getFramework7Versions();
-    }
-
-    /**
-     * Gets the list of Vaadin Framework 8 versions for which the kit provides
-     * vulnerability assessments.
-     *
-     * @return the list of versions
-     */
-    public List<String> getSupportedFramework8Versions() {
-        return githubService.getFramework8Versions();
-    }
-
-    /**
-     * Gets the list of Vaadin Flow 24 versions for which the kit provides
-     * vulnerability assessments.
-     *
-     * @return the list of versions
-     */
-    public List<String> getSupportedFlow24Versions() {
-        return githubService.getFlow24Versions();
     }
 
     /**
@@ -189,8 +165,7 @@ public class AppSecService {
      * coming from transitive dependencies of the current maintained Vaadin
      * versions.
      *
-     * @see #getSupportedFramework7Versions()
-     * @see #getSupportedFramework8Versions()
+     * @see #getSupportedFlowVersions()
      * @return the vulnerability analysis
      */
     public VulnerabilityAnalysis getVulnerabilityAnalysis() {

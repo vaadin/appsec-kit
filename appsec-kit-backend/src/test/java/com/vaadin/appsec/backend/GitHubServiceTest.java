@@ -25,14 +25,10 @@ import static org.junit.Assert.assertEquals;
 
 public class GitHubServiceTest {
 
-    static final String TEST_RESOURCE_BOM_PATH = "/bom.json";
+    static final String TEST_RESOURCE_MAVEN_BOM_PATH = "/bom.json";
+    static final String TEST_RESOURCE_NPM_BOM_PATH = "/bom-npm.json";
 
     static class TestGitHubService extends GitHubService {
-
-        @Override
-        protected URL getFrameworkReleasesUrl() {
-            return getClass().getClassLoader().getResource("releases.json");
-        }
 
         @Override
         protected URL getFlowReleasesUrl() {
@@ -52,40 +48,32 @@ public class GitHubServiceTest {
         service = new TestGitHubService();
 
         AppSecConfiguration configuration = new AppSecConfiguration();
-        configuration.setBomFilePath(Paths.get(AppSecServiceTest.class
-                .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
+        configuration.setBomFilePath(Paths.get(GitHubServiceTest.class
+                .getResource(TEST_RESOURCE_MAVEN_BOM_PATH).toURI()));
+        configuration.setBomNpmFilePath(Paths.get(GitHubServiceTest.class
+                .getResource(TEST_RESOURCE_NPM_BOM_PATH).toURI()));
         AppSecService.getInstance().setConfiguration(configuration);
         AppSecService.getInstance().init();
     }
 
     @Test
-    public void getFramework7Versions() {
-        List<String> versions = service.getFramework7Versions();
+    public void getFlow14Versions() {
+        List<String> versions = service.getFlow14Versions();
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
                 versions.size());
         versions.forEach(
-                version -> MatcherAssert.assertThat(version, startsWith("7.")));
+                version -> MatcherAssert.assertThat(version, startsWith("14.")));
     }
 
     @Test
-    public void getFramework8Versions() {
-        List<String> versions = service.getFramework8Versions();
-
-        assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
-                versions.size());
-        versions.forEach(
-                version -> MatcherAssert.assertThat(version, startsWith("8.")));
-    }
-
-    @Test
-    public void getFlow24Versions() {
-        List<String> versions = service.getFlow24Versions();
+    public void getFlow23Versions() {
+        List<String> versions = service.getFlow23Versions();
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
                 versions.size());
         versions.forEach(version -> MatcherAssert.assertThat(version,
-                startsWith("24.")));
+                startsWith("23.")));
     }
 
     @Test
