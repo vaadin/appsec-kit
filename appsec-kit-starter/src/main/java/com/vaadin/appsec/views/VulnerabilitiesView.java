@@ -28,7 +28,7 @@ import com.vaadin.flow.function.ValueProvider;
 /**
  * Vulnerabilities tab view contains a detailed list of vulnerabilities.
  */
-public class VulnerabilitiesTab extends AbstractAppSecView {
+public class VulnerabilitiesView extends AbstractAppSecView {
 
     private Grid<Vulnerability> grid;
     private ComboBox<Ecosystem> ecosystem;
@@ -41,7 +41,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     private final ValueProvider<Vulnerability, Ecosystem> ecosystemValueProvider = vuln -> vuln
             .getDependency().getEcosystem();
 
-    public VulnerabilitiesTab(AbstractAppSecView parent) {
+    public VulnerabilitiesView(AbstractAppSecView parent) {
         this.parent = parent;
         buildFilters();
         buildGrid();
@@ -158,11 +158,9 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     }
 
     private void buildGrid() {
-        grid = new Grid<>();
+        grid = new Grid<>(Vulnerability.class, false);
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
-        /*- FIXME Not available in V14
-        grid.setMultiSort(true, Grid.MultiSortPriority.APPEND);
-        -*/
+        grid.setMultiSort(true);
         grid.setSizeFull();
 
         grid.addColumn(Vulnerability::getIdentifier)
@@ -195,6 +193,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     private void buildShowDetailsButton() {
         Button showDetails = new Button("Show details");
         showDetails.setEnabled(false);
+        showDetails.getElement().setAttribute("aria-label", "Show details");
         showDetails.addClickListener(e -> showVulnerabilityDetails(
                 grid.getSelectedItems().iterator().next()));
         grid.addSelectionListener(e -> showDetails

@@ -29,7 +29,10 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Push;
+import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.shared.communication.PushMode;
 
@@ -44,11 +47,13 @@ public class AppSecView extends AbstractAppSecView {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecView.class);
 
-    private VulnerabilitiesTab vulnerabilitiesTab;
-    private DependenciesTab dependenciesTab;
-    /*- FIXME Not available in V14
-    private TabSheet tabSheet;
-    -*/
+    private VulnerabilitiesView vulnerabilitiesView;
+    private DependenciesView dependenciesView;
+    private Tabs tabs;
+    private Tab vulnerabilitiesTab;
+    private Tab dependenciesTab;
+    private VerticalLayout tabContent;
+
     private Span lastScannedLabel;
     private DateFormat formatter;
     private Registration scanListener;
@@ -64,18 +69,18 @@ public class AppSecView extends AbstractAppSecView {
     }
 
     private void buildLayout() {
+        buildHeaderBar();
+        buildTabs();
+    }
+
+    private void buildHeaderBar() {
         HorizontalLayout headerBar = new HorizontalLayout();
         headerBar.setWidth(100, Unit.PERCENTAGE);
         headerBar.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
-
         headerBar.addAndExpand(buildAppTitle());
         headerBar.add(buildLastScannedLabel());
         headerBar.add(buildScanNowButton());
-
         getMainContent().add(headerBar);
-        /*- FIXME Not available in V14
-        getMainContent().addAndExpand(buildTabSheet());
-        -*/
     }
 
     private Component buildAppTitle() {
@@ -94,8 +99,10 @@ public class AppSecView extends AbstractAppSecView {
 
     private Component buildScanNowButton() {
         scanNowButton = new Button("Scan now");
+        scanNowButton.setWidth("130px");
         scanNowButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         scanNowButton.setDisableOnClick(true);
+        scanNowButton.getElement().setAttribute("aria-label", "Scan now");
         scanNowButton.addClickListener(e -> {
             lastScannedLabel.setText("Scanning...");
             AppSecService.getInstance().scanForVulnerabilities();
@@ -103,43 +110,50 @@ public class AppSecView extends AbstractAppSecView {
         return scanNowButton;
     }
 
-    /*- FIXME Not available in V14
-    private Component buildTabSheet() {
-        tabSheet = new TabSheet();
-        tabSheet.setSizeFull();
-        tabSheet.addSelectedChangeListener(e -> {
-            Component component = tabSheet
-                    .getComponent(tabSheet.getSelectedTab());
-            if (component instanceof AbstractAppSecView abstractAppSecView) {
-                abstractAppSecView.refresh();
-            }
-        });
-        vulnerabilitiesTab = new VulnerabilitiesTab(this);
-        dependenciesTab = new DependenciesTab(this);
-        tabSheet.add("Vulnerabilities", vulnerabilitiesTab);
-        tabSheet.add("Dependencies", dependenciesTab);
-        return tabSheet;
+    private void buildTabs() {
+        vulnerabilitiesView = new VulnerabilitiesView(this);
+        dependenciesView = new DependenciesView(this);
+        vulnerabilitiesTab = new Tab("Vulnerabilities");
+        dependenciesTab = new Tab("Dependencies");
+
+        tabs = new Tabs(vulnerabilitiesTab, dependenciesTab);
+        tabs.addSelectedChangeListener(e -> setTabContent(e.getSelectedTab()));
+
+        tabContent = new VerticalLayout();
+        tabContent.setSizeFull();
+        tabContent.setMargin(false);
+        tabContent.setPadding(false);
+        tabContent.setSpacing(false);
+        setTabContent(tabs.getSelectedTab());
+
+        getMainContent().addAndExpand(tabs, tabContent);
     }
-    -*/
+
+    private void setTabContent(Tab tab) {
+        tabContent.removeAll();
+
+        if (tab.equals(vulnerabilitiesTab)) {
+            tabContent.add(vulnerabilitiesView);
+            vulnerabilitiesView.refresh();
+        } else if (tab.equals(dependenciesTab)) {
+            tabContent.add(dependenciesView);
+            dependenciesView.refresh();
+        }
+    }
+
     @Override
     public void refresh() {
-        /*- FIXME Not available in V14
-        Component component = tabSheet.getComponent(tabSheet.getSelectedTab());
-        if (component instanceof AbstractAppSecView abstractAppSecView) {
-            abstractAppSecView.refresh();
-        }
-        -*/
+        setTabContent(tabs.getSelectedTab());
         Instant lastScan = AppSecService.getInstance().refresh().getLastScan();
         lastScannedLabel.setText("Last Scan: " + (lastScan == null ? "--"
                 : formatter.format(Date.from(lastScan))));
     }
 
     void showVulnerabilitiesTabFor(Dependency item) {
-        /*- FIXME Not available in V14
-        tabSheet.setSelectedTab(tabSheet.getTab(vulnerabilitiesTab));
-        -*/
-        vulnerabilitiesTab.filterOn(item);
+        tabs.setSelectedTab(vulnerabilitiesTab);
+        vulnerabilitiesView.filterOn(item);
     }
+
     @Override
     public void onAttach(AttachEvent event) {
         super.onAttach(event);

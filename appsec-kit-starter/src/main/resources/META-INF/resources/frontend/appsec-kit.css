@@ -17,10 +17,16 @@
 
 .vulnerability-details-view .navigate-back-button {
     color: black;
+    border: none;
+    background: transparent;
 }
 
 .vulnerability-details-view .vulnerability-details-content-right {
     background-color: #ddd;
+}
+
+.vulnerability-details-view .vulnerability-details-content-left-panel {
+    border: none;
 }
 
 .vulnerability-details-view .vulnerability-details-property-holder {

@@ -10,6 +10,7 @@ package com.vaadin.appsec.views;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,24 +19,17 @@ import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.flow.data.value.ValueChangeMode;
 
 /**
  * Dependencies tab view contains a detailed list of dependencies.
  */
-public class DependenciesTab extends AbstractAppSecView {
+public class DependenciesView extends AbstractAppSecView {
 
     private Grid<Dependency> grid;
-    /*- FIXME Not available in V14
-    private GridListDataView<Dependency> dataView;
-    -*/
-    private TextField searchField;
     private ComboBox<Ecosystem> ecosystem;
     private ComboBox<String> group;
     private ComboBox<Boolean> isDevelopment;
@@ -44,18 +38,17 @@ public class DependenciesTab extends AbstractAppSecView {
     private final boolean includeNpmDevDeps;
     private final AppSecView parent;
 
-    public DependenciesTab(AppSecView parent) {
+    public DependenciesView(AppSecView parent) {
         this.parent = parent;
         this.includeNpmDevDeps = AppSecService.getInstance().getConfiguration()
                 .isIncludeNpmDevDependencies();
         buildFilters();
         buildGrid();
-        configureSearchField();
+        buildShowVulnerabilitiesButton();
     }
 
     @Override
     protected void clearFilters() {
-        searchField.setValue("");
         ecosystem.setValue(null);
         group.setValue(null);
         if (includeNpmDevDeps) {
@@ -103,21 +96,16 @@ public class DependenciesTab extends AbstractAppSecView {
 
     @Override
     public void refresh() {
-        /*- FIXME Not available in V14
-        dataView = grid.setItems(AppSecService.getInstance().getDependencies());
-        dataView.addFilter(dependency -> {
-            String searchTerm = searchField.getValue().trim();
-            if (searchTerm.isEmpty()) {
-                return true;
-            }
-            return dependency.getName().contains(searchTerm);
-        });
-        -*/
+        Set<Dependency> selectedItems = grid.getSelectedItems();
+        grid.deselectAll();
+        grid.setItems(AppSecService.getInstance().getDependencies());
+
         List<String> sortedGroups = getListDataProvider().getItems().stream()
                 .map(Dependency::getGroup).filter(Objects::nonNull).distinct()
                 .sorted().collect(Collectors.toList());
         group.setItems(sortedGroups);
         applyFilters();
+        selectedItems.forEach(grid::select);
     }
 
     private Double getRiskScoreFromFilter(String riskScoreFilter) {
@@ -125,21 +113,7 @@ public class DependenciesTab extends AbstractAppSecView {
         return Double.valueOf(parts[1]);
     }
 
-    private void configureSearchField() {
-        /*- FIXME Not available in V14
-        dataView = grid.setItems(AppSecService.getInstance().getDependencies());
-        -*/
-        searchField.setPlaceholder("Search");
-        searchField.setPrefixComponent(new Icon(VaadinIcon.SEARCH));
-        searchField.setValueChangeMode(ValueChangeMode.EAGER);
-        /*- FIXME Not available in V14
-        searchField.addValueChangeListener(e -> dataView.refreshAll());
-        -*/
-    }
-
     private void buildFilters() {
-        searchField = new TextField("Dependency name");
-
         ecosystem = new ComboBox<>("Ecosystem");
         ecosystem.setItems(Ecosystem.MAVEN, Ecosystem.NPM);
         ecosystem.addValueChangeListener(event -> applyFilters());
@@ -166,7 +140,7 @@ public class DependenciesTab extends AbstractAppSecView {
         riskScore.addValueChangeListener(event -> applyFilters());
 
         List<Component> components = Stream
-                .of(searchField, ecosystem, group, severity, riskScore)
+                .of(ecosystem, group, severity, riskScore)
                 .collect(Collectors.toList());
         if (includeNpmDevDeps) {
             components.add(3, isDevelopment);
@@ -178,11 +152,15 @@ public class DependenciesTab extends AbstractAppSecView {
 
     private void buildGrid() {
         grid = new Grid<>();
-        grid.setSelectionMode(Grid.SelectionMode.NONE);
-        /*- FIXME Not available in V14
-        grid.setMultiSort(true, Grid.MultiSortPriority.APPEND);
-        -*/
+        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        grid.setMultiSort(true);
         grid.setSizeFull();
+
+        List<Dependency> dependencies = AppSecService.getInstance()
+                .getDependencies();
+        ListDataProvider<Dependency> dataProvider = new ListDataProvider<>(
+                dependencies);
+        grid.setDataProvider(dataProvider);
 
         grid.addColumn(Dependency::getName).setHeader("Dependency")
                 .setResizable(true).setSortable(true);
@@ -213,6 +191,22 @@ public class DependenciesTab extends AbstractAppSecView {
         });
 
         getMainContent().addAndExpand(grid);
+    }
+
+    private void buildShowVulnerabilitiesButton() {
+        Button showVulnerabilities = new Button("Show vulnerabilities");
+        showVulnerabilities.setEnabled(false);
+        showVulnerabilities.getElement().setAttribute("aria-label",
+                "Show vulnerabilities");
+        showVulnerabilities
+                .addClickListener(e -> parent.showVulnerabilitiesTabFor(
+                        grid.getSelectedItems().iterator().next()));
+        grid.addSelectionListener(e -> showVulnerabilities
+                .setEnabled(e.getFirstSelectedItem().isPresent()));
+
+        getMainContent().add(showVulnerabilities);
+        getMainContent().setHorizontalComponentAlignment(Alignment.END,
+                showVulnerabilities);
     }
 
     @SuppressWarnings("unchecked")
