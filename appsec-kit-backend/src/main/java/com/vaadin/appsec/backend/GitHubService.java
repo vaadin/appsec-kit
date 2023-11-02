@@ -79,9 +79,9 @@ class GitHubService {
 
     static final String VAADIN_ANALYSIS_URI = "https://raw.githubusercontent.com/vaadin/vulnerability-analysis/main/analysis.json";
 
-    static final String FLOW_RELEASES_URI = "https://api.github.com/repos/vaadin/platform/releases";
+    static final String FLOW_RELEASES_URI = "https://api.github.com/repos/vaadin/flow/releases";
 
-    static final Pattern FLOW_14_PATTERN = compile("^14\\.\\d+.\\d+$");
+    static final Pattern FLOW_14_PATTERN = compile("^2\\.\\d+.\\d+$");
 
     static final Pattern FLOW_23_PATTERN = compile("^23\\.\\d+.\\d+$");
 
