@@ -15,42 +15,32 @@ import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.views.AppSecView;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.server.ServiceInitEvent;
-import com.vaadin.flow.server.VaadinService;
-import com.vaadin.flow.server.VaadinServiceInitListener;
 
 /**
  * A Vaadin service listener for registering the AppSec Kit route and
  * initializing AppSec Kit services. Will be invoked automatically by Vaadin.
  */
-public class AppSecServiceInitListener implements VaadinServiceInitListener {
+public class AppSecServiceInitListener extends AbstractInitListener {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecServiceInitListener.class);
 
-    private static final String APPSEC_KIT_ROUTE = "vaadin-appsec-kit";
-
     @Override
     public void serviceInit(ServiceInitEvent event) {
         if (isDebugMode(event.getSource())) {
-            registerRoute();
             AppSecService appSecService = AppSecService.getInstance();
+            registerRoute(appSecService.getConfiguration().getAppSecRoute());
             appSecService.init();
             LOGGER.info("AppSec Kit initialized");
-            appSecService.scanForVulnerabilities()
-                    .thenRun(appSecService::scheduleAutomaticScan);
         } else {
             LOGGER.info("AppSec Kit not enabled in production mode. Run the "
                     + "application in debug mode to initialize AppSec Kit");
         }
     }
 
-    private void registerRoute() {
+    private void registerRoute(String path) {
         RouteConfiguration configuration = RouteConfiguration
                 .forApplicationScope();
-        configuration.setRoute(APPSEC_KIT_ROUTE, AppSecView.class);
-    }
-
-    private boolean isDebugMode(VaadinService vaadinService) {
-        return !vaadinService.getDeploymentConfiguration().isProductionMode();
+        configuration.setRoute(path, AppSecView.class);
     }
 }

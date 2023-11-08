@@ -144,7 +144,7 @@
                             <arguments>
                                 <argument>@cyclonedx/cyclonedx-npm</argument>
                                 <argument>--output-file</argument>
-                                <argument>target/classes/resources/bom-npm.json</argument>
+                                <argument>${project.build.outputDirectory}/resources/bom-npm.json</argument>
                                 <argument>--output-format</argument>
                                 <argument>JSON</argument>
                             </arguments>
