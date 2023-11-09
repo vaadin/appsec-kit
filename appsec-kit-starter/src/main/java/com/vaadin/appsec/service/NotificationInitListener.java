@@ -74,8 +74,8 @@ public class NotificationInitListener extends AbstractInitListener {
     }
 
     private void subscribeUIToScanEvents(UIInitEvent event) {
-        UI ui = event.getUI();
-        scanEventRegistrations.computeIfAbsent(ui, this::computeRegistration);
+        scanEventRegistrations.computeIfAbsent(event.getUI(),
+                this::computeRegistration);
         LOGGER.debug("Scan event listener added");
     }
 
