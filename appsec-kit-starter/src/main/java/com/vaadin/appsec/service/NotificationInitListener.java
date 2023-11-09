@@ -25,7 +25,8 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.AnchorTarget;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.icon.IronIcon;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -113,8 +114,8 @@ public class NotificationInitListener extends AbstractInitListener {
 
         Div content = new Div(header, new Div(info), new Div(open, text));
 
-        Button closeButton = new Button(new IronIcon("lumo", "cross"));
-        closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+        Button closeButton = new Button(new Icon(VaadinIcon.CLOSE_SMALL));
+        closeButton.addThemeVariants(ButtonVariant.LUMO_ICON);
         closeButton.getElement().setAttribute("aria-label", "Close");
         closeButton.addClickListener(buttonClickEvent -> notification.close());
 
