@@ -25,7 +25,7 @@
         <flow.version>2.9.10</flow.version>
         <flow.components.version>14.10.9</flow.components.version>
 
-        <spring.boot.version>2.7.16</spring.boot.version>
+        <spring.boot.version>2.7.17</spring.boot.version>
 
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
