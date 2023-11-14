@@ -33,8 +33,8 @@ public class AppSecConfiguration implements Serializable {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecConfiguration.class);
 
+    static final String DEFAULT_APPSEC_ROUTE = "vaadin-appsec-kit";
     static final String DATA_PATH_PROPERTY = "vaadin.appsec.data";
-
     /**
      * The default path of the file to store kit's data in the project root.
      */
@@ -46,6 +46,7 @@ public class AppSecConfiguration implements Serializable {
     static final String BOM_NPM_PATH_PROPERTY = "vaadin.appsec.bom-npm";
     static final String DEFAULT_BOM_NPM_FILE_NAME = "bom-npm.json";
 
+    private String appSecRoute = DEFAULT_APPSEC_ROUTE;
     private Path dataFilePath;
     private Path bomMavenFilePath;
     private Path bomNpmFilePath;
@@ -54,6 +55,29 @@ public class AppSecConfiguration implements Serializable {
     private Duration autoScanInterval = Duration.ofDays(1);
     private int osvApiRatePerSecond = 25;
     private boolean includeNpmDevDependencies = true;
+
+    /**
+     * Gets the AppSec Kit route.
+     *
+     * @return the AppSec Kit route, not {@code null}
+     */
+    public String getAppSecRoute() {
+        return appSecRoute;
+    }
+
+    /**
+     * Sets the AppSec Kit route.
+     *
+     * @param appSecRoute
+     *            the AppSec Kit route, not {@code null}
+     */
+    public void setAppSecRoute(String appSecRoute) {
+        if (appSecRoute == null) {
+            throw new IllegalArgumentException(
+                    "The AppSec route cannot be null");
+        }
+        this.appSecRoute = appSecRoute;
+    }
 
     /**
      * Gets the data-file path.
@@ -293,8 +317,9 @@ public class AppSecConfiguration implements Serializable {
 
     @Override
     public String toString() {
-        return "AppSecConfiguration{" + "dataFilePath=" + dataFilePath
-                + ", bomFilePath=" + bomMavenFilePath
+        return "AppSecConfiguration{" + "appSecRoute=" + appSecRoute
+                + "dataFilePath=" + dataFilePath + ", bomFilePath="
+                + bomMavenFilePath
                 + (bomNpmFilePath != null ? ", bomNpmFilePath=" + bomNpmFilePath
                         : "")
                 + ", taskExecutor=" + taskExecutor + ", autoScanInterval="
