@@ -46,7 +46,7 @@ public class AppSecConfiguration implements Serializable {
     static final String BOM_NPM_PATH_PROPERTY = "vaadin.appsec.bom-npm";
     static final String DEFAULT_BOM_NPM_FILE_NAME = "bom-npm.json";
 
-    private String appSecRoute;
+    private String appSecRoute = DEFAULT_APPSEC_ROUTE;
     private Path dataFilePath;
     private Path bomMavenFilePath;
     private Path bomNpmFilePath;
@@ -62,9 +62,6 @@ public class AppSecConfiguration implements Serializable {
      * @return the AppSec Kit route, not {@code null}
      */
     public String getAppSecRoute() {
-        if (appSecRoute == null) {
-            appSecRoute = DEFAULT_APPSEC_ROUTE;
-        }
         return appSecRoute;
     }
 
@@ -75,6 +72,10 @@ public class AppSecConfiguration implements Serializable {
      *            the AppSec Kit route, not {@code null}
      */
     public void setAppSecRoute(String appSecRoute) {
+        if (appSecRoute == null) {
+            throw new IllegalArgumentException(
+                    "The AppSec route cannot be null");
+        }
         this.appSecRoute = appSecRoute;
     }
 
