@@ -1,3 +1,2 @@
 com.vaadin.appsec.service.LicenseCheckerServiceInitListener
 com.vaadin.appsec.service.AppSecServiceInitListener
-com.vaadin.appsec.service.NotificationInitListener
