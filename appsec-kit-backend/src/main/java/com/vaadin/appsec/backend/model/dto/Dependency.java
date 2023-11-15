@@ -12,11 +12,14 @@ package com.vaadin.appsec.backend.model.dto;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
+
 /**
  * DTO for a dependency instance, used in the UI.
  */
 public class Dependency {
 
+    private Ecosystem ecosystem;
     private String group;
     private String name;
     private String version;
@@ -24,6 +27,7 @@ public class Dependency {
     private Integer numOfVulnerabilities;
     private SeverityLevel severityLevel;
     private Double riskScore;
+    private String cvssString;
 
     /**
      * Instantiates a new Dependency dto.
@@ -35,11 +39,31 @@ public class Dependency {
      * @param version
      *            the version
      */
-    public Dependency(@NotNull String group, @NotNull String name,
-            @NotNull String version) {
+    public Dependency(@NotNull Ecosystem ecosystem, String group,
+            @NotNull String name, @NotNull String version) {
+        this.ecosystem = ecosystem;
         this.group = group;
         this.name = name;
         this.version = version;
+    }
+
+    /**
+     * Gets the dependency ecosystem.
+     *
+     * @return the ecosystem
+     */
+    public Ecosystem getEcosystem() {
+        return ecosystem;
+    }
+
+    /**
+     * Sets the dependency ecosystem.
+     *
+     * @param ecosystem
+     *            the ecosystem
+     */
+    public void setEcosystem(Ecosystem ecosystem) {
+        this.ecosystem = ecosystem;
     }
 
     /**
@@ -175,6 +199,25 @@ public class Dependency {
         this.riskScore = riskScore;
     }
 
+    /**
+     * Gets CVSS string.
+     *
+     * @return the CVSS string
+     */
+    public String getCvssString() {
+        return cvssString;
+    }
+
+    /**
+     * Sets CVSS string.
+     *
+     * @param cvssString
+     *            the CVSS string
+     */
+    public void setCvssString(String cvssString) {
+        this.cvssString = cvssString;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -194,6 +237,6 @@ public class Dependency {
 
     @Override
     public String toString() {
-        return group + ":" + name;
+        return (group != null ? group + ":" : "") + name;
     }
 }

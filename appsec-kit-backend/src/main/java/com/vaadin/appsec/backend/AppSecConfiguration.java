@@ -33,24 +33,16 @@ public class AppSecConfiguration implements Serializable {
      * The default path of the file to store kit's data in the project root.
      */
     static final String DEFAULT_DATA_FILE_PATH = "";
-
     static final String DEFAULT_DATA_FILE_NAME = "appsec-data.json";
-
-    static final String BOM_PATH_PROPERTY = "vaadin.appsec.bom";
-
     static final String DEFAULT_BOM_FILE_PATH = "/resources";
-
-    static final String DEFAULT_BOM_FILE_NAME = "bom.json";
+    static final String BOM_MAVEN_PATH_PROPERTY = "vaadin.appsec.bom";
+    static final String DEFAULT_BOM_MAVEN_FILE_NAME = "bom.json";
 
     private Path dataFilePath;
-
-    private Path bomFilePath;
-
+    private Path bomMavenFilePath;
     private ScheduledExecutorService taskExecutor = Executors
             .newSingleThreadScheduledExecutor();
-
     private Duration autoScanInterval = Duration.ofDays(1);
-
     private int osvApiRatePerSecond = 25;
 
     /**
@@ -87,26 +79,27 @@ public class AppSecConfiguration implements Serializable {
     }
 
     /**
-     * Gets the BOM-file path.
+     * Gets the Maven BOM-file path.
      *
-     * @return the BOM-file path, not {@code null}
+     * @return the Maven BOM-file path, not {@code null}
      */
     public Path getBomFilePath() {
-        if (bomFilePath == null) {
-            String propertyPath = System.getProperty(BOM_PATH_PROPERTY,
+        if (bomMavenFilePath == null) {
+            String propertyPath = System.getProperty(BOM_MAVEN_PATH_PROPERTY,
                     DEFAULT_BOM_FILE_PATH);
-            String bomFile = propertyPath + "/" + DEFAULT_BOM_FILE_NAME;
+            String bomFile = propertyPath + "/" + DEFAULT_BOM_MAVEN_FILE_NAME;
             URL bomFileUrl = AppSecConfiguration.class.getResource(bomFile);
             if (bomFileUrl != null) {
                 try {
-                    bomFilePath = Paths.get(bomFileUrl.toURI());
+                    bomMavenFilePath = Paths.get(bomFileUrl.toURI());
                 } catch (URISyntaxException e) {
                     throw new AppSecException(
-                            "URI syntax error for SBOM file path: " + bomFile,
+                            "URI syntax error for Maven SBOM file path: "
+                                    + bomFile,
                             e);
                 } catch (InvalidPathException e) {
                     throw new AppSecException(
-                            "Invalid SBOM file path " + bomFile, e);
+                            "Invalid Maven SBOM file path " + bomFile, e);
                 } catch (FileSystemNotFoundException e) {
                     // Some web and application servers can use file systems
                     // which are not supported, therefore a relative path is
@@ -114,29 +107,29 @@ public class AppSecConfiguration implements Serializable {
                     return Paths.get(bomFile);
                 } catch (RuntimeException e) {
                     throw new AppSecException(
-                            "Error occurred when getting the SBOM file path",
+                            "Error occurred when getting the Maven SBOM file path",
                             e);
                 }
             } else {
                 throw new AppSecException(
-                        "SBOM file not found on path " + bomFile);
+                        "Maven SBOM file not found on path " + bomFile);
             }
         }
-        return bomFilePath;
+        return bomMavenFilePath;
     }
 
     /**
-     * Sets the BOM-file path.
+     * Sets the Maven BOM-file path.
      *
      * @param bomFilePath
-     *            the BOM-file path, not {@code null}
+     *            the Maven BOM-file path, not {@code null}
      */
     public void setBomFilePath(Path bomFilePath) {
         if (bomFilePath == null) {
             throw new IllegalArgumentException(
-                    "The BOM-file path cannot be null");
+                    "The Maven BOM-file path cannot be null");
         }
-        this.bomFilePath = bomFilePath;
+        this.bomMavenFilePath = bomFilePath;
     }
 
     /**
@@ -213,7 +206,7 @@ public class AppSecConfiguration implements Serializable {
     @Override
     public String toString() {
         return "AppSecConfiguration{" + "dataFilePath=" + dataFilePath
-                + ", bomFilePath=" + bomFilePath + ", taskExecutor="
+                + ", bomFilePath=" + bomMavenFilePath + ", taskExecutor="
                 + taskExecutor + ", autoScanInterval=" + autoScanInterval
                 + ", osvApiRatePerSecond=" + osvApiRatePerSecond + '}';
     }

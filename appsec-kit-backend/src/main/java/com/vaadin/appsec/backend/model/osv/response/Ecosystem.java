@@ -6,14 +6,13 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-
 package com.vaadin.appsec.backend.model.osv.response;
 
 /**
  * The OSV API Ecosystem values.
  */
 public enum Ecosystem {
-    MAVEN("Maven"), NPM("npm");
+    MAVEN("Maven");
 
     private final String value;
 
@@ -39,7 +38,7 @@ public enum Ecosystem {
      */
     public static Ecosystem fromValue(String value) {
         for (Ecosystem ecosystem : values()) {
-            if (ecosystem.value().equals(value)) {
+            if (ecosystem.value().equalsIgnoreCase(value)) {
                 return ecosystem;
             }
         }

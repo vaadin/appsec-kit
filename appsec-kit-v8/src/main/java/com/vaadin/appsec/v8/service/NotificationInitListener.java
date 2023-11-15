@@ -104,6 +104,8 @@ public class NotificationInitListener extends AbstractInitListener {
                                             ui -> doNotifyUI(ui, event)));
                                 }
                             });
+                    LOGGER.debug("Scan event listener added for Session["
+                            + session.getSession().getId() + "]");
                     scanEventRegistrations.put(session, scanEventRegistration);
                 }
             }
@@ -126,10 +128,12 @@ public class NotificationInitListener extends AbstractInitListener {
         String link = "<a class=\"appsec-notification-button\" href=\"?"
                 + AppSecUIProvider.VAADIN_APPSEC_KIT_URL_PARAM
                 + "\" target=\"_blank\">Open AppSec Kit</a>";
-        String msg = "<div>%d vulnerabilities found (%d critical, %d moderate). "
+        String msg = "<div>%d vulnerabilities found (%d critical, %d high, %d moderate). "
                 + "Open AppSec Kit for details.</div>" + link;
         Notification n = new Notification("AppSec Kit",
                 String.format(msg, vulns.size(),
+                        countBySeverity.getOrDefault(SeverityLevel.CRITICAL,
+                                0l),
                         countBySeverity.getOrDefault(SeverityLevel.HIGH, 0l),
                         countBySeverity.getOrDefault(SeverityLevel.MEDIUM, 0l)),
                 Notification.Type.TRAY_NOTIFICATION);

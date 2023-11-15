@@ -81,9 +81,9 @@ class GitHubService {
 
     static final String FRAMEWORK_RELEASES_URI = "https://api.github.com/repos/vaadin/framework/releases";
 
-    static final Pattern FRAMEWORK_8_PATTERN = compile("^8\\.\\d+.\\d+$");
-
     static final Pattern FRAMEWORK_7_PATTERN = compile("^7\\.\\d+.\\d+$");
+
+    static final Pattern FRAMEWORK_8_PATTERN = compile("^8\\.\\d+.\\d+$");
 
     static final long NUMBER_OF_LATEST_MAINTAINED_VERSIONS = 4;
 
@@ -91,15 +91,15 @@ class GitHubService {
 
     private VulnerabilityAnalysis analysisCache;
 
-    List<String> getFramework8Versions() {
-        return getFrameworkVersions(FRAMEWORK_8_PATTERN);
-    }
-
     List<String> getFramework7Versions() {
-        return getFrameworkVersions(FRAMEWORK_7_PATTERN);
+        return getVersions(FRAMEWORK_7_PATTERN);
     }
 
-    private List<String> getFrameworkVersions(Pattern frameworkVersionPattern) {
+    List<String> getFramework8Versions() {
+        return getVersions(FRAMEWORK_8_PATTERN);
+    }
+
+    private List<String> getVersions(Pattern frameworkVersionPattern) {
         return getReleasesFromGitHub().stream().map(GitHubRelease::getTagName)
                 .filter(frameworkVersionPattern.asPredicate())
                 .limit(NUMBER_OF_LATEST_MAINTAINED_VERSIONS)
@@ -150,7 +150,8 @@ class GitHubService {
         try {
             return new URL(FRAMEWORK_RELEASES_URI);
         } catch (MalformedURLException e) {
-            throw new AppSecException("Invalid releases URL", e);
+            throw new AppSecException("Invalid Vaadin framework releases URL",
+                    e);
         }
     }
 
@@ -158,7 +159,7 @@ class GitHubService {
         try {
             return new URL(VAADIN_ANALYSIS_URI);
         } catch (MalformedURLException e) {
-            throw new AppSecException("Invalid analysis URL", e);
+            throw new AppSecException("Invalid Vaadin analysis URL", e);
         }
     }
 }

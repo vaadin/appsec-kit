@@ -18,8 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -60,12 +62,10 @@ public class AppSecService {
      * @return singleton the singleton instance
      */
     public static AppSecService getInstance() {
-        return AppSecService.InstanceHolder.instance;
+        return InstanceHolder.instance;
     }
 
     private final List<AppSecScanEventListener> scanEventListeners = new ArrayList<>();
-
-    private final OpenSourceVulnerabilityService osvService;
 
     private final VulnerabilityStore vulnerabilityStore;
 
@@ -92,7 +92,8 @@ public class AppSecService {
     private AppSecService(AppSecConfiguration configuration) {
         bomStore = new BillOfMaterialsStore();
         int osvApiRatePerSecond = configuration.getOsvApiRatePerSecond();
-        osvService = new OpenSourceVulnerabilityService(osvApiRatePerSecond);
+        OpenSourceVulnerabilityService osvService = new OpenSourceVulnerabilityService(
+                osvApiRatePerSecond);
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
         dtoProvider = new AppSecDTOProvider(vulnerabilityStore, bomStore);
         githubService = new GitHubService();
@@ -104,13 +105,15 @@ public class AppSecService {
      */
     public void init() {
         cancelScheduledScan();
-        Path bomFilePath = configuration.getBomFilePath();
+
+        Path bomMavenFilePath = configuration.getBomFilePath();
         try {
-            bomStore.readBomFile(bomFilePath);
+            bomStore.readBomFile(bomMavenFilePath);
         } catch (ParseException e) {
-            throw new AppSecException(
-                    "Cannot parse the SBOM file: " + bomFilePath, e);
+            throw new AppSecException("Cannot parse the Maven SBOM file: "
+                    + bomMavenFilePath.toAbsolutePath(), e);
         }
+
         readOrCreateDataFile();
     }
 
@@ -198,12 +201,13 @@ public class AppSecService {
 
     /**
      * Scans the application dependencies for vulnerabilities. The scan is
-     * performed against the OSV database (see {@link https://osv.dev/}).
+     * performed against the OSV database (see
+     * <a href="https://osv.dev/">osv.dev</a>).
      * <p>
      * The scan is performed asynchronously on a thread created by the
      * {@link Executor} set in the service configuration (the default is a
      * single-thread executor). A custom executor can be set with
-     * {@link AppSecConfiguration#setTaskExecutor(Executor)}.
+     * {@link AppSecConfiguration#setTaskExecutor(ScheduledExecutorService)}.
      *
      * @return a future completed when the scan has ended
      */
@@ -237,12 +241,28 @@ public class AppSecService {
     /**
      * Gets the list of vulnerabilities found in application dependencies. The
      * list is always empty before the first scan. To scan dependencies for
-     * vulnerabilities see {@link #scanForVulnerabilities(Runnable)}.
+     * vulnerabilities see {@link #scanForVulnerabilities()}.
      *
      * @return the list of vulnerabilities
      */
     public List<Vulnerability> getVulnerabilities() {
         return dtoProvider.getVulnerabilities();
+    }
+
+    /**
+     * Gets the list of new vulnerabilities. A vulnerability is considered new
+     * if there is no developer assessment data for that vulnerability.
+     *
+     * @return the list of new vulnerabilities
+     */
+    public List<Vulnerability> getNewVulnerabilities() {
+        return getVulnerabilities().stream().filter(this::newVulnerability)
+                .collect(Collectors.toList());
+    }
+
+    private boolean newVulnerability(Vulnerability vulnerability) {
+        String vulnerabilityId = vulnerability.getIdentifier();
+        return !getData().getVulnerabilities().containsKey(vulnerabilityId);
     }
 
     /**

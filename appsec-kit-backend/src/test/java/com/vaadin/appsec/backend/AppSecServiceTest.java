@@ -18,7 +18,6 @@ import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,21 +35,17 @@ public class AppSecServiceTest {
 
     private AppSecConfiguration configuration;
 
-    private Path dataFilePath;
-
     private Clock fixedClock;
 
     private AppSecService service;
 
     private TestScheduledExecutorService testExecutorService;
 
-    private ObjectMapper mapper;
-
     @Before
     public void setup() throws Exception {
         fixedClock = Clock.fixed(Instant.ofEpochSecond(1687450676),
                 ZoneOffset.UTC);
-        dataFilePath = Files.createTempFile("appsec-kit", "testfile");
+        Path dataFilePath = Files.createTempFile("appsec-kit", "testfile");
         AppSecService.MAPPER.writeValue(dataFilePath.toFile(),
                 new AppSecData());
 
@@ -65,8 +60,6 @@ public class AppSecServiceTest {
         service = AppSecService.getInstance();
         service.setConfiguration(configuration);
         service.setClock(fixedClock);
-
-        mapper = new ObjectMapper();
     }
 
     @Test(expected = AppSecException.class)

@@ -50,10 +50,20 @@ public class QueryRequestPayload implements Serializable {
     /**
      * Instantiates a new query request payload.
      *
+     * @param aPackage
+     *            the package
+     */
+    public QueryRequestPayload(Package aPackage) {
+        this(null, null, aPackage);
+    }
+
+    /**
+     * Instantiates a new query request payload.
+     *
      * @param version
      *            the version
      * @param aPackage
-     *            the a package
+     *            the package
      */
     public QueryRequestPayload(String version, Package aPackage) {
         this(null, version, aPackage);

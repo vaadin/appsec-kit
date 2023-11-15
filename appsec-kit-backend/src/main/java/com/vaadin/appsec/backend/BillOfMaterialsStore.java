@@ -27,26 +27,31 @@ class BillOfMaterialsStore {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(BillOfMaterialsStore.class);
 
-    private Bom bom;
+    private Bom bomMaven;
 
     BillOfMaterialsStore() {
     }
 
     Bom getBom() {
-        return this.bom;
+        return bomMaven;
     }
 
     void readBomFile(Path bomFilePath) throws ParseException {
+        bomMaven = readBomFromFile(bomFilePath);
+        LOGGER.debug("Reading SBOM from file " + bomFilePath.toAbsolutePath());
+    }
+
+    private Bom readBomFromFile(Path bomFilePath) throws ParseException {
         JsonParser parser = new JsonParser();
         File bomFile = bomFilePath.toFile();
         try {
-            bom = parser.parse(bomFile);
+            return parser.parse(bomFile);
         } catch (ParseException e) {
             ClassLoader ccl = Thread.currentThread().getContextClassLoader();
             try (InputStream is = ccl
                     .getResourceAsStream(bomFilePath.toString())) {
                 if (is != null) {
-                    bom = parser.parse(is);
+                    return parser.parse(is);
                 } else {
                     // Throw original ParseException if resource stream is null
                     throw e;
@@ -56,7 +61,5 @@ class BillOfMaterialsStore {
                         "SBOM file not found on path " + bomFilePath, ex);
             }
         }
-        LOGGER.debug("Reading Bill Of Materials from file "
-                + bomFile.getAbsolutePath());
     }
 }

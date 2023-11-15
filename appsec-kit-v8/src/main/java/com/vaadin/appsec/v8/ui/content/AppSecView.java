@@ -6,13 +6,16 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-
-package com.vaadin.appsec.v7.ui.content;
+package com.vaadin.appsec.v8.ui.content;
 
 import java.text.DateFormat;
 import java.time.Instant;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.vaadin.appsec.backend.AppSecScanEvent;
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.Registration;
 import com.vaadin.appsec.backend.model.dto.Dependency;
@@ -26,43 +29,45 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 
 /**
- * Results tab content
+ * AppSec view is the main view for the AppSec Kit.
  */
-public class MainView extends AbstractAppSecContent {
+public class AppSecView extends AbstractAppSecContent {
+
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AppSecView.class);
+
     private VulnerabilitiesTab vulnerabilitiesTab;
+
     private DependenciesTab dependenciesTab;
+
     private TabSheet tabSheet;
 
     private Label lastScannedLabel;
 
     private DateFormat formatter;
-    private Button scanNow;
     private Registration scanListener;
+    private Button scanNow;
 
     /**
-     * Instantiates a new Results tab.
+     * Instantiates a new AppSec view.
      */
-    public MainView() {
+    public AppSecView() {
         buildLayout();
         formatter = DateFormat.getDateTimeInstance(DateFormat.DEFAULT,
                 DateFormat.DEFAULT, UI.getCurrent().getLocale());
-        setMargin(true);
     }
 
     private void buildLayout() {
         Label appTitle = new Label("AppSec Kit");
         appTitle.addStyleName("appseckit-title");
-        appTitle.setWidth(100, Unit.PERCENTAGE);
+        appTitle.setSizeFull();
 
         HorizontalLayout headerBar = new HorizontalLayout();
-        headerBar.setSpacing(true);
         headerBar.setWidth(100, Unit.PERCENTAGE);
-        headerBar.addComponent(appTitle);
-        headerBar.setExpandRatio(appTitle, 1);
+        headerBar.addComponentsAndExpand(appTitle);
         headerBar.setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
 
         lastScannedLabel = new Label();
-        lastScannedLabel.setWidthUndefined();
         headerBar.addComponent(lastScannedLabel);
 
         scanNow = new Button("Scan now");
@@ -114,16 +119,8 @@ public class MainView extends AbstractAppSecContent {
         super.attach();
         removeScanListener();
         scanListener = AppSecService.getInstance()
-                .addScanEventListener(event -> {
-                    MainView.this.getUI().access(() -> {
-                        scanNow.setEnabled(true);
-                        refresh();
-                        if (PushMode.MANUAL == MainView.this.getUI()
-                                .getPushConfiguration().getPushMode()) {
-                            MainView.this.getUI().push();
-                        }
-                    });
-                });
+                .addScanEventListener(this::handleScanEvent);
+        LOGGER.debug("Scan event listener added");
     }
 
     @Override
@@ -137,5 +134,16 @@ public class MainView extends AbstractAppSecContent {
             scanListener.remove();
             scanListener = null;
         }
+    }
+
+    private void handleScanEvent(AppSecScanEvent event) {
+        getUI().access(() -> {
+            scanNow.setEnabled(true);
+            refresh();
+            if (PushMode.MANUAL == getUI().getPushConfiguration()
+                    .getPushMode()) {
+                getUI().push();
+            }
+        });
     }
 }
