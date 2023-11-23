@@ -8,10 +8,18 @@
  */
 package com.vaadin.appsec.views;
 
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.dto.Dependency;
@@ -21,11 +29,13 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.server.StreamResource;
 
 /**
  * Dependencies tab view contains a detailed list of dependencies.
@@ -88,7 +98,7 @@ public class DependenciesTab extends AbstractAppSecView {
             }
             if (includeNpmDevDeps && isDevelopmentFilter != null
                     && !isDevelopmentFilter == dependencyDTO
-                            .isDevDependency()) {
+                    .isDevDependency()) {
                 return false;
             }
             if (severityFilter != null && !severityFilter
@@ -102,7 +112,8 @@ public class DependenciesTab extends AbstractAppSecView {
 
     @Override
     public void refresh() {
-        dataView = grid.setItems(AppSecService.getInstance().getDependencies());
+        List<Dependency> dependencies = AppSecService.getInstance().getDependencies();
+        dataView = grid.setItems(dependencies);
         dataView.addFilter(dependency -> {
             String searchTerm = searchField.getValue().trim();
             if (searchTerm.isEmpty()) {
@@ -116,6 +127,38 @@ public class DependenciesTab extends AbstractAppSecView {
                 .sorted().toList();
         group.setItems(sortedGroups);
         applyFilters();
+
+        prepareExportData(dependencies);
+    }
+
+    private void prepareExportData(List<Dependency> dependencyList) {
+        try (
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                CSVPrinter printer = new CSVPrinter(new OutputStreamWriter(outputStream), CSVFormat.DEFAULT)
+        ) {
+            // header
+            printer.printRecord("Dependency", "Ecosystem", "Dependency group", "Version", "Is development?", "# of vulnerabilities", "Highest severity", "Highest CVSS score");
+            // content
+            for (Dependency dependency : dependencyList) {
+                printer.printRecord(
+                        dependency.getName(),
+                        dependency.getEcosystem(),
+                        dependency.getGroup(),
+                        dependency.getVersion(),
+                        dependency.isDevDependency(),
+                        dependency.getNumOfVulnerabilities(),
+                        dependency.getSeverityLevel(),
+                        dependency.getRiskScore()
+                );
+            }
+
+            String fileName = "dependencies.csv";
+            StreamResource streamResource = new StreamResource(fileName, () -> new ByteArrayInputStream(outputStream.toByteArray()));
+            updateExportData(streamResource);
+        } catch (IOException e) {
+            // TODO handle exception properly
+            e.printStackTrace();
+        }
     }
 
     private Double getRiskScoreFromFilter(String riskScoreFilter) {
