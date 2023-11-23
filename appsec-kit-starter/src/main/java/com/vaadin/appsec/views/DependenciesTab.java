@@ -96,7 +96,7 @@ public class DependenciesTab extends AbstractAppSecView {
             }
             if (includeNpmDevDeps && isDevelopmentFilter != null
                     && !isDevelopmentFilter == dependencyDTO
-                    .isDevDependency()) {
+                            .isDevDependency()) {
                 return false;
             }
             if (severityFilter != null && !severityFilter
@@ -110,7 +110,8 @@ public class DependenciesTab extends AbstractAppSecView {
 
     @Override
     public void refresh() {
-        List<Dependency> dependencies = AppSecService.getInstance().getDependencies();
+        List<Dependency> dependencies = AppSecService.getInstance()
+                .getDependencies();
         dataView = grid.setItems(dependencies);
         dataView.addFilter(dependency -> {
             String searchTerm = searchField.getValue().trim();
@@ -130,28 +131,27 @@ public class DependenciesTab extends AbstractAppSecView {
     }
 
     private void prepareExportData(List<Dependency> dependencyList) {
-        try (
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                CSVPrinter printer = new CSVPrinter(new OutputStreamWriter(outputStream), CSVFormat.DEFAULT)
-        ) {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                CSVPrinter printer = new CSVPrinter(
+                        new OutputStreamWriter(outputStream),
+                        CSVFormat.DEFAULT)) {
             // header
-            printer.printRecord("Dependency", "Ecosystem", "Dependency group", "Version", "Is development?", "# of vulnerabilities", "Highest severity", "Highest CVSS score");
+            printer.printRecord("Dependency", "Ecosystem", "Dependency group",
+                    "Version", "Is development?", "# of vulnerabilities",
+                    "Highest severity", "Highest CVSS score");
             // content
             for (Dependency dependency : dependencyList) {
-                printer.printRecord(
-                        dependency.getName(),
-                        dependency.getEcosystem(),
-                        dependency.getGroup(),
-                        dependency.getVersion(),
-                        dependency.isDevDependency(),
+                printer.printRecord(dependency.getName(),
+                        dependency.getEcosystem(), dependency.getGroup(),
+                        dependency.getVersion(), dependency.isDevDependency(),
                         dependency.getNumOfVulnerabilities(),
                         dependency.getSeverityLevel(),
-                        dependency.getRiskScore()
-                );
+                        dependency.getRiskScore());
             }
 
             String fileName = "dependencies.csv";
-            StreamResource streamResource = new StreamResource(fileName, () -> new ByteArrayInputStream(outputStream.toByteArray()));
+            StreamResource streamResource = new StreamResource(fileName,
+                    () -> new ByteArrayInputStream(outputStream.toByteArray()));
             updateExportData(streamResource);
         } catch (IOException e) {
             // TODO handle exception properly

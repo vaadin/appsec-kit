@@ -116,7 +116,8 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     public void refresh() {
         Set<Vulnerability> selectedItems = grid.getSelectedItems();
         grid.deselectAll();
-        List<Vulnerability> vulnerabilities = AppSecService.getInstance().getVulnerabilities();
+        List<Vulnerability> vulnerabilities = AppSecService.getInstance()
+                .getVulnerabilities();
         grid.setItems(vulnerabilities);
         dependency.setItems(getListDataProvider().getItems().stream()
                 .map(Vulnerability::getDependency).collect(Collectors.toSet()));
@@ -128,27 +129,28 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     }
 
     private void prepareExportData(List<Vulnerability> vulnerabilityList) {
-        try (
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                CSVPrinter printer = new CSVPrinter(new OutputStreamWriter(outputStream), CSVFormat.DEFAULT)
-        ) {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                CSVPrinter printer = new CSVPrinter(
+                        new OutputStreamWriter(outputStream),
+                        CSVFormat.DEFAULT)) {
             // header
-            printer.printRecord("Vulnerability name or identifier", "Ecosystem", "Dependency", "Severity", "CVSS score", "Vaadin analysis", "Developer analysis");
+            printer.printRecord("Vulnerability name or identifier", "Ecosystem",
+                    "Dependency", "Severity", "CVSS score", "Vaadin analysis",
+                    "Developer analysis");
             // content
             for (Vulnerability vulnerability : vulnerabilityList) {
-                printer.printRecord(
-                        vulnerability.getIdentifier(),
+                printer.printRecord(vulnerability.getIdentifier(),
                         ecosystemValueProvider.apply(vulnerability),
                         vulnerability.getDependency(),
                         vulnerability.getSeverityLevel(),
                         vulnerability.getRiskScore(),
                         vulnerability.getVaadinAnalysis(),
-                        vulnerability.getDeveloperAnalysis()
-                );
+                        vulnerability.getDeveloperAnalysis());
             }
 
             String fileName = "vulnerabilities.csv";
-            StreamResource streamResource = new StreamResource(fileName, () -> new ByteArrayInputStream(outputStream.toByteArray()));
+            StreamResource streamResource = new StreamResource(fileName,
+                    () -> new ByteArrayInputStream(outputStream.toByteArray()));
             updateExportData(streamResource);
         } catch (IOException e) {
             // TODO handle exception properly
