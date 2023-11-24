@@ -8,6 +8,7 @@
  */
 package com.vaadin.appsec.views;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -98,12 +99,9 @@ public class DependenciesView extends AbstractAppSecView {
     public void refresh() {
         Set<Dependency> selectedItems = grid.getSelectedItems();
         grid.deselectAll();
-        grid.setItems(AppSecService.getInstance().getDependencies());
+        grid.setDataProvider(getDependencyDataProvider());
 
-        List<String> sortedGroups = getListDataProvider().getItems().stream()
-                .map(Dependency::getGroup).filter(Objects::nonNull).distinct()
-                .sorted().collect(Collectors.toList());
-        group.setItems(sortedGroups);
+        group.setDataProvider(getGroupDataProvider());
         applyFilters();
         selectedItems.forEach(grid::select);
     }
@@ -115,7 +113,7 @@ public class DependenciesView extends AbstractAppSecView {
 
     private void buildFilters() {
         ecosystem = new ComboBox<>("Ecosystem");
-        ecosystem.setItems(Ecosystem.MAVEN, Ecosystem.NPM);
+        ecosystem.setDataProvider(getEcosystemDataProvider());
         ecosystem.addValueChangeListener(event -> applyFilters());
 
         group = new ComboBox<>("Dependency group");
@@ -124,19 +122,16 @@ public class DependenciesView extends AbstractAppSecView {
 
         if (includeNpmDevDeps) {
             isDevelopment = new ComboBox<>("Is development?");
-            isDevelopment.setItems(Boolean.TRUE, Boolean.FALSE);
+            isDevelopment.setDataProvider(getIsDevelopmentDataProvider());
             isDevelopment.addValueChangeListener(event -> applyFilters());
         }
 
         severity = new ComboBox<>("Severity");
-        severity.setItems(SeverityLevel.NONE, SeverityLevel.LOW,
-                SeverityLevel.MEDIUM, SeverityLevel.HIGH,
-                SeverityLevel.CRITICAL);
+        severity.setDataProvider(getSeverityLevelDataProvider());
         severity.addValueChangeListener(event -> applyFilters());
 
         riskScore = new ComboBox<>("CVSS score");
-        riskScore.setItems(">=0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
-                ">=7", ">=8", ">=9", "=10");
+        riskScore.setDataProvider(getRiskScoreDataProvider());
         riskScore.addValueChangeListener(event -> applyFilters());
 
         List<Component> components = Stream
@@ -212,5 +207,34 @@ public class DependenciesView extends AbstractAppSecView {
     @SuppressWarnings("unchecked")
     private ListDataProvider<Dependency> getListDataProvider() {
         return (ListDataProvider<Dependency>) grid.getDataProvider();
+    }
+
+    private ListDataProvider<Dependency> getDependencyDataProvider() {
+        return new ListDataProvider<>(
+                AppSecService.getInstance().getDependencies());
+    }
+
+    private ListDataProvider<String> getGroupDataProvider() {
+        return new ListDataProvider<>(getDependencyDataProvider().getItems()
+                .stream().map(Dependency::getGroup).filter(Objects::nonNull)
+                .distinct().sorted().collect(Collectors.toList()));
+    }
+
+    private ListDataProvider<Ecosystem> getEcosystemDataProvider() {
+        return new ListDataProvider<>(Arrays.asList(Ecosystem.values()));
+    }
+
+    private ListDataProvider<Boolean> getIsDevelopmentDataProvider() {
+        return new ListDataProvider<>(
+                Arrays.asList(Boolean.TRUE, Boolean.FALSE));
+    }
+
+    private ListDataProvider<SeverityLevel> getSeverityLevelDataProvider() {
+        return new ListDataProvider<>(Arrays.asList(SeverityLevel.values()));
+    }
+
+    private ListDataProvider<String> getRiskScoreDataProvider() {
+        return new ListDataProvider<>(Arrays.asList(">=0", ">=1", ">=2", ">=3",
+                ">=4", ">=5", ">=6", ">=7", ">=8", ">=9", "=10"));
     }
 }

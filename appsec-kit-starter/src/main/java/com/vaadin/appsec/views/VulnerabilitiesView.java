@@ -8,6 +8,7 @@
  */
 package com.vaadin.appsec.views;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -107,9 +108,8 @@ public class VulnerabilitiesView extends AbstractAppSecView {
     public void refresh() {
         Set<Vulnerability> selectedItems = grid.getSelectedItems();
         grid.deselectAll();
-        grid.setItems(AppSecService.getInstance().getVulnerabilities());
-        dependency.setItems(getListDataProvider().getItems().stream()
-                .map(Vulnerability::getDependency).collect(Collectors.toSet()));
+        grid.setDataProvider(getVulnerabilityDataProvider());
+        dependency.setDataProvider(getDependencyDataProvider());
         applyFilters();
         selectedItems.forEach(grid::select);
     }
@@ -121,7 +121,7 @@ public class VulnerabilitiesView extends AbstractAppSecView {
 
     private void buildFilters() {
         ecosystem = new ComboBox<>("Ecosystem");
-        ecosystem.setItems(Ecosystem.MAVEN, Ecosystem.NPM);
+        ecosystem.setDataProvider(getEcosystemDataProvider());
         ecosystem.addValueChangeListener(event -> applyFilters());
 
         dependency = new ComboBox<>("Dependency");
@@ -129,27 +129,19 @@ public class VulnerabilitiesView extends AbstractAppSecView {
         dependency.getStyle().set("--vaadin-combo-box-overlay-width", "350px");
 
         vaadinAnalysis = new ComboBox<>("Vaadin analysis");
-        vaadinAnalysis.setItems(AssessmentStatus.TRUE_POSITIVE,
-                AssessmentStatus.FALSE_POSITIVE, AssessmentStatus.UNDER_REVIEW);
+        vaadinAnalysis.setDataProvider(getAssessmentStatusDataProvider());
         vaadinAnalysis.addValueChangeListener(event -> applyFilters());
 
         developerAnalysis = new ComboBox<>("Developer analysis");
-        developerAnalysis.setItems(AppSecData.VulnerabilityStatus.NOT_SET,
-                AppSecData.VulnerabilityStatus.NOT_AFFECTED,
-                AppSecData.VulnerabilityStatus.FALSE_POSITIVE,
-                AppSecData.VulnerabilityStatus.IN_TRIAGE,
-                AppSecData.VulnerabilityStatus.EXPLOITABLE);
+        developerAnalysis.setDataProvider(getVulnerabilityStatusDataProvider());
         developerAnalysis.addValueChangeListener(event -> applyFilters());
 
         severity = new ComboBox<>("Severity");
-        severity.setItems(SeverityLevel.NONE, SeverityLevel.LOW,
-                SeverityLevel.MEDIUM, SeverityLevel.HIGH,
-                SeverityLevel.CRITICAL);
+        severity.setDataProvider(getSeverityLevelDataProvider());
         severity.addValueChangeListener(event -> applyFilters());
 
         riskScore = new ComboBox<>("CVSS score");
-        riskScore.setItems(">=0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
-                ">=7", ">=8", ">=9", "=10");
+        riskScore.setDataProvider(getRiskScoreDataProvider());
         riskScore.addValueChangeListener(event -> applyFilters());
 
         Component filterBar = buildFilterBar(ecosystem, dependency,
@@ -215,5 +207,38 @@ public class VulnerabilitiesView extends AbstractAppSecView {
     @SuppressWarnings("unchecked")
     private ListDataProvider<Vulnerability> getListDataProvider() {
         return (ListDataProvider<Vulnerability>) grid.getDataProvider();
+    }
+
+    private ListDataProvider<Vulnerability> getVulnerabilityDataProvider() {
+        return new ListDataProvider<>(
+                AppSecService.getInstance().getVulnerabilities());
+    }
+
+    private ListDataProvider<Dependency> getDependencyDataProvider() {
+        return new ListDataProvider<>(getVulnerabilityDataProvider().getItems()
+                .stream().map(Vulnerability::getDependency)
+                .collect(Collectors.toSet()));
+    }
+
+    private ListDataProvider<Ecosystem> getEcosystemDataProvider() {
+        return new ListDataProvider<>(Arrays.asList(Ecosystem.values()));
+    }
+
+    private ListDataProvider<AssessmentStatus> getAssessmentStatusDataProvider() {
+        return new ListDataProvider<>(Arrays.asList(AssessmentStatus.values()));
+    }
+
+    private ListDataProvider<AppSecData.VulnerabilityStatus> getVulnerabilityStatusDataProvider() {
+        return new ListDataProvider<>(
+                Arrays.asList(AppSecData.VulnerabilityStatus.values()));
+    }
+
+    private ListDataProvider<SeverityLevel> getSeverityLevelDataProvider() {
+        return new ListDataProvider<>(Arrays.asList(SeverityLevel.values()));
+    }
+
+    private ListDataProvider<String> getRiskScoreDataProvider() {
+        return new ListDataProvider<>(Arrays.asList(">=0", ">=1", ">=2", ">=3",
+                ">=4", ">=5", ">=6", ">=7", ">=8", ">=9", "=10"));
     }
 }
