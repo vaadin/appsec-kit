@@ -24,7 +24,7 @@ public abstract class AbstractAppSecView extends VerticalLayout {
 
     private final VerticalLayout mainContent;
 
-    private Anchor exportLink;
+    protected Anchor exportLink;
 
     AbstractAppSecView() {
         super();

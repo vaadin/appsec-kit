@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.AppSecData;
@@ -30,6 +32,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.function.ValueProvider;
 import com.vaadin.flow.server.StreamResource;
@@ -38,6 +42,8 @@ import com.vaadin.flow.server.StreamResource;
  * Vulnerabilities tab view contains a detailed list of vulnerabilities.
  */
 public class VulnerabilitiesTab extends AbstractAppSecView {
+
+    private final Logger logger = LoggerFactory.getLogger(VulnerabilitiesTab.class);
 
     private Grid<Vulnerability> grid;
     private ComboBox<Ecosystem> ecosystem;
@@ -129,6 +135,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     }
 
     private void prepareExportData(List<Vulnerability> vulnerabilityList) {
+        exportLink.setEnabled(false); // disable while preparing data
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 CSVPrinter printer = new CSVPrinter(
                         new OutputStreamWriter(outputStream),
@@ -152,9 +159,13 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
             StreamResource streamResource = new StreamResource(fileName,
                     () -> new ByteArrayInputStream(outputStream.toByteArray()));
             updateExportData(streamResource);
+            // enable now that there is data to download
+            exportLink.setEnabled(true);
         } catch (IOException e) {
-            // TODO handle exception properly
-            e.printStackTrace();
+            logger.error("Error preparing export data", e);
+            Notification errorNotification = new Notification("Data cannot be exported due to an error.", 5000, Notification.Position.TOP_END);
+            errorNotification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            errorNotification.open();
         }
     }
 

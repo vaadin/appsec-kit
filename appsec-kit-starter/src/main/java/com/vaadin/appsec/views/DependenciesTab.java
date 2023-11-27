@@ -19,6 +19,8 @@ import java.util.stream.Stream;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.dto.Dependency;
@@ -30,6 +32,8 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
@@ -39,6 +43,8 @@ import com.vaadin.flow.server.StreamResource;
  * Dependencies tab view contains a detailed list of dependencies.
  */
 public class DependenciesTab extends AbstractAppSecView {
+
+    private final Logger logger = LoggerFactory.getLogger(DependenciesTab.class);
 
     private Grid<Dependency> grid;
     private GridListDataView<Dependency> dataView;
@@ -131,6 +137,7 @@ public class DependenciesTab extends AbstractAppSecView {
     }
 
     private void prepareExportData(List<Dependency> dependencyList) {
+        exportLink.setEnabled(false); // disable while preparing data
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 CSVPrinter printer = new CSVPrinter(
                         new OutputStreamWriter(outputStream),
@@ -153,9 +160,13 @@ public class DependenciesTab extends AbstractAppSecView {
             StreamResource streamResource = new StreamResource(fileName,
                     () -> new ByteArrayInputStream(outputStream.toByteArray()));
             updateExportData(streamResource);
+            // enable now that there is data to download
+            exportLink.setEnabled(true);
         } catch (IOException e) {
-            // TODO handle exception properly
-            e.printStackTrace();
+            logger.error("Error preparing export data", e);
+            Notification errorNotification = new Notification("Data cannot be exported due to an error.", 5000, Notification.Position.TOP_END);
+            errorNotification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            errorNotification.open();
         }
     }
 
