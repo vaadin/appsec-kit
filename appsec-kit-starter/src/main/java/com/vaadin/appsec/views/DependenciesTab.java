@@ -44,7 +44,8 @@ import com.vaadin.flow.server.StreamResource;
  */
 public class DependenciesTab extends AbstractAppSecView {
 
-    private final Logger logger = LoggerFactory.getLogger(DependenciesTab.class);
+    private final Logger logger = LoggerFactory
+            .getLogger(DependenciesTab.class);
 
     private Grid<Dependency> grid;
     private GridListDataView<Dependency> dataView;
@@ -164,7 +165,9 @@ public class DependenciesTab extends AbstractAppSecView {
             exportLink.setEnabled(true);
         } catch (IOException e) {
             logger.error("Error preparing export data", e);
-            Notification errorNotification = new Notification("Data cannot be exported due to an error.", 5000, Notification.Position.TOP_END);
+            Notification errorNotification = new Notification(
+                    "Data cannot be exported due to an error.", 5000,
+                    Notification.Position.TOP_END);
             errorNotification.addThemeVariants(NotificationVariant.LUMO_ERROR);
             errorNotification.open();
         }
