@@ -12,6 +12,14 @@
 **/bin
 *~
 
+# Vaadin auto-generated files
+appsec-kit-demo/frontend/generated
+appsec-kit-demo/frontend/index.html
+appsec-kit-demo/tsconfig.json
+appsec-kit-demo/types.d.ts
+appsec-kit-demo/vite.config.ts
+appsec-kit-demo/vite.generated.ts
+
 *pom.xml.versionsBackup
 
 **/target
