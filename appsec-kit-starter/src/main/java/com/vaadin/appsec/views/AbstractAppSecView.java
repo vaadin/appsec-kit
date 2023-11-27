@@ -11,8 +11,11 @@ package com.vaadin.appsec.views;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.server.StreamResource;
 
 /**
  * Abstract AppSec view is a base class for the view parts.
@@ -20,6 +23,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 public abstract class AbstractAppSecView extends VerticalLayout {
 
     private final VerticalLayout mainContent;
+
+    protected Anchor exportLink;
 
     AbstractAppSecView() {
         super();
@@ -39,6 +44,7 @@ public abstract class AbstractAppSecView extends VerticalLayout {
         filterBar.add(filters);
         filterBar.expand(filters);
         filterBar.add(buildClearButton());
+        filterBar.add(buildExportButton());
         return filterBar;
     }
 
@@ -46,6 +52,17 @@ public abstract class AbstractAppSecView extends VerticalLayout {
         Button clear = new Button("Clear");
         clear.addClickListener(e -> clearFilters());
         return clear;
+    }
+
+    Anchor buildExportButton() {
+        exportLink = new Anchor();
+        exportLink.getElement().setAttribute("download", true);
+        exportLink.add(new Button("Export", VaadinIcon.DOWNLOAD.create()));
+        return exportLink;
+    }
+
+    void updateExportData(StreamResource streamResource) {
+        exportLink.setHref(streamResource);
     }
 
     void clearFilters() {

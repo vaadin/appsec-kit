@@ -8,8 +8,18 @@
  */
 package com.vaadin.appsec.views;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.AppSecData;
@@ -22,13 +32,19 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.function.ValueProvider;
+import com.vaadin.flow.server.StreamResource;
 
 /**
  * Vulnerabilities tab view contains a detailed list of vulnerabilities.
  */
 public class VulnerabilitiesTab extends AbstractAppSecView {
+
+    private final Logger logger = LoggerFactory
+            .getLogger(VulnerabilitiesTab.class);
 
     private Grid<Vulnerability> grid;
     private ComboBox<Ecosystem> ecosystem;
@@ -107,11 +123,53 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     public void refresh() {
         Set<Vulnerability> selectedItems = grid.getSelectedItems();
         grid.deselectAll();
-        grid.setItems(AppSecService.getInstance().getVulnerabilities());
+        List<Vulnerability> vulnerabilities = AppSecService.getInstance()
+                .getVulnerabilities();
+        grid.setItems(vulnerabilities);
         dependency.setItems(getListDataProvider().getItems().stream()
                 .map(Vulnerability::getDependency).collect(Collectors.toSet()));
         applyFilters();
         selectedItems.forEach(grid::select);
+
+        // prepare export data
+        prepareExportData(vulnerabilities);
+    }
+
+    private void prepareExportData(List<Vulnerability> vulnerabilityList) {
+        exportLink.setEnabled(false); // disable while preparing data
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                CSVPrinter printer = new CSVPrinter(
+                        new OutputStreamWriter(outputStream),
+                        CSVFormat.DEFAULT)) {
+            // header
+            printer.printRecord("Vulnerability name or identifier", "Ecosystem",
+                    "Dependency", "Severity", "CVSS score", "Vaadin analysis",
+                    "Developer analysis");
+            // content
+            for (Vulnerability vulnerability : vulnerabilityList) {
+                printer.printRecord(vulnerability.getIdentifier(),
+                        ecosystemValueProvider.apply(vulnerability),
+                        vulnerability.getDependency(),
+                        vulnerability.getSeverityLevel(),
+                        vulnerability.getRiskScore(),
+                        vulnerability.getVaadinAnalysis(),
+                        vulnerability.getDeveloperAnalysis());
+            }
+
+            String fileName = "vulnerabilities.csv";
+            StreamResource streamResource = new StreamResource(fileName,
+                    () -> new ByteArrayInputStream(outputStream.toByteArray()));
+            updateExportData(streamResource);
+            // enable now that there is data to download
+            exportLink.setEnabled(true);
+        } catch (IOException e) {
+            logger.error("Error preparing export data", e);
+            Notification errorNotification = new Notification(
+                    "Data cannot be exported due to an error.", 5000,
+                    Notification.Position.TOP_END);
+            errorNotification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            errorNotification.open();
+        }
     }
 
     private Double getRiskScoreFromFilter(String riskScoreFilter) {

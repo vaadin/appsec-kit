@@ -8,10 +8,19 @@
  */
 package com.vaadin.appsec.views;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.dto.Dependency;
@@ -23,14 +32,20 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.server.StreamResource;
 
 /**
  * Dependencies tab view contains a detailed list of dependencies.
  */
 public class DependenciesTab extends AbstractAppSecView {
+
+    private final Logger logger = LoggerFactory
+            .getLogger(DependenciesTab.class);
 
     private Grid<Dependency> grid;
     private GridListDataView<Dependency> dataView;
@@ -102,7 +117,9 @@ public class DependenciesTab extends AbstractAppSecView {
 
     @Override
     public void refresh() {
-        dataView = grid.setItems(AppSecService.getInstance().getDependencies());
+        List<Dependency> dependencies = AppSecService.getInstance()
+                .getDependencies();
+        dataView = grid.setItems(dependencies);
         dataView.addFilter(dependency -> {
             String searchTerm = searchField.getValue().trim();
             if (searchTerm.isEmpty()) {
@@ -116,6 +133,44 @@ public class DependenciesTab extends AbstractAppSecView {
                 .sorted().toList();
         group.setItems(sortedGroups);
         applyFilters();
+
+        prepareExportData(dependencies);
+    }
+
+    private void prepareExportData(List<Dependency> dependencyList) {
+        exportLink.setEnabled(false); // disable while preparing data
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                CSVPrinter printer = new CSVPrinter(
+                        new OutputStreamWriter(outputStream),
+                        CSVFormat.DEFAULT)) {
+            // header
+            printer.printRecord("Dependency", "Ecosystem", "Dependency group",
+                    "Version", "Is development?", "# of vulnerabilities",
+                    "Highest severity", "Highest CVSS score");
+            // content
+            for (Dependency dependency : dependencyList) {
+                printer.printRecord(dependency.getName(),
+                        dependency.getEcosystem(), dependency.getGroup(),
+                        dependency.getVersion(), dependency.isDevDependency(),
+                        dependency.getNumOfVulnerabilities(),
+                        dependency.getSeverityLevel(),
+                        dependency.getRiskScore());
+            }
+
+            String fileName = "dependencies.csv";
+            StreamResource streamResource = new StreamResource(fileName,
+                    () -> new ByteArrayInputStream(outputStream.toByteArray()));
+            updateExportData(streamResource);
+            // enable now that there is data to download
+            exportLink.setEnabled(true);
+        } catch (IOException e) {
+            logger.error("Error preparing export data", e);
+            Notification errorNotification = new Notification(
+                    "Data cannot be exported due to an error.", 5000,
+                    Notification.Position.TOP_END);
+            errorNotification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+            errorNotification.open();
+        }
     }
 
     private Double getRiskScoreFromFilter(String riskScoreFilter) {
