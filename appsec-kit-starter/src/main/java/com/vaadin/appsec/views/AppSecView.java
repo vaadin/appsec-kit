@@ -100,11 +100,11 @@ public class AppSecView extends AbstractAppSecView {
             UI ui = UI.getCurrent();
             AppSecService.getInstance().scanForVulnerabilities()
                     .exceptionally(ex -> {
+                        LOGGER.error("Error scanning vulnerabilities.", ex);
                         ui.access(() -> {
                             lastScannedLabel
                                     .setText("Error scanning vulnerabilities.");
                             scanNowButton.setEnabled(true);
-                            LOGGER.error("Enabling button");
                         });
                         return null;
                     });
