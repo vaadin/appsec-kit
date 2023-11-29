@@ -11,7 +11,6 @@ package com.vaadin.appsec.views;
 import java.text.DateFormat;
 import java.time.Instant;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,9 +44,6 @@ public class AppSecView extends AbstractAppSecView {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecView.class);
-
-    private static final AtomicBoolean pushWarningShown = new AtomicBoolean(
-            false);
 
     private VulnerabilitiesTab vulnerabilitiesTab;
     private DependenciesTab dependenciesTab;
@@ -140,7 +136,6 @@ public class AppSecView extends AbstractAppSecView {
     @Override
     public void onAttach(AttachEvent event) {
         super.onAttach(event);
-        getUI().ifPresent(this::checkForPush);
         removeScanListener();
         scanListener = AppSecService.getInstance()
                 .addScanEventListener(this::handleScanEvent);
@@ -173,29 +168,5 @@ public class AppSecView extends AbstractAppSecView {
                 ui.push();
             }
         });
-    }
-
-    private void checkForPush(UI ui) {
-        if (!canPushChanges(ui) && isActivationEnabled()) {
-            ui.getPushConfiguration().setPushMode(PushMode.AUTOMATIC);
-
-            boolean warningAlreadyShown = pushWarningShown.getAndSet(true);
-            if (!warningAlreadyShown) {
-                LOGGER.warn(
-                        "Server push has been automatically enabled so updates can be shown immediately. "
-                                + "Add @Push annotation on your AppShellConfigurator class to suppress this warning. "
-                                + "Set automaticallyActivatePush to false in AppSecConfiguration if you want to ensure push is not automatically enabled.");
-            }
-        }
-    }
-
-    private boolean canPushChanges(UI ui) {
-        return ui.getPushConfiguration().getPushMode().isEnabled()
-                || ui.getPollInterval() > 0;
-    }
-
-    private boolean isActivationEnabled() {
-        return AppSecService.getInstance().getConfiguration()
-                .isAutomaticallyActivatePush();
     }
 }
