@@ -30,7 +30,6 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
@@ -39,7 +38,6 @@ import com.vaadin.flow.shared.communication.PushMode;
 /**
  * AppSec view is the main view for the AppSec Kit.
  */
-@Push
 @PageTitle("AppSec Kit")
 @CssImport("./appsec-kit.css")
 public class AppSecView extends AbstractAppSecView {
