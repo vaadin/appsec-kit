@@ -45,6 +45,7 @@ public class AppSecConfiguration implements Serializable {
     static final String DEFAULT_BOM_MAVEN_FILE_NAME = "bom.json";
     static final String BOM_NPM_PATH_PROPERTY = "vaadin.appsec.bom-npm";
     static final String DEFAULT_BOM_NPM_FILE_NAME = "bom-npm.json";
+    static final boolean DEFAULT_AUTOMATICALLY_ACTIVATE_PUSH = true;
 
     private Path dataFilePath;
     private Path bomMavenFilePath;
@@ -54,6 +55,7 @@ public class AppSecConfiguration implements Serializable {
     private Duration autoScanInterval = Duration.ofDays(1);
     private int osvApiRatePerSecond = 25;
     private boolean includeNpmDevDependencies = true;
+    private boolean automaticallyActivatePush = DEFAULT_AUTOMATICALLY_ACTIVATE_PUSH;
 
     /**
      * Gets the data-file path.
@@ -291,6 +293,35 @@ public class AppSecConfiguration implements Serializable {
         this.includeNpmDevDependencies = includeNpmDevDependencies;
     }
 
+    /**
+     * Sets whether server push should be automatically activated if needed.
+     * When enabled, which is the default, AppSec Kit will automatically
+     * activate {@code PushMode#AUTOMATIC} if neither push nor polling is active
+     * for a UI where AppSec Kit is used. When disabled, no automatic changes
+     * are made to the application's push configuration.
+     *
+     * @param automaticallyActivatePush
+     *            <code>true</code> to automatically activate server push if
+     *            needed, <code>false</code> to not make any automatic changes
+     *            to the push configuration
+     */
+    public void setAutomaticallyActivatePush(
+            boolean automaticallyActivatePush) {
+        this.automaticallyActivatePush = automaticallyActivatePush;
+    }
+
+    /**
+     * Checks whether automatic push activation is enabled.
+     *
+     * @see #setAutomaticallyActivatePush(boolean)
+     *
+     * @return <code>true</code> if automatic server push configuration is
+     *         enabled, <code>false</code> if it's no enabled
+     */
+    public boolean isAutomaticallyActivatePush() {
+        return automaticallyActivatePush;
+    }
+
     @Override
     public String toString() {
         return "AppSecConfiguration{" + "dataFilePath=" + dataFilePath
@@ -300,6 +331,7 @@ public class AppSecConfiguration implements Serializable {
                 + ", taskExecutor=" + taskExecutor + ", autoScanInterval="
                 + autoScanInterval + ", osvApiRatePerSecond="
                 + osvApiRatePerSecond + ", includeNpmDevDependencies="
-                + includeNpmDevDependencies + '}';
+                + includeNpmDevDependencies + ", automaticallyActivatePush="
+                + automaticallyActivatePush + '}';
     }
 }
