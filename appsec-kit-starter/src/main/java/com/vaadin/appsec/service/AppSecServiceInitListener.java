@@ -10,6 +10,7 @@ package com.vaadin.appsec.service;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.SessionDestroyEvent;
@@ -38,6 +40,8 @@ import com.vaadin.flow.server.UIInitEvent;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinServiceInitListener;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.server.Version;
+import com.vaadin.flow.shared.communication.PushMode;
 
 /**
  * A Vaadin service listener for registering the AppSec Kit route and
@@ -48,18 +52,23 @@ public class AppSecServiceInitListener implements VaadinServiceInitListener {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecServiceInitListener.class);
 
+    private static final AtomicBoolean pushWarningShown = new AtomicBoolean(
+            false);
+
     private final Map<UI, Registration> scanEventRegistrations = new ConcurrentHashMap<>();
 
     @Override
     public void serviceInit(ServiceInitEvent event) {
-        VaadinService service = event.getSource();
-        if (isDebugMode(service)) {
+        VaadinService vaadinService = event.getSource();
+        if (isDebugMode(vaadinService)) {
             AppSecService appSecService = AppSecService.getInstance();
 
             registerRoute(appSecService.getConfiguration().getAppSecRoute());
+            vaadinService.addUIInitListener(this::addAfterNavigationListener);
             appSecService.init();
-            service.addUIInitListener(this::subscribeUIToScanEvents);
-            service.addSessionDestroyListener(this::removeUIRegistrations);
+            vaadinService.addUIInitListener(this::subscribeUIToScanEvents);
+            vaadinService
+                    .addSessionDestroyListener(this::removeUIRegistrations);
             LOGGER.info("AppSec Kit initialized");
 
             appSecService.scanForVulnerabilities()
@@ -78,6 +87,43 @@ public class AppSecServiceInitListener implements VaadinServiceInitListener {
         RouteConfiguration configuration = RouteConfiguration
                 .forApplicationScope();
         configuration.setRoute(path, AppSecView.class);
+    }
+
+    private void addAfterNavigationListener(UIInitEvent event) {
+        event.getUI().addAfterNavigationListener(this::checkForPush);
+    }
+
+    private void checkForPush(AfterNavigationEvent event) {
+        UI ui = UI.getCurrent();
+        if (!canPushChanges(ui) && isActivationEnabled()) {
+            ui.getPushConfiguration().setPushMode(PushMode.AUTOMATIC);
+
+            boolean warningAlreadyShown = pushWarningShown.getAndSet(true);
+            if (!warningAlreadyShown) {
+                int flowVersionInVaadin14 = 2;
+                String annotationLocation = Version
+                        .getMajorVersion() == flowVersionInVaadin14
+                                ? "root layout or individual views"
+                                : "AppShellConfigurator class";
+
+                LOGGER.warn(
+                        "Server push has been automatically enabled so updates can be shown immediately. "
+                                + "Add @Push annotation on your "
+                                + annotationLocation
+                                + " to suppress this warning. "
+                                + "Set automaticallyActivatePush to false in CollaborationEngineConfiguration if you want to ensure push is not automatically enabled.");
+            }
+        }
+    }
+
+    private boolean canPushChanges(UI ui) {
+        return ui.getPushConfiguration().getPushMode().isEnabled()
+                || ui.getPollInterval() > 0;
+    }
+
+    private boolean isActivationEnabled() {
+        return AppSecService.getInstance().getConfiguration()
+                .isAutomaticallyActivatePush();
     }
 
     private void removeUIRegistrations(SessionDestroyEvent event) {

@@ -27,10 +27,16 @@ import com.vaadin.appsec.backend.AppSecScanEvent;
 import com.vaadin.appsec.backend.AppSecScanEventListener;
 import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
+import com.vaadin.appsec.views.AppSecView;
+import com.vaadin.flow.component.PushConfiguration;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.function.DeploymentConfiguration;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationListener;
+import com.vaadin.flow.router.LocationChangeEvent;
 import com.vaadin.flow.router.RouteConfiguration;
+import com.vaadin.flow.router.Router;
 import com.vaadin.flow.server.Command;
 import com.vaadin.flow.server.ServiceInitEvent;
 import com.vaadin.flow.server.SessionDestroyEvent;
@@ -39,9 +45,11 @@ import com.vaadin.flow.server.UIInitEvent;
 import com.vaadin.flow.server.UIInitListener;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.shared.communication.PushMode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockConstruction;
 import static org.mockito.Mockito.mockStatic;
@@ -59,10 +67,13 @@ public class AppSecServiceInitListenerTest {
     private MockedStatic<AppSecService> appSecService;
     private AppSecService appSecServiceInstance;
     private MockedStatic<RouteConfiguration> routeConfiguration;
+    private RouteConfiguration routeConfigurationInstance;
     private MockedConstruction<Notification> notification;
 
     @Captor
     private ArgumentCaptor<UIInitListener> uiInitListenerCaptor;
+    @Captor
+    private ArgumentCaptor<AfterNavigationListener> afterNavigationListenerCaptor;
     @Captor
     private ArgumentCaptor<SessionDestroyListener> sessionDestroyListenerCaptor;
     @Captor
@@ -84,7 +95,7 @@ public class AppSecServiceInitListenerTest {
         appSecService.when(AppSecService::getInstance)
                 .thenReturn(appSecServiceInstance);
 
-        var routeConfigurationInstance = mock(RouteConfiguration.class);
+        routeConfigurationInstance = mock(RouteConfiguration.class);
         routeConfiguration = mockStatic(RouteConfiguration.class);
         routeConfiguration.when(RouteConfiguration::forApplicationScope)
                 .thenReturn(routeConfigurationInstance);
@@ -101,8 +112,16 @@ public class AppSecServiceInitListenerTest {
 
     @Test
     public void debugMode_appSecServiceInitialized() {
+        var pushMode = mock(PushMode.class);
+        when(pushMode.isEnabled()).thenReturn(false);
+        var pushConfiguration = mock(PushConfiguration.class);
+        when(pushConfiguration.getPushMode()).thenReturn(pushMode);
         var ui = mock(UI.class);
+        when(ui.getPushConfiguration()).thenReturn(pushConfiguration);
         UI.setCurrent(ui);
+        var locationChangeEvent = mock(LocationChangeEvent.class);
+        var router = mock(Router.class);
+        when(locationChangeEvent.getSource()).thenReturn(router);
         var vaadinSession = mock(VaadinSession.class);
         when(vaadinSession.getUIs()).thenReturn(Collections.singletonList(ui));
         var vulnerabilities = Arrays.asList(new Vulnerability("CVE-001"),
@@ -127,13 +146,29 @@ public class AppSecServiceInitListenerTest {
 
         listener.serviceInit(new ServiceInitEvent(vaadinService));
 
-        // verifies if AppSec service is initialized
-        verify(appSecServiceInstance, times(1)).init();
+        // verifies that the AppSec Kit route is set
+        verify(routeConfigurationInstance).setRoute("vaadin-appsec-kit",
+                AppSecView.class);
 
-        // verifies that a UI init listener is added
-        verify(vaadinService).addUIInitListener(uiInitListenerCaptor.capture());
-        var uiInitListener = uiInitListenerCaptor.getValue();
-        uiInitListener.uiInit(new UIInitEvent(ui, vaadinService));
+        // verifies that two UI init listeners are added
+        verify(vaadinService, times(2))
+                .addUIInitListener(uiInitListenerCaptor.capture());
+        var uiInitListener = uiInitListenerCaptor.getAllValues();
+        uiInitListener.get(0).uiInit(new UIInitEvent(ui, vaadinService));
+        uiInitListener.get(1).uiInit(new UIInitEvent(ui, vaadinService));
+
+        // verifies that an after navigation listener is added
+        verify(ui).addAfterNavigationListener(
+                afterNavigationListenerCaptor.capture());
+        var afterNavigationListener = afterNavigationListenerCaptor.getValue();
+        afterNavigationListener
+                .afterNavigation(new AfterNavigationEvent(locationChangeEvent));
+
+        // verifies that the push mode is set
+        verify(pushConfiguration).setPushMode(PushMode.AUTOMATIC);
+
+        // verifies if AppSec service is initialized
+        verify(appSecServiceInstance).init();
 
         // verifies that a scan event listener is added
         verify(appSecServiceInstance)
@@ -149,7 +184,7 @@ public class AppSecServiceInitListenerTest {
         var constructed = constructedList.get(0);
         verify(appSecScanEvent, times(2)).getNewVulnerabilities();
         assertEquals(1, constructedList.size());
-        verify(constructed, times(1)).open();
+        verify(constructed).open();
 
         // verifies that a session destroy listener is added and
         // the scan event registration is removed when the session is destroyed
@@ -158,11 +193,11 @@ public class AppSecServiceInitListenerTest {
         var sessionDestroyListener = sessionDestroyListenerCaptor.getValue();
         sessionDestroyListener.sessionDestroy(
                 new SessionDestroyEvent(vaadinService, vaadinSession));
-        verify(scanEventRegistration, times(1)).remove();
+        verify(scanEventRegistration).remove();
 
         // verifies that vulnerability and automatic scans are triggered
-        verify(appSecServiceInstance, times(1)).scanForVulnerabilities();
-        verify(appSecServiceInstance, times(1)).scheduleAutomaticScan();
+        verify(appSecServiceInstance).scanForVulnerabilities();
+        verify(appSecServiceInstance).scheduleAutomaticScan();
     }
 
     @Test
@@ -171,8 +206,10 @@ public class AppSecServiceInitListenerTest {
 
         listener.serviceInit(new ServiceInitEvent(vaadinService));
 
-        verify(appSecServiceInstance, never()).init();
+        verify(routeConfigurationInstance, never()).setRoute(anyString(),
+                any());
         verify(vaadinService, never()).addUIInitListener(any());
+        verify(appSecServiceInstance, never()).init();
         verify(vaadinService, never()).addSessionDestroyListener(any());
         verify(appSecServiceInstance, never()).scanForVulnerabilities();
         verify(appSecServiceInstance, never()).scheduleAutomaticScan();
