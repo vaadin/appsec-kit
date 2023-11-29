@@ -103,7 +103,17 @@ public class AppSecView extends AbstractAppSecView {
         scanNowButton.getElement().setAttribute("aria-label", "Scan now");
         scanNowButton.addClickListener(e -> {
             lastScannedLabel.setText("Scanning...");
-            AppSecService.getInstance().scanForVulnerabilities();
+            UI ui = UI.getCurrent();
+            AppSecService.getInstance().scanForVulnerabilities()
+                    .exceptionally(ex -> {
+                        LOGGER.error("Error scanning vulnerabilities.", ex);
+                        ui.access(() -> {
+                            lastScannedLabel
+                                    .setText("Error scanning vulnerabilities.");
+                            scanNowButton.setEnabled(true);
+                        });
+                        return null;
+                    });
         });
         return scanNowButton;
     }
