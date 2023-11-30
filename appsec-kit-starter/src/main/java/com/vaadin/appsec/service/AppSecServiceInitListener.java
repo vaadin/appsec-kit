@@ -111,7 +111,7 @@ public class AppSecServiceInitListener implements VaadinServiceInitListener {
                                 + "Add @Push annotation on your "
                                 + annotationLocation
                                 + " to suppress this warning. "
-                                + "Set automaticallyActivatePush to false in CollaborationEngineConfiguration if you want to ensure push is not automatically enabled.");
+                                + "Set automaticallyActivatePush to false in AppSecConfiguration if you want to ensure push is not automatically enabled.");
             }
         }
     }
