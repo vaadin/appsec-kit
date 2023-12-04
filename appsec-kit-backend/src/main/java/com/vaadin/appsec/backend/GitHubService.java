@@ -94,8 +94,7 @@ class GitHubService {
     private List<String> getVersions(Pattern flowVersionPattern) {
         return getReleasesFromGitHub().stream().map(GitHubRelease::getTagName)
                 .filter(flowVersionPattern.asPredicate())
-                .limit(NUMBER_OF_LATEST_MAINTAINED_VERSIONS)
-                .toList();
+                .limit(NUMBER_OF_LATEST_MAINTAINED_VERSIONS).toList();
     }
 
     private List<GitHubRelease> getReleasesFromGitHub() {
