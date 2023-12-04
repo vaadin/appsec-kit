@@ -17,8 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.appsec.backend.model.analysis.Assessment;
-import com.vaadin.appsec.backend.model.analysis.VulnerabilityDetails;
 import com.vaadin.appsec.backend.model.analysis.VulnerabilityAnalysis;
+import com.vaadin.appsec.backend.model.analysis.VulnerabilityDetails;
 
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertEquals;
@@ -26,13 +26,9 @@ import static org.junit.Assert.assertEquals;
 public class GitHubServiceTest {
 
     static final String TEST_RESOURCE_BOM_PATH = "/bom.json";
+    static final String TEST_RESOURCE_NPM_BOM_PATH = "/bom-npm.json";
 
     static class TestGitHubService extends GitHubService {
-
-        @Override
-        protected URL getFrameworkReleasesUrl() {
-            return getClass().getClassLoader().getResource("releases.json");
-        }
 
         @Override
         protected URL getFlowReleasesUrl() {
@@ -54,28 +50,10 @@ public class GitHubServiceTest {
         AppSecConfiguration configuration = new AppSecConfiguration();
         configuration.setBomFilePath(Paths.get(AppSecServiceTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
+        configuration.setBomNpmFilePath(Paths.get(GitHubServiceTest.class
+                .getResource(TEST_RESOURCE_NPM_BOM_PATH).toURI()));
         AppSecService.getInstance().setConfiguration(configuration);
         AppSecService.getInstance().init();
-    }
-
-    @Test
-    public void getFramework7Versions() {
-        List<String> versions = service.getFramework7Versions();
-
-        assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
-                versions.size());
-        versions.forEach(
-                version -> MatcherAssert.assertThat(version, startsWith("7.")));
-    }
-
-    @Test
-    public void getFramework8Versions() {
-        List<String> versions = service.getFramework8Versions();
-
-        assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
-                versions.size());
-        versions.forEach(
-                version -> MatcherAssert.assertThat(version, startsWith("8.")));
     }
 
     @Test
