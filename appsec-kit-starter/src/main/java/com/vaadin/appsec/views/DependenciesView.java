@@ -276,7 +276,7 @@ public class DependenciesView extends AbstractAppSecView {
         showVulnerabilities.getElement().setAttribute("aria-label",
                 "Show vulnerabilities");
         showVulnerabilities
-                .addClickListener(e -> parent.showVulnerabilitiesTabFor(
+                .addClickListener(e -> parent.showVulnerabilitiesViewFor(
                         grid.getSelectedItems().iterator().next()));
         grid.addSelectionListener(e -> showVulnerabilities
                 .setEnabled(e.getFirstSelectedItem().isPresent()));
