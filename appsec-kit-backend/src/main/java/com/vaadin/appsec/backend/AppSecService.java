@@ -135,12 +135,49 @@ public class AppSecService {
         readOrCreateDataFile();
     }
 
+    boolean isFlow() {
+        return getFlowServerComponent().isPresent();
+    }
+
     boolean bomNpmFileExists() {
         Path bomNpmFilePath = configuration.getBomNpmFilePath();
         if (bomNpmFilePath != null) {
             return Files.exists(bomNpmFilePath);
         }
         return false;
+    }
+
+    /**
+     * Gets the list of Vaadin Framework 7 versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    @Deprecated(forRemoval = true, since = "3.1.0")
+    public List<String> getSupportedFramework7Versions() {
+        return githubService.getFramework7Versions();
+    }
+
+    /**
+     * Gets the list of Vaadin Framework 8 versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    @Deprecated(forRemoval = true, since = "3.1.0")
+    public List<String> getSupportedFramework8Versions() {
+        return githubService.getFramework8Versions();
+    }
+
+    /**
+     * Gets the list of Vaadin Flow 24 versions for which the kit provides
+     * vulnerability assessments.
+     *
+     * @return the list of versions
+     */
+    @Deprecated(forRemoval = true, since = "3.1.0")
+    public List<String> getSupportedFlow24Versions() {
+        return getSupportedFlowVersions();
     }
 
     /**

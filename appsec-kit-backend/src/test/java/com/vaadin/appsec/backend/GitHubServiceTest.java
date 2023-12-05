@@ -31,6 +31,11 @@ public class GitHubServiceTest {
     static class TestGitHubService extends GitHubService {
 
         @Override
+        protected URL getFrameworkReleasesUrl() {
+            return getClass().getClassLoader().getResource("releases.json");
+        }
+
+        @Override
         protected URL getFlowReleasesUrl() {
             return getClass().getClassLoader().getResource("releases.json");
         }
@@ -54,6 +59,26 @@ public class GitHubServiceTest {
                 .getResource(TEST_RESOURCE_NPM_BOM_PATH).toURI()));
         AppSecService.getInstance().setConfiguration(configuration);
         AppSecService.getInstance().init();
+    }
+
+    @Test
+    public void getFramework7Versions() {
+        List<String> versions = service.getFramework7Versions();
+
+        assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
+                versions.size());
+        versions.forEach(
+                version -> MatcherAssert.assertThat(version, startsWith("7.")));
+    }
+
+    @Test
+    public void getFramework8Versions() {
+        List<String> versions = service.getFramework8Versions();
+
+        assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
+                versions.size());
+        versions.forEach(
+                version -> MatcherAssert.assertThat(version, startsWith("8.")));
     }
 
     @Test

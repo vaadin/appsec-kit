@@ -77,7 +77,13 @@ class GitHubService {
 
     static final String VAADIN_ANALYSIS_URI = "https://raw.githubusercontent.com/vaadin/vulnerability-analysis/main/analysis.json";
 
+    static final String FRAMEWORK_RELEASES_URI = "https://api.github.com/repos/vaadin/framework/releases";
+
     static final String FLOW_RELEASES_URI = "https://api.github.com/repos/vaadin/flow/releases";
+
+    static final Pattern FRAMEWORK_7_PATTERN = compile("^7\\.\\d+.\\d+$");
+
+    static final Pattern FRAMEWORK_8_PATTERN = compile("^8\\.\\d+.\\d+$");
 
     static final Pattern FLOW_24_PATTERN = compile("^24\\.\\d+.\\d+$");
 
@@ -86,6 +92,14 @@ class GitHubService {
     private List<GitHubRelease> releasesCache;
 
     private VulnerabilityAnalysis analysisCache;
+
+    List<String> getFramework7Versions() {
+        return getVersions(FRAMEWORK_7_PATTERN);
+    }
+
+    List<String> getFramework8Versions() {
+        return getVersions(FRAMEWORK_8_PATTERN);
+    }
 
     List<String> getFlow24Versions() {
         return getVersions(FLOW_24_PATTERN);
@@ -105,10 +119,16 @@ class GitHubService {
     }
 
     void updateReleasesCache() {
+        boolean isFlow = AppSecService.getInstance().isFlow();
         ObjectReader listReader = MAPPER.readerForListOf(GitHubRelease.class);
         try {
-            URL flowTagsUrl = getFlowReleasesUrl();
-            releasesCache = listReader.readValue(flowTagsUrl);
+            URL releasesUrl;
+            if (isFlow) {
+                releasesUrl = getFlowReleasesUrl();
+            } else {
+                releasesUrl = getFrameworkReleasesUrl();
+            }
+            releasesCache = listReader.readValue(releasesUrl);
             LOGGER.debug("Vaadin releases cache updated from GitHub "
                     + releasesCache);
         } catch (IOException e) {
@@ -133,6 +153,15 @@ class GitHubService {
                     + analysisCache);
         } catch (IOException e) {
             throw new AppSecException("Cannot get Vaadin analysis from GitHub",
+                    e);
+        }
+    }
+
+    protected URL getFrameworkReleasesUrl() {
+        try {
+            return new URL(FRAMEWORK_RELEASES_URI);
+        } catch (MalformedURLException e) {
+            throw new AppSecException("Invalid Vaadin framework releases URL",
                     e);
         }
     }
