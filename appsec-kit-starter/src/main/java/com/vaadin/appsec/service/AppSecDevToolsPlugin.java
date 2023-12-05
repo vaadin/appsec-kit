@@ -33,8 +33,10 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
 
     @Override
     public void handleConnect(DevToolsInterface devToolsInterface) {
-        devToolsInterface.send("appsec-kit-init", Json.createObject());
         var appSecService = AppSecService.getInstance();
+
+        var appSecRoute = appSecService.getConfiguration().getAppSecRoute();
+        sendInitData(appSecRoute, devToolsInterface);
 
         if (!scanEventRegistrations.containsKey(devToolsInterface)) {
             var registration = appSecService.addScanEventListener(event -> {
@@ -64,6 +66,13 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
             registration.remove();
             LOGGER.debug("Scan event listener removed");
         }
+    }
+
+    private void sendInitData(String appSecRoute,
+            DevToolsInterface devToolsInterface) {
+        var data = Json.createObject();
+        data.put("appSecRoute", appSecRoute);
+        devToolsInterface.send("appsec-kit-init", data);
     }
 
     private void sendScanResult(int vulnerabilityCount,
