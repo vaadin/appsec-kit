@@ -20,6 +20,7 @@ import org.mockito.Captor;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.vaadin.appsec.backend.AppSecConfiguration;
 import com.vaadin.appsec.backend.AppSecScanEvent;
 import com.vaadin.appsec.backend.AppSecScanEventListener;
 import com.vaadin.appsec.backend.AppSecService;
@@ -31,7 +32,6 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
@@ -61,6 +61,8 @@ public class AppSecDevToolsPluginTest {
         devToolsInterface = mock(DevToolsInterface.class);
 
         appSecServiceInstance = mock(AppSecService.class);
+        when(appSecServiceInstance.getConfiguration())
+                .thenReturn(new AppSecConfiguration());
         registration = mock(Registration.class);
         when(appSecServiceInstance.addScanEventListener(any()))
                 .thenReturn(registration);
@@ -95,7 +97,8 @@ public class AppSecDevToolsPluginTest {
         assertEquals("appsec-kit-init", commands.get(0));
         assertEquals("appsec-kit-scan", commands.get(1));
         var values = jsonObjectCaptor.getAllValues();
-        assertNotNull(values.get(0));
+        assertEquals("vaadin-appsec-kit",
+                values.get(0).get("appSecRoute").asString());
         assertEquals(1, values.get(1).get("vulnerabilityCount").asNumber());
 
         verify(appSecServiceInstance)
