@@ -31,7 +31,11 @@ public class AppSecServiceInitListener extends AbstractInitListener {
             appSecService.init();
             LOGGER.info("AppSec Kit initialized");
             appSecService.scanForVulnerabilities()
-                    .thenRun(appSecService::scheduleAutomaticScan);
+                    .exceptionally(appSecException -> {
+                        LOGGER.error("Error scanning vulnerabilities.",
+                                appSecException);
+                        return null;
+                    }).thenRun(appSecService::scheduleAutomaticScan);
         } else {
             LOGGER.info("AppSec Kit not enabled in production mode. Run the "
                     + "application in debug mode to initialize AppSec Kit");

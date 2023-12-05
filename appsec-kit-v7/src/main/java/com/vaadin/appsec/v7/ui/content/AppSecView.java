@@ -76,7 +76,17 @@ public class AppSecView extends AbstractAppSecContent {
         scanNow.setDisableOnClick(true);
         scanNow.addClickListener(e -> {
             lastScannedLabel.setValue("Scanning...");
-            AppSecService.getInstance().scanForVulnerabilities();
+            UI ui = UI.getCurrent();
+            AppSecService.getInstance().scanForVulnerabilities()
+                    .exceptionally(ex -> {
+                        LOGGER.error("Error scanning for vulnerabilities.", ex);
+                        ui.access(() -> {
+                            lastScannedLabel.setValue(
+                                    "Error scanning vulnerabilities.");
+                            scanNow.setEnabled(true);
+                        });
+                        return null;
+                    });
         });
         headerBar.addComponent(scanNow);
 
