@@ -40,12 +40,12 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.server.StreamResource;
 
 /**
- * Dependencies tab view contains a detailed list of dependencies.
+ * Dependencies view contains a detailed list of dependencies.
  */
-public class DependenciesTab extends AbstractAppSecView {
+public class DependenciesView extends AbstractAppSecView {
 
     private final Logger logger = LoggerFactory
-            .getLogger(DependenciesTab.class);
+            .getLogger(DependenciesView.class);
 
     private Grid<Dependency> grid;
     private GridListDataView<Dependency> dataView;
@@ -58,7 +58,7 @@ public class DependenciesTab extends AbstractAppSecView {
     private final boolean includeNpmDevDeps;
     private final AppSecView parent;
 
-    public DependenciesTab(AppSecView parent) {
+    public DependenciesView(AppSecView parent) {
         this.parent = parent;
         this.includeNpmDevDeps = AppSecService.getInstance().getConfiguration()
                 .isIncludeNpmDevDependencies();
@@ -144,9 +144,9 @@ public class DependenciesTab extends AbstractAppSecView {
                         new OutputStreamWriter(outputStream),
                         CSVFormat.DEFAULT)) {
             // header
-            printer.printRecord("Dependency", "Ecosystem", "Dependency group",
-                    "Version", "Is development?", "# of vulnerabilities",
-                    "Highest severity", "Highest CVSS score");
+            printer.printRecord(DEPENDENCY, ECOSYSTEM, DEPENDENCY_GROUP,
+                    VERSION, IS_DEVELOPMENT, NUMBER_OF_VULNERABILITIES,
+                    HIGHEST_SEVERITY, HIGHEST_CVSS_SCORE);
             // content
             for (Dependency dependency : dependencyList) {
                 printer.printRecord(dependency.getName(),
@@ -181,36 +181,36 @@ public class DependenciesTab extends AbstractAppSecView {
     private void configureSearchField() {
         dataView = grid.setItems(AppSecService.getInstance().getDependencies());
 
-        searchField.setPlaceholder("Search");
+        searchField.setPlaceholder(SEARCH);
         searchField.setPrefixComponent(new Icon(VaadinIcon.SEARCH));
         searchField.setValueChangeMode(ValueChangeMode.EAGER);
         searchField.addValueChangeListener(e -> dataView.refreshAll());
     }
 
     private void buildFilters() {
-        searchField = new TextField("Dependency name");
+        searchField = new TextField(DEPENDENCY_NAME);
 
-        ecosystem = new ComboBox<>("Ecosystem");
+        ecosystem = new ComboBox<>(ECOSYSTEM);
         ecosystem.setItems(Ecosystem.MAVEN, Ecosystem.NPM);
         ecosystem.addValueChangeListener(event -> applyFilters());
 
-        group = new ComboBox<>("Dependency group");
+        group = new ComboBox<>(DEPENDENCY_GROUP);
         group.addValueChangeListener(event -> applyFilters());
         group.getStyle().set("--vaadin-combo-box-overlay-width", "350px");
 
         if (includeNpmDevDeps) {
-            isDevelopment = new ComboBox<>("Is development?");
+            isDevelopment = new ComboBox<>(IS_DEVELOPMENT);
             isDevelopment.setItems(Boolean.TRUE, Boolean.FALSE);
             isDevelopment.addValueChangeListener(event -> applyFilters());
         }
 
-        severity = new ComboBox<>("Severity");
+        severity = new ComboBox<>(SEVERITY);
         severity.setItems(SeverityLevel.NONE, SeverityLevel.LOW,
                 SeverityLevel.MEDIUM, SeverityLevel.HIGH,
                 SeverityLevel.CRITICAL);
         severity.addValueChangeListener(event -> applyFilters());
 
-        riskScore = new ComboBox<>("CVSS score");
+        riskScore = new ComboBox<>(CVSS_SCORE);
         riskScore.setItems(">=0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
                 ">=7", ">=8", ">=9", "=10");
         riskScore.addValueChangeListener(event -> applyFilters());
@@ -232,32 +232,31 @@ public class DependenciesTab extends AbstractAppSecView {
         grid.setMultiSort(true, Grid.MultiSortPriority.APPEND);
         grid.setSizeFull();
 
-        grid.addColumn(Dependency::getName).setHeader("Dependency")
+        grid.addColumn(Dependency::getName).setHeader(DEPENDENCY)
                 .setResizable(true).setSortable(true);
-        grid.addColumn(Dependency::getEcosystem).setHeader("Ecosystem")
+        grid.addColumn(Dependency::getEcosystem).setHeader(ECOSYSTEM)
                 .setResizable(true).setSortable(true);
-        grid.addColumn(Dependency::getGroup).setHeader("Dependency group")
+        grid.addColumn(Dependency::getGroup).setHeader(DEPENDENCY_GROUP)
                 .setResizable(true).setSortable(true);
-        grid.addColumn(Dependency::getVersion).setHeader("Version")
+        grid.addColumn(Dependency::getVersion).setHeader(VERSION)
                 .setResizable(true).setSortable(true);
         if (includeNpmDevDeps) {
             grid.addColumn(Dependency::isDevDependency)
-                    .setHeader("Is development?").setResizable(true)
+                    .setHeader(IS_DEVELOPMENT).setResizable(true)
                     .setSortable(true);
         }
         grid.addColumn(Dependency::getNumOfVulnerabilities)
-                .setHeader("# of vulnerabilities").setResizable(true)
+                .setHeader(NUMBER_OF_VULNERABILITIES).setResizable(true)
                 .setSortable(true);
-        grid.addColumn(Dependency::getSeverityLevel)
-                .setHeader("Highest severity").setResizable(true)
-                .setSortable(true);
-        grid.addColumn(Dependency::getRiskScore).setHeader("Highest CVSS score")
+        grid.addColumn(Dependency::getSeverityLevel).setHeader(HIGHEST_SEVERITY)
+                .setResizable(true).setSortable(true);
+        grid.addColumn(Dependency::getRiskScore).setHeader(HIGHEST_CVSS_SCORE)
                 .setResizable(true).setSortable(true)
                 .setTooltipGenerator(Dependency::getCvssString);
 
         grid.addItemClickListener(e -> {
             if (e.getClickCount() == 2) {
-                parent.showVulnerabilitiesTabFor(e.getItem());
+                parent.showVulnerabilitiesViewFor(e.getItem());
             }
         });
 

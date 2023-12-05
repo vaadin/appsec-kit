@@ -45,8 +45,8 @@ public class AppSecView extends AbstractAppSecView {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecView.class);
 
-    private VulnerabilitiesTab vulnerabilitiesTab;
-    private DependenciesTab dependenciesTab;
+    private VulnerabilitiesView vulnerabilitiesView;
+    private DependenciesView dependenciesView;
     private TabSheet tabSheet;
     private Span lastScannedLabel;
     private DateFormat formatter;
@@ -120,10 +120,10 @@ public class AppSecView extends AbstractAppSecView {
                 abstractAppSecView.refresh();
             }
         });
-        vulnerabilitiesTab = new VulnerabilitiesTab(this);
-        dependenciesTab = new DependenciesTab(this);
-        tabSheet.add("Vulnerabilities", vulnerabilitiesTab);
-        tabSheet.add("Dependencies", dependenciesTab);
+        vulnerabilitiesView = new VulnerabilitiesView(this);
+        dependenciesView = new DependenciesView(this);
+        tabSheet.add("Vulnerabilities", vulnerabilitiesView);
+        tabSheet.add("Dependencies", dependenciesView);
         return tabSheet;
     }
 
@@ -138,9 +138,9 @@ public class AppSecView extends AbstractAppSecView {
                 : formatter.format(Date.from(lastScan))));
     }
 
-    void showVulnerabilitiesTabFor(Dependency item) {
-        tabSheet.setSelectedTab(tabSheet.getTab(vulnerabilitiesTab));
-        vulnerabilitiesTab.filterOn(item);
+    void showVulnerabilitiesViewFor(Dependency item) {
+        tabSheet.setSelectedTab(tabSheet.getTab(vulnerabilitiesView));
+        vulnerabilitiesView.filterOn(item);
     }
 
     @Override

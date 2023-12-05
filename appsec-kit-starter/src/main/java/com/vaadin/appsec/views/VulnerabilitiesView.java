@@ -39,12 +39,12 @@ import com.vaadin.flow.function.ValueProvider;
 import com.vaadin.flow.server.StreamResource;
 
 /**
- * Vulnerabilities tab view contains a detailed list of vulnerabilities.
+ * Vulnerabilities view contains a detailed list of vulnerabilities.
  */
-public class VulnerabilitiesTab extends AbstractAppSecView {
+public class VulnerabilitiesView extends AbstractAppSecView {
 
     private final Logger logger = LoggerFactory
-            .getLogger(VulnerabilitiesTab.class);
+            .getLogger(VulnerabilitiesView.class);
 
     private Grid<Vulnerability> grid;
     private ComboBox<Ecosystem> ecosystem;
@@ -57,7 +57,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     private final ValueProvider<Vulnerability, Ecosystem> ecosystemValueProvider = vuln -> vuln
             .getDependency().getEcosystem();
 
-    public VulnerabilitiesTab(AbstractAppSecView parent) {
+    public VulnerabilitiesView(AbstractAppSecView parent) {
         this.parent = parent;
         buildFilters();
         buildGrid();
@@ -142,9 +142,9 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
                         new OutputStreamWriter(outputStream),
                         CSVFormat.DEFAULT)) {
             // header
-            printer.printRecord("Vulnerability name or identifier", "Ecosystem",
-                    "Dependency", "Severity", "CVSS score", "Vaadin analysis",
-                    "Developer analysis");
+            printer.printRecord(VULNERABILITY_NAME_OR_IDENTIFIER, ECOSYSTEM,
+                    DEPENDENCY, SEVERITY, CVSS_SCORE, VAADIN_ANALYSIS,
+                    DEVELOPER_ANALYSIS);
             // content
             for (Vulnerability vulnerability : vulnerabilityList) {
                 printer.printRecord(vulnerability.getIdentifier(),
@@ -178,20 +178,20 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     }
 
     private void buildFilters() {
-        ecosystem = new ComboBox<>("Ecosystem");
+        ecosystem = new ComboBox<>(ECOSYSTEM);
         ecosystem.setItems(Ecosystem.MAVEN, Ecosystem.NPM);
         ecosystem.addValueChangeListener(event -> applyFilters());
 
-        dependency = new ComboBox<>("Dependency");
+        dependency = new ComboBox<>(DEPENDENCY);
         dependency.addValueChangeListener(event -> applyFilters());
         dependency.getStyle().set("--vaadin-combo-box-overlay-width", "350px");
 
-        vaadinAnalysis = new ComboBox<>("Vaadin analysis");
+        vaadinAnalysis = new ComboBox<>(VAADIN_ANALYSIS);
         vaadinAnalysis.setItems(AssessmentStatus.TRUE_POSITIVE,
                 AssessmentStatus.FALSE_POSITIVE, AssessmentStatus.UNDER_REVIEW);
         vaadinAnalysis.addValueChangeListener(event -> applyFilters());
 
-        developerAnalysis = new ComboBox<>("Developer analysis");
+        developerAnalysis = new ComboBox<>(DEVELOPER_ANALYSIS);
         developerAnalysis.setItems(AppSecData.VulnerabilityStatus.NOT_SET,
                 AppSecData.VulnerabilityStatus.NOT_AFFECTED,
                 AppSecData.VulnerabilityStatus.FALSE_POSITIVE,
@@ -199,13 +199,13 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
                 AppSecData.VulnerabilityStatus.EXPLOITABLE);
         developerAnalysis.addValueChangeListener(event -> applyFilters());
 
-        severity = new ComboBox<>("Severity");
+        severity = new ComboBox<>(SEVERITY);
         severity.setItems(SeverityLevel.NONE, SeverityLevel.LOW,
                 SeverityLevel.MEDIUM, SeverityLevel.HIGH,
                 SeverityLevel.CRITICAL);
         severity.addValueChangeListener(event -> applyFilters());
 
-        riskScore = new ComboBox<>("CVSS score");
+        riskScore = new ComboBox<>(CVSS_SCORE);
         riskScore.setItems(">=0", ">=1", ">=2", ">=3", ">=4", ">=5", ">=6",
                 ">=7", ">=8", ">=9", "=10");
         riskScore.addValueChangeListener(event -> applyFilters());
@@ -222,22 +222,22 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
         grid.setSizeFull();
 
         grid.addColumn(Vulnerability::getIdentifier)
-                .setHeader("Vulnerability name or identifier")
+                .setHeader(VULNERABILITY_NAME_OR_IDENTIFIER).setResizable(true)
+                .setSortable(true);
+        grid.addColumn(ecosystemValueProvider).setHeader(ECOSYSTEM)
                 .setResizable(true).setSortable(true);
-        grid.addColumn(ecosystemValueProvider).setHeader("Ecosystem")
+        grid.addColumn(Vulnerability::getDependency).setHeader(DEPENDENCY)
                 .setResizable(true).setSortable(true);
-        grid.addColumn(Vulnerability::getDependency).setHeader("Dependency")
+        grid.addColumn(Vulnerability::getSeverityLevel).setHeader(SEVERITY)
                 .setResizable(true).setSortable(true);
-        grid.addColumn(Vulnerability::getSeverityLevel).setHeader("Severity")
-                .setResizable(true).setSortable(true);
-        grid.addColumn(Vulnerability::getRiskScore).setHeader("CVSS score")
+        grid.addColumn(Vulnerability::getRiskScore).setHeader(CVSS_SCORE)
                 .setResizable(true).setSortable(true)
                 .setTooltipGenerator(Vulnerability::getCvssString);
         grid.addColumn(Vulnerability::getVaadinAnalysis)
-                .setHeader("Vaadin analysis").setResizable(true)
+                .setHeader(VAADIN_ANALYSIS).setResizable(true)
                 .setSortable(true);
         grid.addColumn(Vulnerability::getDeveloperStatus)
-                .setHeader("Developer analysis").setResizable(true)
+                .setHeader(DEVELOPER_ANALYSIS).setResizable(true)
                 .setSortable(true);
 
         grid.addItemClickListener(e -> {
@@ -250,7 +250,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
     }
 
     private void buildShowDetailsButton() {
-        Button showDetails = new Button("Show details");
+        Button showDetails = new Button(SHOW_DETAILS);
         showDetails.setEnabled(false);
         showDetails.addClickListener(e -> showVulnerabilityDetails(
                 grid.getSelectedItems().iterator().next()));
