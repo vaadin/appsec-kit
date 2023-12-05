@@ -123,6 +123,7 @@ public class VulnerabilitiesView extends AbstractAppSecView {
     public void refresh() {
         Set<Vulnerability> selectedItems = grid.getSelectedItems();
         grid.deselectAll();
+
         List<Vulnerability> vulnerabilities = AppSecService.getInstance()
                 .getVulnerabilities();
         grid.setItems(vulnerabilities);
@@ -252,6 +253,7 @@ public class VulnerabilitiesView extends AbstractAppSecView {
     private void buildShowDetailsButton() {
         Button showDetails = new Button(SHOW_DETAILS);
         showDetails.setEnabled(false);
+        showDetails.getElement().setAttribute("aria-label", "Show details");
         showDetails.addClickListener(e -> showVulnerabilityDetails(
                 grid.getSelectedItems().iterator().next()));
         grid.addSelectionListener(e -> showDetails

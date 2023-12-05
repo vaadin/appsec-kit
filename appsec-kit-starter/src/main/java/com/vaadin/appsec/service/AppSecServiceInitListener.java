@@ -33,7 +33,6 @@ public class AppSecServiceInitListener implements VaadinServiceInitListener {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecServiceInitListener.class);
 
-    private static final String APPSEC_KIT_ROUTE = "vaadin-appsec-kit";
     private static final AtomicBoolean pushWarningShown = new AtomicBoolean(
             false);
 
@@ -41,11 +40,13 @@ public class AppSecServiceInitListener implements VaadinServiceInitListener {
     public void serviceInit(ServiceInitEvent event) {
         VaadinService vaadinService = event.getSource();
         if (isDebugMode(vaadinService)) {
-            registerRoute();
-            vaadinService.addUIInitListener(this::addAfterNavigationListener);
             AppSecService appSecService = AppSecService.getInstance();
+
+            registerRoute(appSecService.getConfiguration().getAppSecRoute());
+            vaadinService.addUIInitListener(this::addAfterNavigationListener);
             appSecService.init();
             LOGGER.info("AppSec Kit initialized");
+
             appSecService.scanForVulnerabilities()
                     .exceptionally(appSecException -> {
                         LOGGER.error("Error scanning vulnerabilities.",
@@ -58,10 +59,10 @@ public class AppSecServiceInitListener implements VaadinServiceInitListener {
         }
     }
 
-    private void registerRoute() {
+    private void registerRoute(String path) {
         RouteConfiguration configuration = RouteConfiguration
                 .forApplicationScope();
-        configuration.setRoute(APPSEC_KIT_ROUTE, AppSecView.class);
+        configuration.setRoute(path, AppSecView.class);
     }
 
     private boolean isDebugMode(VaadinService vaadinService) {

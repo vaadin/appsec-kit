@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,6 +28,7 @@ import com.vaadin.appsec.backend.model.dto.Dependency;
 import com.vaadin.appsec.backend.model.dto.SeverityLevel;
 import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
@@ -64,6 +66,7 @@ public class DependenciesView extends AbstractAppSecView {
                 .isIncludeNpmDevDependencies();
         buildFilters();
         buildGrid();
+        buildShowVulnerabilitiesButton();
         configureSearchField();
     }
 
@@ -117,6 +120,9 @@ public class DependenciesView extends AbstractAppSecView {
 
     @Override
     public void refresh() {
+        Set<Dependency> selectedItems = grid.getSelectedItems();
+        grid.deselectAll();
+
         List<Dependency> dependencies = AppSecService.getInstance()
                 .getDependencies();
         dataView = grid.setItems(dependencies);
@@ -133,6 +139,7 @@ public class DependenciesView extends AbstractAppSecView {
                 .sorted().toList();
         group.setItems(sortedGroups);
         applyFilters();
+        selectedItems.forEach(grid::select);
 
         prepareExportData(dependencies);
     }
@@ -228,7 +235,7 @@ public class DependenciesView extends AbstractAppSecView {
 
     private void buildGrid() {
         grid = new Grid<>();
-        grid.setSelectionMode(Grid.SelectionMode.NONE);
+        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         grid.setMultiSort(true, Grid.MultiSortPriority.APPEND);
         grid.setSizeFull();
 
@@ -261,6 +268,22 @@ public class DependenciesView extends AbstractAppSecView {
         });
 
         getMainContent().addAndExpand(grid);
+    }
+
+    private void buildShowVulnerabilitiesButton() {
+        Button showVulnerabilities = new Button("Show vulnerabilities");
+        showVulnerabilities.setEnabled(false);
+        showVulnerabilities.getElement().setAttribute("aria-label",
+                "Show vulnerabilities");
+        showVulnerabilities
+                .addClickListener(e -> parent.showVulnerabilitiesTabFor(
+                        grid.getSelectedItems().iterator().next()));
+        grid.addSelectionListener(e -> showVulnerabilities
+                .setEnabled(e.getFirstSelectedItem().isPresent()));
+
+        getMainContent().add(showVulnerabilities);
+        getMainContent().setHorizontalComponentAlignment(Alignment.END,
+                showVulnerabilities);
     }
 
     @SuppressWarnings("unchecked")
