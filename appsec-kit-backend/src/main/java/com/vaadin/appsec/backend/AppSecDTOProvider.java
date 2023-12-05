@@ -114,18 +114,12 @@ class AppSecDTOProvider {
                 .getVulnerabilities();
         final List<Vulnerability> vulnerabilityDTOs = new ArrayList<>();
 
-        for (OpenSourceVulnerability vuln : vulnerabilities) {
-            for (Affected affected : vuln.getAffected()) {
-                String vulnDepGroup = AppSecUtils.getVulnDepGroup(affected);
-                String vulnDepName = AppSecUtils.getVulnDepName(affected);
-                List<String> versions = affected.getVersions();
-                List<Range> ranges = affected.getRanges();
-
-                for (Dependency dep : dependencies) {
-                    if (isVulnerable(dep, vulnDepGroup, vulnDepName, versions,
-                            ranges)) {
+        for (OpenSourceVulnerability vulnerability : vulnerabilities) {
+            for (Affected affected : vulnerability.getAffected()) {
+                for (Dependency dependency : dependencies) {
+                    if (isVulnerable(dependency, affected)) {
                         Vulnerability vulnerabilityDTO = createVulnerabilityDTO(
-                                vuln, dep, affected);
+                                vulnerability, dependency, affected);
                         vulnerabilityDTOs.add(vulnerabilityDTO);
                     }
                 }
@@ -137,11 +131,15 @@ class AppSecDTOProvider {
 
     // Pseudocode for evaluating if a given version is affected
     // is available here https://ossf.github.io/osv-schema/#evaluation
-    private boolean isVulnerable(Dependency dep, String vulnDepGroup,
-            String vulnDepName, List<String> versions, List<Range> ranges) {
-        return isSameGroup(dep.getGroup(), vulnDepGroup)
-                && isSameName(dep.getName(), vulnDepName)
-                && isVersionAffected(dep.getVersion(), versions, ranges);
+    private boolean isVulnerable(Dependency dependency, Affected affected) {
+        String vulnDepGroup = AppSecUtils.getVulnDepGroup(affected);
+        String vulnDepName = AppSecUtils.getVulnDepName(affected);
+        List<String> versions = affected.getVersions();
+        List<Range> ranges = affected.getRanges();
+
+        return isSameGroup(dependency.getGroup(), vulnDepGroup)
+                && isSameName(dependency.getName(), vulnDepName)
+                && isVersionAffected(dependency.getVersion(), versions, ranges);
     }
 
     private boolean isSameGroup(String depGroup, String vulnDepGroup) {
@@ -294,9 +292,7 @@ class AppSecDTOProvider {
 
         for (OpenSourceVulnerability vulnerability : vulnerabilities) {
             for (Affected affected : vulnerability.getAffected()) {
-                String depGroupAndName = AppSecUtils
-                        .getDepGroupAndName(dependency);
-                if (depGroupAndName.equals(affected.getPackage().getName())) {
+                if (isVulnerable(dependency, affected)) {
                     vulnerabilityCount++;
                     highestSeverityLevel = findSeverityIfHigher(vulnerability,
                             highestSeverityLevel);
