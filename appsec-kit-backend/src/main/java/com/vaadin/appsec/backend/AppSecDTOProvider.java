@@ -253,8 +253,7 @@ class AppSecDTOProvider {
 
         Optional<AffectedVersion> vaadinAnalysis = getVaadinAnalysis(
                 vulnerabilityDTO);
-        vaadinAnalysis.ifPresent(affectedVersion -> vulnerabilityDTO
-                .setVaadinAnalysis(affectedVersion.getStatus()));
+        vaadinAnalysis.ifPresent(vulnerabilityDTO::setVaadinAnalysis);
 
         Map<String, AppSecData.VulnerabilityAssessment> vulnerabilityAssessments = AppSecService
                 .getInstance().getData().getVulnerabilities();
@@ -418,15 +417,18 @@ class AppSecDTOProvider {
         if (vulnerability == null) {
             return Optional.empty();
         }
+
         Dependency dependency = vulnerabilityDTO.getDependency();
         String parentBomRef = dependency.getParentBomRef();
-        String groupAndName = AppSecUtils
-                .bomRefToMavenGroupAndName(parentBomRef);
+        String groupAndName = dependency.getEcosystem() == Ecosystem.MAVEN
+                ? AppSecUtils.bomRefToMavenGroupAndName(parentBomRef)
+                : AppSecUtils.bomRefToNpmGroupAndName(parentBomRef);
         Assessment assessment = vulnerability.getAssessments()
                 .get(groupAndName);
         if (assessment == null) {
             return Optional.empty();
         }
+
         return assessment.getAffectedVersions().values().stream().filter(
                 v -> v.isInRange(AppSecUtils.bomRefToVersion(parentBomRef)))
                 .findFirst();

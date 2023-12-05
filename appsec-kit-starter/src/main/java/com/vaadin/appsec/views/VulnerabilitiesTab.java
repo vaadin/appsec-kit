@@ -103,7 +103,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
                 return false;
             }
             if (vaadinAnalysisFilter != null && !vaadinAnalysisFilter
-                    .equals(vulnerabilityDTO.getVaadinAnalysis())) {
+                    .equals(getVaadinAnalysisFor(vulnerabilityDTO))) {
                 return false;
             }
             if (developerAnalysisFilter != null && !developerAnalysisFilter
@@ -152,7 +152,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
                         vulnerability.getDependency(),
                         vulnerability.getSeverityLevel(),
                         vulnerability.getRiskScore(),
-                        vulnerability.getVaadinAnalysis(),
+                        getVaadinAnalysisFor(vulnerability),
                         vulnerability.getDeveloperAnalysis());
             }
 
@@ -170,6 +170,12 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
             errorNotification.addThemeVariants(NotificationVariant.LUMO_ERROR);
             errorNotification.open();
         }
+    }
+
+    private AssessmentStatus getVaadinAnalysisFor(Vulnerability vulnerability) {
+        return vulnerability.getVaadinAnalysis() != null
+                ? vulnerability.getVaadinAnalysis().getStatus()
+                : null;
     }
 
     private Double getRiskScoreFromFilter(String riskScoreFilter) {
@@ -233,7 +239,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
         grid.addColumn(Vulnerability::getRiskScore).setHeader("CVSS score")
                 .setResizable(true).setSortable(true)
                 .setTooltipGenerator(Vulnerability::getCvssString);
-        grid.addColumn(Vulnerability::getVaadinAnalysis)
+        grid.addColumn(vaadinAnalysisValueProvider())
                 .setHeader("Vaadin analysis").setResizable(true)
                 .setSortable(true);
         grid.addColumn(Vulnerability::getDeveloperStatus)
@@ -247,6 +253,12 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
         });
 
         getMainContent().addAndExpand(grid);
+    }
+
+    private ValueProvider<Vulnerability, AssessmentStatus> vaadinAnalysisValueProvider() {
+        return vulnerability -> vulnerability.getVaadinAnalysis() != null
+                ? vulnerability.getVaadinAnalysis().getStatus()
+                : null;
     }
 
     private void buildShowDetailsButton() {
