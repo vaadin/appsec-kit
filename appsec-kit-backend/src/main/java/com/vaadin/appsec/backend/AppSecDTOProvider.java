@@ -249,9 +249,9 @@ class AppSecDTOProvider {
                     HtmlRenderer.builder().build().render(document));
         }
 
-        Optional<AffectedVersion> vaadinAnalysis = getVaadinAnalysis(
+        Optional<AffectedVersion> affectedVersion = getAffectedVersion(
                 vulnerabilityDTO);
-        vaadinAnalysis.ifPresent(vulnerabilityDTO::setVaadinAnalysis);
+        affectedVersion.ifPresent(vulnerabilityDTO::setAffectedVersion);
 
         Map<String, AppSecData.VulnerabilityAssessment> vulnerabilityAssessments = AppSecService
                 .getInstance().getData().getVulnerabilities();
@@ -404,7 +404,7 @@ class AppSecDTOProvider {
         }
     }
 
-    private Optional<AffectedVersion> getVaadinAnalysis(
+    private Optional<AffectedVersion> getAffectedVersion(
             Vulnerability vulnerabilityDTO) {
         String vulnerabilityId = vulnerabilityDTO.getIdentifier();
         VulnerabilityDetails vulnerability = AppSecService.getInstance()
