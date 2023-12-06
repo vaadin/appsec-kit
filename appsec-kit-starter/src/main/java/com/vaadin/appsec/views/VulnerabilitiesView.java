@@ -234,9 +234,8 @@ public class VulnerabilitiesView extends AbstractAppSecView {
         grid.addColumn(Vulnerability::getRiskScore).setHeader(CVSS_SCORE)
                 .setResizable(true).setSortable(true)
                 .setTooltipGenerator(Vulnerability::getCvssString);
-        grid.addColumn(this::getAssessmentStatus)
-                .setHeader(VAADIN_ANALYSIS).setResizable(true)
-                .setSortable(true);
+        grid.addColumn(this::getAssessmentStatus).setHeader(VAADIN_ANALYSIS)
+                .setResizable(true).setSortable(true);
         grid.addColumn(Vulnerability::getDeveloperStatus)
                 .setHeader(DEVELOPER_ANALYSIS).setResizable(true)
                 .setSortable(true);
