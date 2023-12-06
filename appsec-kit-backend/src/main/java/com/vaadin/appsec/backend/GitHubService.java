@@ -15,7 +15,6 @@ import java.text.Collator;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -57,10 +56,9 @@ class GitHubService {
             if (this == obj) {
                 return true;
             }
-            if (!(obj instanceof GitHubRelease)) {
+            if (!(obj instanceof GitHubRelease other)) {
                 return false;
             }
-            GitHubRelease other = (GitHubRelease) obj;
             return Objects.equals(tagName, other.tagName);
         }
 
@@ -107,11 +105,10 @@ class GitHubService {
         return getVersions(FLOW_24_PATTERN);
     }
 
-    private List<String> getVersions(Pattern frameworkVersionPattern) {
+    private List<String> getVersions(Pattern flowVersionPattern) {
         return getReleasesFromGitHub().stream().map(GitHubRelease::getTagName)
-                .filter(frameworkVersionPattern.asPredicate())
-                .limit(NUMBER_OF_LATEST_MAINTAINED_VERSIONS)
-                .collect(Collectors.toList());
+                .filter(flowVersionPattern.asPredicate())
+                .limit(NUMBER_OF_LATEST_MAINTAINED_VERSIONS).toList();
     }
 
     private List<GitHubRelease> getReleasesFromGitHub() {
@@ -125,13 +122,13 @@ class GitHubService {
         boolean isFlow = AppSecService.getInstance().isFlow();
         ObjectReader listReader = MAPPER.readerForListOf(GitHubRelease.class);
         try {
-            URL frameworkTagsUrl;
+            URL releasesUrl;
             if (isFlow) {
-                frameworkTagsUrl = getFlowReleasesUrl();
+                releasesUrl = getFlowReleasesUrl();
             } else {
-                frameworkTagsUrl = getFrameworkReleasesUrl();
+                releasesUrl = getFrameworkReleasesUrl();
             }
-            releasesCache = listReader.readValue(frameworkTagsUrl);
+            releasesCache = listReader.readValue(releasesUrl);
             LOGGER.debug("Vaadin releases cache updated from GitHub "
                     + releasesCache);
         } catch (IOException e) {
@@ -160,20 +157,20 @@ class GitHubService {
         }
     }
 
-    protected URL getFlowReleasesUrl() {
-        try {
-            return new URL(FLOW_RELEASES_URI);
-        } catch (MalformedURLException e) {
-            throw new AppSecException("Invalid Vaadin Flow releases URL", e);
-        }
-    }
-
     protected URL getFrameworkReleasesUrl() {
         try {
             return new URL(FRAMEWORK_RELEASES_URI);
         } catch (MalformedURLException e) {
             throw new AppSecException("Invalid Vaadin framework releases URL",
                     e);
+        }
+    }
+
+    protected URL getFlowReleasesUrl() {
+        try {
+            return new URL(FLOW_RELEASES_URI);
+        } catch (MalformedURLException e) {
+            throw new AppSecException("Invalid Vaadin Flow releases URL", e);
         }
     }
 
