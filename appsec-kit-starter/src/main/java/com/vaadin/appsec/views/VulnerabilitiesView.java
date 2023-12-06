@@ -103,7 +103,7 @@ public class VulnerabilitiesView extends AbstractAppSecView {
                 return false;
             }
             if (vaadinAnalysisFilter != null && !vaadinAnalysisFilter
-                    .equals(vulnerabilityDTO.getVaadinAnalysis())) {
+                    .equals(getAssessmentStatus(vulnerabilityDTO))) {
                 return false;
             }
             if (developerAnalysisFilter != null && !developerAnalysisFilter
@@ -153,7 +153,7 @@ public class VulnerabilitiesView extends AbstractAppSecView {
                         vulnerability.getDependency(),
                         vulnerability.getSeverityLevel(),
                         vulnerability.getRiskScore(),
-                        vulnerability.getVaadinAnalysis(),
+                        getAssessmentStatus(vulnerability),
                         vulnerability.getDeveloperAnalysis());
             }
 
@@ -234,7 +234,7 @@ public class VulnerabilitiesView extends AbstractAppSecView {
         grid.addColumn(Vulnerability::getRiskScore).setHeader(CVSS_SCORE)
                 .setResizable(true).setSortable(true)
                 .setTooltipGenerator(Vulnerability::getCvssString);
-        grid.addColumn(Vulnerability::getVaadinAnalysis)
+        grid.addColumn(this::getAssessmentStatus)
                 .setHeader(VAADIN_ANALYSIS).setResizable(true)
                 .setSortable(true);
         grid.addColumn(Vulnerability::getDeveloperStatus)
@@ -248,6 +248,12 @@ public class VulnerabilitiesView extends AbstractAppSecView {
         });
 
         getMainContent().addAndExpand(grid);
+    }
+
+    private AssessmentStatus getAssessmentStatus(Vulnerability vulnerability) {
+        return vulnerability.getAffectedVersion() != null
+                ? vulnerability.getAffectedVersion().getStatus()
+                : null;
     }
 
     private void buildShowDetailsButton() {
