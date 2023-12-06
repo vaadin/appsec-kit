@@ -103,7 +103,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
                 return false;
             }
             if (vaadinAnalysisFilter != null && !vaadinAnalysisFilter
-                    .equals(vulnerabilityDTO.getVaadinAnalysis())) {
+                    .equals(getAssessmentStatus(vulnerabilityDTO))) {
                 return false;
             }
             if (developerAnalysisFilter != null && !developerAnalysisFilter
@@ -153,7 +153,7 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
                         vulnerability.getDependency(),
                         vulnerability.getSeverityLevel(),
                         vulnerability.getRiskScore(),
-                        vulnerability.getVaadinAnalysis(),
+                        getAssessmentStatus(vulnerability),
                         vulnerability.getDeveloperAnalysis());
             }
 
@@ -234,9 +234,8 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
         grid.addColumn(Vulnerability::getRiskScore).setHeader("CVSS score")
                 .setResizable(true).setSortable(true)
                 .setTooltipGenerator(Vulnerability::getCvssString);
-        grid.addColumn(Vulnerability::getVaadinAnalysis)
-                .setHeader("Vaadin analysis").setResizable(true)
-                .setSortable(true);
+        grid.addColumn(this::getAssessmentStatus).setHeader("Vaadin analysis")
+                .setResizable(true).setSortable(true);
         grid.addColumn(Vulnerability::getDeveloperStatus)
                 .setHeader("Developer analysis").setResizable(true)
                 .setSortable(true);
@@ -248,6 +247,12 @@ public class VulnerabilitiesTab extends AbstractAppSecView {
         });
 
         getMainContent().addAndExpand(grid);
+    }
+
+    private AssessmentStatus getAssessmentStatus(Vulnerability vulnerability) {
+        return vulnerability.getAffectedVersion() != null
+                ? vulnerability.getAffectedVersion().getStatus()
+                : null;
     }
 
     private void buildShowDetailsButton() {
