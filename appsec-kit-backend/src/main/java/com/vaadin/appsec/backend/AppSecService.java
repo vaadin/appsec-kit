@@ -191,18 +191,13 @@ public class AppSecService {
         }
         LOGGER.debug("Scheduling automatic scan every " + autoScanPeriod
                 + " seconds");
-        scheduledScan = configuration.getTaskExecutor()
-                .scheduleAtFixedRate(() -> {
-                    try {
-                        vulnerabilityStore.refresh();
-                        updateLastScanTime();
-                        invokeEventListeners(new AppSecScanEvent(this));
-                    } catch (AppSecException e) {
-                        LOGGER.error(
-                                "There was an error with scheduled scan for vulnerabilities",
-                                e);
-                    }
-                }, initialDelay, autoScanPeriod, TimeUnit.SECONDS);
+        scheduledScan = configuration.getTaskExecutor().scheduleAtFixedRate(
+                () -> scanForVulnerabilities().exceptionally(ex -> {
+                    LOGGER.error(
+                            "There was an error with scheduled scan for vulnerabilities",
+                            ex);
+                    return null;
+                }), initialDelay, autoScanPeriod, TimeUnit.SECONDS);
     }
 
     private void cancelScheduledScan() {
