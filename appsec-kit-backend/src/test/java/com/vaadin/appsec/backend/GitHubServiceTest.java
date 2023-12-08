@@ -28,7 +28,7 @@ public class GitHubServiceTest {
     static final String TEST_RESOURCE_BOM_PATH = "/bom.json";
     static final String TEST_RESOURCE_NPM_BOM_PATH = "/bom-npm.json";
 
-    static class TestGitHubService extends GitHubService {
+    static class TestGitHubService1 extends GitHubService {
 
         @Override
         protected URL getFrameworkReleasesUrl() {
@@ -39,6 +39,9 @@ public class GitHubServiceTest {
         protected URL getFlowReleasesUrl() {
             return getClass().getClassLoader().getResource("releases.json");
         }
+    }
+
+    static class TestGitHubService2 extends TestGitHubService1 {
 
         @Override
         protected URL getVaadinAnalysisUrl() {
@@ -50,8 +53,6 @@ public class GitHubServiceTest {
 
     @Before
     public void setup() throws Exception {
-        service = new TestGitHubService();
-
         AppSecConfiguration configuration = new AppSecConfiguration();
         configuration.setBomFilePath(Paths.get(AppSecServiceTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
@@ -63,6 +64,7 @@ public class GitHubServiceTest {
 
     @Test
     public void getFramework7Versions() {
+        service = new TestGitHubService2();
         List<String> versions = service.getFramework7Versions();
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
@@ -73,6 +75,7 @@ public class GitHubServiceTest {
 
     @Test
     public void getFramework8Versions() {
+        service = new TestGitHubService2();
         List<String> versions = service.getFramework8Versions();
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
@@ -83,6 +86,7 @@ public class GitHubServiceTest {
 
     @Test
     public void getFlow24Versions() {
+        service = new TestGitHubService2();
         List<String> versions = service.getFlow24Versions();
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
@@ -92,7 +96,30 @@ public class GitHubServiceTest {
     }
 
     @Test
-    public void getVulnerabilityAnalysis() {
+    public void getVulnerabilityAnalysisByURI() {
+        service = new TestGitHubService2();
+        VulnerabilityAnalysis vulnerabilityAnalysis = service
+                .getVulnerabilityAnalysis();
+
+        VulnerabilityDetails vulnerability = vulnerabilityAnalysis
+                .getVulnerabilities().entrySet().stream().findFirst().get()
+                .getValue();
+
+        assertEquals("org.acme:foobar",
+                vulnerability.getDependency().getName());
+
+        Assessment assessment = vulnerability.getAssessments().entrySet()
+                .stream().findFirst().get().getValue();
+
+        int affectedVersionsSize = assessment.getAffectedVersions().size();
+
+        assertEquals(2, affectedVersionsSize);
+    }
+
+    @Test
+    public void getVulnerabilityAnalysisByFile() {
+        System.setProperty("vaadin.appsec.analysis", "src/test/resources/analysis.json");
+        service = new TestGitHubService1();
         VulnerabilityAnalysis vulnerabilityAnalysis = service
                 .getVulnerabilityAnalysis();
 
