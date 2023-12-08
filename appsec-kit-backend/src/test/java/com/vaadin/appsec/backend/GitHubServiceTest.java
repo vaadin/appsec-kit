@@ -118,7 +118,8 @@ public class GitHubServiceTest {
 
     @Test
     public void getVulnerabilityAnalysisByFile() {
-        System.setProperty("vaadin.appsec.analysis", "src/test/resources/analysis.json");
+        System.setProperty("vaadin.appsec.analysis",
+                "src/test/resources/analysis.json");
         service = new TestGitHubService1();
         VulnerabilityAnalysis vulnerabilityAnalysis = service
                 .getVulnerabilityAnalysis();
