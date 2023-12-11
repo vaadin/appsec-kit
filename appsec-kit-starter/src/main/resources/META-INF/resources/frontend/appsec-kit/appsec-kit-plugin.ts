@@ -8,8 +8,8 @@
  */
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "@vaadin/flow-frontend/vaadin-dev-tools/vaadin-dev-tools";
-import { Framework, CopilotPlugin, CopilotInterface, CopilotPanelConfiguration } from "@vaadin/flow-frontend/copilot/copilot-plugin-support";
+import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "../vaadin-dev-tools/vaadin-dev-tools";
+import { Framework, CopilotPlugin, CopilotInterface, PanelConfiguration } from "../copilot/copilot-plugin-support";
 
 const devTools: VaadinDevTools = (window as any).Vaadin.devTools;
 
@@ -72,7 +72,7 @@ const plugin: DevToolsPlugin = {
 };
 (window as any).Vaadin.devToolsPlugins.push(plugin);
 
-const panelConfig: CopilotPanelConfiguration = {
+const panelConfig: PanelConfiguration = {
     header: 'AppSec Kit',
     expanded: true,
     draggable: true,
