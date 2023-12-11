@@ -32,6 +32,7 @@ import static org.junit.Assert.assertTrue;
 public class AppSecServiceTest {
 
     static final String TEST_RESOURCE_BOM_PATH = "/bom.json";
+    static final String TEST_RESOURCE_NPM_BOM_PATH = "/bom-npm.json";
 
     private AppSecConfiguration configuration;
 
@@ -55,6 +56,8 @@ public class AppSecServiceTest {
         configuration.setDataFilePath(dataFilePath);
         configuration.setBomFilePath(Paths.get(AppSecServiceTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
+        configuration.setBomNpmFilePath(Paths.get(GitHubServiceTest.class
+                .getResource(TEST_RESOURCE_NPM_BOM_PATH).toURI()));
         configuration.setTaskExecutor(testExecutorService);
 
         service = AppSecService.getInstance();

@@ -22,6 +22,23 @@ import com.vaadin.flow.server.StreamResource;
  */
 public abstract class AbstractAppSecView extends VerticalLayout {
 
+    static final String DEPENDENCY = "Dependency";
+    static final String DEPENDENCY_GROUP = "Dependency group";
+    static final String DEPENDENCY_NAME = "Dependency name";
+    static final String ECOSYSTEM = "Ecosystem";
+    static final String SEVERITY = "Severity";
+    static final String CVSS_SCORE = "CVSS score";
+    static final String VAADIN_ANALYSIS = "Vaadin analysis";
+    static final String DEVELOPER_ANALYSIS = "Developer analysis";
+    static final String IS_DEVELOPMENT = "Is development?";
+    static final String NUMBER_OF_VULNERABILITIES = "# of vulnerabilities";
+    static final String HIGHEST_SEVERITY = "Highest severity";
+    static final String HIGHEST_CVSS_SCORE = "Highest CVSS score";
+    static final String VERSION = "Version";
+    static final String SEARCH = "Search";
+    static final String SHOW_DETAILS = "Show details";
+    static final String VULNERABILITY_NAME_OR_IDENTIFIER = "Vulnerability name or identifier";
+
     private final VerticalLayout mainContent;
 
     protected Anchor exportLink;

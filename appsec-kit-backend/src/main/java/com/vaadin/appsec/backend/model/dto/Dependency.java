@@ -6,10 +6,10 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-
 package com.vaadin.appsec.backend.model.dto;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
 import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
@@ -17,7 +17,7 @@ import com.vaadin.appsec.backend.model.osv.response.Ecosystem;
 /**
  * DTO for a dependency instance, used in the UI.
  */
-public class Dependency {
+public class Dependency implements Serializable {
 
     private Ecosystem ecosystem;
     private String group;

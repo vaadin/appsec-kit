@@ -8,13 +8,15 @@
  */
 package com.vaadin.appsec.backend.model.dto;
 
+import java.io.Serializable;
+
 /**
  * Severity level for a vulnerability. Contains the appropriate CVSS score
  * ranges what can be used to get the severity based on the score.
  *
  * @see <a href="https://nvd.nist.gov/vuln-metrics/cvss">CVSS score</a>
  */
-public enum SeverityLevel {
+public enum SeverityLevel implements Serializable {
 
     /**
      * Critical severity level.
