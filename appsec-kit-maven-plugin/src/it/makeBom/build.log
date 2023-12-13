@@ -1,0 +1,45 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< org.cyclonedx.its:makeBom >----------------------
+[INFO] Building cyclonedx:makeBom smoke test with default configuration 1.0-SNAPSHOT
+[INFO]   from interpolated-pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] The POM for org.cyclonedx:cyclonedx-maven-plugin:jar:3.1-SNAPSHOT is missing, no dependency information available
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.292 s
+[INFO] Finished at: 2023-12-12T15:50:27+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Plugin org.cyclonedx:cyclonedx-maven-plugin:3.1-SNAPSHOT or one of its dependencies could not be resolved: The following artifacts could not be resolved: org.cyclonedx:cyclonedx-maven-plugin:jar:3.1-SNAPSHOT (absent): Could not find artifact org.cyclonedx:cyclonedx-maven-plugin:jar:3.1-SNAPSHOT in local.central (file:///Users/davidsosa/.m2/repository) -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException
+Running post-build script: /Users/davidsosa/Projects/vaadin/appsec-kit/appsec-kit-maven-plugin/src/it/makeBom/verify.groovy
+Assertion failed: 
+
+assert bomFileXml.exists()
+       |          |
+       |          false
+       /Users/davidsosa/Projects/vaadin/appsec-kit/appsec-kit-maven-plugin/src/it/makeBom/target/bom.xml
+
+	at org.codehaus.groovy.runtime.InvokerHelper.createAssertError(InvokerHelper.java:414)
+	at Script1.run(Script1.groovy:4)
+	at groovy.lang.GroovyShell.evaluate(GroovyShell.java:460)
+	at groovy.lang.GroovyShell.evaluate(GroovyShell.java:495)
+	at groovy.lang.GroovyShell.evaluate(GroovyShell.java:469)
+	at org.apache.maven.shared.scriptinterpreter.GroovyScriptInterpreter.evaluateScript(GroovyScriptInterpreter.java:69)
+	at org.apache.maven.shared.scriptinterpreter.ScriptRunner.executeRun(ScriptRunner.java:223)
+	at org.apache.maven.shared.scriptinterpreter.ScriptRunner.run(ScriptRunner.java:160)
+	at org.apache.maven.plugins.invoker.AbstractInvokerMojo.runPostBuildHook(AbstractInvokerMojo.java:1896)
+	at org.apache.maven.plugins.invoker.AbstractInvokerMojo.runBuild(AbstractInvokerMojo.java:1877)
+	at org.apache.maven.plugins.invoker.AbstractInvokerMojo.runBuild(AbstractInvokerMojo.java:1546)
+	at org.apache.maven.plugins.invoker.AbstractInvokerMojo.lambda$runBuilds$4(AbstractInvokerMojo.java:1308)
+	at org.apache.maven.plugins.invoker.JobExecutor.lambda$forEach$1(JobExecutor.java:62)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)

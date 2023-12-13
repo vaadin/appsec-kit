@@ -58,6 +58,7 @@
     <modules>
         <module>appsec-kit-backend</module>
         <module>appsec-kit-starter</module>
+        <module>appsec-kit-maven-plugin</module>
     </modules>
 
     <dependencyManagement>
