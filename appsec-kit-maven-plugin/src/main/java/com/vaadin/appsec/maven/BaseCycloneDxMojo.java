@@ -69,9 +69,9 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
     private MavenProject project;
 
     /**
-     * The component type associated to the SBOM metadata. See
-     * <a href="https://cyclonedx.org/docs/1.4/json/#metadata_component_type">CycloneDX reference</a> for supported
-     * values. 
+     * The component type associated to the SBOM metadata. See <a href=
+     * "https://cyclonedx.org/docs/1.4/json/#metadata_component_type">CycloneDX
+     * reference</a> for supported values.
      */
     @Parameter(property = "projectType", defaultValue = "library", required = false)
     private String projectType;
@@ -85,7 +85,8 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
     private String schemaVersion;
 
     /**
-     * The CycloneDX output format that should be generated (<code>xml</code>, <code>json</code> or <code>all</code>).
+     * The CycloneDX output format that should be generated (<code>xml</code>,
+     * <code>json</code> or <code>all</code>).
      *
      * @since 2.1.0
      */
@@ -93,7 +94,8 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
     private String outputFormat;
 
     /**
-     * The CycloneDX output file name (without extension) that should be generated (in {@code outputDirectory} directory).
+     * The CycloneDX output file name (without extension) that should be
+     * generated (in {@code outputDirectory} directory).
      *
      * @since 2.2.0
      */
@@ -173,8 +175,9 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
     private String[] excludeTypes;
 
     /**
-     * Use the original mechanism for determining whether a component has OPTIONAL or REQUIRED scope,
-     * relying on bytecode analysis of the compiled classes instead of the Maven dependency declaration of optional.
+     * Use the original mechanism for determining whether a component has
+     * OPTIONAL or REQUIRED scope, relying on bytecode analysis of the compiled
+     * classes instead of the Maven dependency declaration of optional.
      *
      * @since 2.7.9
      */
@@ -210,13 +213,14 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
     private boolean verbose = false;
 
     /**
-     * Timestamp for reproducible output archive entries, either formatted as ISO 8601
-     * <code>yyyy-MM-dd'T'HH:mm:ssXXX</code> or as an int representing seconds since the epoch (like
-     * <a href="https://reproducible-builds.org/docs/source-date-epoch/">SOURCE_DATE_EPOCH</a>).
+     * Timestamp for reproducible output archive entries, either formatted as
+     * ISO 8601 <code>yyyy-MM-dd'T'HH:mm:ssXXX</code> or as an int representing
+     * seconds since the epoch (like <a href=
+     * "https://reproducible-builds.org/docs/source-date-epoch/">SOURCE_DATE_EPOCH</a>).
      *
      * @since 2.7.9
      */
-    @Parameter( defaultValue = "${project.build.outputTimestamp}" )
+    @Parameter(defaultValue = "${project.build.outputTimestamp}")
     private String outputTimestamp;
 
     @org.apache.maven.plugins.annotations.Component
@@ -259,25 +263,35 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
     }
 
     protected Component convert(Artifact artifact) {
-        return modelConverter.convert(artifact, schemaVersion(), includeLicenseText);
+        return modelConverter.convert(artifact, schemaVersion(),
+                includeLicenseText);
     }
 
     /**
-     * Analyze the current Maven project to extract the BOM components list and their dependencies.
+     * Analyze the current Maven project to extract the BOM components list and
+     * their dependencies.
      *
-     * @param topLevelComponents the PURLs for all top level components
-     * @param components the components map to fill
-     * @param dependencies the dependencies map to fill
-     * @return the name of the analysis done to store as a BOM, or {@code null} to not save result.
-     * @throws MojoExecutionException something weird happened...
+     * @param topLevelComponents
+     *            the PURLs for all top level components
+     * @param components
+     *            the components map to fill
+     * @param dependencies
+     *            the dependencies map to fill
+     * @return the name of the analysis done to store as a BOM, or {@code null}
+     *         to not save result.
+     * @throws MojoExecutionException
+     *             something weird happened...
      */
-    protected abstract String extractComponentsAndDependencies(Set<String> topLevelComponents, Map<String, Component> components, Map<String, Dependency> dependencies) throws MojoExecutionException;
+    protected abstract String extractComponentsAndDependencies(
+            Set<String> topLevelComponents, Map<String, Component> components,
+            Map<String, Dependency> dependencies) throws MojoExecutionException;
 
     /**
      * @return {@literal true} if the execution should be skipped.
      */
     protected boolean shouldSkip() {
-        return Boolean.parseBoolean(System.getProperty("cyclonedx.skip", Boolean.toString(skip)));
+        return Boolean.parseBoolean(
+                System.getProperty("cyclonedx.skip", Boolean.toString(skip)));
     }
 
     public void execute() throws MojoExecutionException {
@@ -287,37 +301,50 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
         }
         logParameters();
 
-        // top level components do not currently set their scope, we track these to prevent merging of scopes
+        // top level components do not currently set their scope, we track these
+        // to prevent merging of scopes
         final Set<String> topLevelComponents = new LinkedHashSet<>();
         final Map<String, Component> componentMap = new LinkedHashMap<>();
         final Map<String, Dependency> dependencyMap = new LinkedHashMap<>();
 
-        String analysis = extractComponentsAndDependencies(topLevelComponents, componentMap, dependencyMap);
+        String analysis = extractComponentsAndDependencies(topLevelComponents,
+                componentMap, dependencyMap);
         if (analysis != null) {
-            final Metadata metadata = modelConverter.convert(project, projectType, schemaVersion(), includeLicenseText);
+            final Metadata metadata = modelConverter.convert(project,
+                    projectType, schemaVersion(), includeLicenseText);
 
             if (schemaVersion().getVersion() >= 1.3) {
                 metadata.addProperty(newProperty("maven.goal", analysis));
 
                 List<String> scopes = new ArrayList<>();
-                if (includeCompileScope) scopes.add("compile");
-                if (includeProvidedScope) scopes.add("provided");
-                if (includeRuntimeScope) scopes.add("runtime");
-                if (includeSystemScope) scopes.add("system");
-                if (includeTestScope) scopes.add("test");
-                metadata.addProperty(newProperty("maven.scopes", String.join(",", scopes)));
+                if (includeCompileScope)
+                    scopes.add("compile");
+                if (includeProvidedScope)
+                    scopes.add("provided");
+                if (includeRuntimeScope)
+                    scopes.add("runtime");
+                if (includeSystemScope)
+                    scopes.add("system");
+                if (includeTestScope)
+                    scopes.add("test");
+                metadata.addProperty(
+                        newProperty("maven.scopes", String.join(",", scopes)));
 
                 if (detectUnusedForOptionalScope) {
-                    metadata.addProperty(newProperty("maven.optional.unused", Boolean.toString(detectUnusedForOptionalScope)));
+                    metadata.addProperty(newProperty("maven.optional.unused",
+                            Boolean.toString(detectUnusedForOptionalScope)));
                 }
             }
 
             final Component rootComponent = metadata.getComponent();
             componentMap.remove(rootComponent.getPurl());
 
-            projectDependenciesConverter.cleanupBomDependencies(metadata, componentMap, dependencyMap);
+            projectDependenciesConverter.cleanupBomDependencies(metadata,
+                    componentMap, dependencyMap);
 
-            generateBom(analysis, metadata, new ArrayList<>(componentMap.values()), new ArrayList<>(dependencyMap.values()));
+            generateBom(analysis, metadata,
+                    new ArrayList<>(componentMap.values()),
+                    new ArrayList<>(dependencyMap.values()));
         }
     }
 
@@ -328,9 +355,12 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
         return property;
     }
 
-    private void generateBom(String analysis, Metadata metadata, List<Component> components, List<Dependency> dependencies) throws MojoExecutionException {
+    private void generateBom(String analysis, Metadata metadata,
+            List<Component> components, List<Dependency> dependencies)
+            throws MojoExecutionException {
         try {
-            getLog().info(String.format(MESSAGE_CREATING_BOM, schemaVersion, components.size()));
+            getLog().info(String.format(MESSAGE_CREATING_BOM, schemaVersion,
+                    components.size()));
             final Bom bom = new Bom();
             bom.setComponents(components);
 
@@ -338,12 +368,14 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
                 // activate Reproducible Builds mode
                 metadata.setTimestamp(null);
                 if (schemaVersion().getVersion() >= 1.3) {
-                    metadata.addProperty(newProperty("cdx:reproducible", "enabled"));
+                    metadata.addProperty(
+                            newProperty("cdx:reproducible", "enabled"));
                 }
             }
 
             if (schemaVersion().getVersion() >= 1.1 && includeBomSerialNumber) {
-                String serialNumber = generateSerialNumber(metadata.getProperties());
+                String serialNumber = generateSerialNumber(
+                        metadata.getProperties());
                 bom.setSerialNumber(serialNumber);
             }
 
@@ -352,63 +384,76 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
                 bom.setDependencies(dependencies);
             }
 
-            /*if (schemaVersion().getVersion() >= 1.3) {
-                if (excludeArtifactId != null && excludeTypes.length > 0) { // TODO
-                    final Composition composition = new Composition();
-                    composition.setAggregate(Composition.Aggregate.INCOMPLETE);
-                    composition.setDependencies(Collections.singletonList(new Dependency(bom.getMetadata().getComponent().getBomRef())));
-                    bom.setCompositions(Collections.singletonList(composition));
-                }
-            }*/
+            /*
+             * if (schemaVersion().getVersion() >= 1.3) { if (excludeArtifactId
+             * != null && excludeTypes.length > 0) { // TODO final Composition
+             * composition = new Composition();
+             * composition.setAggregate(Composition.Aggregate.INCOMPLETE);
+             * composition.setDependencies(Collections.singletonList(new
+             * Dependency(bom.getMetadata().getComponent().getBomRef())));
+             * bom.setCompositions(Collections.singletonList(composition)); } }
+             */
 
             if ("all".equalsIgnoreCase(outputFormat)
                     || "xml".equalsIgnoreCase(outputFormat)
                     || "json".equalsIgnoreCase(outputFormat)) {
                 saveBom(bom);
             } else {
-                getLog().error("Unsupported output format. Valid options are XML and JSON");
+                getLog().error(
+                        "Unsupported output format. Valid options are XML and JSON");
             }
-        } catch (GeneratorException | ParserConfigurationException | IOException e) {
-            throw new MojoExecutionException("An error occurred executing " + this.getClass().getName() + ": " + e.getMessage(), e);
+        } catch (GeneratorException | ParserConfigurationException
+                | IOException e) {
+            throw new MojoExecutionException("An error occurred executing "
+                    + this.getClass().getName() + ": " + e.getMessage(), e);
         }
     }
 
     private String generateSerialNumber(List<Property> properties) {
-        String gav = String.format("%s:%s:%s", project.getGroupId(), project.getArtifactId(), project.getVersion());
+        String gav = String.format("%s:%s:%s", project.getGroupId(),
+                project.getArtifactId(), project.getVersion());
         StringBuilder sb = new StringBuilder(gav);
         if (properties != null) {
-            for(Property prop: properties) {
+            for (Property prop : properties) {
                 sb.append(';');
                 sb.append(prop.getName());
                 sb.append('=');
                 sb.append(prop.getValue());
             }
         }
-        UUID uuid = UUID.nameUUIDFromBytes(sb.toString().getBytes(StandardCharsets.UTF_8));
+        UUID uuid = UUID.nameUUIDFromBytes(
+                sb.toString().getBytes(StandardCharsets.UTF_8));
         return String.format("urn:uuid:%s", uuid);
     }
 
-    private void saveBom(Bom bom) throws ParserConfigurationException, IOException, GeneratorException,
-            MojoExecutionException {
-        if ("all".equalsIgnoreCase(outputFormat) || "xml".equalsIgnoreCase(outputFormat)) {
-            final BomXmlGenerator bomGenerator = BomGeneratorFactory.createXml(schemaVersion(), bom);
-            //bomGenerator.generate();
+    private void saveBom(Bom bom) throws ParserConfigurationException,
+            IOException, GeneratorException, MojoExecutionException {
+        if ("all".equalsIgnoreCase(outputFormat)
+                || "xml".equalsIgnoreCase(outputFormat)) {
+            final BomXmlGenerator bomGenerator = BomGeneratorFactory
+                    .createXml(schemaVersion(), bom);
+            // bomGenerator.generate();
 
             final String bomString = bomGenerator.toXmlString();
             saveBomToFile(bomString, "xml", new XmlParser());
         }
-        if ("all".equalsIgnoreCase(outputFormat) || "json".equalsIgnoreCase(outputFormat)) {
-            final BomJsonGenerator bomGenerator = BomGeneratorFactory.createJson(schemaVersion(), bom);
+        if ("all".equalsIgnoreCase(outputFormat)
+                || "json".equalsIgnoreCase(outputFormat)) {
+            final BomJsonGenerator bomGenerator = BomGeneratorFactory
+                    .createJson(schemaVersion(), bom);
 
             final String bomString = bomGenerator.toJsonString();
             saveBomToFile(bomString, "json", new JsonParser());
         }
     }
 
-    private void saveBomToFile(String bomString, String extension, Parser bomParser) throws IOException, MojoExecutionException {
-        final File bomFile = new File(outputDirectory, outputName + "." + extension);
+    private void saveBomToFile(String bomString, String extension,
+            Parser bomParser) throws IOException, MojoExecutionException {
+        final File bomFile = new File(outputDirectory,
+                outputName + "." + extension);
 
-        getLog().info(String.format(MESSAGE_WRITING_BOM, extension.toUpperCase(), bomFile.getAbsolutePath()));
+        getLog().info(String.format(MESSAGE_WRITING_BOM,
+                extension.toUpperCase(), bomFile.getAbsolutePath()));
         FileUtils.write(bomFile, bomString, StandardCharsets.UTF_8, false);
 
         if (!bomParser.isValid(bomFile, schemaVersion())) {
@@ -416,18 +461,25 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
         }
 
         if (!skipAttach) {
-            getLog().info(String.format(MESSAGE_ATTACHING_BOM, project.getArtifactId(), project.getVersion(), extension));
-            mavenProjectHelper.attachArtifact(project, extension, "cyclonedx", bomFile);
+            getLog().info(String.format(MESSAGE_ATTACHING_BOM,
+                    project.getArtifactId(), project.getVersion(), extension));
+            mavenProjectHelper.attachArtifact(project, extension, "cyclonedx",
+                    bomFile);
         }
     }
 
-    protected BomDependencies extractBOMDependencies(MavenProject mavenProject) throws MojoExecutionException {
-        ProjectDependenciesConverter.MavenDependencyScopes include = new ProjectDependenciesConverter.MavenDependencyScopes(includeCompileScope, includeProvidedScope, includeRuntimeScope, includeTestScope, includeSystemScope);
-        return projectDependenciesConverter.extractBOMDependencies(mavenProject, include, excludeTypes);
+    protected BomDependencies extractBOMDependencies(MavenProject mavenProject)
+            throws MojoExecutionException {
+        ProjectDependenciesConverter.MavenDependencyScopes include = new ProjectDependenciesConverter.MavenDependencyScopes(
+                includeCompileScope, includeProvidedScope, includeRuntimeScope,
+                includeTestScope, includeSystemScope);
+        return projectDependenciesConverter.extractBOMDependencies(mavenProject,
+                include, excludeTypes);
     }
 
     /**
      * Resolves the CycloneDX schema the mojo has been requested to use.
+     * 
      * @return the CycloneDX schema to use
      */
     protected CycloneDxSchema.Version schemaVersion() {
@@ -451,8 +503,10 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
     protected void logParameters() {
         if (verbose && getLog().isInfoEnabled()) {
             getLog().info("CycloneDX: Parameters");
-            getLog().info("------------------------------------------------------------------------");
-            getLog().info("schemaVersion          : " + schemaVersion().getVersionString());
+            getLog().info(
+                    "------------------------------------------------------------------------");
+            getLog().info("schemaVersion          : "
+                    + schemaVersion().getVersionString());
             getLog().info("includeBomSerialNumber : " + includeBomSerialNumber);
             getLog().info("includeCompileScope    : " + includeCompileScope);
             getLog().info("includeProvidedScope   : " + includeProvidedScope);
@@ -463,79 +517,105 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
             getLog().info("outputFormat           : " + outputFormat);
             getLog().info("outputName             : " + outputName);
             logAdditionalParameters();
-            getLog().info("------------------------------------------------------------------------");
+            getLog().info(
+                    "------------------------------------------------------------------------");
         }
     }
 
-    protected void populateComponents(final Set<String> topLevelComponents, final Map<String, Component> components, final Map<String, Artifact> artifacts, final ProjectDependencyAnalysis dependencyAnalysis) {
-        for (Map.Entry<String, Artifact> entry: artifacts.entrySet()) {
+    protected void populateComponents(final Set<String> topLevelComponents,
+            final Map<String, Component> components,
+            final Map<String, Artifact> artifacts,
+            final ProjectDependencyAnalysis dependencyAnalysis) {
+        for (Map.Entry<String, Artifact> entry : artifacts.entrySet()) {
             final String purl = entry.getKey();
             final Artifact artifact = entry.getValue();
-            final Component.Scope artifactScope = getComponentScope(artifact, dependencyAnalysis);
+            final Component.Scope artifactScope = getComponentScope(artifact,
+                    dependencyAnalysis);
             final Component component = components.get(purl);
             if (component == null) {
                 final Component newComponent = convert(artifact);
                 newComponent.setScope(artifactScope);
                 components.put(purl, newComponent);
             } else if (!topLevelComponents.contains(purl)) {
-                component.setScope(mergeScopes(component.getScope(), artifactScope));
+                component.setScope(
+                        mergeScopes(component.getScope(), artifactScope));
             }
         }
     }
 
     /**
-     * Get the BOM component scope (required/optional/excluded).  The scope can either be determined through bytecode
-     * analysis or through maven dependency resolution.
+     * Get the BOM component scope (required/optional/excluded). The scope can
+     * either be determined through bytecode analysis or through maven
+     * dependency resolution.
      *
-     * @param artifact Artifact from maven project
-     * @param projectDependencyAnalysis Maven Project Dependency Analysis data
+     * @param artifact
+     *            Artifact from maven project
+     * @param projectDependencyAnalysis
+     *            Maven Project Dependency Analysis data
      *
-     * @return Component.Scope - REQUIRED, OPTIONAL or null if it cannot be determined
+     * @return Component.Scope - REQUIRED, OPTIONAL or null if it cannot be
+     *         determined
      *
      * @see #detectUnusedForOptionalScope
      */
-    private Component.Scope getComponentScope(Artifact artifact, ProjectDependencyAnalysis projectDependencyAnalysis) {
+    private Component.Scope getComponentScope(Artifact artifact,
+            ProjectDependencyAnalysis projectDependencyAnalysis) {
         if (detectUnusedForOptionalScope) {
             return inferComponentScope(artifact, projectDependencyAnalysis);
         } else {
-            return (artifact.isOptional() ? Component.Scope.OPTIONAL : Component.Scope.REQUIRED);
+            return (artifact.isOptional() ? Component.Scope.OPTIONAL
+                    : Component.Scope.REQUIRED);
         }
     }
 
     /**
-     * Infer BOM component scope (required/optional/excluded) based on Maven project dependency analysis.
+     * Infer BOM component scope (required/optional/excluded) based on Maven
+     * project dependency analysis.
      *
-     * @param artifact Artifact from maven project
-     * @param projectDependencyAnalysis Maven Project Dependency Analysis data
+     * @param artifact
+     *            Artifact from maven project
+     * @param projectDependencyAnalysis
+     *            Maven Project Dependency Analysis data
      *
-     * @return Component.Scope - REQUIRED: If the component is used (as detected by project dependency analysis). OPTIONAL: If it is unused
+     * @return Component.Scope - REQUIRED: If the component is used (as detected
+     *         by project dependency analysis). OPTIONAL: If it is unused
      */
-    private Component.Scope inferComponentScope(Artifact artifact, ProjectDependencyAnalysis projectDependencyAnalysis) {
+    private Component.Scope inferComponentScope(Artifact artifact,
+            ProjectDependencyAnalysis projectDependencyAnalysis) {
         if (projectDependencyAnalysis == null) {
             return null;
         }
 
-        Set<Artifact> usedDeclaredArtifacts = projectDependencyAnalysis.getUsedDeclaredArtifacts();
-        Set<Artifact> usedUndeclaredArtifacts = projectDependencyAnalysis.getUsedUndeclaredArtifacts();
-        Set<Artifact> unusedDeclaredArtifacts = projectDependencyAnalysis.getUnusedDeclaredArtifacts();
-        Set<Artifact> testArtifactsWithNonTestScope = projectDependencyAnalysis.getTestArtifactsWithNonTestScope();
+        Set<Artifact> usedDeclaredArtifacts = projectDependencyAnalysis
+                .getUsedDeclaredArtifacts();
+        Set<Artifact> usedUndeclaredArtifacts = projectDependencyAnalysis
+                .getUsedUndeclaredArtifacts();
+        Set<Artifact> unusedDeclaredArtifacts = projectDependencyAnalysis
+                .getUnusedDeclaredArtifacts();
+        Set<Artifact> testArtifactsWithNonTestScope = projectDependencyAnalysis
+                .getTestArtifactsWithNonTestScope();
 
         // Is the artifact used?
-        if (usedDeclaredArtifacts.contains(artifact) || usedUndeclaredArtifacts.contains(artifact)) {
+        if (usedDeclaredArtifacts.contains(artifact)
+                || usedUndeclaredArtifacts.contains(artifact)) {
             return Component.Scope.REQUIRED;
         }
 
         // Is the artifact unused or test?
-        if (unusedDeclaredArtifacts.contains(artifact) || testArtifactsWithNonTestScope.contains(artifact)) {
+        if (unusedDeclaredArtifacts.contains(artifact)
+                || testArtifactsWithNonTestScope.contains(artifact)) {
             return Component.Scope.OPTIONAL;
         }
 
         return null;
     }
 
-    // Merging of scopes follows the method previously implemented in the aggregate code.  This needs to be fixed in a future PR.
-    private Component.Scope mergeScopes(final Component.Scope existing, final Component.Scope project) {
-        if ((Component.Scope.REQUIRED == existing) || (Component.Scope.REQUIRED == project)) {
+    // Merging of scopes follows the method previously implemented in the
+    // aggregate code. This needs to be fixed in a future PR.
+    private Component.Scope mergeScopes(final Component.Scope existing,
+            final Component.Scope project) {
+        if ((Component.Scope.REQUIRED == existing)
+                || (Component.Scope.REQUIRED == project)) {
             return Component.Scope.REQUIRED;
         }
         if (null == existing) {
@@ -545,29 +625,29 @@ public abstract class BaseCycloneDxMojo extends AbstractMojo {
     }
 
     static boolean isDeployable(final MavenProject project) {
-        return isDeployable(project,
-                        MAVEN_DEPLOY_PLUGIN,
-                        "skip",
-                        "maven.deploy.skip")
-                || isDeployable(project,
-                        NEXUS_STAGING_PLUGIN,
+        return isDeployable(project, MAVEN_DEPLOY_PLUGIN, "skip",
+                "maven.deploy.skip")
+                || isDeployable(project, NEXUS_STAGING_PLUGIN,
                         "skipNexusStagingDeployMojo",
                         "skipNexusStagingDeployMojo");
     }
 
     private static boolean isDeployable(final MavenProject project,
-                                        final String pluginKey,
-                                        final String parameter,
-                                        final String propertyName) {
+            final String pluginKey, final String parameter,
+            final String propertyName) {
         final Plugin plugin = project.getPlugin(pluginKey);
         if (plugin != null) {
             // Default skip value
-            final String property = System.getProperty(propertyName, project.getProperties().getProperty(propertyName));
-            final boolean defaultSkipValue = property != null ? Boolean.parseBoolean(property) : false;
+            final String property = System.getProperty(propertyName,
+                    project.getProperties().getProperty(propertyName));
+            final boolean defaultSkipValue = property != null
+                    ? Boolean.parseBoolean(property)
+                    : false;
             // Find an execution that is not skipped
             for (final PluginExecution execution : plugin.getExecutions()) {
                 if (execution.getGoals().contains("deploy")) {
-                    final Xpp3Dom executionConf = (Xpp3Dom) execution.getConfiguration();
+                    final Xpp3Dom executionConf = (Xpp3Dom) execution
+                            .getConfiguration();
                     boolean skipValue = defaultSkipValue;
                     if (executionConf != null) {
                         Xpp3Dom target = executionConf.getChild(parameter);

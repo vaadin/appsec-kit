@@ -18,7 +18,7 @@ import io.takari.maven.testing.executor.junit.MavenJUnitTestRunner;
  * include test scoped dependencies
  */
 @RunWith(MavenJUnitTestRunner.class)
-@MavenVersions({"3.6.3"})
+@MavenVersions({ "3.6.3" })
 public class Issue64Test extends BaseMavenVerifier {
 
     public Issue64Test(MavenRuntimeBuilder runtimeBuilder) throws Exception {
@@ -29,20 +29,23 @@ public class Issue64Test extends BaseMavenVerifier {
     public void testPluginWithActiviti() throws Exception {
         File projDir = resources.getBasedir("issue-64");
 
-        verifier
-                .forProject(projDir)
-                .withCliOption("-Dcurrent.version=" + getCurrentVersion()) // inject cyclonedx-maven-plugin version
+        verifier.forProject(projDir)
+                .withCliOption("-Dcurrent.version=" + getCurrentVersion()) // inject
+                                                                           // cyclonedx-maven-plugin
+                                                                           // version
                 .withCliOption("-X") // debug
-                .withCliOption("-B")
-                .execute("clean", "verify")
+                .withCliOption("-B").execute("clean", "verify")
                 .assertErrorFreeLog();
 
         assertFileContains(projDir, "target/bom.xml", "junit");
     }
 
-    private static void assertFileContains(File basedir, String expectedFile, String expectedContent) throws IOException {
+    private static void assertFileContains(File basedir, String expectedFile,
+            String expectedContent) throws IOException {
         assertFilesPresent(basedir, expectedFile);
         String bomContents = fileRead(new File(basedir, expectedFile), true);
-        assertTrue(String.format("%s contains %s", expectedFile, expectedContent), bomContents.contains(expectedContent));
+        assertTrue(
+                String.format("%s contains %s", expectedFile, expectedContent),
+                bomContents.contains(expectedContent));
     }
 }

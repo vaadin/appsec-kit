@@ -16,16 +16,19 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 class TestUtils {
-    static Element getElement(final Element parent, final String elementName) throws Exception {
+    static Element getElement(final Element parent, final String elementName)
+            throws Exception {
         Element element = null;
         Node child = parent.getFirstChild();
         while (child != null) {
             if (Node.ELEMENT_NODE == child.getNodeType()) {
                 if (child.getNodeName().equals(elementName)) {
                     if (element != null) {
-                        throw new Exception("Second instance of element " + elementName + " discovered in " + parent.getNodeName());
+                        throw new Exception("Second instance of element "
+                                + elementName + " discovered in "
+                                + parent.getNodeName());
                     }
-                    element = (Element)child;
+                    element = (Element) child;
                 }
             }
             child = child.getNextSibling();
@@ -33,7 +36,8 @@ class TestUtils {
         return element;
     }
 
-    static Element getDependencyNode(final Node dependencies, final String ref) {
+    static Element getDependencyNode(final Node dependencies,
+            final String ref) {
         return getChildElement(dependencies, ref, "dependency", "ref");
     }
 
@@ -41,15 +45,18 @@ class TestUtils {
         return getChildElement(components, ref, "component", "bom-ref");
     }
 
-    private static Element getChildElement(final Node parent, final String ref, final String elementName, final String attrName) {
+    private static Element getChildElement(final Node parent, final String ref,
+            final String elementName, final String attrName) {
         final NodeList children = parent.getChildNodes();
         final int numChildNodes = children.getLength();
-        for (int index = 0 ; index < numChildNodes ; index++) {
+        for (int index = 0; index < numChildNodes; index++) {
             final Node child = children.item(index);
-            if ((child.getNodeType() == Node.ELEMENT_NODE) && elementName.equals(child.getNodeName())) {
-                final Node refNode = child.getAttributes().getNamedItem(attrName);
+            if ((child.getNodeType() == Node.ELEMENT_NODE)
+                    && elementName.equals(child.getNodeName())) {
+                final Node refNode = child.getAttributes()
+                        .getNamedItem(attrName);
                 if (ref.equals(refNode.getNodeValue())) {
-                    return (Element)child;
+                    return (Element) child;
                 }
             }
         }
@@ -64,17 +71,20 @@ class TestUtils {
         return getReferences(null, parent, "dependency", "ref");
     }
 
-    private static Set<String> getReferences(Set<String> references, final Node rootNode, final String elementName, final String attrName) {
+    private static Set<String> getReferences(Set<String> references,
+            final Node rootNode, final String elementName,
+            final String attrName) {
         if (references == null) {
             references = new HashSet<>();
         }
         final NodeList children = rootNode.getChildNodes();
         final int numChildNodes = children.getLength();
-        for (int index = 0 ; index < numChildNodes ; index++) {
+        for (int index = 0; index < numChildNodes; index++) {
             final Node child = children.item(index);
             if (child.getNodeType() == Node.ELEMENT_NODE) {
                 if (elementName.equals(child.getNodeName())) {
-                    final Node refNode = child.getAttributes().getNamedItem(attrName);
+                    final Node refNode = child.getAttributes()
+                            .getNamedItem(attrName);
                     if (refNode != null) {
                         references.add(refNode.getNodeValue());
                     }
@@ -85,8 +95,10 @@ class TestUtils {
         return references;
     }
 
-    static Document readXML(File file) throws IOException, SAXException, ParserConfigurationException {
-        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    static Document readXML(File file)
+            throws IOException, SAXException, ParserConfigurationException {
+        final DocumentBuilderFactory factory = DocumentBuilderFactory
+                .newInstance();
 
         factory.setIgnoringComments(true);
         factory.setIgnoringElementContentWhitespace(true);

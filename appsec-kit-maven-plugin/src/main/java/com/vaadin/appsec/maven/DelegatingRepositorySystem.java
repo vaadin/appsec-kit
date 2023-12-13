@@ -60,8 +60,8 @@ import org.eclipse.aether.resolution.VersionResult;
 import org.eclipse.aether.util.graph.visitor.TreeDependencyVisitor;
 
 /**
- * Maven Resolver (Aether) repository system that delegates to provided system, but keep tracks of
- * collected dependencies result.
+ * Maven Resolver (Aether) repository system that delegates to provided system,
+ * but keep tracks of collected dependencies result.
  * 
  * @see #getCollectResult()
  */
@@ -78,26 +78,27 @@ class DelegatingRepositorySystem implements RepositorySystem {
     }
 
     @Override
-    public CollectResult collectDependencies(final RepositorySystemSession session, final CollectRequest request)
+    public CollectResult collectDependencies(
+            final RepositorySystemSession session, final CollectRequest request)
             throws DependencyCollectionException {
         collectResult = delegate.collectDependencies(session, request);
         final DependencyNode root = collectResult.getRoot();
         root.accept(new TreeDependencyVisitor(new DependencyVisitor() {
             @Override
-            public boolean visitEnter(final DependencyNode node)
-            {
+            public boolean visitEnter(final DependencyNode node) {
                 if (root != node) {
                     try {
-                        final ArtifactResult resolveArtifact = resolveArtifact(session, new ArtifactRequest(node));
+                        final ArtifactResult resolveArtifact = resolveArtifact(
+                                session, new ArtifactRequest(node));
                         node.setArtifact(resolveArtifact.getArtifact());
-                    } catch (ArtifactResolutionException e) {} // ignored
+                    } catch (ArtifactResolutionException e) {
+                    } // ignored
                 }
                 return true;
             }
 
             @Override
-            public boolean visitLeave(final DependencyNode dependencyNode)
-            {
+            public boolean visitLeave(final DependencyNode dependencyNode) {
                 return true;
             }
         }));
@@ -106,77 +107,91 @@ class DelegatingRepositorySystem implements RepositorySystem {
     }
 
     @Override
-    public DeployResult deploy(final RepositorySystemSession session, final DeployRequest request)
-            throws DeploymentException {
+    public DeployResult deploy(final RepositorySystemSession session,
+            final DeployRequest request) throws DeploymentException {
         return delegate.deploy(session, request);
     }
 
     @Override
-    public InstallResult install(final RepositorySystemSession session, final InstallRequest request)
-            throws InstallationException {
+    public InstallResult install(final RepositorySystemSession session,
+            final InstallRequest request) throws InstallationException {
         return delegate.install(session, request);
     }
 
     @Override
-    public RemoteRepository newDeploymentRepository(final RepositorySystemSession session, final RemoteRepository repository) {
+    public RemoteRepository newDeploymentRepository(
+            final RepositorySystemSession session,
+            final RemoteRepository repository) {
         return delegate.newDeploymentRepository(session, repository);
     }
 
     @Override
-    public LocalRepositoryManager newLocalRepositoryManager(final RepositorySystemSession session,
+    public LocalRepositoryManager newLocalRepositoryManager(
+            final RepositorySystemSession session,
             final LocalRepository localRepository) {
         return delegate.newLocalRepositoryManager(session, localRepository);
     }
 
     @Override
-    public List<RemoteRepository> newResolutionRepositories(final RepositorySystemSession session,
+    public List<RemoteRepository> newResolutionRepositories(
+            final RepositorySystemSession session,
             final List<RemoteRepository> repositories) {
         return delegate.newResolutionRepositories(session, repositories);
     }
 
     @Override
-    public SyncContext newSyncContext(final RepositorySystemSession session, final boolean shared) {
+    public SyncContext newSyncContext(final RepositorySystemSession session,
+            final boolean shared) {
         return delegate.newSyncContext(session, shared);
     }
 
     @Override
-    public ArtifactDescriptorResult readArtifactDescriptor(final RepositorySystemSession session,
-            final ArtifactDescriptorRequest request) throws ArtifactDescriptorException {
+    public ArtifactDescriptorResult readArtifactDescriptor(
+            final RepositorySystemSession session,
+            final ArtifactDescriptorRequest request)
+            throws ArtifactDescriptorException {
         return delegate.readArtifactDescriptor(null, request);
     }
 
     @Override
-    public ArtifactResult resolveArtifact(final RepositorySystemSession session, final ArtifactRequest request)
-            throws ArtifactResolutionException {
+    public ArtifactResult resolveArtifact(final RepositorySystemSession session,
+            final ArtifactRequest request) throws ArtifactResolutionException {
         return delegate.resolveArtifact(session, request);
     }
 
     @Override
-    public List<ArtifactResult> resolveArtifacts(final RepositorySystemSession session,
-            final Collection<? extends ArtifactRequest> requests) throws ArtifactResolutionException {
+    public List<ArtifactResult> resolveArtifacts(
+            final RepositorySystemSession session,
+            final Collection<? extends ArtifactRequest> requests)
+            throws ArtifactResolutionException {
         return delegate.resolveArtifacts(session, requests);
     }
 
     @Override
-    public DependencyResult resolveDependencies(final RepositorySystemSession session, final DependencyRequest request)
+    public DependencyResult resolveDependencies(
+            final RepositorySystemSession session,
+            final DependencyRequest request)
             throws DependencyResolutionException {
         return delegate.resolveDependencies(session, request);
     }
 
     @Override
-    public List<MetadataResult> resolveMetadata(final RepositorySystemSession session,
+    public List<MetadataResult> resolveMetadata(
+            final RepositorySystemSession session,
             final Collection<? extends MetadataRequest> requests) {
         return delegate.resolveMetadata(session, requests);
     }
 
     @Override
-    public VersionResult resolveVersion(final RepositorySystemSession session, final VersionRequest request)
-            throws VersionResolutionException {
+    public VersionResult resolveVersion(final RepositorySystemSession session,
+            final VersionRequest request) throws VersionResolutionException {
         return delegate.resolveVersion(session, request);
     }
 
     @Override
-    public VersionRangeResult resolveVersionRange(final RepositorySystemSession session, final VersionRangeRequest request)
+    public VersionRangeResult resolveVersionRange(
+            final RepositorySystemSession session,
+            final VersionRangeRequest request)
             throws VersionRangeResolutionException {
         return delegate.resolveVersionRange(session, request);
     }

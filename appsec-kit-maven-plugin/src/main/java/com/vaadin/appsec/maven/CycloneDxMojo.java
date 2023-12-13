@@ -41,21 +41,18 @@ import java.util.Set;
 /**
  * Creates a CycloneDX BOM for each Maven module with its dependencies.
  */
-@Mojo(
-        name = "makeBom",
-        defaultPhase = LifecyclePhase.PACKAGE,
-        threadSafe = true,
-        requiresOnline = true
-)
+@Mojo(name = "makeBom", defaultPhase = LifecyclePhase.PACKAGE, threadSafe = true, requiresOnline = true)
 public class CycloneDxMojo extends BaseCycloneDxMojo {
 
     /**
-     * Specify the Maven project dependency analyzer to use (plexus component role-hint). By default,
-     * <a href="https://maven.apache.org/shared/maven-dependency-analyzer/">maven-dependency-analyzer</a>'s one
-     * is used.
+     * Specify the Maven project dependency analyzer to use (plexus component
+     * role-hint). By default, <a href=
+     * "https://maven.apache.org/shared/maven-dependency-analyzer/">maven-dependency-analyzer</a>'s
+     * one is used.
      *
-     * To use another implementation, you must declare a dependency for this plugin that contains the code for the analyzer
-     * and you specify its Plexus role name here.
+     * To use another implementation, you must declare a dependency for this
+     * plugin that contains the code for the analyzer and you specify its Plexus
+     * role name here.
      *
      * @since 2.1.0
      */
@@ -66,31 +63,45 @@ public class CycloneDxMojo extends BaseCycloneDxMojo {
     private PlexusContainer plexusContainer;
 
     /**
-     * Maven ProjectDependencyAnalyzer analyzes a Maven project's declared dependencies and effective classes used to find which artifacts are
-     * used and declared, used but not declared, not used but declared.
+     * Maven ProjectDependencyAnalyzer analyzes a Maven project's declared
+     * dependencies and effective classes used to find which artifacts are used
+     * and declared, used but not declared, not used but declared.
      */
     protected ProjectDependencyAnalyzer dependencyAnalyzer;
 
-    private ProjectDependencyAnalyzer getProjectDependencyAnalyzer() throws MojoExecutionException {
+    private ProjectDependencyAnalyzer getProjectDependencyAnalyzer()
+            throws MojoExecutionException {
         if (dependencyAnalyzer == null) {
             try {
-                dependencyAnalyzer = (ProjectDependencyAnalyzer) plexusContainer.lookup(ProjectDependencyAnalyzer.class, analyzer);
+                dependencyAnalyzer = (ProjectDependencyAnalyzer) plexusContainer
+                        .lookup(ProjectDependencyAnalyzer.class, analyzer);
             } catch (ComponentLookupException cle) {
-                throw new MojoExecutionException("Failed to instantiate ProjectDependencyAnalyser with role-hint " + analyzer, cle);
+                throw new MojoExecutionException(
+                        "Failed to instantiate ProjectDependencyAnalyser with role-hint "
+                                + analyzer,
+                        cle);
             }
         }
         return dependencyAnalyzer;
     }
 
-    protected ProjectDependencyAnalysis doProjectDependencyAnalysis(final MavenProject mavenProject, final BomDependencies bomDependencies) throws MojoExecutionException {
+    protected ProjectDependencyAnalysis doProjectDependencyAnalysis(
+            final MavenProject mavenProject,
+            final BomDependencies bomDependencies)
+            throws MojoExecutionException {
         if (detectUnusedForOptionalScope) {
-            final MavenProject localMavenProject = new MavenProject(mavenProject);
-            localMavenProject.setArtifacts(new LinkedHashSet<>(bomDependencies.getArtifacts().values()));
-            localMavenProject.setDependencyArtifacts(new LinkedHashSet<>(bomDependencies.getDependencyArtifacts().values()));
+            final MavenProject localMavenProject = new MavenProject(
+                    mavenProject);
+            localMavenProject.setArtifacts(new LinkedHashSet<>(
+                    bomDependencies.getArtifacts().values()));
+            localMavenProject.setDependencyArtifacts(new LinkedHashSet<>(
+                    bomDependencies.getDependencyArtifacts().values()));
             try {
-                return getProjectDependencyAnalyzer().analyze(localMavenProject);
+                return getProjectDependencyAnalyzer()
+                        .analyze(localMavenProject);
             } catch (ProjectDependencyAnalyzerException pdae) {
-                getLog().debug("Could not analyze " + mavenProject.getId(), pdae); // TODO should warn...
+                getLog().debug("Could not analyze " + mavenProject.getId(),
+                        pdae); // TODO should warn...
             }
         }
         return null;
@@ -102,17 +113,26 @@ public class CycloneDxMojo extends BaseCycloneDxMojo {
         return super.shouldSkip() || !isDeployable(getProject());
     }
 
-    protected String extractComponentsAndDependencies(final Set<String> topLevelComponents, final Map<String, Component> components, final Map<String, Dependency> dependencies) throws MojoExecutionException {
+    protected String extractComponentsAndDependencies(
+            final Set<String> topLevelComponents,
+            final Map<String, Component> components,
+            final Map<String, Dependency> dependencies)
+            throws MojoExecutionException {
         getLog().info(MESSAGE_RESOLVING_DEPS);
 
-        final BomDependencies bomDependencies = extractBOMDependencies(getProject());
-        final Map<String, Dependency> projectDependencies = bomDependencies.getDependencies();
+        final BomDependencies bomDependencies = extractBOMDependencies(
+                getProject());
+        final Map<String, Dependency> projectDependencies = bomDependencies
+                .getDependencies();
 
-        final Component projectBomComponent = convert(getProject().getArtifact());
+        final Component projectBomComponent = convert(
+                getProject().getArtifact());
         components.put(projectBomComponent.getPurl(), projectBomComponent);
         topLevelComponents.add(projectBomComponent.getPurl());
 
-        populateComponents(topLevelComponents, components, bomDependencies.getArtifacts(), doProjectDependencyAnalysis(getProject(), bomDependencies));
+        populateComponents(topLevelComponents, components,
+                bomDependencies.getArtifacts(),
+                doProjectDependencyAnalysis(getProject(), bomDependencies));
 
         projectDependencies.forEach(dependencies::putIfAbsent);
 

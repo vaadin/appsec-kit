@@ -35,27 +35,25 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Creates a CycloneDX BOM for each Maven module with {@code war} or {@code ear} packaging.
+ * Creates a CycloneDX BOM for each Maven module with {@code war} or {@code ear}
+ * packaging.
  *
  * @since 2.4.0
  */
-@Mojo(
-        name = "makePackageBom",
-        defaultPhase = LifecyclePhase.PACKAGE,
-        threadSafe = true,
-        aggregator = true,
-        requiresOnline = true
-)
+@Mojo(name = "makePackageBom", defaultPhase = LifecyclePhase.PACKAGE, threadSafe = true, aggregator = true, requiresOnline = true)
 public class CycloneDxPackageMojo extends BaseCycloneDxMojo {
     @Parameter(property = "reactorProjects", readonly = true, required = true)
     private List<MavenProject> reactorProjects;
 
-
     protected boolean shouldInclude(MavenProject mavenProject) {
-        return Arrays.asList(new String[]{"war", "ear"}).contains(mavenProject.getPackaging());
+        return Arrays.asList(new String[] { "war", "ear" })
+                .contains(mavenProject.getPackaging());
     }
 
-    protected String extractComponentsAndDependencies(Set<String> topLevelComponents, Map<String, Component> components, Map<String, Dependency> dependencies) throws MojoExecutionException {
+    protected String extractComponentsAndDependencies(
+            Set<String> topLevelComponents, Map<String, Component> components,
+            Map<String, Dependency> dependencies)
+            throws MojoExecutionException {
         getLog().info(MESSAGE_RESOLVING_DEPS);
 
         for (final MavenProject mavenProject : reactorProjects) {
@@ -64,14 +62,18 @@ public class CycloneDxPackageMojo extends BaseCycloneDxMojo {
             }
             getLog().info("Analyzing " + mavenProject.getArtifactId());
 
-            final BomDependencies bomDependencies = extractBOMDependencies(mavenProject);
-            final Map<String, Dependency> projectDependencies = bomDependencies.getDependencies();
+            final BomDependencies bomDependencies = extractBOMDependencies(
+                    mavenProject);
+            final Map<String, Dependency> projectDependencies = bomDependencies
+                    .getDependencies();
 
-            final Component projectBomComponent = convert(mavenProject.getArtifact());
+            final Component projectBomComponent = convert(
+                    mavenProject.getArtifact());
             components.put(projectBomComponent.getPurl(), projectBomComponent);
             topLevelComponents.add(projectBomComponent.getPurl());
 
-            populateComponents(topLevelComponents, components, bomDependencies.getArtifacts(), null);
+            populateComponents(topLevelComponents, components,
+                    bomDependencies.getArtifacts(), null);
 
             projectDependencies.forEach(dependencies::putIfAbsent);
         }
