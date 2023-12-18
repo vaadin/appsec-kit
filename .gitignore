@@ -50,7 +50,6 @@ bower_components
 node
 node_modules
 */flow-*/frontend
-package-lock.json
 **/webpack.generated.js
 
 flow-tests/**/package.json
