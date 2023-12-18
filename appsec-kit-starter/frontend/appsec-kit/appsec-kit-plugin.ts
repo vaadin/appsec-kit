@@ -9,7 +9,7 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "Frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools";
-import { Framework, CopilotPlugin, CopilotInterface, PanelConfiguration } from "Frontend/generated/jar-resources/copilot/copilot-plugin-support";
+import { Framework, CopilotPlugin, CopilotInterface, PanelConfiguration } from "../copilot/copilot-plugin-support.js";
 
 const devTools: VaadinDevTools = (window as any).Vaadin.devTools;
 
