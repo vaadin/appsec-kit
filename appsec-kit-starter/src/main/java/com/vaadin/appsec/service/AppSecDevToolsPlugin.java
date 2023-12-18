@@ -23,7 +23,7 @@ import com.vaadin.flow.component.dependency.JsModule;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-@JsModule(value = "./appsec-kit/appsec-kit-plugin.ts", developmentOnly = true)
+@JsModule(value = "./appsec-kit/appsec-kit-plugin.js", developmentOnly = true)
 public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
 
     private static final Logger LOGGER = LoggerFactory

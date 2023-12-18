@@ -1,0 +1,10 @@
+{
+  "name": "appsec-kit-plugin",
+  "type": "module",
+  "scripts": {
+    "build": "npm install && vite build"
+  },
+  "devDependencies": {
+    "vite": "^5.0.7"
+  }
+}
