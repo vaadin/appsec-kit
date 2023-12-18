@@ -10,7 +10,8 @@ export default defineConfig({
     outDir: 'target/classes/META-INF/frontend/appsec-kit',
     rollupOptions: {
       external: [
-        /^lit.*/
+        /^lit.*/,
+        /^Frontend\/generated\/jar-resources.*/,
       ]
     },
   },
