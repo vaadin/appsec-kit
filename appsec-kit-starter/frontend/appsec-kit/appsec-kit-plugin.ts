@@ -9,7 +9,7 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "Frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools";
-import { CopilotPlugin, CopilotInterface, PanelConfiguration } from "Frontend/generated/jar-resources/copilot/copilot-plugin-support";
+import { Framework, CopilotPlugin, CopilotInterface, PanelConfiguration } from "Frontend/generated/jar-resources/copilot/copilot-plugin-support";
 
 const devTools: VaadinDevTools = (window as any).Vaadin.devTools;
 
@@ -80,6 +80,7 @@ const panelConfig: PanelConfiguration = {
     panel: 'right',
     floating: false,
     tag: 'appsec-kit-plugin',
+    showOn: [Framework.Flow],
 };
 
 const copilotPlugin: CopilotPlugin = {
