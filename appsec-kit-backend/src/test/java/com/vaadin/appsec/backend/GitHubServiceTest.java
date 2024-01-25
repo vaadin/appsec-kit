@@ -28,7 +28,7 @@ public class GitHubServiceTest {
     static final String TEST_RESOURCE_BOM_PATH = "/bom.json";
     static final String TEST_RESOURCE_NPM_BOM_PATH = "/bom-npm.json";
 
-    static class TestGitHubService1 extends GitHubService {
+    static class TestGitHubServiceWithMockReleases extends GitHubService {
 
         @Override
         protected URL getFrameworkReleasesUrl() {
@@ -41,7 +41,7 @@ public class GitHubServiceTest {
         }
     }
 
-    static class TestGitHubService2 extends TestGitHubService1 {
+    static class TestGitHubServiceWithMockReleasesAndAnalysis extends TestGitHubServiceWithMockReleases {
 
         @Override
         protected URL getVaadinAnalysisUrl() {
@@ -64,7 +64,7 @@ public class GitHubServiceTest {
 
     @Test
     public void getFramework7Versions() {
-        service = new TestGitHubService2();
+        service = new TestGitHubServiceWithMockReleasesAndAnalysis();
         List<String> versions = service.getFramework7Versions();
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
@@ -75,7 +75,7 @@ public class GitHubServiceTest {
 
     @Test
     public void getFramework8Versions() {
-        service = new TestGitHubService2();
+        service = new TestGitHubServiceWithMockReleasesAndAnalysis();
         List<String> versions = service.getFramework8Versions();
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
@@ -86,7 +86,7 @@ public class GitHubServiceTest {
 
     @Test
     public void getFlow24Versions() {
-        service = new TestGitHubService2();
+        service = new TestGitHubServiceWithMockReleasesAndAnalysis();
         List<String> versions = service.getFlow24Versions();
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
@@ -97,7 +97,7 @@ public class GitHubServiceTest {
 
     @Test
     public void getVulnerabilityAnalysisByURI() {
-        service = new TestGitHubService2();
+        service = new TestGitHubServiceWithMockReleasesAndAnalysis();
         VulnerabilityAnalysis vulnerabilityAnalysis = service
                 .getVulnerabilityAnalysis();
 
@@ -120,7 +120,7 @@ public class GitHubServiceTest {
     public void getVulnerabilityAnalysisByFile() {
         System.setProperty("vaadin.appsec.analysis",
                 "src/test/resources/analysis.json");
-        service = new TestGitHubService1();
+        service = new TestGitHubServiceWithMockReleases();
         VulnerabilityAnalysis vulnerabilityAnalysis = service
                 .getVulnerabilityAnalysis();
 
