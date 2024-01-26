@@ -41,7 +41,8 @@ public class GitHubServiceTest {
         }
     }
 
-    static class TestGitHubServiceWithMockReleasesAndAnalysis extends TestGitHubServiceWithMockReleases {
+    static class TestGitHubServiceWithMockReleasesAndAnalysis
+            extends TestGitHubServiceWithMockReleases {
 
         @Override
         protected URL getVaadinAnalysisUrl() {
