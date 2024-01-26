@@ -11,6 +11,9 @@ package com.vaadin.appsec.backend;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.Collator;
 import java.util.List;
 import java.util.Objects;
@@ -87,6 +90,8 @@ class GitHubService {
 
     static final long NUMBER_OF_LATEST_MAINTAINED_VERSIONS = 4;
 
+    static final String ANALYSIS_PATH_AND_NAME_PROPERTY = "vaadin.appsec.analysis";
+
     private List<GitHubRelease> releasesCache;
 
     private VulnerabilityAnalysis analysisCache;
@@ -156,10 +161,28 @@ class GitHubService {
     }
 
     protected URL getVaadinAnalysisUrl() {
-        try {
-            return new URL(VAADIN_ANALYSIS_URI);
-        } catch (MalformedURLException e) {
-            throw new AppSecException("Invalid Vaadin analysis URL", e);
+        String analysisPathAndName = System
+                .getProperty(ANALYSIS_PATH_AND_NAME_PROPERTY);
+        if (analysisPathAndName != null && !analysisPathAndName.isEmpty()) {
+            Path analysis = null;
+            try {
+                analysis = Paths.get(analysisPathAndName);
+                return analysis.toUri().toURL();
+            } catch (InvalidPathException e) {
+                throw new AppSecException(
+                        "Invalid Vaadin analysis file path and name "
+                                + analysis,
+                        e);
+            } catch (MalformedURLException e) {
+                throw new AppSecException(
+                        "Invalid Vaadin analysis file path and name URL", e);
+            }
+        } else {
+            try {
+                return new URL(VAADIN_ANALYSIS_URI);
+            } catch (MalformedURLException e) {
+                throw new AppSecException("Invalid Vaadin analysis URL", e);
+            }
         }
     }
 }
