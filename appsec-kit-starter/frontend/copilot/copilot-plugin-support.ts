@@ -3,6 +3,7 @@
  */
 export interface CopilotInterface {
   send(command: string, data: any): void;
+
   addPanel(panel: PanelConfiguration): void;
 }
 
@@ -62,9 +63,11 @@ export interface PanelConfiguration {
   tag: string;
   floating: boolean;
   floatingPosition?: {
-    left: number;
-    top: number;
-    width: number;
+    left?: number;
+    top?: number;
+    right?: number;
+    bottom?: number;
+    width?: number;
     height?: number;
   };
   showOn?: Framework[];
