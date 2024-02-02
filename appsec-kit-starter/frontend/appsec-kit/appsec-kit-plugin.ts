@@ -8,7 +8,8 @@
  */
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "../vaadin-dev-tools/vaadin-dev-tools";
+import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "Frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools";
+import { Framework, CopilotPlugin, CopilotInterface, PanelConfiguration } from "../copilot/copilot-plugin-support.js";
 
 const devTools: VaadinDevTools = (window as any).Vaadin.devTools;
 
@@ -43,7 +44,6 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
     }
 
     handleMessage(message: ServerMessage): boolean {
-        console.log("appsec-kit-plugin command received: " + message.command);
         if (message.command === "appsec-kit-init") {
             this.appSecRoute = "/" + message.data.appSecRoute;
             devTools.showNotification("information" as MessageType, "AppSec Kit is running",
@@ -71,3 +71,21 @@ const plugin: DevToolsPlugin = {
     }
 };
 (window as any).Vaadin.devToolsPlugins.push(plugin);
+
+const panelConfig: PanelConfiguration = {
+    header: 'AppSec Kit',
+    expanded: true,
+    draggable: true,
+    panelOrder: 0,
+    panel: 'right',
+    floating: false,
+    tag: 'appsec-kit-plugin',
+    showOn: [Framework.Flow],
+};
+
+const copilotPlugin: CopilotPlugin = {
+    init(copilotInterface: CopilotInterface): void {
+        copilotInterface.addPanel(panelConfig);
+    },
+};
+(window as any).Vaadin.copilot.plugins.push(copilotPlugin);
