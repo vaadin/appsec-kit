@@ -88,4 +88,4 @@ const copilotPlugin: CopilotPlugin = {
         copilotInterface.addPanel(panelConfig);
     },
 };
-(window as any).Vaadin.copilotPlugins.push(copilotPlugin);
+(window as any).Vaadin.copilot.plugins.push(copilotPlugin);
