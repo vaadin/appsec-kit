@@ -22,10 +22,11 @@
     </licenses>
 
     <properties>
-        <flow.version>24.3-SNAPSHOT</flow.version>
-        <flow.components.version>24.3-SNAPSHOT</flow.components.version>
+        <flow.version>24.4-SNAPSHOT</flow.version>
+        <flow.components.version>24.4-SNAPSHOT</flow.components.version>
+        <license.checker.version>1.12.7</license.checker.version>
 
-        <spring.boot.version>3.2.0</spring.boot.version>
+        <spring.boot.version>3.2.2</spring.boot.version>
 
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -36,7 +37,7 @@
         <maven.javadoc.version>3.4.1</maven.javadoc.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <maven.formatter.version>2.16.0</maven.formatter.version>
-        <jackson.version>2.14.3</jackson.version>
+        <jackson.version>2.16.0</jackson.version>
     </properties>
 
     <repositories>
@@ -72,7 +73,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>license-checker</artifactId>
-                <version>1.12.3</version>
+                <version>${license.checker.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

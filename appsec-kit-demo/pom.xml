@@ -127,32 +127,46 @@
                     <verbose>false</verbose>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <executions>
-                    <execution>
-                        <id>cyclonedx-npm</id>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <executable>npx</executable>
-                            <arguments>
-                                <argument>@cyclonedx/cyclonedx-npm</argument>
-                                <argument>--output-file</argument>
-                                <argument>${project.build.outputDirectory}/resources/bom-npm.json</argument>
-                                <argument>--output-format</argument>
-                                <argument>JSON</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>generate-npm-sbom</id>
+            <activation>
+                <file>
+                    <exists>package.json</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.3.2</version>
+                        <executions>
+                            <execution>
+                                <id>cyclonedx-npm</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <executable>npx</executable>
+                                    <arguments>
+                                        <argument>@cyclonedx/cyclonedx-npm</argument>
+                                        <argument>--output-file</argument>
+                                        <argument>${project.build.outputDirectory}/resources/bom-npm.json</argument>
+                                        <argument>--output-format</argument>
+                                        <argument>JSON</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
