@@ -25,6 +25,8 @@
         <flow.version>24.3-SNAPSHOT</flow.version>
         <flow.components.version>24.3-SNAPSHOT</flow.components.version>
 
+        <license.checker.version>1.12.9</license.checker.version>
+
         <spring.boot.version>3.2.0</spring.boot.version>
 
         <maven.compiler.source>17</maven.compiler.source>
@@ -72,7 +74,7 @@
             <dependency>
                 <groupId>com.vaadin</groupId>
                 <artifactId>license-checker</artifactId>
-                <version>1.12.3</version>
+                <version>${license.checker.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
