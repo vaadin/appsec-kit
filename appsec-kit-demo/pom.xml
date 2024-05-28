@@ -155,6 +155,8 @@
                                     <executable>npx</executable>
                                     <arguments>
                                         <argument>@cyclonedx/cyclonedx-npm</argument>
+                                        <argument>--spec-version</argument>
+                                        <argument>1.5</argument>
                                         <argument>--output-file</argument>
                                         <argument>${project.build.outputDirectory}/resources/bom-npm.json</argument>
                                         <argument>--output-format</argument>
