@@ -25,7 +25,8 @@
         <flow.version>24.3-SNAPSHOT</flow.version>
         <flow.components.version>24.3-SNAPSHOT</flow.components.version>
 
-        <license.checker.version>1.12.10</license.checker.version>
+        <flow.components.version>24.4-SNAPSHOT</flow.components.version>
+        <license.checker.version>1.12.12</license.checker.version>
 
         <spring.boot.version>3.2.0</spring.boot.version>
 
