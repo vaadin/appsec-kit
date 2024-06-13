@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
@@ -105,7 +104,7 @@ class AppSecDTOProvider {
             updateVulnerabilityStatistics(dependency, vulnerabilities);
 
             return dependency;
-        }).collect(Collectors.toList());
+        }).toList();
     }
 
     List<Vulnerability> getVulnerabilities() {
@@ -116,17 +115,29 @@ class AppSecDTOProvider {
 
         for (OpenSourceVulnerability vulnerability : vulnerabilities) {
             for (Affected affected : vulnerability.getAffected()) {
-                for (Dependency dependency : dependencies) {
-                    if (isVulnerable(dependency, affected)) {
-                        Vulnerability vulnerabilityDTO = createVulnerabilityDTO(
-                                vulnerability, dependency, affected);
-                        vulnerabilityDTOs.add(vulnerabilityDTO);
+                if (isMavenEcosystem(affected) || isNpmEcosystem(affected)) {
+                    for (Dependency dependency : dependencies) {
+                        if (isVulnerable(dependency, affected)) {
+                            Vulnerability vulnerabilityDTO = createVulnerabilityDTO(
+                                    vulnerability, dependency, affected);
+                            vulnerabilityDTOs.add(vulnerabilityDTO);
+                        }
                     }
                 }
             }
         }
 
         return vulnerabilityDTOs;
+    }
+
+    private boolean isMavenEcosystem(Affected affected) {
+        return Ecosystem.MAVEN.value()
+                .equalsIgnoreCase(affected.getPackage().getEcosystem());
+    }
+
+    private boolean isNpmEcosystem(Affected affected) {
+        return Ecosystem.NPM.value()
+                .equalsIgnoreCase(affected.getPackage().getEcosystem());
     }
 
     // Pseudocode for evaluating if a given version is affected
@@ -292,7 +303,8 @@ class AppSecDTOProvider {
 
         for (OpenSourceVulnerability vulnerability : vulnerabilities) {
             for (Affected affected : vulnerability.getAffected()) {
-                if (isVulnerable(dependency, affected)) {
+                if ((isMavenEcosystem(affected) || isNpmEcosystem(affected))
+                        && isVulnerable(dependency, affected)) {
                     vulnerabilityCount++;
                     highestSeverityLevel = findSeverityIfHigher(vulnerability,
                             highestSeverityLevel);
