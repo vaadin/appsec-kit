@@ -6,7 +6,6 @@
  *
  * See <https://vaadin.com/commercial-license-and-service-terms> for the full license.
  */
-
 package com.vaadin.appsec.backend;
 
 import java.net.URI;
@@ -20,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.appsec.backend.model.dto.Dependency;
@@ -44,40 +42,31 @@ public class AppSecDTOProviderTest {
 
     private BillOfMaterialsStore bomStore;
     private VulnerabilityStore vulnerabilityStore;
+    private OpenSourceVulnerabilityService osvService;
 
-    @Before
-    public void setup() throws Exception {
+    @Test
+    public void testGetDependencies() throws Exception {
         bomStore = new BillOfMaterialsStore();
-        OpenSourceVulnerabilityService osvService = mock(
-                OpenSourceVulnerabilityService.class);
+        osvService = mock(OpenSourceVulnerabilityService.class);
         when(osvService.getVulnerabilities(anyList()))
                 .thenReturn(createVulnerabilities());
         vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
-
         // Init BOM Store
         URL bomResource = AppSecDTOProviderTest.class
                 .getResource(TEST_RESOURCE_BOM_PATH);
         URL bomNpmResource = AppSecDTOProviderTest.class
                 .getResource(TEST_RESOURCE_BOM_NPM_PATH);
-        try {
-            assert bomResource != null;
-            bomStore.readBomFile(Paths.get(bomResource.toURI()),
-                    Ecosystem.MAVEN);
-            assert bomNpmResource != null;
-            bomStore.readBomFile(Paths.get(bomNpmResource.toURI()),
-                    Ecosystem.NPM);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+        assert bomResource != null;
+        bomStore.readBomFile(Paths.get(bomResource.toURI()), Ecosystem.MAVEN);
+        assert bomNpmResource != null;
+        bomStore.readBomFile(Paths.get(bomNpmResource.toURI()), Ecosystem.NPM);
         // Init vulnerability store
         vulnerabilityStore.refresh();
-    }
-
-    @Test
-    public void testGetDependencies() {
+        when(osvService.getVulnerabilities(anyList()))
+                .thenReturn(createVulnerabilities());
         AppSecDTOProvider dtoProvider = new AppSecDTOProvider(
                 vulnerabilityStore, bomStore);
+
         List<Dependency> dependencies = dtoProvider.getDependencies();
 
         Assert.assertEquals("Mismatch in expected dependency count.", 4,
@@ -85,12 +74,59 @@ public class AppSecDTOProviderTest {
     }
 
     @Test
-    public void testGetVulnerabilities() {
+    public void testGetVulnerabilities() throws Exception {
+        bomStore = new BillOfMaterialsStore();
+        osvService = mock(OpenSourceVulnerabilityService.class);
+        when(osvService.getVulnerabilities(anyList()))
+                .thenReturn(createVulnerabilities());
+        vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
+        // Init BOM Store
+        URL bomResource = AppSecDTOProviderTest.class
+                .getResource(TEST_RESOURCE_BOM_PATH);
+        URL bomNpmResource = AppSecDTOProviderTest.class
+                .getResource(TEST_RESOURCE_BOM_NPM_PATH);
+        assert bomResource != null;
+        bomStore.readBomFile(Paths.get(bomResource.toURI()), Ecosystem.MAVEN);
+        assert bomNpmResource != null;
+        bomStore.readBomFile(Paths.get(bomNpmResource.toURI()), Ecosystem.NPM);
+        // Init vulnerability store
+        vulnerabilityStore.refresh();
+        when(osvService.getVulnerabilities(anyList()))
+                .thenReturn(createVulnerabilities());
         AppSecDTOProvider dtoProvider = new AppSecDTOProvider(
                 vulnerabilityStore, bomStore);
+
         List<Vulnerability> vulnerabilities = dtoProvider.getVulnerabilities();
 
         Assert.assertEquals("Mismatch in expected vulnerability count.", 3,
+                vulnerabilities.size());
+    }
+
+    @Test
+    public void testGetVulnerabilitiesFiltersOutUnsupportedEcosystems()
+            throws Exception {
+        bomStore = new BillOfMaterialsStore();
+        osvService = mock(OpenSourceVulnerabilityService.class);
+        when(osvService.getVulnerabilities(anyList()))
+                .thenReturn(createVulnerabilitiesWithUnsupportedEcosystems());
+        vulnerabilityStore = new VulnerabilityStore(osvService, bomStore);
+        // Init BOM Store
+        URL bomResource = AppSecDTOProviderTest.class
+                .getResource(TEST_RESOURCE_BOM_PATH);
+        URL bomNpmResource = AppSecDTOProviderTest.class
+                .getResource(TEST_RESOURCE_BOM_NPM_PATH);
+        assert bomResource != null;
+        bomStore.readBomFile(Paths.get(bomResource.toURI()), Ecosystem.MAVEN);
+        assert bomNpmResource != null;
+        bomStore.readBomFile(Paths.get(bomNpmResource.toURI()), Ecosystem.NPM);
+        // Init vulnerability store
+        vulnerabilityStore.refresh();
+        AppSecDTOProvider dtoProvider = new AppSecDTOProvider(
+                vulnerabilityStore, bomStore);
+
+        List<Vulnerability> vulnerabilities = dtoProvider.getVulnerabilities();
+
+        Assert.assertEquals("Mismatch in expected vulnerability count.", 1,
                 vulnerabilities.size());
     }
 
@@ -101,21 +137,21 @@ public class AppSecDTOProviderTest {
 
         Affected affected1 = createAffected("Maven", "org.yaml:snakeyaml",
                 Arrays.asList("1.32", "1.33", "1.4"), Range.Type.ECOSYSTEM,
-                new HashMap<String, String>() {
+                new HashMap<>() {
                     {
                         put("introduced", "0");
                         put("fixed", "2.0");
                     }
                 });
         Affected affected2 = createAffected("npm", "pac-resolver", null,
-                Range.Type.SEMVER, new HashMap<String, String>() {
+                Range.Type.SEMVER, new HashMap<>() {
                     {
                         put("introduced", "0");
                         put("fixed", "5.0.0");
                     }
                 });
         Affected affected3 = createAffected("npm", "degenerator", null,
-                Range.Type.SEMVER, new HashMap<String, String>() {
+                Range.Type.SEMVER, new HashMap<>() {
                     {
                         put("introduced", "0");
                         put("fixed", "3.0.1");
@@ -124,15 +160,46 @@ public class AppSecDTOProviderTest {
 
         OpenSourceVulnerability vulnerability1 = createVulnerability(
                 "GHSA-mjmj-j48q-9wg2", "CVE-2022-1471", reference,
-                Collections.singletonList(affected1));
+                List.of(affected1));
         OpenSourceVulnerability vulnerability2 = createVulnerability(
                 "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
-                Arrays.asList(affected2, affected3));
+                List.of(affected2, affected3));
         OpenSourceVulnerability vulnerability3 = createVulnerability(
                 "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
-                Arrays.asList(affected2, affected3));
+                List.of(affected2, affected3));
 
         return Arrays.asList(vulnerability1, vulnerability2, vulnerability3);
+    }
+
+    private List<OpenSourceVulnerability> createVulnerabilitiesWithUnsupportedEcosystems()
+            throws Exception {
+        Reference reference = new Reference(Reference.Type.WEB,
+                new URI("https://wwww.reference.com"));
+
+        Affected affected1 = createAffected("Maven", "org.yaml:snakeyaml",
+                Arrays.asList("1.32", "1.33", "1.4"), Range.Type.ECOSYSTEM,
+                new HashMap<>() {
+                    {
+                        put("introduced", "0");
+                        put("fixed", "2.0");
+                    }
+                });
+        Affected affected2 = createAffected("NuGet", "nuget/BouncyCastle", null,
+                Range.Type.ECOSYSTEM, new HashMap<>() {
+                    {
+                        put("introduced", "0");
+                        put("fixed", "2.0");
+                    }
+                });
+
+        OpenSourceVulnerability vulnerability1 = createVulnerability(
+                "GHSA-mjmj-j48q-9wg2", "CVE-2022-1471", reference,
+                List.of(affected1));
+        OpenSourceVulnerability vulnerability2 = createVulnerability(
+                "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
+                List.of(affected2));
+
+        return Arrays.asList(vulnerability1, vulnerability2);
     }
 
     private OpenSourceVulnerability createVulnerability(String id, String alias,
