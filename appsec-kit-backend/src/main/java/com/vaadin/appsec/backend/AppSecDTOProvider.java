@@ -100,23 +100,30 @@ class AppSecDTOProvider {
 
         for (OpenSourceVulnerability vuln : vulnerabilities) {
             for (Affected affected : vuln.getAffected()) {
-                String vulnDepGroup = AppSecUtils.getVulnDepGroup(affected);
-                String vulnDepName = AppSecUtils.getVulnDepName(affected);
-                List<String> versions = affected.getVersions();
-                List<Range> ranges = affected.getRanges();
+                if (isMavenEcosystem(affected)) {
+                    String vulnDepGroup = AppSecUtils.getVulnDepGroup(affected);
+                    String vulnDepName = AppSecUtils.getVulnDepName(affected);
+                    List<String> versions = affected.getVersions();
+                    List<Range> ranges = affected.getRanges();
 
-                for (Dependency dep : dependencies) {
-                    if (isVulnerable(dep, vulnDepGroup, vulnDepName, versions,
-                            ranges)) {
-                        Vulnerability vulnerabilityDTO = createVulnerabilityDTO(
-                                vuln, dep, affected);
-                        vulnerabilityDTOs.add(vulnerabilityDTO);
+                    for (Dependency dep : dependencies) {
+                        if (isVulnerable(dep, vulnDepGroup, vulnDepName,
+                                versions, ranges)) {
+                            Vulnerability vulnerabilityDTO = createVulnerabilityDTO(
+                                    vuln, dep, affected);
+                            vulnerabilityDTOs.add(vulnerabilityDTO);
+                        }
                     }
                 }
             }
         }
 
         return vulnerabilityDTOs;
+    }
+
+    private boolean isMavenEcosystem(Affected affected) {
+        return Ecosystem.MAVEN.value()
+                .equalsIgnoreCase(affected.getPackage().getEcosystem());
     }
 
     // Pseudocode for evaluating if a given version is affected
@@ -269,17 +276,20 @@ class AppSecDTOProvider {
 
         for (OpenSourceVulnerability vulnerability : vulnerabilities) {
             for (Affected affected : vulnerability.getAffected()) {
-                String depGroupAndName = AppSecUtils
-                        .getDepGroupAndName(dependency);
-                if (depGroupAndName.equals(affected.getPackage().getName())) {
-                    vulnerabilityCount++;
-                    highestSeverityLevel = findSeverityIfHigher(vulnerability,
-                            highestSeverityLevel);
-                    highestScoreNumber = findScoreIfHigher(vulnerability,
-                            highestScoreNumber);
-                    highestScoreString = getHighestCvssScoreString(
-                            vulnerability, highestScoreNumber,
-                            highestScoreString);
+                if (isMavenEcosystem(affected)) {
+                    String depGroupAndName = AppSecUtils
+                            .getDepGroupAndName(dependency);
+                    if (depGroupAndName
+                            .equals(affected.getPackage().getName())) {
+                        vulnerabilityCount++;
+                        highestSeverityLevel = findSeverityIfHigher(
+                                vulnerability, highestSeverityLevel);
+                        highestScoreNumber = findScoreIfHigher(vulnerability,
+                                highestScoreNumber);
+                        highestScoreString = getHighestCvssScoreString(
+                                vulnerability, highestScoreNumber,
+                                highestScoreString);
+                    }
                 }
             }
         }
