@@ -352,6 +352,7 @@ class AppSecDTOProvider {
             OpenSourceVulnerability vulnerability) {
         return vulnerability.getSeverity().stream()
                 .map(severity -> Cvss.fromVector(severity.getScore()))
+                .filter(Objects::nonNull)
                 .map(cvss -> cvss.calculateScore().getBaseScore())
                 .max(Comparator.naturalOrder()).orElse(0.0);
     }
@@ -366,11 +367,13 @@ class AppSecDTOProvider {
         String cvssString = "";
         double tempBaseScore = 0.0;
         for (Severity severity : vulnerability.getSeverity()) {
-            double baseScore = Cvss.fromVector(severity.getScore())
-                    .calculateScore().getBaseScore();
-            if (baseScore > tempBaseScore) {
-                tempBaseScore = baseScore;
-                cvssString = severity.getScore();
+            Cvss cvss = Cvss.fromVector(severity.getScore());
+            if (cvss != null) {
+                double baseScore = cvss.calculateScore().getBaseScore();
+                if (baseScore > tempBaseScore) {
+                    tempBaseScore = baseScore;
+                    cvssString = severity.getScore();
+                }
             }
         }
 

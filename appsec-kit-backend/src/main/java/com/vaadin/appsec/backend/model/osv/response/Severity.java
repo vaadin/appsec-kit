@@ -86,7 +86,9 @@ public class Severity {
      * The severity type.
      */
     public enum Type {
-        CVSS_V2("CVSS_V2"), CVSS_V3("CVSS_V3");
+        CVSS_V2("CVSS_V2"),
+        CVSS_V3("CVSS_V3"),
+        CVSS_V4("CVSS_V4");
 
         private final String value;
 
