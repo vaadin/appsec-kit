@@ -351,6 +351,7 @@ class AppSecDTOProvider {
     private Double getHighestCvssScoreNumber(
             OpenSourceVulnerability vulnerability) {
         return vulnerability.getSeverity().stream()
+                .filter(severity -> isSupportedCvssType(severity.getType()))
                 .map(severity -> Cvss.fromVector(severity.getScore()))
                 .filter(Objects::nonNull)
                 .map(cvss -> cvss.calculateScore().getBaseScore())
@@ -367,18 +368,24 @@ class AppSecDTOProvider {
         String cvssString = "";
         double tempBaseScore = 0.0;
         for (Severity severity : vulnerability.getSeverity()) {
-            Cvss cvss = Cvss.fromVector(severity.getScore());
-            if (cvss != null) {
-                double baseScore = cvss.calculateScore().getBaseScore();
-                if (baseScore > tempBaseScore) {
-                    tempBaseScore = baseScore;
-                    cvssString = severity.getScore();
+            if (isSupportedCvssType(severity.getType())) {
+                Cvss cvss = Cvss.fromVector(severity.getScore());
+                if (cvss != null) {
+                    double baseScore = cvss.calculateScore().getBaseScore();
+                    if (baseScore > tempBaseScore) {
+                        tempBaseScore = baseScore;
+                        cvssString = severity.getScore();
+                    }
                 }
             }
         }
 
         return tempBaseScore >= highestScoreNumber ? cvssString
                 : highestScoreString;
+    }
+
+    private boolean isSupportedCvssType(Severity.Type type) {
+        return type == Severity.Type.CVSS_V2 || type == Severity.Type.CVSS_V3;
     }
 
     private Optional<String> getPatchedVersion(Affected affected) {
