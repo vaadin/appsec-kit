@@ -11,7 +11,7 @@
     <name>AppSec Kit</name>
 
     <artifactId>appsec-kit</artifactId>
-    <version>3.2-SNAPSHOT</version>
+    <version>3.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <licenses>
@@ -22,9 +22,9 @@
     </licenses>
 
     <properties>
-        <flow.version>24.4-SNAPSHOT</flow.version>
-        <flow.components.version>24.4-SNAPSHOT</flow.components.version>
-        <license.checker.version>1.12.13</license.checker.version>
+        <flow.version>24.6-SNAPSHOT</flow.version>
+        <flow.components.version>24.6-SNAPSHOT</flow.components.version>
+        <license.checker.version>1.13.3</license.checker.version>
 
         <spring.boot.version>3.2.6</spring.boot.version>
 
@@ -37,7 +37,7 @@
         <maven.javadoc.version>3.4.1</maven.javadoc.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <maven.formatter.version>2.16.0</maven.formatter.version>
-        <jackson.version>2.16.0</jackson.version>
+        <jackson.version>2.18.2</jackson.version>
     </properties>
 
     <repositories>
