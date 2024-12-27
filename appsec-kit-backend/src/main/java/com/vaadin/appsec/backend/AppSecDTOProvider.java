@@ -330,7 +330,7 @@ class AppSecDTOProvider {
         return vulnerability.getSeverity().stream()
                 .filter(severity -> isSupportedCvssType(severity.getType()))
                 .map(severity -> Cvss.fromVector(severity.getScore()))
-                .filter(Objects::nonNull);
+                .filter(Objects::nonNull)
                 .map(cvss -> cvss.calculateScore().getBaseScore())
                 .max(Comparator.naturalOrder()).orElse(0.0);
     }
