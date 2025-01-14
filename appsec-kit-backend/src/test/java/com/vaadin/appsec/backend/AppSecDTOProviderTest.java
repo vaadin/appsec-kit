@@ -29,6 +29,7 @@ import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Package;
 import com.vaadin.appsec.backend.model.osv.response.Range;
 import com.vaadin.appsec.backend.model.osv.response.Reference;
+import com.vaadin.appsec.backend.model.osv.response.Severity;
 
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.mock;
@@ -63,7 +64,7 @@ public class AppSecDTOProviderTest {
 
         List<Dependency> dependencies = dtoProvider.getDependencies();
 
-        Assert.assertEquals("Mismatch in expected dependency count.", 2,
+        Assert.assertEquals("Mismatch in expected dependency count.", 4,
                 dependencies.size());
     }
 
@@ -88,7 +89,7 @@ public class AppSecDTOProviderTest {
 
         List<Vulnerability> vulnerabilities = dtoProvider.getVulnerabilities();
 
-        Assert.assertEquals("Mismatch in expected vulnerability count.", 1,
+        Assert.assertEquals("Mismatch in expected vulnerability count.", 3,
                 vulnerabilities.size());
     }
 
@@ -121,7 +122,23 @@ public class AppSecDTOProviderTest {
         Reference reference = new Reference(Reference.Type.WEB,
                 new URI("https://wwww.reference.com"));
 
-        Affected affected = createAffected("Maven", "org.yaml:snakeyaml",
+        Affected affected1 = createAffected("Maven", "org.yaml:snakeyaml1",
+                Arrays.asList("1.32", "1.33", "1.4"), Range.Type.ECOSYSTEM,
+                new HashMap<String, String>() {
+                    {
+                        put("introduced", "0");
+                        put("fixed", "2.0");
+                    }
+                });
+        Affected affected2 = createAffected("Maven", "org.yaml:snakeyaml2",
+                Arrays.asList("1.32", "1.33", "1.4"), Range.Type.ECOSYSTEM,
+                new HashMap<String, String>() {
+                    {
+                        put("introduced", "0");
+                        put("fixed", "2.0");
+                    }
+                });
+        Affected affected3 = createAffected("Maven", "org.yaml:snakeyaml3",
                 Arrays.asList("1.32", "1.33", "1.4"), Range.Type.ECOSYSTEM,
                 new HashMap<String, String>() {
                     {
@@ -130,11 +147,25 @@ public class AppSecDTOProviderTest {
                     }
                 });
 
-        OpenSourceVulnerability vulnerability = createVulnerability(
-                "GHSA-mjmj-j48q-9wg2", "CVE-2022-1471", reference,
-                Collections.singletonList(affected));
+        Severity severity1 = new Severity(Severity.Type.CVSS_V3,
+                "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N");
+        Severity severity2 = new Severity(Severity.Type.CVSS_V4,
+                "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N");
 
-        return Collections.singletonList(vulnerability);
+        OpenSourceVulnerability vulnerability1 = createVulnerability(
+                "GHSA-mjmj-j48q-9wg2", "CVE-2022-1471", reference,
+                Collections.singletonList(affected1),
+                Arrays.asList(severity1, severity2));
+
+        OpenSourceVulnerability vulnerability2 = createVulnerability(
+                "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
+                Arrays.asList(affected2, affected3), Collections.emptyList());
+
+        OpenSourceVulnerability vulnerability3 = createVulnerability(
+                "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
+                Arrays.asList(affected2, affected3), Collections.emptyList());
+
+        return Arrays.asList(vulnerability1, vulnerability2, vulnerability3);
     }
 
     private List<OpenSourceVulnerability> createVulnerabilitiesWithUnsupportedEcosystems()
@@ -142,7 +173,7 @@ public class AppSecDTOProviderTest {
         Reference reference = new Reference(Reference.Type.WEB,
                 new URI("https://wwww.reference.com"));
 
-        Affected affected1 = createAffected("Maven", "org.yaml:snakeyaml",
+        Affected affected1 = createAffected("Maven", "org.yaml:snakeyaml1",
                 Arrays.asList("1.32", "1.33", "1.4"), Range.Type.ECOSYSTEM,
                 new HashMap<String, String>() {
                     {
@@ -160,21 +191,23 @@ public class AppSecDTOProviderTest {
 
         OpenSourceVulnerability vulnerability1 = createVulnerability(
                 "GHSA-mjmj-j48q-9wg2", "CVE-2022-1471", reference,
-                Collections.singletonList(affected1));
+                Collections.singletonList(affected1), Collections.emptyList());
         OpenSourceVulnerability vulnerability2 = createVulnerability(
                 "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
-                Collections.singletonList(affected2));
+                Collections.singletonList(affected2), Collections.emptyList());
 
         return Arrays.asList(vulnerability1, vulnerability2);
     }
 
     private OpenSourceVulnerability createVulnerability(String id, String alias,
-            Reference reference, List<Affected> affected) {
+            Reference reference, List<Affected> affected,
+            List<Severity> severity) {
         OpenSourceVulnerability vulnerability = new OpenSourceVulnerability();
         vulnerability.setId(id);
         vulnerability.setAliases(Collections.singletonList(alias));
         vulnerability.setReferences(Collections.singletonList(reference));
         vulnerability.setAffected(affected);
+        vulnerability.setSeverity(severity);
         return vulnerability;
     }
 

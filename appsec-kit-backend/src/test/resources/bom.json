@@ -156,7 +156,7 @@
     },
     {
       "group" : "org.yaml",
-      "name" : "snakeyaml",
+      "name" : "snakeyaml1",
       "version" : "1.33",
       "description" : "YAML 1.1 parser and emitter for Java",
       "hashes" : [
@@ -200,7 +200,7 @@
           }
         }
       ],
-      "purl" : "pkg:maven/org.yaml/snakeyaml@1.33?type=jar",
+      "purl" : "pkg:maven/org.yaml/snakeyaml1@1.33?type=jar",
       "externalReferences" : [
         {
           "type" : "website",
@@ -220,18 +220,164 @@
         }
       ],
       "type" : "library",
-      "bom-ref" : "pkg:maven/org.yaml/snakeyaml@1.33?type=jar"
+      "bom-ref" : "pkg:maven/org.yaml/snakeyaml1@1.33?type=jar"
+    },
+    {
+      "group" : "org.yaml",
+      "name" : "snakeyaml2",
+      "version" : "1.33",
+      "description" : "YAML 1.1 parser and emitter for Java",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "e0164a637c691c8cf01d29f90a709c02"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "2cd0a87ff7df953f810c344bdf2fe3340b954c69"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "11ff459788f0a2d781f56a4a86d7e69202cebacd0273d5269c4ae9f02f3fd8f0"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "787b72aebb685689ab379ed8f238fc2f4175bb82d285909e39e7ff1ee1b9e64ad8878f4685dadde274f950b0dc77dca3082a52921c11094aa2a535672ae4f33c"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "9f0a0a35df2b339830b9e78294634ea894e7096e01709c82d965e24a9fa9ac6ee15edbbbf23368dcd57741de5bf23086"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "91d8fd581d60be4090d3b522d8c119c12449cff2ce6c436d0e53977e1c9fea8686b2b360fb15f4c3507e4f243d7d6170"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "7dcf0429ecb923a66e00ec633bafeb297e3b90e1cc2be0f85443fd61367f355a"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "59b32910dddf63475893f7c830d58ca320cd6183704d80b8111cee7bb1674f97f5699c8ac52f905a5b9a20128b9e2b6a26a07490f217033c858d9c358bedcafc"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.yaml/snakeyaml2@1.33?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/src"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.yaml/snakeyaml2@1.33?type=jar"
+    },
+    {
+      "group" : "org.yaml",
+      "name" : "snakeyaml3",
+      "version" : "1.33",
+      "description" : "YAML 1.1 parser and emitter for Java",
+      "hashes" : [
+        {
+          "alg" : "MD5",
+          "content" : "e0164a637c691c8cf01d29f90a709c02"
+        },
+        {
+          "alg" : "SHA-1",
+          "content" : "2cd0a87ff7df953f810c344bdf2fe3340b954c69"
+        },
+        {
+          "alg" : "SHA-256",
+          "content" : "11ff459788f0a2d781f56a4a86d7e69202cebacd0273d5269c4ae9f02f3fd8f0"
+        },
+        {
+          "alg" : "SHA-512",
+          "content" : "787b72aebb685689ab379ed8f238fc2f4175bb82d285909e39e7ff1ee1b9e64ad8878f4685dadde274f950b0dc77dca3082a52921c11094aa2a535672ae4f33c"
+        },
+        {
+          "alg" : "SHA-384",
+          "content" : "9f0a0a35df2b339830b9e78294634ea894e7096e01709c82d965e24a9fa9ac6ee15edbbbf23368dcd57741de5bf23086"
+        },
+        {
+          "alg" : "SHA3-384",
+          "content" : "91d8fd581d60be4090d3b522d8c119c12449cff2ce6c436d0e53977e1c9fea8686b2b360fb15f4c3507e4f243d7d6170"
+        },
+        {
+          "alg" : "SHA3-256",
+          "content" : "7dcf0429ecb923a66e00ec633bafeb297e3b90e1cc2be0f85443fd61367f355a"
+        },
+        {
+          "alg" : "SHA3-512",
+          "content" : "59b32910dddf63475893f7c830d58ca320cd6183704d80b8111cee7bb1674f97f5699c8ac52f905a5b9a20128b9e2b6a26a07490f217033c858d9c358bedcafc"
+        }
+      ],
+      "licenses" : [
+        {
+          "license" : {
+            "id" : "Apache-2.0"
+          }
+        }
+      ],
+      "purl" : "pkg:maven/org.yaml/snakeyaml3@1.33?type=jar",
+      "externalReferences" : [
+        {
+          "type" : "website",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml"
+        },
+        {
+          "type" : "distribution",
+          "url" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        },
+        {
+          "type" : "issue-tracker",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/issues"
+        },
+        {
+          "type" : "vcs",
+          "url" : "https://bitbucket.org/snakeyaml/snakeyaml/src"
+        }
+      ],
+      "type" : "library",
+      "bom-ref" : "pkg:maven/org.yaml/snakeyaml3@1.33?type=jar"
     }
   ],
   "dependencies": [
     {
       "ref" : "pkg:maven/org.springframework.boot/spring-boot-starter@3.1.4?type=jar",
       "dependsOn" : [
-        "pkg:maven/org.yaml/snakeyaml@1.33?type=jar"
+        "pkg:maven/org.yaml/snakeyaml1@1.33?type=jar",
+        "pkg:maven/org.yaml/snakeyaml2@1.33?type=jar",
+        "pkg:maven/org.yaml/snakeyaml3@1.33?type=jar"
       ]
     },
     {
-      "ref" : "pkg:maven/org.yaml/snakeyaml@1.33?type=jar",
+      "ref" : "pkg:maven/org.yaml/snakeyaml1@1.33?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/org.yaml/snakeyaml2@1.33?type=jar",
+      "dependsOn" : [ ]
+    },
+    {
+      "ref" : "pkg:maven/org.yaml/snakeyam3@1.33?type=jar",
       "dependsOn" : [ ]
     }
   ]

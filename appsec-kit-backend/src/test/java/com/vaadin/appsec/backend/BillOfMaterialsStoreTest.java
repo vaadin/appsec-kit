@@ -25,6 +25,6 @@ public class BillOfMaterialsStoreTest {
                 .getResource(TEST_RESOURCE_BOM_PATH).toURI()));
 
         int components = store.getBom().getComponents().size();
-        assertEquals(2, components);
+        assertEquals(4, components);
     }
 }
