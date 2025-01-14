@@ -24,9 +24,11 @@ public class AppSecData implements Serializable {
      * The status of the analysis for a single vulnerability.
      */
     public enum VulnerabilityStatus {
-        NOT_SET("Not set"), NOT_AFFECTED("Not affected"), FALSE_POSITIVE(
-                "False positive"), IN_TRIAGE(
-                        "In triage"), EXPLOITABLE("Exploitable");
+        NOT_SET("Not set"),
+        NOT_AFFECTED("Not affected"),
+        FALSE_POSITIVE("False positive"),
+        IN_TRIAGE("In triage"),
+        EXPLOITABLE("Exploitable");
 
         private String caption;
 

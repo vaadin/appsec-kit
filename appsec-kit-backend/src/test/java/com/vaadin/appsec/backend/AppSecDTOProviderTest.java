@@ -124,21 +124,21 @@ public class AppSecDTOProviderTest {
 
         Affected affected1 = createAffected("Maven", "org.yaml:snakeyaml",
                 Arrays.asList("1.32", "1.33", "1.4"), Range.Type.ECOSYSTEM,
-                new HashMap<>() {
+                new HashMap<String, String>() {
                     {
                         put("introduced", "0");
                         put("fixed", "2.0");
                     }
                 });
         Affected affected2 = createAffected("npm", "pac-resolver", null,
-                Range.Type.SEMVER, new HashMap<>() {
+                Range.Type.SEMVER, new HashMap<String, String>() {
                     {
                         put("introduced", "0");
                         put("fixed", "5.0.0");
                     }
                 });
         Affected affected3 = createAffected("npm", "degenerator", null,
-                Range.Type.SEMVER, new HashMap<>() {
+                Range.Type.SEMVER, new HashMap<String, String>() {
                     {
                         put("introduced", "0");
                         put("fixed", "3.0.1");
@@ -152,7 +152,8 @@ public class AppSecDTOProviderTest {
 
         OpenSourceVulnerability vulnerability1 = createVulnerability(
                 "GHSA-mjmj-j48q-9wg2", "CVE-2022-1471", reference,
-                Collections.singletonList(affected1), Arrays.asList(serverity1, severity2));
+                Collections.singletonList(affected1),
+                Arrays.asList(severity1, severity2));
 
         OpenSourceVulnerability vulnerability2 = createVulnerability(
                 "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
@@ -197,7 +198,8 @@ public class AppSecDTOProviderTest {
     }
 
     private OpenSourceVulnerability createVulnerability(String id, String alias,
-            Reference reference, List<Affected> affected, List<Severity> severity) {
+            Reference reference, List<Affected> affected,
+            List<Severity> severity) {
         OpenSourceVulnerability vulnerability = new OpenSourceVulnerability();
         vulnerability.setId(id);
         vulnerability.setAliases(Collections.singletonList(alias));
