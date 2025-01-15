@@ -30,6 +30,7 @@ import com.vaadin.appsec.backend.model.osv.response.OpenSourceVulnerability;
 import com.vaadin.appsec.backend.model.osv.response.Package;
 import com.vaadin.appsec.backend.model.osv.response.Range;
 import com.vaadin.appsec.backend.model.osv.response.Reference;
+import com.vaadin.appsec.backend.model.osv.response.Severity;
 
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.mock;
@@ -158,15 +159,20 @@ public class AppSecDTOProviderTest {
                     }
                 });
 
+        Severity severity1 = new Severity(Severity.Type.CVSS_V3,
+                "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N");
+        Severity severity2 = new Severity(Severity.Type.CVSS_V4,
+                "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N");
+
         OpenSourceVulnerability vulnerability1 = createVulnerability(
                 "GHSA-mjmj-j48q-9wg2", "CVE-2022-1471", reference,
-                List.of(affected1));
+                List.of(affected1), List.of(severity1, severity2));
         OpenSourceVulnerability vulnerability2 = createVulnerability(
                 "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
-                List.of(affected2, affected3));
+                List.of(affected2, affected3), List.of());
         OpenSourceVulnerability vulnerability3 = createVulnerability(
                 "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
-                List.of(affected2, affected3));
+                List.of(affected2, affected3), List.of());
 
         return Arrays.asList(vulnerability1, vulnerability2, vulnerability3);
     }
@@ -194,21 +200,23 @@ public class AppSecDTOProviderTest {
 
         OpenSourceVulnerability vulnerability1 = createVulnerability(
                 "GHSA-mjmj-j48q-9wg2", "CVE-2022-1471", reference,
-                List.of(affected1));
+                List.of(affected1), List.of());
         OpenSourceVulnerability vulnerability2 = createVulnerability(
                 "GHSA-9j49-mfvp-vmhm", "CVE-2021-23406", reference,
-                List.of(affected2));
+                List.of(affected2), List.of());
 
         return Arrays.asList(vulnerability1, vulnerability2);
     }
 
     private OpenSourceVulnerability createVulnerability(String id, String alias,
-            Reference reference, List<Affected> affected) {
+            Reference reference, List<Affected> affected,
+            List<Severity> severity) {
         OpenSourceVulnerability vulnerability = new OpenSourceVulnerability();
         vulnerability.setId(id);
         vulnerability.setAliases(Collections.singletonList(alias));
         vulnerability.setReferences(Collections.singletonList(reference));
         vulnerability.setAffected(affected);
+        vulnerability.setSeverity(severity);
         return vulnerability;
     }
 
