@@ -22,8 +22,8 @@
     </licenses>
 
     <properties>
-        <flow.version>24.6-SNAPSHOT</flow.version>
-        <flow.components.version>24.6-SNAPSHOT</flow.components.version>
+        <flow.version>24.9-SNAPSHOT</flow.version>
+        <flow.components.version>24.9-SNAPSHOT</flow.components.version>
         <license.checker.version>1.13.4</license.checker.version>
 
         <spring.boot.version>3.4.2</spring.boot.version>
