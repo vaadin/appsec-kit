@@ -11,18 +11,12 @@ package com.vaadin.appsec.service;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.vaadin.flow.internal.UsageStatistics;
-import com.vaadin.flow.server.ServiceInitEvent;
-import com.vaadin.flow.server.VaadinService;
-import com.vaadin.flow.server.VaadinServiceInitListener;
-import com.vaadin.pro.licensechecker.BuildType;
-import com.vaadin.pro.licensechecker.LicenseChecker;
+import com.vaadin.flow.server.startup.BaseLicenseCheckerServiceInitListener;
 
 /**
  * Service initialization listener to verify the license.
  */
-public class LicenseCheckerServiceInitListener
-        implements VaadinServiceInitListener {
+public class LicenseCheckerServiceInitListener extends BaseLicenseCheckerServiceInitListener {
 
     static final String PROPERTIES_RESOURCE = "appsec-kit.properties";
 
@@ -30,27 +24,19 @@ public class LicenseCheckerServiceInitListener
 
     static final String PRODUCT_NAME = "vaadin-appsec-kit";
 
-    @Override
-    public void serviceInit(ServiceInitEvent event) {
-        final VaadinService service = event.getSource();
+    static final String PRODUCT_VERSION;
 
+    static {
+        final Properties properties = new Properties();
         try {
-            final Properties properties = new Properties();
-            properties.load(LicenseCheckerServiceInitListener.class
-                    .getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE));
-            final String version = properties.getProperty(VERSION_PROPERTY);
-
-            UsageStatistics.markAsUsed(PRODUCT_NAME, version);
-
-            // Check the license at runtime if in development mode
-            if (!service.getDeploymentConfiguration().isProductionMode()) {
-                // Using a null BuildType to allow trial licensing builds
-                // The variable is defined to avoid method signature ambiguity
-                BuildType buildType = null;
-                LicenseChecker.checkLicense(PRODUCT_NAME, version, buildType);
-            }
+            properties.load(LicenseCheckerServiceInitListener.class.getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE));
+            PRODUCT_VERSION = properties.getProperty(VERSION_PROPERTY);
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);
         }
+    }
+
+    protected LicenseCheckerServiceInitListener() {
+        super(PRODUCT_NAME, PRODUCT_VERSION);
     }
 }
