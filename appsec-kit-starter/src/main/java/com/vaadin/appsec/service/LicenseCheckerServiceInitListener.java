@@ -16,7 +16,8 @@ import com.vaadin.flow.server.startup.BaseLicenseCheckerServiceInitListener;
 /**
  * Service initialization listener to verify the license.
  */
-public class LicenseCheckerServiceInitListener extends BaseLicenseCheckerServiceInitListener {
+public class LicenseCheckerServiceInitListener
+        extends BaseLicenseCheckerServiceInitListener {
 
     static final String PROPERTIES_RESOURCE = "appsec-kit.properties";
 
@@ -29,7 +30,8 @@ public class LicenseCheckerServiceInitListener extends BaseLicenseCheckerService
     static {
         final Properties properties = new Properties();
         try {
-            properties.load(LicenseCheckerServiceInitListener.class.getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE));
+            properties.load(LicenseCheckerServiceInitListener.class
+                    .getClassLoader().getResourceAsStream(PROPERTIES_RESOURCE));
             PRODUCT_VERSION = properties.getProperty(VERSION_PROPERTY);
         } catch (IOException e) {
             throw new ExceptionInInitializerError(e);
