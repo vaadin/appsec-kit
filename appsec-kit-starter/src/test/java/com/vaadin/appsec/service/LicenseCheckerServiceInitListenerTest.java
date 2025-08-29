@@ -30,6 +30,8 @@ import com.vaadin.pro.licensechecker.LicenseChecker;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
@@ -66,10 +68,9 @@ public class LicenseCheckerServiceInitListenerTest {
         listener.serviceInit(new ServiceInitEvent(service));
 
         // Verify the license is checked
-        BuildType buildType = null;
         licenseChecker.verify(() -> LicenseChecker.checkLicense(
-                LicenseCheckerServiceInitListener.PRODUCT_NAME, version,
-                any(Capabilities.class), buildType));
+                eq(LicenseCheckerServiceInitListener.PRODUCT_NAME), eq(version),
+                any(Capabilities.class), isNull()));
     }
 
     @Test
