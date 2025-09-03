@@ -8,26 +8,30 @@
  */
 package com.vaadin.appsec.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
+import com.vaadin.flow.server.ServiceInitEvent;
+import com.vaadin.flow.server.VaadinService;
+import com.vaadin.pro.licensechecker.Capabilities;
+import com.vaadin.pro.licensechecker.Capability;
+import com.vaadin.pro.licensechecker.LicenseChecker;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.vaadin.flow.server.ServiceInitEvent;
-import com.vaadin.flow.server.VaadinService;
-import com.vaadin.pro.licensechecker.BuildType;
-import com.vaadin.pro.licensechecker.LicenseChecker;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.matchesPattern;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
@@ -64,10 +68,11 @@ public class LicenseCheckerServiceInitListenerTest {
         listener.serviceInit(new ServiceInitEvent(service));
 
         // Verify the license is checked
-        BuildType buildType = null;
+        var capabilitiesCaptor = ArgumentCaptor.forClass(Capabilities.class);
         licenseChecker.verify(() -> LicenseChecker.checkLicense(
-                LicenseCheckerServiceInitListener.PRODUCT_NAME, version,
-                buildType));
+                eq(LicenseCheckerServiceInitListener.PRODUCT_NAME), eq(version),
+                capabilitiesCaptor.capture(), isNull()));
+        assertTrue(capabilitiesCaptor.getValue().has(Capability.PRE_TRIAL));
     }
 
     @Test
