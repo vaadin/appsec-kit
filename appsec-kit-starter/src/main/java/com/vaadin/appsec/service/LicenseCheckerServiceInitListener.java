@@ -38,7 +38,11 @@ public class LicenseCheckerServiceInitListener
         }
     }
 
-    protected LicenseCheckerServiceInitListener() {
+    /**
+     * Initializes a license-checking mechanism for Appsec Kit using its product
+     * name and current version.
+     */
+    public LicenseCheckerServiceInitListener() {
         super(PRODUCT_NAME, PRODUCT_VERSION);
     }
 }
