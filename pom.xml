@@ -24,9 +24,9 @@
     <properties>
         <flow.version>24.9-SNAPSHOT</flow.version>
         <flow.components.version>24.9-SNAPSHOT</flow.components.version>
-        <license.checker.version>2.0.0-beta4</license.checker.version>
+        <license.checker.version>2.0.0-rc1</license.checker.version>
 
-        <spring.boot.version>3.4.2</spring.boot.version>
+        <spring.boot.version>3.5.5</spring.boot.version>
 
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
