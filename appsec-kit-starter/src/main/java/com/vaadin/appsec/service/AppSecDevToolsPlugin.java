@@ -11,6 +11,9 @@ package com.vaadin.appsec.service;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import elemental.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +22,6 @@ import com.vaadin.appsec.backend.Registration;
 import com.vaadin.base.devserver.DevToolsInterface;
 import com.vaadin.base.devserver.DevToolsMessageHandler;
 import com.vaadin.flow.component.dependency.JsModule;
-
-import elemental.json.Json;
-import elemental.json.JsonObject;
 
 @JsModule(value = "./appsec-kit/appsec-kit-plugin.js", developmentOnly = true)
 public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
@@ -54,7 +54,14 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
     }
 
     @Override
+    @Deprecated
     public boolean handleMessage(String command, JsonObject data,
+            DevToolsInterface devToolsInterface) {
+        return false;
+    }
+
+    @Override
+    public boolean handleMessage(String command, JsonNode data,
             DevToolsInterface devToolsInterface) {
         return false;
     }
@@ -70,14 +77,14 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
 
     private void sendInitData(String appSecRoute,
             DevToolsInterface devToolsInterface) {
-        var data = Json.createObject();
+        var data = JsonNodeFactory.instance.objectNode();
         data.put("appSecRoute", appSecRoute);
         devToolsInterface.send("appsec-kit-init", data);
     }
 
     private void sendScanResult(int vulnerabilityCount,
             DevToolsInterface devToolsInterface) {
-        var data = Json.createObject();
+        var data = JsonNodeFactory.instance.objectNode();
         data.put("vulnerabilityCount", vulnerabilityCount);
         devToolsInterface.send("appsec-kit-scan", data);
     }

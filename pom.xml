@@ -37,7 +37,7 @@
         <maven.javadoc.version>3.4.1</maven.javadoc.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <maven.formatter.version>2.16.0</maven.formatter.version>
-        <jackson.version>2.18.2</jackson.version>
+        <jackson.version>2.20.0</jackson.version>
     </properties>
 
     <repositories>

@@ -11,6 +11,8 @@ package com.vaadin.appsec.service;
 import java.util.Arrays;
 import java.util.Collections;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +30,6 @@ import com.vaadin.appsec.backend.Registration;
 import com.vaadin.appsec.backend.model.dto.Vulnerability;
 import com.vaadin.base.devserver.DevToolsInterface;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
@@ -53,7 +53,7 @@ public class AppSecDevToolsPluginTest {
     @Captor
     private ArgumentCaptor<String> commandCaptor;
     @Captor
-    private ArgumentCaptor<JsonObject> jsonObjectCaptor;
+    private ArgumentCaptor<JsonNode> jsonObjectCaptor;
 
     @BeforeEach
     public void setup() {
@@ -98,8 +98,8 @@ public class AppSecDevToolsPluginTest {
         assertEquals("appsec-kit-scan", commands.get(1));
         var values = jsonObjectCaptor.getAllValues();
         assertEquals("vaadin-appsec-kit",
-                values.get(0).get("appSecRoute").asString());
-        assertEquals(1, values.get(1).get("vulnerabilityCount").asNumber());
+                values.get(0).get("appSecRoute").asText());
+        assertEquals(1, values.get(1).get("vulnerabilityCount").asInt());
 
         verify(appSecServiceInstance)
                 .addScanEventListener(appSecScanEventListenerCaptor.capture());
@@ -111,7 +111,7 @@ public class AppSecDevToolsPluginTest {
         var command = commandCaptor.getValue();
         assertEquals("appsec-kit-scan", command);
         var value = jsonObjectCaptor.getValue();
-        assertEquals(2, value.get("vulnerabilityCount").asNumber());
+        assertEquals(2, value.get("vulnerabilityCount").asInt());
     }
 
     @Test
@@ -126,7 +126,7 @@ public class AppSecDevToolsPluginTest {
     public void handleMessage_returnsFalse() {
         appSecDevToolsPlugin.handleConnect(devToolsInterface);
         var result = appSecDevToolsPlugin.handleMessage("test-command",
-                Json.createObject(), devToolsInterface);
+                JsonNodeFactory.instance.objectNode(), devToolsInterface);
 
         assertFalse(result);
     }
