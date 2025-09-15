@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import elemental.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,13 +50,6 @@ public class AppSecDevToolsPlugin implements DevToolsMessageHandler {
         }
         sendScanResult(appSecService.getNewVulnerabilities().size(),
                 devToolsInterface);
-    }
-
-    @Override
-    @Deprecated
-    public boolean handleMessage(String command, JsonObject data,
-            DevToolsInterface devToolsInterface) {
-        return false;
     }
 
     @Override
