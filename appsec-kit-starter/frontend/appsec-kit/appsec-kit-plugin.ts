@@ -72,22 +72,22 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
             this.message = "AppSec Kit is configured and scanning app dependencies for known vulnerabilities."
             return true;
         } else if (message.command === "appsec-kit-scan") {
-          if (message.data.vulnerabilityCount > 0) {
-              const notificationDetails = {
-                type: MessageType.ERROR,
-                message: "Potential vulnerabilities found"
-              };
-              (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
-              this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
-          } else {
-              const notificationDetails = {
-                type: MessageType.INFORMATION,
-                message: "No vulnerabilities found"
-              };
-              (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
-              this.message = "No vulnerabilities found."
-          }
-          return true;
+            if (message.data.vulnerabilityCount > 0) {
+                const notificationDetails = {
+                  type: MessageType.ERROR,
+                  message: "Potential vulnerabilities found"
+                };
+                (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
+                this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
+            } else {
+                const notificationDetails = {
+                  type: MessageType.INFORMATION,
+                  message: "No vulnerabilities found"
+                };
+                (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
+                this.message = "No vulnerabilities found."
+            }
+            return true;
         } else {
             return false; // not a plugin command
         }
