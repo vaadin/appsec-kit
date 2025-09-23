@@ -8,6 +8,7 @@
  */
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { MessageType } from "../copilot/copilot-plugin-support.js";
 import type { CopilotInterface, CopilotPlugin, PanelConfiguration, MessageHandler, ServerMessage } from "../copilot/copilot-plugin-support.js";
 
 @customElement("appsec-kit-plugin")
@@ -62,15 +63,31 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
     handleMessage(message: ServerMessage): boolean {
         if (message.command === "appsec-kit-init") {
             this.appSecRoute = "/" + message.data.appSecRoute;
+            const notificationDetails = {
+                type: MessageType.INFORMATION,
+                message: "AppSec Kit is running",
+                details: "AppSec Kit is configured and scanning app dependencies for known vulnerabilities."
+            };
+            (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
             this.message = "AppSec Kit is configured and scanning app dependencies for known vulnerabilities."
             return true;
         } else if (message.command === "appsec-kit-scan") {
-            if (message.data.vulnerabilityCount > 0) {
-                this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
-            } else {
-                this.message = "No vulnerabilities found."
-            }
-            return true;
+          if (message.data.vulnerabilityCount > 0) {
+              const notificationDetails = {
+                type: MessageType.ERROR,
+                message: "Potential vulnerabilities found"
+              };
+              (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
+              this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
+          } else {
+              const notificationDetails = {
+                type: MessageType.INFORMATION,
+                message: "No vulnerabilities found"
+              };
+              (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
+              this.message = "No vulnerabilities found."
+          }
+          return true;
         } else {
             return false; // not a plugin command
         }
