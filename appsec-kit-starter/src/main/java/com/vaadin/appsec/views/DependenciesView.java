@@ -39,7 +39,8 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
-import com.vaadin.flow.server.StreamResource;
+import com.vaadin.flow.server.streams.DownloadHandler;
+import com.vaadin.flow.server.streams.DownloadResponse;
 
 /**
  * Dependencies view contains a detailed list of dependencies.
@@ -165,9 +166,12 @@ public class DependenciesView extends AbstractAppSecView {
             }
 
             String fileName = "dependencies.csv";
-            StreamResource streamResource = new StreamResource(fileName,
-                    () -> new ByteArrayInputStream(outputStream.toByteArray()));
-            updateExportData(streamResource);
+            DownloadHandler downloadHandler = DownloadHandler
+                    .fromInputStream(context -> new DownloadResponse(
+                            new ByteArrayInputStream(
+                                    outputStream.toByteArray()),
+                            fileName, "csv", -1));
+            updateExportData(downloadHandler);
             // enable now that there is data to download
             exportLink.setEnabled(true);
         } catch (IOException e) {
