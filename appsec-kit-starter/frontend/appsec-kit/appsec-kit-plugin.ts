@@ -8,19 +8,37 @@
  */
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { DevToolsInterface, DevToolsPlugin, MessageHandler, MessageType, ServerMessage, VaadinDevTools } from "Frontend/generated/jar-resources/vaadin-dev-tools/vaadin-dev-tools";
-import { Framework, CopilotPlugin, CopilotInterface, PanelConfiguration } from "../copilot/copilot-plugin-support.js";
-
-const devTools: VaadinDevTools = (window as any).Vaadin.devTools;
+import { MessageType } from "../copilot/copilot-plugin-support.js";
+import type { CopilotInterface, CopilotPlugin, PanelConfiguration, MessageHandler, ServerMessage } from "../copilot/copilot-plugin-support.js";
 
 @customElement("appsec-kit-plugin")
 export class AppSecKitPlugin extends LitElement implements MessageHandler {
 
     static styles = css`
         .container {
+            align-items: center;
             display: flex;
             padding: 0.75rem;
             justify-content: space-between;
+        }
+
+        .open-appsec-kit-button {
+            align-items: center;
+            background: var(--gray-100);
+            border: 1px solid transparent;
+            border-radius: var(--radius-1);
+            color: var(--color-high-contrast);
+            display: flex;
+            font: var(--font-xsmall-medium);
+            flex-shrink: 0;
+            gap: var(--space-75);
+            height: 1.75rem;
+            justify-content: center;
+            padding: 0 var(--space-100);
+
+            &:hover {
+                background: var(--gray-200);
+            }
         }
     `;
 
@@ -34,7 +52,9 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
         return html`
             <div class="container">
                 <span>${this.message}</span>
-                <button class="tab" @click="${this.openAppSecKit}">Open AppSec Kit</button>
+                <button id="open-appsec-kit" class="open-appsec-kit-button"
+                        @click="${this.openAppSecKit}">Open AppSec Kit
+                </button>
             </div>
         `;
     }
@@ -46,16 +66,28 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
     handleMessage(message: ServerMessage): boolean {
         if (message.command === "appsec-kit-init") {
             this.appSecRoute = "/" + message.data.appSecRoute;
-            devTools.showNotification("information" as MessageType, "AppSec Kit is running",
-                    "AppSec Kit is configured and scanning app dependencies for known vulnerabilities.",
-                    this.appSecRoute, "appsec-kit-running");
+            const notificationDetails = {
+                type: MessageType.INFORMATION,
+                message: "AppSec Kit is running",
+                details: "AppSec Kit is configured and scanning app dependencies for known vulnerabilities."
+            };
+            (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
+            this.message = "AppSec Kit is configured and scanning app dependencies for known vulnerabilities."
             return true;
         } else if (message.command === "appsec-kit-scan") {
             if (message.data.vulnerabilityCount > 0) {
-                devTools.showNotification("error" as MessageType, "Potential vulnerabilities found");
+                const notificationDetails = {
+                    type: MessageType.ERROR,
+                    message: "Potential vulnerabilities found"
+                };
+                (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
                 this.message = message.data.vulnerabilityCount + " potential vulnerabilities found.";
             } else {
-                devTools.showNotification("information" as MessageType, "No vulnerabilities found");
+                const notificationDetails = {
+                    type: MessageType.INFORMATION,
+                    message: "No vulnerabilities found"
+                };
+                (window as any).Vaadin.copilot.eventbus.emit('copilot-ide-notification', notificationDetails);
                 this.message = "No vulnerabilities found."
             }
             return true;
@@ -65,22 +97,13 @@ export class AppSecKitPlugin extends LitElement implements MessageHandler {
     }
 }
 
-const plugin: DevToolsPlugin = {
-    init: (devToolsInterface: DevToolsInterface): void => {
-        devToolsInterface.addTab("AppSec Kit", "appsec-kit-plugin");
-    }
-};
-(window as any).Vaadin.devToolsPlugins.push(plugin);
-
 const panelConfig: PanelConfiguration = {
     header: 'AppSec Kit',
-    expanded: true,
-    draggable: true,
-    panelOrder: 0,
+    expanded: false,
+    panelOrder: 65,
     panel: 'right',
     floating: false,
     tag: 'appsec-kit-plugin',
-    showOn: [Framework.Flow],
 };
 
 const copilotPlugin: CopilotPlugin = {
