@@ -75,10 +75,9 @@ class BillOfMaterialsStore {
 
     void readPlatformCombinedBomFile() {
         ObjectReader jsonReader = MAPPER.readerFor(Bom.class);
-        try {
-            URL platformCombinedBomUrl = getPlatformCombinedBomUrl();
-            Bom platformCombinedBom = jsonReader
-                    .readValue(platformCombinedBomUrl);
+        URL platformCombinedBomUrl = getPlatformCombinedBomUrl();
+        try (InputStream inputStream = platformCombinedBomUrl.openStream()) {
+            Bom platformCombinedBom = jsonReader.readValue(inputStream);
             boolean includeNpmDevDeps = AppSecService.getInstance()
                     .getConfiguration().isIncludeNpmDevDependencies();
             bomNpm = includeNpmDevDeps
