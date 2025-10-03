@@ -11,8 +11,6 @@ package com.vaadin.appsec.service;
 import java.util.Arrays;
 import java.util.Collections;
 
-import tools.jackson.databind.JsonNode;
-import tools.jackson.databind.node.JsonNodeFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +19,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.node.JsonNodeFactory;
 
 import com.vaadin.appsec.backend.AppSecConfiguration;
 import com.vaadin.appsec.backend.AppSecScanEvent;
@@ -40,7 +40,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class AppSecDevToolsPluginTest {
+class AppSecDevToolsPluginTest {
 
     private AppSecDevToolsPlugin appSecDevToolsPlugin;
     private DevToolsInterface devToolsInterface;
@@ -56,7 +56,7 @@ public class AppSecDevToolsPluginTest {
     private ArgumentCaptor<JsonNode> jsonObjectCaptor;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         appSecDevToolsPlugin = new AppSecDevToolsPlugin();
         devToolsInterface = mock(DevToolsInterface.class);
 
@@ -77,12 +77,12 @@ public class AppSecDevToolsPluginTest {
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         appSecService.close();
     }
 
     @Test
-    public void handleConnect_sendsCommands() {
+    void handleConnect_sendsCommands() {
         var vulnerabilities = Arrays.asList(new Vulnerability("CVE-001"),
                 new Vulnerability("CVE-002"));
         var appSecScanEvent = mock(AppSecScanEvent.class);
@@ -98,7 +98,7 @@ public class AppSecDevToolsPluginTest {
         assertEquals("appsec-kit-scan", commands.get(1));
         var values = jsonObjectCaptor.getAllValues();
         assertEquals("vaadin-appsec-kit",
-                values.get(0).get("appSecRoute").asText());
+                values.get(0).get("appSecRoute").asString());
         assertEquals(1, values.get(1).get("vulnerabilityCount").asInt());
 
         verify(appSecServiceInstance)
@@ -115,7 +115,7 @@ public class AppSecDevToolsPluginTest {
     }
 
     @Test
-    public void handleConnect_doesntAddScanEventListener_ifAlreadyAdded() {
+    void handleConnect_doesntAddScanEventListener_ifAlreadyAdded() {
         appSecDevToolsPlugin.handleConnect(devToolsInterface);
         appSecDevToolsPlugin.handleConnect(devToolsInterface);
 
@@ -123,7 +123,7 @@ public class AppSecDevToolsPluginTest {
     }
 
     @Test
-    public void handleMessage_returnsFalse() {
+    void handleMessage_returnsFalse() {
         appSecDevToolsPlugin.handleConnect(devToolsInterface);
         var result = appSecDevToolsPlugin.handleMessage("test-command",
                 JsonNodeFactory.instance.objectNode(), devToolsInterface);
@@ -132,7 +132,7 @@ public class AppSecDevToolsPluginTest {
     }
 
     @Test
-    public void handleDisconnect_removesScanEventListener() {
+    void handleDisconnect_removesScanEventListener() {
         var devToolsInterface1 = mock(DevToolsInterface.class);
 
         appSecDevToolsPlugin.handleConnect(devToolsInterface);
