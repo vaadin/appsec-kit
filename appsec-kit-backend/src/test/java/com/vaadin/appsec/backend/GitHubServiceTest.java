@@ -31,11 +31,6 @@ public class GitHubServiceTest {
     static class TestGitHubServiceWithMockReleases extends GitHubService {
 
         @Override
-        protected URL getFrameworkReleasesUrl() {
-            return getClass().getClassLoader().getResource("releases.json");
-        }
-
-        @Override
         protected URL getFlowReleasesUrl() {
             return getClass().getClassLoader().getResource("releases.json");
         }
@@ -64,36 +59,14 @@ public class GitHubServiceTest {
     }
 
     @Test
-    public void getFramework7Versions() {
+    public void getFlowVersions() {
         service = new TestGitHubServiceWithMockReleasesAndAnalysis();
-        List<String> versions = service.getFramework7Versions();
-
-        assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
-                versions.size());
-        versions.forEach(
-                version -> MatcherAssert.assertThat(version, startsWith("7.")));
-    }
-
-    @Test
-    public void getFramework8Versions() {
-        service = new TestGitHubServiceWithMockReleasesAndAnalysis();
-        List<String> versions = service.getFramework8Versions();
-
-        assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
-                versions.size());
-        versions.forEach(
-                version -> MatcherAssert.assertThat(version, startsWith("8.")));
-    }
-
-    @Test
-    public void getFlow24Versions() {
-        service = new TestGitHubServiceWithMockReleasesAndAnalysis();
-        List<String> versions = service.getFlow24Versions();
+        List<String> versions = service.getFlowVersions();
 
         assertEquals(GitHubService.NUMBER_OF_LATEST_MAINTAINED_VERSIONS,
                 versions.size());
         versions.forEach(version -> MatcherAssert.assertThat(version,
-                startsWith("24.")));
+                startsWith("25.")));
     }
 
     @Test

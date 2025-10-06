@@ -48,6 +48,7 @@ public class AppSecConfiguration implements Serializable {
     static final String DEFAULT_BOM_NPM_FILE_NAME = "bom-npm.json";
     static final boolean DEFAULT_AUTOMATICALLY_ACTIVATE_PUSH = true;
 
+    private String vaadinPlatformVersion;
     private String appSecRoute = DEFAULT_APPSEC_ROUTE;
     private Path dataFilePath;
     private Path bomMavenFilePath;
@@ -58,6 +59,25 @@ public class AppSecConfiguration implements Serializable {
     private int osvApiRatePerSecond = 25;
     private boolean includeNpmDevDependencies = true;
     private boolean automaticallyActivatePush = DEFAULT_AUTOMATICALLY_ACTIVATE_PUSH;
+
+    /**
+     * Gets the Vaadin platform version.
+     *
+     * @return the Vaadin platform version
+     */
+    public String getVaadinPlatformVersion() {
+        return vaadinPlatformVersion;
+    }
+
+    /**
+     * Sets the Vaadin platform version.
+     *
+     * @param vaadinPlatformVersion
+     *            the Vaadin platform version
+     */
+    public void setVaadinPlatformVersion(String vaadinPlatformVersion) {
+        this.vaadinPlatformVersion = vaadinPlatformVersion;
+    }
 
     /**
      * Gets the AppSec Kit route.

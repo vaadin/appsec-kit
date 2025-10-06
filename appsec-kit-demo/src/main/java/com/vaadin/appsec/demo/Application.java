@@ -11,6 +11,8 @@ package com.vaadin.appsec.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.vaadin.appsec.backend.AppSecConfiguration;
+import com.vaadin.appsec.backend.AppSecService;
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
 
@@ -23,7 +25,10 @@ import com.vaadin.flow.theme.Theme;
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
+        AppSecConfiguration appSecConfiguration = new AppSecConfiguration();
+        appSecConfiguration.setVaadinPlatformVersion("25.0.0-alpha12");
+        AppSecService.getInstance().setConfiguration(appSecConfiguration);
+
         SpringApplication.run(Application.class, args);
     }
-
 }
