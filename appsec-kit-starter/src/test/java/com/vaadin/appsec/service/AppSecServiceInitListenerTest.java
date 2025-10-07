@@ -45,7 +45,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class AppSecServiceInitListenerTest {
+class AppSecServiceInitListenerTest {
 
     private AppSecServiceInitListener listener;
     private VaadinService vaadinService;
@@ -62,7 +62,7 @@ public class AppSecServiceInitListenerTest {
     private ArgumentCaptor<AfterNavigationListener> afterNavigationListenerCaptor;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         listener = new AppSecServiceInitListener();
 
         deploymentConfiguration = mock(DeploymentConfiguration.class);
@@ -82,13 +82,13 @@ public class AppSecServiceInitListenerTest {
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         appSecService.close();
         routeConfiguration.close();
     }
 
     @Test
-    public void debugMode_appSecServiceInitialized() {
+    void debugMode_appSecServiceInitialized() {
         var pushMode = mock(PushMode.class);
         when(pushMode.isEnabled()).thenReturn(false);
         var pushConfiguration = mock(PushConfiguration.class);
@@ -141,7 +141,7 @@ public class AppSecServiceInitListenerTest {
     }
 
     @Test
-    public void productionMode_appSecServiceNotInitialized() {
+    void productionMode_appSecServiceNotInitialized() {
         when(deploymentConfiguration.isProductionMode()).thenReturn(true);
 
         listener.serviceInit(new ServiceInitEvent(vaadinService));

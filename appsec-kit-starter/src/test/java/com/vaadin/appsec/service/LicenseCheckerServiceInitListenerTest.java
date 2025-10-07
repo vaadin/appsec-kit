@@ -8,11 +8,10 @@
  */
 package com.vaadin.appsec.service;
 
-import com.vaadin.flow.server.ServiceInitEvent;
-import com.vaadin.flow.server.VaadinService;
-import com.vaadin.pro.licensechecker.Capabilities;
-import com.vaadin.pro.licensechecker.Capability;
-import com.vaadin.pro.licensechecker.LicenseChecker;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,9 +22,11 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import com.vaadin.flow.server.ServiceInitEvent;
+import com.vaadin.flow.server.VaadinService;
+import com.vaadin.pro.licensechecker.Capabilities;
+import com.vaadin.pro.licensechecker.Capability;
+import com.vaadin.pro.licensechecker.LicenseChecker;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.matchesPattern;
@@ -36,7 +37,7 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class LicenseCheckerServiceInitListenerTest {
+class LicenseCheckerServiceInitListenerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private VaadinService service;
@@ -44,17 +45,17 @@ public class LicenseCheckerServiceInitListenerTest {
     private MockedStatic<LicenseChecker> licenseChecker;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         licenseChecker = mockStatic(LicenseChecker.class);
     }
 
     @AfterEach
-    public void cleanup() {
+    void cleanup() {
         licenseChecker.close();
     }
 
     @Test
-    public void developmentMode_licenseIsCheckedRuntime() {
+    void developmentMode_licenseIsCheckedRuntime() {
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(false);
 
@@ -76,7 +77,7 @@ public class LicenseCheckerServiceInitListenerTest {
     }
 
     @Test
-    public void productionMode_licenseIsNotCheckedRuntime() {
+    void productionMode_licenseIsNotCheckedRuntime() {
         when(service.getDeploymentConfiguration().isProductionMode())
                 .thenReturn(true);
 

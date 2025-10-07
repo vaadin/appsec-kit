@@ -15,7 +15,7 @@ import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.server.StreamResource;
+import com.vaadin.flow.server.streams.DownloadHandler;
 
 /**
  * Abstract AppSec view is a base class for the view parts.
@@ -78,8 +78,8 @@ public abstract class AbstractAppSecView extends VerticalLayout {
         return exportLink;
     }
 
-    void updateExportData(StreamResource streamResource) {
-        exportLink.setHref(streamResource);
+    void updateExportData(DownloadHandler downloadHandler) {
+        exportLink.setHref(downloadHandler);
     }
 
     void clearFilters() {

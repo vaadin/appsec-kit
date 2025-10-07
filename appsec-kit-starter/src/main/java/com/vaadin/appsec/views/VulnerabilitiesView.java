@@ -36,7 +36,8 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.function.ValueProvider;
-import com.vaadin.flow.server.StreamResource;
+import com.vaadin.flow.server.streams.DownloadHandler;
+import com.vaadin.flow.server.streams.DownloadResponse;
 
 /**
  * Vulnerabilities view contains a detailed list of vulnerabilities.
@@ -158,9 +159,12 @@ public class VulnerabilitiesView extends AbstractAppSecView {
             }
 
             String fileName = "vulnerabilities.csv";
-            StreamResource streamResource = new StreamResource(fileName,
-                    () -> new ByteArrayInputStream(outputStream.toByteArray()));
-            updateExportData(streamResource);
+            DownloadHandler downloadHandler = DownloadHandler
+                    .fromInputStream(context -> new DownloadResponse(
+                            new ByteArrayInputStream(
+                                    outputStream.toByteArray()),
+                            fileName, "csv", -1));
+            updateExportData(downloadHandler);
             // enable now that there is data to download
             exportLink.setEnabled(true);
         } catch (IOException e) {

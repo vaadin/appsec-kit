@@ -19,6 +19,7 @@ appsec-kit-demo/tsconfig.json
 appsec-kit-demo/types.d.ts
 appsec-kit-demo/vite.config.ts
 appsec-kit-demo/vite.generated.ts
+appsec-kit-demo/appsec-data.json
 
 *pom.xml.versionsBackup
 
@@ -72,4 +73,3 @@ flow-tests/**/*.npmrc
 *.xml.versionsBackup
 
 rebel.xml
-appsec-data.json

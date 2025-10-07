@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -70,15 +71,14 @@ class BillOfMaterialsStore {
             bomNpm = includeNpmDevDeps ? readBomFile(bomFilePath)
                     : filterOutNpmDevLibraries(readBomFile(bomFilePath));
         }
-        LOGGER.debug("Reading SBOM from file " + bomFilePath.toAbsolutePath());
+        LOGGER.debug("Reading SBOM from file {}", bomFilePath.toAbsolutePath());
     }
 
     void readPlatformCombinedBomFile() {
         ObjectReader jsonReader = MAPPER.readerFor(Bom.class);
-        try {
-            URL platformCombinedBomUrl = getPlatformCombinedBomUrl();
-            Bom platformCombinedBom = jsonReader
-                    .readValue(platformCombinedBomUrl);
+        URL platformCombinedBomUrl = getPlatformCombinedBomUrl();
+        try (InputStream inputStream = platformCombinedBomUrl.openStream()) {
+            Bom platformCombinedBom = jsonReader.readValue(inputStream);
             boolean includeNpmDevDeps = AppSecService.getInstance()
                     .getConfiguration().isIncludeNpmDevDependencies();
             bomNpm = includeNpmDevDeps
@@ -203,7 +203,8 @@ class BillOfMaterialsStore {
             throw new AppSecException("Cannot get Vaadin platform version.");
         }
         try {
-            return new URL(String.format(PLATFORM_COMBINED_BOM, version));
+            return URI.create(String.format(PLATFORM_COMBINED_BOM, version))
+                    .toURL();
         } catch (MalformedURLException e) {
             throw new AppSecException("Invalid Vaadin platform SBOM URL", e);
         }
