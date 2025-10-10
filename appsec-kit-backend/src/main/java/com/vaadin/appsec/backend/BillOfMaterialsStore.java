@@ -194,19 +194,28 @@ class BillOfMaterialsStore {
     }
 
     private URL getPlatformCombinedBomUrl() {
-        String version;
-        Optional<Component> flowServerComponent = AppSecService.getInstance()
-                .getFlowServerComponent();
-        if (flowServerComponent.isPresent()) {
-            version = flowServerComponent.get().getVersion();
-        } else {
-            throw new AppSecException("Cannot get Vaadin platform version.");
-        }
         try {
-            return URI.create(String.format(PLATFORM_COMBINED_BOM, version))
+            return URI.create(
+                    String.format(PLATFORM_COMBINED_BOM, getPlatformVersion()))
                     .toURL();
         } catch (MalformedURLException e) {
             throw new AppSecException("Invalid Vaadin platform SBOM URL", e);
+        }
+    }
+
+    private static String getPlatformVersion() {
+        AppSecService appSecService = AppSecService.getInstance();
+        AppSecConfiguration configuration = appSecService.getConfiguration();
+        Optional<Component> vaadinCoreComponent = appSecService
+                .getVaadinCoreComponent();
+        if (vaadinCoreComponent.isPresent() && !vaadinCoreComponent.get()
+                .getVersion().endsWith("SNAPSHOT")) {
+            return vaadinCoreComponent.get().getVersion();
+        } else if (configuration.getVaadinPlatformVersion() != null) {
+            return configuration.getVaadinPlatformVersion();
+        } else {
+            throw new AppSecException(
+                    "Cannot get Vaadin platform version because the 'vaadin-core' dependency is missing. Add this dependency or define the Vaadin platform version through the AppSec Kit configuration.");
         }
     }
 }

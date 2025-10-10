@@ -48,7 +48,11 @@ public class AppSecService {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(AppSecService.class);
 
+    private static final String VAADIN_CORE = "vaadin-core";
+
     private static final String FLOW_SERVER = "flow-server";
+
+    private static final String SUPPORTED_FLOW_VERSION = "25.";
 
     static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -135,49 +139,12 @@ public class AppSecService {
         readOrCreateDataFile();
     }
 
-    boolean isFlow() {
-        return getFlowServerComponent().isPresent();
-    }
-
     boolean bomNpmFileExists() {
         Path bomNpmFilePath = configuration.getBomNpmFilePath();
         if (bomNpmFilePath != null) {
             return Files.exists(bomNpmFilePath);
         }
         return false;
-    }
-
-    /**
-     * Gets the list of Vaadin Framework 7 versions for which the kit provides
-     * vulnerability assessments.
-     *
-     * @return the list of versions
-     */
-    @Deprecated(forRemoval = true, since = "3.1.0")
-    public List<String> getSupportedFramework7Versions() {
-        return githubService.getFramework7Versions();
-    }
-
-    /**
-     * Gets the list of Vaadin Framework 8 versions for which the kit provides
-     * vulnerability assessments.
-     *
-     * @return the list of versions
-     */
-    @Deprecated(forRemoval = true, since = "3.1.0")
-    public List<String> getSupportedFramework8Versions() {
-        return githubService.getFramework8Versions();
-    }
-
-    /**
-     * Gets the list of Vaadin Flow 24 versions for which the kit provides
-     * vulnerability assessments.
-     *
-     * @return the list of versions
-     */
-    @Deprecated(forRemoval = true, since = "3.1.0")
-    public List<String> getSupportedFlow24Versions() {
-        return getSupportedFlowVersions();
     }
 
     /**
@@ -190,8 +157,8 @@ public class AppSecService {
         Optional<Component> flowServerComponent = getFlowServerComponent();
         if (flowServerComponent.isPresent()) {
             String flowServerVersion = flowServerComponent.get().getVersion();
-            if (flowServerVersion.startsWith("24.")) {
-                return githubService.getFlow24Versions();
+            if (flowServerVersion.startsWith(SUPPORTED_FLOW_VERSION)) {
+                return githubService.getFlowVersions();
             } else {
                 LOGGER.warn("Not supported flow-server version: "
                         + flowServerVersion);
@@ -200,6 +167,11 @@ public class AppSecService {
             LOGGER.warn("flow-server dependency not found in Maven SBOM file");
         }
         return Collections.emptyList();
+    }
+
+    Optional<Component> getVaadinCoreComponent() {
+        return bomStore.getBom(Ecosystem.MAVEN).getComponents().stream()
+                .filter(comp -> VAADIN_CORE.equals(comp.getName())).findFirst();
     }
 
     Optional<Component> getFlowServerComponent() {
