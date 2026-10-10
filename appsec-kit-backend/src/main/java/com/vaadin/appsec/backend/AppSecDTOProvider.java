@@ -19,6 +19,8 @@ import java.util.Set;
 
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
+import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
+import org.apache.maven.artifact.versioning.VersionRange;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
@@ -427,26 +429,58 @@ class AppSecDTOProvider {
     }
 
     private Optional<AffectedVersion> getAffectedVersion(
-            Vulnerability vulnerabilityDTO) {
-        String vulnerabilityId = vulnerabilityDTO.getIdentifier();
-        VulnerabilityDetails vulnerability = AppSecService.getInstance()
-                .getVulnerabilityAnalysis().getVulnerabilities()
-                .get(vulnerabilityId);
-        if (vulnerability == null) {
+            Vulnerability vulnDTO) {
+        // Gets the vulnerability details provided in the vulnerability analysis
+        String vulnId = vulnDTO.getIdentifier();
+        VulnerabilityDetails vulnDetails = AppSecService.getInstance()
+                .getVulnerabilityAnalysis().getVulnerabilities().get(vulnId);
+        if (vulnDetails == null) {
             return Optional.empty();
         }
 
-        Dependency dependency = vulnerabilityDTO.getDependency();
-        String parentBomRef = dependency.getParentBomRef();
-        String groupAndName = dependency.getEcosystem() == Ecosystem.MAVEN
+        // Checks if the affected dependency's group and name equals to the
+        // provided dependency's group and name in the vulnerability analysis
+        com.vaadin.appsec.backend.model.analysis.Dependency analysisDep = vulnDetails
+                .getDependency();
+        Dependency vulnDep = vulnDTO.getDependency();
+        String analysisDepGroupAndName = analysisDep.getName();
+        String vulnDepGroupAndName = AppSecUtils.getDepGroupAndName(vulnDep);
+        if (!analysisDepGroupAndName.equals(vulnDepGroupAndName)) {
+            return Optional.empty();
+        }
+
+        // Checks if the affected dependency's version equals to the provided
+        // dependency's version in the vulnerability analysis
+        DefaultArtifactVersion vulnDepVersion = new DefaultArtifactVersion(
+                vulnDep.getVersion());
+        List<String> affectedVersions = analysisDep.getAffectedVersions();
+        boolean isAffected = affectedVersions.stream().map(affectedVersion -> {
+            try {
+                return VersionRange.createFromVersionSpec(affectedVersion);
+            } catch (InvalidVersionSpecificationException e) {
+                throw new AppSecException(
+                        "Failed to parse vulnerability analysis dependency affected versions",
+                        e);
+            }
+        }).anyMatch(range -> range.containsVersion(vulnDepVersion));
+        if (!isAffected) {
+            return Optional.empty();
+        }
+
+        // Gets the assessment provided in the vulnerability analysis for the
+        // affected dependency's parent
+        String parentBomRef = vulnDep.getParentBomRef();
+        String parentGroupAndName = vulnDep.getEcosystem() == Ecosystem.MAVEN
                 ? AppSecUtils.bomRefToMavenGroupAndName(parentBomRef)
                 : AppSecUtils.bomRefToNpmGroupAndName(parentBomRef);
-        Assessment assessment = vulnerability.getAssessments()
-                .get(groupAndName);
+        Assessment assessment = vulnDetails.getAssessments()
+                .get(parentGroupAndName);
         if (assessment == null) {
             return Optional.empty();
         }
 
+        // Checks if the affected dependency's parent version is within the
+        // range provided in the vulnerability analysis
         return assessment.getAffectedVersions().values().stream().filter(
                 v -> v.isInRange(AppSecUtils.bomRefToVersion(parentBomRef)))
                 .findFirst();
